@@ -1,0 +1,12 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+
+# Node.js
+node_modules/
+
+# Logs
+*.log
+
+# Others you know are large or unnecessary

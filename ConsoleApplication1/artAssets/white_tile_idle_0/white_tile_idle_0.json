@@ -1,0 +1,12 @@
+{
+  "animationName": "idle",
+  "chainAnimation": "none",
+  "frameNumber": 0,
+  "height": 128,
+  "key": "white_tile_idle_0",
+  "loop": false,
+  "totalFrames": 1,
+  "width": 128,
+  "xOffset": 0,
+  "yOffset": 0
+}
