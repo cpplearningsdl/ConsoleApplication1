@@ -168,7 +168,10 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="abilities.cpp" />
+    <ClCompile Include="ability.cpp" />
     <ClCompile Include="ConsoleApplication1.cpp" />
+    <ClCompile Include="entity.cpp" />
     <ClCompile Include="fileManager.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameManager.cpp" />
@@ -181,6 +184,10 @@
     <ClCompile Include="windowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="abilities.h" />
+    <ClInclude Include="ability.h" />
+    <ClInclude Include="stats.h" />
+    <ClInclude Include="entity.h" />
     <ClInclude Include="fileManager.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameManager.h" />
