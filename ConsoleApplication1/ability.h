@@ -1,27 +1,28 @@
 #pragma once
 #include <string>
+#include <memory>
 
-class GameContext; // forward declaration if needed later
+class gameContext; // forward declaration
 
 class ability {
 public:
 	ability(const std::string& name, int maxUses, int baseDamage);
+	virtual ~ability() = default;
+
+	// Polymorphic interface
+	virtual std::unique_ptr<ability> clone() const = 0;   // force subclasses to implement
+	virtual void executeEffect(gameContext& ctx) = 0;     // force subclasses to implement
 
 	// Getters
 	const std::string& getName() const;
 	int getMaxUses() const;
-	int getBaseDamage() const;
 	int getRemainingUses() const;
 
 	// Runtime logic
-	void decrementUses();
+	void addUses(int amount); 
 	bool isExhausted() const;
 
-	// Example effect logic (may use game context later)
-	// For now we just define interface; actual effect executed elsewhere
-	void executeEffect(GameContext& ctx);
-
-private:
+protected:
 	std::string name;
 	int maxUses;
 	int baseDamage;

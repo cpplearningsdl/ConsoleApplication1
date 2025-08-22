@@ -179,7 +179,6 @@
     <ClCompile Include="logManager.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="textureDataStruct.cpp" />
-    <ClCompile Include="textureLoader.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="windowManager.cpp" />
   </ItemGroup>
@@ -195,7 +194,6 @@
     <ClInclude Include="logManager.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="textureDataStruct.h" />
-    <ClInclude Include="textureLoader.h" />
     <ClInclude Include="textureManager.h" />
     <ClInclude Include="windowManager.h" />
   </ItemGroup>

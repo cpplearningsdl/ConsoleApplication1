@@ -1,22 +1,19 @@
 #pragma once
 #include <vector>
+#include <memory>
 #include <string>
 #include "ability.h"
 
 class Abilities {
-public:
-	// Add a new ability by copying a master ability
+public: 
 	void addAbility(const ability& masterAbility);
-
-	// Remove ability by name
+	 
 	void removeAbility(const std::string& name);
-
-	// Get ability by name
+	 
 	ability* getAbility(const std::string& name);
-
-	// Access all abilities (read-only)
-	const std::vector<ability>& getAll() const;
+	 
+	const std::vector<std::unique_ptr<ability>>& getAll() const;
 
 private:
-	std::vector<ability> abilities; // entity owns unique copies
+	std::vector<std::unique_ptr<ability>> abilities; // polymorphic storage
 };

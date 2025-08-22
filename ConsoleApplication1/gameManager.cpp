@@ -17,6 +17,6 @@ void gameManager::endGame() {
 void gameManager::processGame() {
 	if (currentGame) {
 		currentGame->update();
-		currentGame->render();
+		//currentGame->render();
 	}
 }
