@@ -4,7 +4,7 @@
 #include <string>
 #include "ability.h"
 
-class Abilities {
+class abilities {
 public: 
 	void addAbility(const ability& masterAbility);
 	 

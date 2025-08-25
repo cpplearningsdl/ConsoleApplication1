@@ -1,11 +1,11 @@
 #include "abilities.h"
 #include <algorithm>
 
-void Abilities::addAbility(const ability& masterAbility) {
+void abilities::addAbility(const ability& masterAbility) {
 	abilities.push_back(masterAbility.clone()); // deep copy via clone()
 }
 
-void Abilities::removeAbility(const std::string& name) {
+void abilities::removeAbility(const std::string& name) {
 	abilities.erase(
 		std::remove_if(abilities.begin(), abilities.end(),
 			[&](const std::unique_ptr<ability>& a) { return a->getName() == name; }),
@@ -13,7 +13,7 @@ void Abilities::removeAbility(const std::string& name) {
 	);
 }
 
-ability* Abilities::getAbility(const std::string& name) {
+ability* abilities::getAbility(const std::string& name) {
 	for (auto& a : abilities) {
 		if (a->getName() == name) {
 			return a.get();
@@ -22,6 +22,6 @@ ability* Abilities::getAbility(const std::string& name) {
 	return nullptr;
 }
 
-const std::vector<std::unique_ptr<ability>>& Abilities::getAll() const {
+const std::vector<std::unique_ptr<ability>>& abilities::getAll() const {
 	return abilities;
 }

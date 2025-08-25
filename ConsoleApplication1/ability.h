@@ -1,33 +1,38 @@
 #pragma once
 #include <string>
 #include <memory>
+#include "abilityType.h"
+#include "uses.h"
 
-class gameContext; // forward declaration
+class gameContext;
 
 class ability {
 public:
-	ability(const std::string& name, int maxUses, int baseDamage);
+	 
+	ability(const std::string& name, int maxUses, int basePower, int currentPower);
 	virtual ~ability() = default;
 
 	// Polymorphic interface
-	virtual std::unique_ptr<ability> clone() const = 0;   // force subclasses to implement
-	virtual void executeEffect(gameContext& ctx) = 0;     // force subclasses to implement
+	virtual std::unique_ptr<ability> clone() const = 0;
+	virtual void executeEffect(gameContext& ctx) = 0;   
 
-	// Getters
+ 
 	const std::string& getName() const;
-	int getMaxUses() const;
-	int getRemainingUses() const;
+	abilityType getAbilityType() const; 
+	int getBasePower() const;
+	int getCurrentPower() const;
+	 
+	void setCurrentPower(int amount);
+	 
+	void increaseCurrentPower(int amount);
 
-	// Runtime logic
-	void addUses(int amount); 
-	bool isExhausted() const;
-
+	void reset();
+	  
 protected:
 	std::string name;
-	int maxUses;
-	int baseDamage;
-
-	// Mutable state for this entity's copy
-	int remainingUses;
+	abilityType abilityType;
+	int basePower;
+	int currentPower;
+	uses uses;
 };
 

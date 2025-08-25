@@ -1,6 +1,5 @@
 #pragma once
-#include <string> 
-
+#include <string>  
 #include "abilities.h"
 #include "stats.h"
 
@@ -10,18 +9,14 @@ public:
 	entity(int id);
 
   
-	void update();
+	void update(); 
 
-	stats& getStats();
-	const stats& getStats() const;
-	
 	abilities& getAbilities();
 	const abilities& getAbilities() const;
 
 private:
 	int entityId;
 	std::string name;
-
-	abilities abilities;
 	stats stats;
+	abilities abilities; 
 };

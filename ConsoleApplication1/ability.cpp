@@ -1,32 +1,32 @@
 #include "ability.h"
 
-ability::ability(const std::string& name, int maxUses, int baseDamage)
-	: name(name), maxUses(maxUses), baseDamage(baseDamage), remainingUses(maxUses)
+ability::ability(const std::string& name, int maxUses, int basePower, int currentPower)
+	: name(std::move(name)), uses(maxUses), basePower(basePower), currentPower(currentPower)
 {
 }
-
-// Getters
-const std::string& ability::getName() const { return name; }
-int ability::getMaxUses() const { return maxUses; } 
-int ability::getRemainingUses() const { return remainingUses; }
-
-// Runtime logic
-void ability::addUses(int amount) {
-
-	if (amount > 0 && remainingUses < maxUses) {
-		remainingUses = remainingUses + maxUses;
-	}
-	else if (amount <= 0) {
-		remainingUses = remainingUses + amount;
-	}
  
+const std::string& ability::getName() const { return name; } 
+int ability::getBasePower() const { return basePower; }
+int ability::getCurrentPower() const { return currentPower; }
+abilityType ability::getAbilityType() const { return abilityType; }
+ 
+void ability::increaseCurrentPower(int amount) {
+	currentPower = currentPower + amount;
+	if (currentPower < 0) {
+		currentPower = 0;
+	} 
 }
 
-bool ability::isExhausted() const {
-	return remainingUses <= 0;
+void ability::setCurrentPower(int amount) {
+	currentPower = amount;
+	if (currentPower < 0) { currentPower = 0; }
 }
 
-
+void ability::reset() {
+	currentPower = basePower;
+	uses.setCurrent = uses.getMax;
+}
+ 
 // Example effect execution (placeholder)
 void  ability::executeEffect(gameContext& ctx) {
 	// Here you would implement the actual effect of the ability.

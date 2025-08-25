@@ -1,0 +1,10 @@
+#pragma once
+
+enum class abilityType : int {
+	NONE,
+	BATTLEONLY,
+	FIELDONLY,
+	PASSIVEBATTLEONLY,
+	PASSIVEFIELDONLY,
+	PASSIVEBOTH
+};

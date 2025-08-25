@@ -3,9 +3,7 @@
 #include <string>
 #include <SDL3/SDL.h>
 
-struct textureDataStruct {
-	SDL_Texture* texture = nullptr;
-
+struct textureDataStruct { 
 	std::string key;
 	std::string animationName;
 

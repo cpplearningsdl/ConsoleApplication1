@@ -2,7 +2,8 @@
 #include "logManager.h"
 #include <SDL3_image/SDL_image.h>
 #include "json.hpp"
-
+#include <cctype>
+#include <string>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -96,6 +97,36 @@ void textureManager::logAnimationInfo(const std::string& name) const {
 	lm::logThis("Loop: " + std::string(anim.loop ? "true" : "false"));
 	lm::logThis("Chain Animation: " + anim.chainAnimation);
 }
+ 
+// Extracts the root animation name (e.g., "fireball12" -> "fireball")
+std::string getAnimationRoot(const std::string& frameName) {
+	std::string root = frameName;
+	while (!root.empty() && std::isdigit(root.back())) {
+		root.pop_back();
+	}
+	return root;
+}
+
+// Extracts the frame number (e.g., "fireball12" -> 12)
+int getFrameNumber(const std::string& frameName) {
+	int num = 0;
+	int multiplier = 1;
+
+	// Walk backward through digits and build the number
+	for (int i = static_cast<int>(frameName.size()) - 1; i >= 0; --i) {
+		if (std::isdigit(frameName[i])) {
+			num += (frameName[i] - '0') * multiplier;
+			multiplier *= 10;
+		}
+		else {
+			break;
+		}
+	}
+	return num;
+}
+
+
+
 
 void textureManager::cleanUp() {
 	for (auto&[key, tex] : frames) {

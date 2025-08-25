@@ -89,10 +89,25 @@
     <ClInclude Include="abilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ability.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="abilityType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="uses.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="oldStats.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="statEnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="stats.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ability.h">
+    <ClInclude Include="statClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -185,7 +185,8 @@
   <ItemGroup>
     <ClInclude Include="abilities.h" />
     <ClInclude Include="ability.h" />
-    <ClInclude Include="stats.h" />
+    <ClInclude Include="abilityType.h" />
+    <ClInclude Include="oldStats.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="fileManager.h" />
     <ClInclude Include="game.h" />
@@ -193,8 +194,12 @@
     <ClInclude Include="inputManager.h" />
     <ClInclude Include="logManager.h" />
     <ClInclude Include="renderer.h" />
+    <ClInclude Include="statClass.h" />
+    <ClInclude Include="statEnum.h" />
+    <ClInclude Include="stats.h" />
     <ClInclude Include="textureDataStruct.h" />
     <ClInclude Include="textureManager.h" />
+    <ClInclude Include="uses.h" />
     <ClInclude Include="windowManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
