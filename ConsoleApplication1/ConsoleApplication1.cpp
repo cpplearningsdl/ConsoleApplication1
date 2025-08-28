@@ -69,8 +69,7 @@ int main(int argc, char* argv[]) {
 			SDL_Delay(static_cast<Uint32>(frameDelay - frameTime));
 		}
 		frameNumber++;
-	}
-	textureManager.logTextureInfo("white_piece_idle_0");
+	} 
 
 
 

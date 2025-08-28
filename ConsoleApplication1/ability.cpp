@@ -24,7 +24,7 @@ void ability::setCurrentPower(int amount) {
 
 void ability::reset() {
 	currentPower = basePower;
-	uses.setCurrent = uses.getMax;
+	uses.setCurrentUses(uses.getMaxUses());
 }
  
 // Example effect execution (placeholder)

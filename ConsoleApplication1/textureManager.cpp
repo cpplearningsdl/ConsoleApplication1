@@ -34,11 +34,17 @@ bool textureManager::loadAllTextures(const std::string& rootDirectory, SDL_Rende
 		nlohmann::json json;
 		file >> json;
 
-		textureDataStruct animData;  // metadata only
+		textureDataStruct animData; 
 		animData.animationName = json.value("animationName", folderName);
 		animData.width = json.value("width", 0);
 		animData.height = json.value("height", 0);
+		animData.hitBoxWidth = json.value("hitBoxWidth", 0);
+		animData.hitBoxHeight = json.value("hitBoxHeight", 0);
 		animData.totalFrames = json.value("totalFrames", 0);
+		animData.actualX = json.value("actualX", 0);
+		animData.actualY = json.value("actualY", 0);
+		animData.currentX = json.value("currentX", 0);
+		animData.currentY = json.value("currentY", 0);
 		animData.xOffset = json.value("xOffset", 0);
 		animData.yOffset = json.value("yOffset", 0);
 		animData.loop = json.value("loop", true);
@@ -124,10 +130,7 @@ int getFrameNumber(const std::string& frameName) {
 	}
 	return num;
 }
-
-
-
-
+ 
 void textureManager::cleanUp() {
 	for (auto&[key, tex] : frames) {
 		if (tex) {

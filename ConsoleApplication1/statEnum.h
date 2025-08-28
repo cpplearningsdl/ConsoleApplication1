@@ -2,6 +2,7 @@
 #include <cstddef>
 
 enum class statEnum : size_t {
+	MISSINGTYPE,
 	LEVEL,
 	EXPERIENCE,
 	EXPERIENCENEEDED,
@@ -17,3 +18,5 @@ enum class statEnum : size_t {
 	GROWTH,
 	COUNT
 };
+
+statEnum count() { return statEnum::COUNT; }

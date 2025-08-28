@@ -12,14 +12,14 @@ public:
 		: current(maxUses), max(maxUses) {}
 
 	int getCurrent() const { return current; }
-	int getMax() const { return max; }
+	int getMaxUses() const { return max; }
 
 	void setMax(int newMax) {
 		max = newMax;
 		if (current > max) current = max;
 	}
 
-	void setCurrent(int newCurrent) {
+	void setCurrentUses(int newCurrent) {
 		current = newCurrent;
 		if (current > max) { current = max; }
 	}

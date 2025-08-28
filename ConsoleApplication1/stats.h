@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include "statClass.h"
 #include "statEnum.h"
+#include "logManager.h"
 
 class stats {
 private:
@@ -11,7 +12,7 @@ public:
 	stats() = default;
 	 
 	void add(statEnum type, const statClass& s) {
-		statsMap[type] = s; // copies the stat into the map
+		statsMap[type] = s;  
 	}
 	 
 	void add(statEnum type, statClass&& s) {
@@ -19,14 +20,14 @@ public:
 	}
 	 
 	statClass& get(statEnum type) {
-		return statsMap.at(type); // throws if type doesn't exist
+		return statsMap.at(type); // throws if type doesn't exist 
 	}
 
 	const statClass& get(statEnum type) const {
 		return statsMap.at(type);
 	}
 	 
-	bool has(statEnum type) const {
+	bool hasStat(statEnum type) const {
 		return statsMap.find(type) != statsMap.end();
 	}
 };

@@ -56,8 +56,9 @@ void renderer::clearNextFrame() {
 }
 
 void renderer::drawToNextFrame(const std::string& key, int x, int y) {
-	const textureDataStruct* texData = textureManager::getInstance().getTexture(key);
-	if (!texData || !texData->texture) return;
+	const textureDataStruct* texData = textureManager::getInstance().getAnimationData(key);
+	SDL_Texture* tex = textureManager::getInstance().getFrame(key);
+	if (!texData || !tex) return;
 
 	SDL_SetRenderTarget(sdlRenderer, nextFrame);
 
@@ -67,7 +68,7 @@ void renderer::drawToNextFrame(const std::string& key, int x, int y) {
 	dst.w = static_cast<float>(texData->width);
 	dst.h = static_cast<float>(texData->height);
 
-	SDL_RenderTexture(sdlRenderer, texData->texture, nullptr, &dst);
+	SDL_RenderTexture(sdlRenderer, tex, nullptr, &dst);
 }
 
 void renderer::presentFrame() {
