@@ -11,26 +11,57 @@ windowManager& windowManager::initWindowManager() {
 
 windowManager::windowManager() : window(nullptr) {}
 
+//bool windowManager::openWindow(const std::string& title, int width, int height, Uint32 flags) {
+	//if (window) return true; 
+
+	//window = SDL_CreateWindow(title.c_str(), width, height, flags);
+	//if (!window) {
+	//	lm::logThis("Failed to create window.");
+	//	return false;
+	//}
+
+	//renderer = SDL_CreateRenderer(window, nullptr);
+	//if (!renderer) {
+	//	lm::logThis("Failed to create renderer.");
+	//	SDL_DestroyWindow(window);
+	//	window = nullptr;
+	//	return false;
+	//}
+
+	//lm::logThis("Created window.");
+	//return true;
+//}
+
 bool windowManager::openWindow(const std::string& title, int width, int height, Uint32 flags) {
-	if (window) return true; 
+	
+		if (window) return true;
 
-	window = SDL_CreateWindow(title.c_str(), width, height, flags);
-	if (!window) {
-		lm::logThis("Failed to create window.");
-		return false;
-	}
+		flags |= SDL_WINDOW_RESIZABLE; 
 
-	renderer = SDL_CreateRenderer(window, nullptr);
-	if (!renderer) {
-		lm::logThis("Failed to create renderer.");
-		SDL_DestroyWindow(window);
-		window = nullptr;
-		return false;
-	}
+		window = SDL_CreateWindow(title.c_str(), width, height, flags);
+		if (!window) {
+			lm::logThis("Failed to create window.");
+			return false;
+		}
+	 
+		renderer = SDL_CreateRenderer(window, nullptr);
+		if (!renderer) {
+			lm::logThis("Failed to create renderer.");
+			SDL_DestroyWindow(window);
+			window = nullptr;
+			return false;
+		}
+	 
+		//0disabled 1enabled
+		if (!SDL_SetRenderVSync(renderer, 1)) {
+			lm::logThis("Failed to set VSync.");
+		}
 
-	lm::logThis("Created window.");
-	return true;
+		lm::logThis("Created window and renderer (vsync enabled).");
+		return true;
 }
+
+ 
 
 windowManager::~windowManager() {
 	closeWindow();

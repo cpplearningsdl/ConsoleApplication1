@@ -11,7 +11,7 @@ public:
 
 	SDL_Renderer* getRenderer() const;
 	SDL_Window* getWindow() const;
-	void closeWindow();
+	void closeWindow(); 
 
 private:
 	windowManager();  

@@ -40,8 +40,9 @@ int main(int argc, char* argv[]) {
 	renderer& renderer = renderer::getInstance();
 	renderer.init(600, 800);
 
-	renderer.drawToNextFrame("white_piece_idle_0", 128, 128);
 	renderer.drawToNextFrame("black_piece_idle_0", 0, 0);
+	renderer.drawToNextFrame("white_piece_idle_0", 128, 128);
+
 	renderer.drawScreen();
 
 	const int FPS = 60;

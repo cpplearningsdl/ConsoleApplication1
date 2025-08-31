@@ -27,9 +27,6 @@
     <ClCompile Include="fileManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="textureManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="textureDataStruct.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -52,6 +49,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ability.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="oldTextureManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="textureManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="animationManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -108,6 +114,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="statClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="animationManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -13,13 +13,7 @@ struct textureDataStruct {
 	int height = 0;
 	int hitBoxWidth = 0;
 	int hitBoxHeight = 0;
-
-	int actualX = 0;
-	int actualY = 0;
-
-	int currentX = 0;
-	int currentY = 0;
-
+	 
 	int xOffset = 0;
 	int yOffset = 0;
 

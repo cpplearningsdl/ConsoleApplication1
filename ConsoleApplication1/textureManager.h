@@ -22,8 +22,9 @@ public:
 	void cleanUp();
 
 private:
-	std::unordered_map<std::string, SDL_Texture*> frames; 
-	std::unordered_map<std::string, textureDataStruct> animationData; 
+	std::unordered_map<std::string, SDL_Texture*> framesMap; 
+	std::unordered_map<std::string, textureDataStruct> frameDataMap; 
+	std::unordered_map<std::string, std::string> entityAnimationNamesMap;
 
 	textureManager() = default;
 	~textureManager();

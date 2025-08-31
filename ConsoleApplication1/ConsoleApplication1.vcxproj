@@ -170,6 +170,7 @@
   <ItemGroup>
     <ClCompile Include="abilities.cpp" />
     <ClCompile Include="ability.cpp" />
+    <ClCompile Include="animationManager.cpp" />
     <ClCompile Include="ConsoleApplication1.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="fileManager.cpp" />
@@ -179,6 +180,10 @@
     <ClCompile Include="logManager.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="textureDataStruct.cpp" />
+    <ClCompile Include="oldTextureManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="windowManager.cpp" />
   </ItemGroup>
@@ -186,6 +191,7 @@
     <ClInclude Include="abilities.h" />
     <ClInclude Include="ability.h" />
     <ClInclude Include="abilityType.h" />
+    <ClInclude Include="animationManager.h" />
     <ClInclude Include="oldStats.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="fileManager.h" />

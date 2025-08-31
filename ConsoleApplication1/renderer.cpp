@@ -6,6 +6,9 @@
 
 #define lm logManager
 
+const int logicalW = 800;
+const int logicalH = 600;
+
 renderer::renderer() {}
 renderer::~renderer() { shutdown(); }
 
@@ -25,17 +28,42 @@ bool renderer::init(int width, int height) {
 	}
 
 	sdlRenderer = windowManager::initWindowManager().getRenderer();
-	if (!sdlRenderer) { 
-		lm::logThis("couldn't create renderer");
+	if (!sdlRenderer) {
+		lm::logThis("couldn't get renderer");
 		return false;
 	}
 
 	lm::logThis("created renderer");
+	 
+	SDL_SetRenderLogicalPresentation(sdlRenderer, logicalW, logicalH, SDL_LOGICAL_PRESENTATION_LETTERBOX);
+	 
+	nextFrame = SDL_CreateTexture(sdlRenderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, logicalW, logicalH);
 
-	nextFrame = SDL_CreateTexture(sdlRenderer, SDL_PIXELFORMAT_RGBA8888,
-		SDL_TEXTUREACCESS_TARGET, screenWidth, screenHeight);
 	return nextFrame != nullptr;
 }
+
+//bool renderer::init(int width, int height) {
+//	screenWidth = width;
+//	screenHeight = height;
+//
+//	SDL_Window* window = windowManager::initWindowManager().getWindow();
+//	if (!window) {
+//		lm::logThis("renderer couldn't get window");
+//		return false;
+//	}
+//
+//	sdlRenderer = windowManager::initWindowManager().getRenderer();
+//	if (!sdlRenderer) { 
+//		lm::logThis("couldn't create renderer");
+//		return false;
+//	}
+//
+//	lm::logThis("created renderer");
+//
+//	nextFrame = SDL_CreateTexture(sdlRenderer, SDL_PIXELFORMAT_RGBA8888,
+//		SDL_TEXTUREACCESS_TARGET, screenWidth, screenHeight);
+//	return nextFrame != nullptr;
+//}
 
 void renderer::shutdown() {
 	if (nextFrame) {
