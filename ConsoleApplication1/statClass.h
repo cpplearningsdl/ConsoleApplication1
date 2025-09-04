@@ -1,5 +1,6 @@
 #pragma once
 #include <algorithm>
+#include "C:\Users\Keary\source\repos\ConsoleApplication1\ConsoleApplication1\include\json.hpp"
 
 //current can go above base, for buffs, but for things like HP and overhealing, you can stop that by calling lockCurrentToBase() after you setCurrent() or increaseCurrent()
 //you can subtract by increasing with a negative amount.
@@ -42,4 +43,22 @@ class statClass {
 		void increaseBase(int amount) { setBase(base + amount); }
 		void clampCurrentToBaseThisTime() { if (current > base) current = base; }
 		void setClamped(bool b) { clamped = b; }
+
 };
+
+//to json
+inline void to_json(nlohmann::json& j, const statClass& s) {
+	j = nlohmann::json{
+		{"current", s.getCurrent()},
+		{"min",     s.getMin()},
+		{"base",    s.getBase()},
+		{"clamped", s.isClamped()}
+	};
+}
+
+inline void from_json(const nlohmann::json& j, statClass& s) {
+	s.setCurrent(j.value("current", 0));
+	s.setMin(j.value("min", 0));
+	s.setBase(j.value("base", 0));
+	s.setClamped(j.value("clamped", false));
+}

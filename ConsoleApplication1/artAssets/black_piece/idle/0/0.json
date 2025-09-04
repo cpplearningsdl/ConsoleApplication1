@@ -4,8 +4,8 @@
   "frameNumber": 0,
   "height": 128,
   "key": "black_piece_idle_0",
-  "loop": false,
-  "totalFrames": 1,
+  "loop": true,
+  "totalFrames": 2,
   "width": 128,
   "xOffset": 0,
   "yOffset": 0

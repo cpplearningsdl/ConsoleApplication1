@@ -1,4 +1,5 @@
 #include "animationManager.h"
+#include "animationMovementFactory.h"
 #include "textureManager.h" 
 #include "logManager.h"
 
@@ -37,6 +38,10 @@ bool animationManager::loadAnimation(const std::string& baseName) {
 	return !frames.empty();
 }
 
+void animationManager::setMovement(movementTypeEnum type, float startX, float startY, float distance, int frames) {
+	movement = animationMovementFactory::createMovement(type, startX, startY, distance, frames);
+}
+
 void animationManager::step() {
 	if (frames.empty() || finished) return;
 
@@ -51,6 +56,11 @@ void animationManager::step() {
 	// Reset hold counter and advance frame
 	heldCount = 0;
 	currentIndex++;
+
+	//advance animation movement
+	if (movement && !movement->isFinished()) {
+		movement->step();
+	}
 
 	if (currentIndex >= frames.size()) {
 		if (frames.back().loop) {

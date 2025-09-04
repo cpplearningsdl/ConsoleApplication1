@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 #include "textureManager.h" 
+#include "animationMovement.h"
+#include "movementTypeEnum.h"
 
 class animationManager {
 public:
@@ -11,7 +13,8 @@ public:
 	 
 	void step(); 
 	void reset();
-
+	 
+	void setMovement(movementTypeEnum type, float startX, float startY, float distance, int frames);
 	// Override the chain animation (die after damage instead of go back to idle, for example)
 	void setChainOverride(const std::string& nextAnim);
 
@@ -33,4 +36,5 @@ private:
 	int holdFor;
 	bool finished;
 	std::string chainOverride; 
+	std::unique_ptr<animationMovement> movement;
 };

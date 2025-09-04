@@ -51,13 +51,25 @@
     <ClCompile Include="ability.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="oldTextureManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="textureManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="animationManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="animationMovement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="animationMovementFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="northMovement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="southMovement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entityFileLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -110,13 +122,34 @@
     <ClInclude Include="statEnum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="stats.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="statClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="animationManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="animationMovement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="animationMovementFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="movementTypeEnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="northMovement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="southMovement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="abilityHeal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="entityFileLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="statsContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

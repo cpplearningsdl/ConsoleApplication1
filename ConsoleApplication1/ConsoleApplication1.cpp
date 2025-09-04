@@ -1,13 +1,14 @@
 #include <iostream>
 #include <string>
-#include <SDL3/SDL.h>
-#include <SDL3_image/SDL_image.h>
+#include <C:\SDL2Libraries\SDL3-devel-3.2.18-VC\SDL3-3.2.18\include\SDL3/SDL.h>
+#include <C:\SDL2Libraries\SDL3_image-devel-3.2.4-VC\SDL3_image-3.2.4\include\SDL3_image/SDL_image.h>
+#include "gameManager.h"
 #include "windowManager.h"
 #include "inputManager.h"
 #include "textureManager.h"
 #include "renderer.h"
 #include "logManager.h"
-#include "json.hpp"
+#include "C:\Users\Keary\source\repos\ConsoleApplication1\ConsoleApplication1\include\json.hpp"
 
 using json = nlohmann::json;
 
@@ -51,6 +52,14 @@ int main(int argc, char* argv[]) {
 	bool running = true;
 	int frameNumber = 1;
 	bool displayFrameNumber = false;
+
+	//
+	gameManager& gManager = gameManager::getInstance();
+
+	gManager.newGame();
+
+
+
 	while (running && windowManager.getWindow()) {
 		Uint64 frameStart = SDL_GetTicks();
 		if(displayFrameNumber) logManager::logThis("Frame start ", frameNumber);
