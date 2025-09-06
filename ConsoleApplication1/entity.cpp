@@ -9,9 +9,7 @@ entity::entity(int id) {
 void entity::update() {
 
 }
-
  
-
 abilities& entity::getAbilities() {
 	return abilities;
 }

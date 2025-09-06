@@ -1,5 +1,7 @@
 #pragma once
+#include "json.hpp"
 #include <algorithm>
+
 class uses {
 private:
 	int current;
@@ -12,7 +14,7 @@ public:
 		: current(maxUses), max(maxUses) {}
 
 	int getCurrent() const { return current; }
-	int getMaxUses() const { return max; }
+	int getMax() const { return max; }
 
 	void setMax(int newMax) {
 		max = newMax;
@@ -40,4 +42,12 @@ public:
 	void addUses(int amount) {
 		current = std::min(current + amount, max);
 	}
+
+	friend void to_json(nlohmann::json& j, const uses& u); 
 };
+inline void to_json(nlohmann::json& j, const uses& u) {
+	j = nlohmann::json{
+		{"current", u.getCurrent()},
+		{"max", u.getMax()}
+	};
+}

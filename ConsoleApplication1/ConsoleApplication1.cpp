@@ -1,14 +1,14 @@
 #include <iostream>
 #include <string>
-#include <C:\SDL2Libraries\SDL3-devel-3.2.18-VC\SDL3-3.2.18\include\SDL3/SDL.h>
-#include <C:\SDL2Libraries\SDL3_image-devel-3.2.4-VC\SDL3_image-3.2.4\include\SDL3_image/SDL_image.h>
+#include <SDL3/SDL.h>
+#include <SDL3_image/SDL_image.h>
 #include "gameManager.h"
 #include "windowManager.h"
 #include "inputManager.h"
 #include "textureManager.h"
 #include "renderer.h"
 #include "logManager.h"
-#include "C:\Users\Keary\source\repos\ConsoleApplication1\ConsoleApplication1\include\json.hpp"
+#include "json.hpp"
 
 using json = nlohmann::json;
 

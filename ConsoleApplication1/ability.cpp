@@ -1,31 +1,13 @@
-#include "ability.h"
+#include "ability.h" 
 
-ability::ability(const std::string& name, int maxUses, int basePower, int currentPower)
-	: name(std::move(name)), uses(maxUses), basePower(basePower), currentPower(currentPower)
+ability::ability() 
 {
+
 }
  
-const std::string& ability::getName() const { return name; } 
-int ability::getBasePower() const { return basePower; }
-int ability::getCurrentPower() const { return currentPower; }
-abilityType ability::getAbilityType() const { return abilityType; }
- 
-void ability::increaseCurrentPower(int amount) {
-	currentPower = currentPower + amount;
-	if (currentPower < 0) {
-		currentPower = 0;
-	} 
-}
-
-void ability::setCurrentPower(int amount) {
-	currentPower = amount;
-	if (currentPower < 0) { currentPower = 0; }
-}
-
-void ability::reset() {
-	currentPower = basePower;
-	uses.setCurrentUses(uses.getMaxUses());
-}
+const std::string& ability::getName() const { return name; }  
+abilityType ability::getAbilityType() const { return type; }
+void ability::setAbilityType(abilityType  newType) { type = newType;  }
  
 // Example effect execution (placeholder)
 void  ability::executeEffect(gameContext& ctx) {

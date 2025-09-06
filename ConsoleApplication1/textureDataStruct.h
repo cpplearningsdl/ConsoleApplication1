@@ -1,8 +1,7 @@
 #pragma once
 
 #include <string>
-#include <SDL3/SDL.h>
-
+#include <SDL3/SDL.h> 
 struct textureDataStruct { 
 	std::string key;
 	std::string animationName;
