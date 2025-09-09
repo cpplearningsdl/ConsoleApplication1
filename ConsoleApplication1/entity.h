@@ -2,13 +2,15 @@
 #include <string>  
 #include "abilities.h"
 #include "statsContainer.h"
-#include "C:\Users\Keary\source\repos\ConsoleApplication1\ConsoleApplication1\include\json.hpp"
+#include "abilityFactory.h"
+#include "json.hpp"
 
 
 class entity {
 public:
-	entity(int factoryId);
-
+	entity();
+	entity(const entity&) = default;
+	entity& operator=(const entity&) = default;
   
 	void update(); 
 
@@ -23,7 +25,8 @@ public:
 
 	abilities& getAbilities();
 	const abilities& getAbilities() const;
-	static nlohmann::json entityToJson(const entity& e);
+	static nlohmann::json to_Json(const entity& e);
+	void from_Json(const nlohmann::json&j);
 
 private:
 	int entityId;

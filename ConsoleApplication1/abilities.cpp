@@ -1,20 +1,30 @@
 #include "abilities.h"
 #include <algorithm>
+#include "logManager.h"
 
 void abilities::addAbility(const ability& masterAbility) {
-	abilities.push_back(masterAbility.clone()); // deep copy via clone()
+	abilityContainer.push_back(masterAbility.clone()); 
 }
-
+void abilities::addAbility(std::unique_ptr<ability> newAbility) {
+	if (newAbility) {
+		abilityContainer.push_back(std::move(newAbility));
+	}
+	else {
+		logManager::logThis("Failed to load ability ptr from factory");
+	}
+}
 void abilities::removeAbility(const std::string& name) {
-	abilities.erase(
-		std::remove_if(abilities.begin(), abilities.end(),
-			[&](const std::unique_ptr<ability>& a) { return a->getName() == name; }),
-		abilities.end()
-	);
+	abilityContainer.erase(
+		std::remove_if(abilityContainer.begin(), abilityContainer.end(),
+			[&](const std::unique_ptr<ability>& a) {
+		return a->getName() == name;
+	}),
+		abilityContainer.end()
+		);
 }
 
 ability* abilities::getAbility(const std::string& name) {
-	for (auto& a : abilities) {
+	for (auto& a : abilityContainer) {
 		if (a->getName() == name) {
 			return a.get();
 		}
@@ -23,5 +33,17 @@ ability* abilities::getAbility(const std::string& name) {
 }
 
 const std::vector<std::unique_ptr<ability>>& abilities::getAll() const {
-	return abilities;
+	return abilityContainer;
+}
+
+nlohmann::json abilities::to_Json(const abilities& abContainer) {
+	json jArray = json::array();
+
+	for (const auto& ab : abContainer.getAll()) {
+		if (ab) {
+			jArray.push_back(ab->to_Json()); 
+		}
+	}
+
+	return jArray;
 }

@@ -1,5 +1,9 @@
 #include "gameManager.h"
-#include "game.h"
+#include "game.h" 
+#include "abilityFactory.h"
+#include "abilityFileLoader.h" 
+#include "entityIncludes.h"
+
 
 gameManager& gameManager::getInstance() {
 	static gameManager instance;
@@ -19,4 +23,9 @@ void gameManager::processGame() {
 		currentGame->update();
 		//currentGame->render();
 	}
+}
+
+void gameManager::loadDefaultAssets() {
+	abilityFactory::getInstance().loadDefaultAbilities();
+	entityFactory::getInstance().loadDefaultEntities(); 
 }

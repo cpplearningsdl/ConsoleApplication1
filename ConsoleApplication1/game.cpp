@@ -2,9 +2,9 @@
 #include <iostream>
 
 game::game() {
-	// init map, entities, etc.
-	entity newEntity(1);
-	//entities.push_back(std::make_unique<entity>(newEntity));
+	// init map, entities, etc. 
+	logManager::logThis("started first game");
+
 }
 
 game::~game() {

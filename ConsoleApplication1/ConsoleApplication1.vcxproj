@@ -170,12 +170,13 @@
   <ItemGroup>
     <ClCompile Include="abilities.cpp" />
     <ClCompile Include="ability.cpp" />
+    <ClCompile Include="abilityFileLoader.cpp" />
     <ClCompile Include="animationManager.cpp" />
     <ClCompile Include="animationMovement.cpp" />
     <ClCompile Include="animationMovementFactory.cpp" />
     <ClCompile Include="ConsoleApplication1.cpp" />
     <ClCompile Include="entity.cpp" />
-    <ClCompile Include="entityFileLoader.cpp" />
+    <ClCompile Include="entityLoader.cpp" />
     <ClCompile Include="fileManager.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameManager.cpp" />
@@ -191,15 +192,19 @@
   <ItemGroup>
     <ClInclude Include="abilities.h" />
     <ClInclude Include="ability.h" />
-    <ClInclude Include="abilityHeal.h" />
+    <ClInclude Include="abilityFactory.h" />
+    <ClInclude Include="abilityFileLoader.h" />
+    <ClInclude Include="heal.h" />
+    <ClInclude Include="abilityIncludes.h" />
     <ClInclude Include="abilityType.h" />
     <ClInclude Include="animationManager.h" />
     <ClInclude Include="animationMovement.h" />
     <ClInclude Include="animationMovementFactory.h" />
-    <ClInclude Include="entityFileLoader.h" />
+    <ClInclude Include="entityFactory.h" />
+    <ClInclude Include="entityIncludes.h" />
+    <ClInclude Include="entityLoader.h" />
     <ClInclude Include="movementTypeEnum.h" />
     <ClInclude Include="northMovement.h" />
-    <ClInclude Include="oldStats.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="fileManager.h" />
     <ClInclude Include="game.h" />

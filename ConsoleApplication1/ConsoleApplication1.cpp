@@ -11,7 +11,9 @@
 #include "json.hpp"
 
 using json = nlohmann::json;
-
+//fucking check all directory paths for spaces and consider using std::string R"path", no escape characters OR
+//std::filesystem::path exePath = std::filesystem::current_path(); // or path of executable
+//std::filesystem::path assetsDir = exePath / "assets";
 
 int main(int argc, char* argv[]) {
 	std::string input; 
@@ -33,7 +35,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	textureManager& textureManager = textureManager::getInstance();
-	std::string artAssetDirectory = "C:\\Users\\Keary\\source\\repos\\ConsoleApplication1\\ConsoleApplication1\\artAssets";
+	std::string artAssetDirectory = "C:\\Users\\Keary\\source\\repos\\ConsoleApplication1-working\\ConsoleApplication1\\artAssets";
 	if (!textureManager.loadAllTextures(artAssetDirectory, windowManager.getRenderer())) {
 		logManager::logThis("Failed to load art succesfully.");
 		return 1;
@@ -54,12 +56,11 @@ int main(int argc, char* argv[]) {
 	bool displayFrameNumber = false;
 
 	//
-	gameManager& gManager = gameManager::getInstance();
-
-	gManager.newGame();
-
-
-
+	//gameManager& gManager = gameManager::getInstance();
+	gameManager::getInstance().loadDefaultAssets();
+	gameManager::getInstance().newGame();
+	//gManager.newGame();
+	 
 	while (running && windowManager.getWindow()) {
 		Uint64 frameStart = SDL_GetTicks();
 		if(displayFrameNumber) logManager::logThis("Frame start ", frameNumber);

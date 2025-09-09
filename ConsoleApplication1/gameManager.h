@@ -1,8 +1,8 @@
-#ifndef GAMEMANAGER_H
-#define GAMEMANAGER_H
-
+#pragma once
 #include <memory>
 #include "game.h"   
+#include "abilityFactory.h"
+#include "abilityFileLoader.h" 
 
 class gameManager {
 public:
@@ -10,6 +10,7 @@ public:
 
 	void newGame();
 	void endGame();
+	void loadDefaultAssets();
 	void processGame(); 
 
 private:
@@ -21,5 +22,4 @@ private:
 
 	std::unique_ptr<game> currentGame;
 };
-
-#endif
+ 

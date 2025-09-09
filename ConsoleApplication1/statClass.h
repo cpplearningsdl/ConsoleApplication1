@@ -1,6 +1,6 @@
 #pragma once
 #include <algorithm>
-#include "C:\Users\Keary\source\repos\ConsoleApplication1\ConsoleApplication1\include\json.hpp"
+#include "json.hpp"
 
 //current can go above base, for buffs, but for things like HP and overhealing, you can stop that by calling lockCurrentToBase() after you setCurrent() or increaseCurrent()
 //you can subtract by increasing with a negative amount.
@@ -18,6 +18,8 @@ class statClass {
 			min = std::clamp(minVal, 0, baseVal);
 			current = std::max(currentVal, min);
 		}
+		statClass(const statClass&) = default;
+		statClass& operator=(const statClass&) = default;
 
 		int getCurrent() const { return current; }
 		int getMin() const { return min; }

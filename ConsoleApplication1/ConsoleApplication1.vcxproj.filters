@@ -9,16 +9,46 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="Header Files\entity">
+      <UniqueIdentifier>{4a11a226-f233-41e4-87cd-7c4ab4a831db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\entity\animation">
+      <UniqueIdentifier>{5a61591c-cc9a-4178-a463-1699c1f233fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\entity\movement">
+      <UniqueIdentifier>{88b4d553-f3b4-4a7e-965d-64f0c505866c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\entity\ability">
+      <UniqueIdentifier>{c103472f-9c11-479e-8e04-4c58e9a580fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\entity\stats">
+      <UniqueIdentifier>{9c8fafd9-534e-4495-8416-450d82797fa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\rendering">
+      <UniqueIdentifier>{b139e201-fcb2-4bc4-aefa-0e04c2af4f29}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\entity">
+      <UniqueIdentifier>{9f33379d-4845-409e-8e3e-f8d45f406e53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\rendering">
+      <UniqueIdentifier>{5d33cf30-ad39-450d-b5d8-f1b352819ab1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\entity\movement">
+      <UniqueIdentifier>{fac4b820-5e6d-4a34-a2ca-cca36522f198}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\entity\animation">
+      <UniqueIdentifier>{252cb290-7e52-420d-b154-677edc51dd16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\entity\ability">
+      <UniqueIdentifier>{ece0316f-4977-4cda-8d77-bc6bba9c3db3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="windowManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="inputManager.cpp">
@@ -27,13 +57,7 @@
     <ClCompile Include="fileManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="textureDataStruct.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="logManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gameManager.cpp">
@@ -42,41 +66,50 @@
     <ClCompile Include="game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="abilities.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\entity\ability</Filter>
     </ClCompile>
     <ClCompile Include="ability.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="textureManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\entity\ability</Filter>
     </ClCompile>
     <ClCompile Include="animationManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\entity\animation</Filter>
     </ClCompile>
     <ClCompile Include="animationMovement.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\entity\animation</Filter>
     </ClCompile>
     <ClCompile Include="animationMovementFactory.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\entity\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="entity.cpp">
+      <Filter>Source Files\entity</Filter>
     </ClCompile>
     <ClCompile Include="northMovement.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\entity\movement</Filter>
     </ClCompile>
     <ClCompile Include="southMovement.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\entity\movement</Filter>
     </ClCompile>
-    <ClCompile Include="entityFileLoader.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="renderer.cpp">
+      <Filter>Source Files\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="textureDataStruct.cpp">
+      <Filter>Source Files\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="textureManager.cpp">
+      <Filter>Source Files\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="windowManager.cpp">
+      <Filter>Source Files\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="entityLoader.cpp">
+      <Filter>Source Files\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="abilityFileLoader.cpp">
+      <Filter>Source Files\entity\ability</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="windowManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="logManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -86,71 +119,86 @@
     <ClInclude Include="fileManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="textureManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="textureDataStruct.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="gameManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="abilities.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\entity\ability</Filter>
     </ClInclude>
     <ClInclude Include="ability.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\entity\ability</Filter>
     </ClInclude>
     <ClInclude Include="abilityType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="uses.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="oldStats.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="statEnum.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="statClass.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\entity\ability</Filter>
     </ClInclude>
     <ClInclude Include="animationManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\entity\animation</Filter>
     </ClInclude>
     <ClInclude Include="animationMovement.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\entity\animation</Filter>
     </ClInclude>
     <ClInclude Include="animationMovementFactory.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\entity\animation</Filter>
     </ClInclude>
-    <ClInclude Include="movementTypeEnum.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="entity.h">
+      <Filter>Header Files\entity</Filter>
     </ClInclude>
     <ClInclude Include="northMovement.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\entity\movement</Filter>
+    </ClInclude>
+    <ClInclude Include="movementTypeEnum.h">
+      <Filter>Header Files\entity\movement</Filter>
     </ClInclude>
     <ClInclude Include="southMovement.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\entity\movement</Filter>
     </ClInclude>
-    <ClInclude Include="abilityHeal.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="statClass.h">
+      <Filter>Header Files\entity\stats</Filter>
     </ClInclude>
-    <ClInclude Include="entityFileLoader.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="statEnum.h">
+      <Filter>Header Files\entity\stats</Filter>
     </ClInclude>
     <ClInclude Include="statsContainer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\entity\stats</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer.h">
+      <Filter>Header Files\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="textureDataStruct.h">
+      <Filter>Header Files\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="textureManager.h">
+      <Filter>Header Files\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="uses.h">
+      <Filter>Header Files\entity\stats</Filter>
+    </ClInclude>
+    <ClInclude Include="windowManager.h">
+      <Filter>Header Files\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="abilityIncludes.h">
+      <Filter>Header Files\entity\ability</Filter>
+    </ClInclude>
+    <ClInclude Include="abilityFileLoader.h">
+      <Filter>Header Files\entity\ability</Filter>
+    </ClInclude>
+    <ClInclude Include="entityFactory.h">
+      <Filter>Header Files\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="entityLoader.h">
+      <Filter>Header Files\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="abilityFactory.h">
+      <Filter>Header Files\entity\ability</Filter>
+    </ClInclude>
+    <ClInclude Include="entityIncludes.h">
+      <Filter>Header Files\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="heal.h">
+      <Filter>Header Files\entity\ability</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,0 +1,64 @@
+{
+    "name": "heal",
+    "type": "BATTLEONLY",
+    "stats": {
+        "LEVEL": {
+            "current": 1,
+            "min": 1,
+            "base": 1,
+            "clamped": false
+        },
+        "EXPERIENCE": {
+            "current": 0,
+            "min": 0,
+            "base": 0,
+            "clamped": false
+        },
+        "EXPERIENCENEEDED": {
+            "current": 10,
+            "min": 0,
+            "base": 10,
+            "clamped": false
+        },
+        "ATTACK": {
+            "current": 5,
+            "min": 0,
+            "base": 5,
+            "clamped": false
+        },
+        "MP": {
+            "current": 20,
+            "min": 0,
+            "base": 20,
+            "clamped": true
+        },
+        "TIMESUSED": {
+            "current": 0,
+            "min": 0,
+            "base": 0,
+            "clamped": false
+        },
+        "TIMESLANDED": {
+            "current": 0,
+            "min": 0,
+            "base": 0,
+            "clamped": false
+        },
+        "TIMESMISSED": {
+            "current": 0,
+            "min": 0,
+            "base": 0,
+            "clamped": false
+        },
+        "KILLS": {
+            "current": 0,
+            "min": 0,
+            "base": 0,
+            "clamped": false
+        }
+    },
+    "usesLeft": {
+        "current": 5,
+        "max": 5
+    }
+}

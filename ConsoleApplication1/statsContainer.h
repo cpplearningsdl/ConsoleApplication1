@@ -3,7 +3,7 @@
 #include "statClass.h"
 #include "statEnum.h"
 #include "logManager.h"
-#include "C:\Users\Keary\source\repos\ConsoleApplication1\ConsoleApplication1\include\json.hpp"
+#include "json.hpp"
 
 class statsContainer {
 private:
@@ -11,7 +11,9 @@ private:
 
 public:
 	statsContainer() = default;
-	 
+	statsContainer(const statsContainer&) = default;
+	statsContainer& operator=(const statsContainer&) = default;
+
 	void add(statEnum type, const statClass& s) {
 		statsMap[type] = s;  
 	}
