@@ -49,18 +49,18 @@ public:
 	void addUses(int amount) {
 		current = std::min(current + amount, max);
 	}
-	friend void from_json(const nlohmann::json& j, uses& u);
-	friend void to_json(nlohmann::json& j, const uses& u);  
+	friend void from_json(const nlohmann::ordered_json& j, uses& u);
+	friend void to_json(nlohmann::ordered_json& j, const uses& u);
 };
-inline void to_json(nlohmann::json& j, const uses& u) {
-	j = nlohmann::json{
+inline void to_json(nlohmann::ordered_json& j, const uses& u) {
+	j = nlohmann::ordered_json{
 		{"current", u.getCurrent()},
 		{"max", u.getMax()},
 		{"locked", u.getLocked()}
 	};
 }
  
-inline void from_json(const nlohmann::json& j, uses& u) {
+inline void from_json(const nlohmann::ordered_json& j, uses& u) {
 	int current = j.value("current", 0);
 	int max = j.value("max", 0);
 	bool locked = j.value("locked", false);

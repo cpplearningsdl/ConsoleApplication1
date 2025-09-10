@@ -1,8 +1,8 @@
 
 #include "entity.h"
 #include "json.hpp"
-using json = nlohmann::json;
-
+//using json = nlohmann::json;
+using ordered_json = nlohmann::ordered_json;
 entity::entity() { 
 }	
 
@@ -18,7 +18,7 @@ const abilities& entity::getAbilities() const {
 	return abilities;
 }
 
-void entity::from_Json(const nlohmann::json& j) {
+void entity::from_Json(const nlohmann::ordered_json& j) {
 	if (j.contains("name")) {
 		setName(j.at("name").get<std::string>());
 	}
@@ -29,29 +29,38 @@ void entity::from_Json(const nlohmann::json& j) {
 		setFactoryId(j.at("factoryId").get<int>());
 	}
 	if (j.contains("stats")) {
-		stats = j.at("stats").get<statsContainer>();
+		//stats = j.at("stats").get<statsContainer>();
+		from_json(j.at("stats"), stats);
 	}
 	if (j.contains("abilities")) {
-		for (const auto& abName : j["abilities"]) {
-			auto ability = abilityFactory::getInstance().create(abName.get<std::string>());
-			if (ability) {
-				abilities.addAbility(std::move(ability));
+		for (const auto& abEntry : j["abilities"]) { 
+			std::string abilityName = abEntry.at("name").get<std::string>(); 
+			auto abPtr = abilityFactory::getInstance().create(abilityName);
+			if (abPtr) {
+				abilities.addAbility(std::move(abPtr));
+			}
+			else {
+				logManager::logThis("Failed to create ability: " + abilityName);
 			}
 		}
 	}
+	nlohmann::ordered_json dumper = to_Json(*this);
+	logManager::logThis("New Entity Dump \n", dumper.dump(4));
 }
-json entity::to_Json(const entity& e) {
-	json j;
+nlohmann::ordered_json entity::to_Json(const entity& e) {
+	ordered_json j;
+	//json j;
 	j["entityId"] = e.getId();
 	j["factoryId"] = e.getFactoryId();
 	j["name"] = e.getName();
 	j["stats"] = e.getStats();
-	nlohmann::json abilitiesArray = nlohmann::json::array();
+	nlohmann::ordered_json abilitiesArray = nlohmann::ordered_json::array();
 	for (const auto& abPtr : e.getAbilities().getAll()) {
 		if (abPtr) {
 			abilitiesArray.push_back(abPtr->to_Json());  // each subclass implements to_json()
 		}
 	}
 	j["abilities"] = abilitiesArray;
+	//logManager::logThis("Entity JSON dump:\n" + j.dump(4));
 	return j;
 }

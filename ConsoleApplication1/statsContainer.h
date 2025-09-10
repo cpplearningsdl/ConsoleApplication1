@@ -1,5 +1,6 @@
 #pragma once
-#include <unordered_map>
+//#include <unordered_map>
+#include <map>
 #include "statClass.h"
 #include "statEnum.h"
 #include "logManager.h"
@@ -7,7 +8,7 @@
 
 class statsContainer {
 private:
-	std::unordered_map<statEnum, statClass> statsMap;
+	std::map<statEnum, statClass> statsMap;
 
 public:
 	statsContainer() = default;
@@ -35,25 +36,37 @@ public:
 	}
 
 	// Make the JSON serializer a friend so it can see statsMap
-	friend void to_json(nlohmann::json& j, const statsContainer& sc);
+	friend void to_json(nlohmann::ordered_json& j, const statsContainer& sc);
 };
 
 //json erialize the container
-inline void to_json(nlohmann::json& j, const statsContainer& sc) {
-	j = nlohmann::json::object();
+inline void to_json(nlohmann::ordered_json& j, const statsContainer& sc) {
+	j = nlohmann::ordered_json::object();
 	for (const auto&[key, stat] : sc.statsMap) {
 		// convert enum key to string for JSON object keys
 		j[statEnumToString(key)] = stat;  // uses to_json(statClass) via ADL
 		// If you want numeric keys instead: j[std::to_string(static_cast<int>(key))] = stat;
 	}
 }
+//
+//inline void from_json(nlohmann::ordered_json& j, statsContainer& sc) {
+//	for (auto it = j.begin(); it != j.end(); ++it) {
+//		statEnum type = stringToStatEnum(it.key());
+//		if (type != statEnum::MISSINGTYPE && type != statEnum::COUNT) {
+//			statClass s = it.value().get<statClass>(); // uses from_json(statClass)
+//			sc.add(type, s);
+//		}
+//	}
+//}
 
-inline void from_json(const nlohmann::json& j, statsContainer& sc) {
+inline void from_json(const nlohmann::ordered_json& j, statsContainer& sc) {
 	for (auto it = j.begin(); it != j.end(); ++it) {
 		statEnum type = stringToStatEnum(it.key());
 		if (type != statEnum::MISSINGTYPE && type != statEnum::COUNT) {
-			statClass s = it.value().get<statClass>(); // uses from_json(statClass)
-			sc.add(type, s);
+			statClass s;
+			from_json(it.value(), s);  // <- use this instead of get<statClass>()
+			sc.add(type, std::move(s));
 		}
 	}
 }
+

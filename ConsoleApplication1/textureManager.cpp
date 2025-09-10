@@ -171,7 +171,7 @@ bool textureManager::loadAllTextures(const std::string& rootDirectory, SDL_Rende
 						continue;
 					}
 
-					nlohmann::json json;
+					nlohmann::ordered_json json;
 					file >> json;
 
 					textureDataStruct newFrameData;

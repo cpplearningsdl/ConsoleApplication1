@@ -35,7 +35,7 @@ namespace abilityFileLoader {
 					continue;
 				}
 
-				nlohmann::json j;
+				nlohmann::ordered_json j;
 				try {
 					file >> j;
 				}
@@ -50,6 +50,7 @@ namespace abilityFileLoader {
 					abilityFactory::getInstance().registerAbility(
 						h.getName(), std::make_unique<heal>(h));
 					logManager::logThis("Registered Ability Heal");
+					//logManager::logThis("Ability JSON dump:\n" + j.dump(4));
 				}
 				// else if (filename == "fireball") { ... }
 				else {

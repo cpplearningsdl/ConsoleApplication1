@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include "json.hpp"
 #include "abilityFactory.h"
 #include "abilityFileLoader.h"
 #include "ability.h"
@@ -37,7 +38,7 @@ public:
 	 
 	const std::vector<std::unique_ptr<ability>>& getAll() const;
 
-	nlohmann::json to_Json(const abilities& abContainer);
+	nlohmann::ordered_json to_Json(const abilities& abContainer);
 private:
 	std::vector<std::unique_ptr<ability>> abilityContainer; // polymorphic storage
 };

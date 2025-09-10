@@ -4,7 +4,7 @@
 #include "uses.h"
 #include "json.hpp"
 
-using json = nlohmann::json;
+using json = nlohmann::ordered_json;
 
 class heal : public ability {
 public: 
@@ -37,7 +37,7 @@ public:
 		j["usesLeft"] = usesLeft;  
 		return j;
 	}
-	void from_Json(const nlohmann::json& j) override {
+	void from_Json(const nlohmann::ordered_json& j) override {
 		if (j.contains("name")) { 
 			const_cast<std::string&>(getName()) = j.at("name").get<std::string>();
 		}

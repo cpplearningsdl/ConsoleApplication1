@@ -35,7 +35,7 @@ namespace entityLoader {
 					continue;
 				}
 
-				nlohmann::json j;
+				nlohmann::ordered_json j;
 				try {
 					file >> j;
 				}
@@ -56,7 +56,7 @@ namespace entityLoader {
 
 				// Register with factory
 				entityFactory::getInstance().registerEntity(filename, std::move(prototype));
-				logManager::logThis("Registered entity: " + filename);
+				logManager::logThis("Registered entity: " + filename + "\n"); 
 			}
 		}
 
@@ -66,7 +66,7 @@ namespace entityLoader {
 	}
 
 
-	void loadEntityFromFactoryJson(const json& j, entity& e) {
+	void loadEntityFromFactoryJson(const nlohmann::ordered_json& j, entity& e) {
 		if (j.contains("name")) e.setName(j.at("name").get<std::string>());
 		if (j.contains("entityId")) e.setEntityId(j.at("entityId").get<int>());
 		if (j.contains("factoryId")) e.setFactoryId(j.at("factoryId").get<int>());
@@ -82,7 +82,7 @@ namespace entityLoader {
 		}
 	}
 
-	void loadEntityFromSaveJson(const json& j, entity& e) {
+	void loadEntityFromSaveJson(const nlohmann::ordered_json& j, entity& e) {
 		if (j.contains("name")) e.setName(j.at("name").get<std::string>());
 		if (j.contains("entityId")) e.setEntityId(j.at("entityId").get<int>());
 		if (j.contains("factoryId")) e.setFactoryId(j.at("factoryId").get<int>());

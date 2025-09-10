@@ -10,7 +10,7 @@
 #include "logManager.h"
 #include "json.hpp"
 
-using json = nlohmann::json;
+using json = nlohmann::ordered_json;
 //fucking check all directory paths for spaces and consider using std::string R"path", no escape characters OR
 //std::filesystem::path exePath = std::filesystem::current_path(); // or path of executable
 //std::filesystem::path assetsDir = exePath / "assets";
@@ -53,13 +53,10 @@ int main(int argc, char* argv[]) {
 
 	bool running = true;
 	int frameNumber = 1;
-	bool displayFrameNumber = false;
+	bool displayFrameNumber = false; 
 
-	//
-	//gameManager& gManager = gameManager::getInstance();
 	gameManager::getInstance().loadDefaultAssets();
-	gameManager::getInstance().newGame();
-	//gManager.newGame();
+	gameManager::getInstance().newGame(); 
 	 
 	while (running && windowManager.getWindow()) {
 		Uint64 frameStart = SDL_GetTicks();

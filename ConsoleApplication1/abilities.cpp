@@ -36,7 +36,7 @@ const std::vector<std::unique_ptr<ability>>& abilities::getAll() const {
 	return abilityContainer;
 }
 
-nlohmann::json abilities::to_Json(const abilities& abContainer) {
+nlohmann::ordered_json abilities::to_Json(const abilities& abContainer) {
 	json jArray = json::array();
 
 	for (const auto& ab : abContainer.getAll()) {

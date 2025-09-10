@@ -25,8 +25,8 @@ public:
 
 	abilities& getAbilities();
 	const abilities& getAbilities() const;
-	static nlohmann::json to_Json(const entity& e);
-	void from_Json(const nlohmann::json&j);
+	static nlohmann::ordered_json to_Json(const entity& e);
+	void from_Json(const nlohmann::ordered_json&j);
 
 private:
 	int entityId;

@@ -24,7 +24,8 @@ public:
 	 
 	void loadDefaultAbilities() {
 		std::string path = R"(C:\Users\Keary\source\repos\ConsoleApplication1-working\ConsoleApplication1\abilityFiles)";
-		abilityFileLoader::loadAllAbilitiesFromDir(path); };
+		abilityFileLoader::loadAllAbilitiesFromDir(path); 
+	};
 
 	std::unique_ptr<ability> create(const std::string& name) const {
 		auto it = prototypes.find(name);

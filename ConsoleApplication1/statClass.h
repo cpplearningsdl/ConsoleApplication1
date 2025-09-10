@@ -49,8 +49,8 @@ class statClass {
 };
 
 //to json
-inline void to_json(nlohmann::json& j, const statClass& s) {
-	j = nlohmann::json{
+inline void to_json(nlohmann::ordered_json& j, const statClass& s) {
+	j = nlohmann::ordered_json{
 		{"current", s.getCurrent()},
 		{"min",     s.getMin()},
 		{"base",    s.getBase()},
@@ -58,7 +58,7 @@ inline void to_json(nlohmann::json& j, const statClass& s) {
 	};
 }
 
-inline void from_json(const nlohmann::json& j, statClass& s) {
+inline void from_json(const nlohmann::ordered_json& j, statClass& s) {
 	s.setCurrent(j.value("current", 0));
 	s.setMin(j.value("min", 0));
 	s.setBase(j.value("base", 0));
