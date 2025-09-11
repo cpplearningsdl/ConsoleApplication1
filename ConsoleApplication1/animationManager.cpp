@@ -38,7 +38,7 @@ bool animationManager::loadAnimation(const std::string& baseName) {
 	return !frames.empty();
 }
 
-void animationManager::setMovement(movementTypeEnum type, float startX, float startY, float distance, int frames) {
+void animationManager::setMovement(movementDirectionEnum type, float startX, float startY, float distance, int frames) {
 	movement = animationMovementFactory::createMovement(type, startX, startY, distance, frames);
 }
 

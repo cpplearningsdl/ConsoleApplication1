@@ -37,6 +37,7 @@ public:
 
 	// Make the JSON serializer a friend so it can see statsMap
 	friend void to_json(nlohmann::ordered_json& j, const statsContainer& sc);
+	friend void from_json(const nlohmann::ordered_json& j, statsContainer& sc);
 };
 
 //json erialize the container
@@ -47,17 +48,7 @@ inline void to_json(nlohmann::ordered_json& j, const statsContainer& sc) {
 		j[statEnumToString(key)] = stat;  // uses to_json(statClass) via ADL
 		// If you want numeric keys instead: j[std::to_string(static_cast<int>(key))] = stat;
 	}
-}
-//
-//inline void from_json(nlohmann::ordered_json& j, statsContainer& sc) {
-//	for (auto it = j.begin(); it != j.end(); ++it) {
-//		statEnum type = stringToStatEnum(it.key());
-//		if (type != statEnum::MISSINGTYPE && type != statEnum::COUNT) {
-//			statClass s = it.value().get<statClass>(); // uses from_json(statClass)
-//			sc.add(type, s);
-//		}
-//	}
-//}
+} 
 
 inline void from_json(const nlohmann::ordered_json& j, statsContainer& sc) {
 	for (auto it = j.begin(); it != j.end(); ++it) {

@@ -3,7 +3,7 @@
 #include <string>
 #include "textureManager.h" 
 #include "animationMovement.h"
-#include "movementTypeEnum.h"
+#include "movementDirectionEnum.h"
 
 class animationManager {
 public:
@@ -14,7 +14,7 @@ public:
 	void step(); 
 	void reset();
 	 
-	void setMovement(movementTypeEnum type, float startX, float startY, float distance, int frames);
+	void setMovement(movementDirectionEnum type, float startX, float startY, float distance, int frames);
 	// Override the chain animation (die after damage instead of go back to idle, for example)
 	void setChainOverride(const std::string& nextAnim);
 
