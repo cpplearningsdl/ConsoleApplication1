@@ -6,6 +6,31 @@
 animationManager::animationManager()
 	: currentIndex(0), heldCount(0), holdFor(0), finished(false) {}
 
+animationManager::animationManager(const animationManager& other)
+	: frames(other.frames),
+	name(other.name),
+	currentIndex(other.currentIndex),
+	heldCount(other.heldCount),
+	holdFor(other.holdFor),
+	finished(other.finished),
+	chainOverride(other.chainOverride),
+	movement(other.movement ? other.movement->clone() : nullptr) // deep clone
+{}
+
+animationManager& animationManager::operator=(const animationManager& other) {
+	if (this != &other) {
+		frames = other.frames;
+		name = other.name;
+		currentIndex = other.currentIndex;
+		heldCount = other.heldCount;
+		holdFor = other.holdFor;
+		finished = other.finished;
+		chainOverride = other.chainOverride;
+		movement = other.movement ? other.movement->clone() : nullptr;
+	}
+	return *this;
+}
+
 bool animationManager::loadAnimation(const std::string& baseName) {
 	frames.clear();
 	currentIndex = 0;
@@ -135,4 +160,16 @@ bool animationManager::isFinished() const {
 
 const std::string& animationManager::getName() const {
 	return name;
+}
+
+void to_json(nlohmann::ordered_json& j, const animationManager& m) {
+	j = nlohmann::ordered_json{
+		{"frames", m.getFrames()},
+		{"name", m.getName()},
+		{"currentIndex", m.getCurrentIndex()},
+		{"heldCount", m.getHeldCount()},
+		{"holdFor", m.getHoldFor()},
+		{"finished", m.getFinished()},
+		{"chainOverride", m.getChainOverride()}
+	};
 }

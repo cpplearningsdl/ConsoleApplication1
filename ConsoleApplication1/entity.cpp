@@ -3,9 +3,23 @@
 #include "json.hpp"
 //using json = nlohmann::json;
 using ordered_json = nlohmann::ordered_json;
-entity::entity() { 
-}	
 
+entity::entity() {
+
+}
+entity::entity(const entity& other)
+	: animationHandler(other.animationHandler) // uses deep copy from animationManager
+{
+	// copy other members here…
+}
+
+entity& entity::operator=(const entity& other) {
+	if (this != &other) {
+		animationHandler = other.animationHandler; // deep copy again
+		// copy other members here…
+	}
+	return *this;
+}
 void entity::update() {
 
 }
@@ -60,7 +74,8 @@ nlohmann::ordered_json entity::to_Json(const entity& e) {
 			abilitiesArray.push_back(abPtr->to_Json());  // each subclass implements to_json()
 		}
 	}
-	j["abilities"] = abilitiesArray;
+	j["abilities"] = abilitiesArray; 
+
 	//logManager::logThis("Entity JSON dump:\n" + j.dump(4));
 	return j;
 }

@@ -1,9 +1,9 @@
 #pragma once
-
+#include <memory>
 class animationMovement {
 public:
 	virtual ~animationMovement() = default;
-
+	virtual std::unique_ptr<animationMovement> clone() const = 0;
 	virtual void step() = 0; 
 	virtual bool isFinished() const = 0;
 

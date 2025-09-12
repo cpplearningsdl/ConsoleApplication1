@@ -1,5 +1,6 @@
 #pragma once
 #include <string>  
+#include "animationManager.h"
 #include "abilities.h"
 #include "statsContainer.h"
 #include "abilityFactory.h"
@@ -9,9 +10,18 @@
 class entity {
 public:
 	entity();
-	entity(const entity&) = default;
-	entity& operator=(const entity&) = default;
-  
+	~entity() = default;
+
+	// Deep copy constructor
+	entity(const entity& other);
+
+	// Deep copy assignment
+	entity& operator=(const entity& other);
+
+	// Move semantics
+	entity(entity&&) noexcept = default;
+	entity& operator=(entity&&) noexcept = default;
+
 	void update(); 
 
 	std::string getName() const { return name; };
@@ -24,7 +34,8 @@ public:
 	statsContainer& getStats() { return stats; }
 
 	abilities& getAbilities();
-	const abilities& getAbilities() const;
+	const abilities& getAbilities() const; 
+	//const animationManager& getAnimationManager() const { return animationHandler; }
 	static nlohmann::ordered_json to_Json(const entity& e);
 	void from_Json(const nlohmann::ordered_json&j);
 
@@ -35,5 +46,7 @@ private:
 	std::string name;
 	statsContainer stats;
 	abilities abilities; 
+	
+	animationManager animationHandler;
 };
  
