@@ -53,7 +53,7 @@ inline void to_json(nlohmann::ordered_json& j, const statsContainer& sc) {
 inline void from_json(const nlohmann::ordered_json& j, statsContainer& sc) {
 	for (auto it = j.begin(); it != j.end(); ++it) {
 		statEnum type = stringToStatEnum(it.key());
-		if (type != statEnum::MISSINGTYPE && type != statEnum::COUNT) {
+		if (type != statEnum::STATENUMMISSINGTYPE && type != statEnum::STATENUMCOUNT) {
 			statClass s;
 			from_json(it.value(), s);  // <- use this instead of get<statClass>()
 			sc.add(type, std::move(s));

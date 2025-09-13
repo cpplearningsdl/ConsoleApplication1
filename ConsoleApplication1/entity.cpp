@@ -10,13 +10,21 @@ entity::entity() {
 entity::entity(const entity& other)
 	: animationHandler(other.animationHandler) // uses deep copy from animationManager
 {
-	// copy other members here…
+	entityId = other.entityId;
+	factoryId = other.factoryId;
+	name = other.name;
+	stats = other.stats;
+	abilities = other.abilities; 
 }
 
 entity& entity::operator=(const entity& other) {
 	if (this != &other) {
 		animationHandler = other.animationHandler; // deep copy again
-		// copy other members here…
+		entityId = other.entityId;
+		factoryId = other.factoryId;
+		name = other.name;
+		stats = other.stats;
+		abilities = other.abilities;
 	}
 	return *this;
 }
@@ -58,6 +66,10 @@ void entity::from_Json(const nlohmann::ordered_json& j) {
 			}
 		}
 	}
+	if (j.contains("animationManager")) {
+		from_json(j.at("animationManager"), animationHandler);
+	}
+
 	nlohmann::ordered_json dumper = to_Json(*this);
 	logManager::logThis("New Entity Dump \n", dumper.dump(4));
 }

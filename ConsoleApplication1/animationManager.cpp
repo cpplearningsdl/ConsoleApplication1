@@ -63,7 +63,7 @@ bool animationManager::loadAnimation(const std::string& baseName) {
 	return !frames.empty();
 }
 
-void animationManager::setMovement(movementDirectionEnum type, float startX, float startY, float distance, int frames) {
+void animationManager::setMovement(movementTypeEnum type, float startX, float startY, float distance, int frames) {
 	movement = animationMovementFactory::createMovement(type, startX, startY, distance, frames);
 }
 
@@ -172,4 +172,38 @@ void to_json(nlohmann::ordered_json& j, const animationManager& m) {
 		{"finished", m.getFinished()},
 		{"chainOverride", m.getChainOverride()}
 	};
+}
+
+void from_json(const nlohmann::ordered_json& j,animationManager& m) {
+	if (j.contains("frames")) {
+		m.frames = j.at("frames").get<std::vector<textureDataStruct>>();
+	}
+	if (j.contains("name")) {
+		m.setName(j.at("name").get<std::string>());
+	}
+	if (j.contains("currentIndex")) {
+		m.setCurrentIndex(j.at("currentIndex").get<int>());
+	}
+	if (j.contains("heldCount")) {
+		m.setHeldCount(j.at("heldCount").get<int>());
+	}
+	if (j.contains("holdFor")) {
+		m.setHoldFor(j.at("holdCount").get<int>());
+	}
+	if (j.contains("finished")) {
+		m.setFinished(j.at("finished").get<bool>());
+	}
+	if (j.contains("chainOverride")) {
+		m.setChainOverride(j.at("chainOverride").get<std::string>());
+	}
+	if (j.contains("animationMovement")) {
+		const auto& jm = j.at("animationMovement");
+
+		// Factory creates the correct subclass and loads JSON internally
+		auto movePtr = animationMovementFactory::createFromJson(jm);
+
+		if (movePtr) {
+			m.setMovement(std::move(movePtr));
+		}
+	}
 }

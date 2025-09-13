@@ -12,6 +12,14 @@ northMovement::northMovement(const northMovement& other)
 {
 }
 
+void northMovement::loadFromJson(const nlohmann::ordered_json& j){
+	x = j.value("x", 0.0f);
+	y = j.value("y", 0.0f);
+	deltaY = j.value("deltaY", 0.0f);
+	totalFrames = j.value("totalFrames", 1);
+	currentFrame = j.value("currentFrame", 0);
+}
+
 void northMovement::step() {
 	if (currentFrame < totalFrames) {
 		y -= deltaY; // moves north

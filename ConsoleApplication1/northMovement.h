@@ -1,5 +1,7 @@
 #pragma once
 #include "animationMovement.h"
+#include "json.hpp"
+
 class northMovement : public animationMovement {
 private:
 	float x, y;
@@ -10,6 +12,7 @@ private:
 public:
 	northMovement(float startX, float startY, float distance, int frames); 
 	northMovement(const northMovement& other);
+	void loadFromJson(const nlohmann::ordered_json& j) override;
 
 	void step() override;
 	float getX() const override;

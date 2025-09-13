@@ -1,15 +1,15 @@
 #include "animationMovementFactory.h"
 #include "northMovement.h"
-#include "southMovement.h"
+//#include "southMovement.h"
 //#include "eastMovement.h"
 //#include "westMovement.h"
 
-std::unique_ptr<animationMovement> animationMovementFactory::createMovement(movementDirectionEnum type, float startX, float startY, float distance, int frames) {
+std::unique_ptr<animationMovement> animationMovementFactory::createMovement(movementTypeEnum type, float startX, float startY, float distance, int frames) {
 	switch (type) {
-	case movementDirectionEnum::north:
+	case movementTypeEnum::north:
 		return std::make_unique<northMovement>(startX, startY, distance, frames);
-	case movementDirectionEnum::south:
-		return std::make_unique<southMovement>(startX, startY, distance, frames);
+	//case movementTypeEnum::south:
+	//	return std::make_unique<southMovement>(startX, startY, distance, frames);
 	//case movementDirectionEnum::east:
 	//	return std::make_unique<eastMovement>(startX, startY, distance, frames);
 	//case movementDirectionEnum::west:
@@ -17,4 +17,22 @@ std::unique_ptr<animationMovement> animationMovementFactory::createMovement(move
 	default:
 		return nullptr;
 	}
+}
+ 
+
+std::unique_ptr<animationMovement> animationMovementFactory::createFromJson(
+	const nlohmann::ordered_json& j
+) {
+	std::string type = j.at("type").get<std::string>();
+	std::unique_ptr<animationMovement> ptr;
+
+	if (type == "north") {
+		ptr = std::make_unique<northMovement>(0, 0, 0, 1); // dummy init
+	}
+	// later types...
+
+	if (ptr) {
+		ptr->loadFromJson(j); // overwrite with real state
+	}
+	return ptr;
 }

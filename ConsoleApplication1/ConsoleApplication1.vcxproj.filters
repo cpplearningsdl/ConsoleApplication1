@@ -87,9 +87,6 @@
     <ClCompile Include="northMovement.cpp">
       <Filter>Source Files\entity\movement</Filter>
     </ClCompile>
-    <ClCompile Include="southMovement.cpp">
-      <Filter>Source Files\entity\movement</Filter>
-    </ClCompile>
     <ClCompile Include="renderer.cpp">
       <Filter>Source Files\rendering</Filter>
     </ClCompile>
@@ -149,12 +146,6 @@
     <ClInclude Include="northMovement.h">
       <Filter>Header Files\entity\movement</Filter>
     </ClInclude>
-    <ClInclude Include="movementTypeEnum.h">
-      <Filter>Header Files\entity\movement</Filter>
-    </ClInclude>
-    <ClInclude Include="southMovement.h">
-      <Filter>Header Files\entity\movement</Filter>
-    </ClInclude>
     <ClInclude Include="statClass.h">
       <Filter>Header Files\entity\stats</Filter>
     </ClInclude>
@@ -199,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="heal.h">
       <Filter>Header Files\entity\ability</Filter>
+    </ClInclude>
+    <ClInclude Include="movementTypeEnum.h">
+      <Filter>Header Files\entity\movement</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

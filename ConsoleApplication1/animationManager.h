@@ -3,7 +3,8 @@
 #include <string>
 #include "textureManager.h" 
 #include "animationMovement.h"
-#include "movementDirectionEnum.h"
+#include "movementTypeEnum.h"
+#include "json.hpp"
 
 class animationManager {
 public:
@@ -18,14 +19,15 @@ public:
 	// Move semantics
 	animationManager(animationManager&&) noexcept = default;
 	animationManager& operator=(animationManager&&) noexcept = default;
-
 	 
 	bool loadAnimation(const std::string& baseName);
 	 
 	void step(); 
 	void reset();
 	 
-	void setMovement(movementDirectionEnum type, float startX, float startY, float distance, int frames);
+	void setMovement(movementTypeEnum type, float startX, float startY, float distance, int frames);
+	void setMovement(std::unique_ptr<animationMovement> mvt) {	movement = std::move(mvt);	}
+
 	// Override the chain animation (die after damage instead of go back to idle, for example)
 	void setChainOverride(const std::string& nextAnim); 
 	// Clear any chain override (back to using frame.chainAnimation)
@@ -50,6 +52,7 @@ public:
 	void setFinished(bool f) { finished = f; }
 
 	friend void to_json(nlohmann::ordered_json& j, const animationManager& m);
+	friend void from_json(const nlohmann::ordered_json& j, animationManager& m);
 private:
 	std::vector<textureDataStruct> frames;
 	std::string name;
@@ -62,3 +65,4 @@ private:
 };
 
 void to_json(nlohmann::ordered_json& j, const animationManager& m);
+void from_json( const nlohmann::ordered_json& j, animationManager& m);

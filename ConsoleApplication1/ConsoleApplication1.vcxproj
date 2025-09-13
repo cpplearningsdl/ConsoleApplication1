@@ -184,7 +184,6 @@
     <ClCompile Include="logManager.cpp" />
     <ClCompile Include="northMovement.cpp" />
     <ClCompile Include="renderer.cpp" />
-    <ClCompile Include="southMovement.cpp" />
     <ClCompile Include="textureDataStruct.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="windowManager.cpp" />
@@ -194,6 +193,7 @@
     <ClInclude Include="ability.h" />
     <ClInclude Include="abilityFactory.h" />
     <ClInclude Include="abilityFileLoader.h" />
+    <ClInclude Include="movementTypeEnum.h" />
     <ClInclude Include="heal.h" />
     <ClInclude Include="abilityIncludes.h" />
     <ClInclude Include="abilityType.h" />
@@ -203,7 +203,6 @@
     <ClInclude Include="entityFactory.h" />
     <ClInclude Include="entityIncludes.h" />
     <ClInclude Include="entityLoader.h" />
-    <ClInclude Include="movementTypeEnum.h" />
     <ClInclude Include="northMovement.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="fileManager.h" />
@@ -212,7 +211,6 @@
     <ClInclude Include="inputManager.h" />
     <ClInclude Include="logManager.h" />
     <ClInclude Include="renderer.h" />
-    <ClInclude Include="southMovement.h" />
     <ClInclude Include="statClass.h" />
     <ClInclude Include="statEnum.h" />
     <ClInclude Include="statsContainer.h" />

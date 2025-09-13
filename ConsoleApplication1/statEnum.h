@@ -2,7 +2,7 @@
 #include <cstddef>
 
 enum class statEnum : size_t {
-	MISSINGTYPE,
+	STATENUMMISSINGTYPE,
 	LEVEL,
 	EXPERIENCE,
 	EXPERIENCENEEDED,
@@ -18,15 +18,15 @@ enum class statEnum : size_t {
 	LUCK,
 	GROWTH,
 	TIMESUSED,
-	COUNT
+	STATENUMCOUNT
 };
 
-inline statEnum count() { return statEnum::COUNT; }
+inline statEnum statEnumCount() { return statEnum::STATENUMCOUNT; }
 
 
 inline const char* statEnumToString(statEnum e) {
 	switch (e) {
-	case statEnum::MISSINGTYPE:         return "MISSINGTYPE";
+	case statEnum::STATENUMMISSINGTYPE:         return "STATENUMMISSINGTYPE";
 	case statEnum::LEVEL:           return "LEVEL";
 	case statEnum::EXPERIENCE:      return "EXPERIENCE";
 	case statEnum::EXPERIENCENEEDED:return "EXPERIENCENEEDED";
@@ -42,7 +42,7 @@ inline const char* statEnumToString(statEnum e) {
 	case statEnum::LUCK:            return "LUCK";
 	case statEnum::GROWTH:          return "GROWTH";
 	case statEnum::TIMESUSED:		return "TIMESUSED";
-	case statEnum::COUNT:           return "COUNT";
+	case statEnum::STATENUMCOUNT:           return "STATENUMCOUNT";
 	default:                        return "MISSINGTYPE";
 	}
 }
@@ -50,7 +50,7 @@ inline const char* statEnumToString(statEnum e) {
 inline statEnum stringToStatEnum(const std::string& s) {
 	std::string upper = s;
 	std::transform(upper.begin(), upper.end(), upper.begin(), ::toupper);
-	if (upper == "MISSINGTYPE")			return statEnum::MISSINGTYPE;
+	if (upper == "STATENUMMISSINGTYPE")			return statEnum::STATENUMMISSINGTYPE;
 	if (upper == "LEVEL")				return statEnum::LEVEL;
 	if (upper == "EXPERIENCE")			 return statEnum::EXPERIENCE;
 	if (upper == "EXPERIENCENEEDED")	return statEnum::EXPERIENCENEEDED;
@@ -66,6 +66,6 @@ inline statEnum stringToStatEnum(const std::string& s) {
 	if (upper == "LUCK")				return statEnum::LUCK;
 	if (upper == "GROWTH")				return statEnum::GROWTH;
 	if (upper == "TIMESUSED")			return statEnum::TIMESUSED;
-	if (upper == "COUNT")				return statEnum::COUNT;
-	return statEnum::MISSINGTYPE; // fallback
+	if (upper == "STATENUMCOUNT")				return statEnum::STATENUMCOUNT;
+	return statEnum::STATENUMMISSINGTYPE; // fallback
 }
