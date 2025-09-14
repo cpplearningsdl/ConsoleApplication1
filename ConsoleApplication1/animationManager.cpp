@@ -172,6 +172,12 @@ void to_json(nlohmann::ordered_json& j, const animationManager& m) {
 		{"finished", m.getFinished()},
 		{"chainOverride", m.getChainOverride()}
 	};
+
+	if (m.getMovement()) {
+		nlohmann::ordered_json moveJson;
+		m.getMovement()->to_json(moveJson);
+		j["animationMovement"] = std::move(moveJson);
+	}
 }
 
 void from_json(const nlohmann::ordered_json& j,animationManager& m) {

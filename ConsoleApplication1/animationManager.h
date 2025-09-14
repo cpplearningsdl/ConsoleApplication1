@@ -20,6 +20,8 @@ public:
 	animationManager(animationManager&&) noexcept = default;
 	animationManager& operator=(animationManager&&) noexcept = default;
 	 
+	const animationMovement* getMovement() const { return movement.get(); }
+
 	bool loadAnimation(const std::string& baseName);
 	 
 	void step(); 

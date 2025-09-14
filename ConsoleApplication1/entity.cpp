@@ -87,7 +87,7 @@ nlohmann::ordered_json entity::to_Json(const entity& e) {
 		}
 	}
 	j["abilities"] = abilitiesArray; 
-
-	//logManager::logThis("Entity JSON dump:\n" + j.dump(4));
+	j["animationManager"] = e.animationHandler;
+	logManager::logThis("Entity JSON dump:\n" + j.dump(4));
 	return j;
 }
