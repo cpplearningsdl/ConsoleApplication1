@@ -29,6 +29,10 @@ void gameManager::render() {
 	renderEntities();
 }
 
+void gameManager::renderEntities() {
+}
+
+
  
 void gameManager::loadDefaultAssets() {
 	abilityFactory::getInstance().loadDefaultAbilities();

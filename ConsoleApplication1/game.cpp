@@ -5,6 +5,7 @@ game::game() {
 	// init map, entities, etc. 
 	logManager::logThis("started first game");
 	entities.push_back(entityFactory::getInstance().create("bone_thug"));
+	entities.push_back(entityFactory::getInstance().create("black_piece"));
 
 	entity& test = getEntityById(2);
 	test.getAnimationManager().loadAnimation("idle");
@@ -30,7 +31,7 @@ std::vector<entity*> game::getRenderables()
 	// sort however you like
 	std::sort(list.begin(), list.end(),
 		[](entity* a, entity* b) {
-		return a->getPos->getY() < b->getPos->getY();
+		return a->getPos().getY() < b->getPos().getY();
 	});
 
 	return list;
@@ -42,5 +43,5 @@ entity& game::getEntityById(int id) {
 			return *e;  // return reference to the entity
 		}
 	}
-	throw std::runtime_error("Entity with id " + std::to_string(id) + " not found.");
+	throw std::runtime_error("entity with id " + std::to_string(id) + " not found.");
 }
