@@ -69,6 +69,10 @@ void entity::from_Json(const nlohmann::ordered_json& j) {
 	if (j.contains("animationManager")) {
 		from_json(j.at("animationManager"), animationHandler);
 	}
+	if (j.contains("position")) {
+
+		from_json(j.at("position"), pos);
+	}
 
 	nlohmann::ordered_json dumper = to_Json(*this);
 	logManager::logThis("New Entity Dump \n", dumper.dump(4));
@@ -80,6 +84,7 @@ nlohmann::ordered_json entity::to_Json(const entity& e) {
 	j["factoryId"] = e.getFactoryId();
 	j["name"] = e.getName();
 	j["stats"] = e.getStats();
+	j["position"] = e.getPos();
 	nlohmann::ordered_json abilitiesArray = nlohmann::ordered_json::array();
 	for (const auto& abPtr : e.getAbilities().getAll()) {
 		if (abPtr) {

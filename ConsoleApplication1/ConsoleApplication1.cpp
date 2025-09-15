@@ -62,6 +62,9 @@ int main(int argc, char* argv[]) {
 		Uint64 frameStart = SDL_GetTicks();
 		if(displayFrameNumber) logManager::logThis("Frame start ", frameNumber);
 
+		if (frameNumber == 1) {
+			
+		}
 		// 1. Input
 		running = inputManager::getInstance().pollEvents();
 

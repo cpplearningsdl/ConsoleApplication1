@@ -3,6 +3,7 @@
 #include "abilityFactory.h"
 #include "abilityFileLoader.h" 
 #include "entityIncludes.h"
+#include "renderer.h"
 
 
 gameManager& gameManager::getInstance() {
@@ -20,11 +21,15 @@ void gameManager::endGame() {
 
 void gameManager::processGame() {
 	if (currentGame) {
-		currentGame->update();
-		//currentGame->render();
+		currentGame->update(); 
 	}
 }
 
+void gameManager::render() {
+	renderEntities();
+}
+
+ 
 void gameManager::loadDefaultAssets() {
 	abilityFactory::getInstance().loadDefaultAbilities();
 	entityFactory::getInstance().loadDefaultEntities(); 

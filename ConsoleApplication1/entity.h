@@ -3,6 +3,7 @@
 #include "animationManager.h"
 #include "abilities.h"
 #include "statsContainer.h"
+#include "position.h"
 #include "abilityFactory.h"
 #include "json.hpp"
 
@@ -32,16 +33,19 @@ public:
 	int getFactoryId() const { return factoryId; } 
 	const statsContainer& getStats() const { return stats; }
 	statsContainer& getStats() { return stats; }
+	const position& getPos() const { return pos; }
+	position& getPos() { return pos; }
 
 	abilities& getAbilities();
 	const abilities& getAbilities() const; 
-	//const animationManager& getAnimationManager() const { return animationHandler; }
+	animationManager& getAnimationManager() { return animationHandler; }
 	static nlohmann::ordered_json to_Json(const entity& e);
-	void from_Json(const nlohmann::ordered_json&j);
+	void from_Json(const nlohmann::ordered_json& j);
 
 private:
 	int entityId;
 	int factoryId;
+	position pos;
 
 	std::string name;
 	statsContainer stats;

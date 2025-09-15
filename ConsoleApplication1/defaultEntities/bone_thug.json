@@ -16,14 +16,6 @@
         "Power": { "current": 10, "min": 0, "base": 10, "clamped": false }
       },
       "usesLeft": { "current": 3, "max": 3, "locked": false }
-    },
-    {
-      "name": "heal",
-      "type": "ACTIVEBOTH",
-      "stats": {
-        "Power": { "current": 10, "min": 0, "base": 10, "clamped": false }
-      },
-      "usesLeft": { "current": 3, "max": 3, "locked": false }
     }
   ]
 }

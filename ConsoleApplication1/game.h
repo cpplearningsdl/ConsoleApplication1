@@ -8,6 +8,9 @@ public:
 	~game();
 
 	void update(); 
+	entity&  getEntityById(int id);
+	std::vector<std::unique_ptr<entity>>& getEntities() { return entities; }
+	std::vector<entity*> getRenderables();
 
 private:
 	std::vector<std::unique_ptr<entity>> entities;

@@ -79,7 +79,10 @@ namespace entityLoader {
 					e.getAbilities().addAbility(std::move(ability));
 				}
 			}
-		}
+		} 
+		if (j.contains("position")) {
+			e.getPos() = j.at("position").get<position>();
+		}  
 	}
 
 	void loadEntityFromSaveJson(const nlohmann::ordered_json& j, entity& e) {
@@ -87,7 +90,9 @@ namespace entityLoader {
 		if (j.contains("entityId")) e.setEntityId(j.at("entityId").get<int>());
 		if (j.contains("factoryId")) e.setFactoryId(j.at("factoryId").get<int>());
 		if (j.contains("stats")) e.getStats() = j.at("stats").get<statsContainer>();
-
+		if (j.contains("position")) {
+			e.getPos() = j.at("position").get<position>();
+		}
 		if (j.contains("abilities")) {
 			for (const auto& abJson : j["abilities"]) {
 				if (!abJson.contains("name")) {

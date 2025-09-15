@@ -18,10 +18,14 @@ public:
 	}
 
 	std::unique_ptr<entity> create(const std::string& name) {
+		logManager::logThis("Trying to add entity to game: ", name);
 		auto it = prototypes.find(name);
 		if (it != prototypes.end()) {
+			logManager::logThis("Added entity to game: ", name);
 			return std::make_unique<entity>(*it->second); // copy constructor
+
 		}
+		logManager::logThis("Couldn't find entity: ", name);
 		return nullptr;
 	}
 	void loadDefaultEntities() { entityLoader::loadAllDefaultEntitiesFromDir("C:\\Users\\Keary\\source\\repos\\ConsoleApplication1-working\\ConsoleApplication1\\defaultEntities"); };

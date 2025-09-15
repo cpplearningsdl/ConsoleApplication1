@@ -1,0 +1,21 @@
+{
+  "name": "black_piece",
+  "entityId": -1,
+  "factoryId": 2,
+  "stats": {
+    "HP": { "current": 40, "min": 0, "base": 40, "clamped": true },
+    "MP": { "current": 50, "min": 0, "base": 50, "clamped": true },
+    "Strength": { "current": 8, "min": 0, "base": 8, "clamped": false },
+    "Defense": { "current": 5, "min": 0, "base": 5, "clamped": false }
+  },
+  "abilities": [
+    {
+      "name": "heal",
+      "type": "ACTIVEBOTH",
+      "stats": {
+        "Power": { "current": 10, "min": 0, "base": 10, "clamped": false }
+      },
+      "usesLeft": { "current": 3, "max": 3, "locked": false }
+    }
+  ]
+}

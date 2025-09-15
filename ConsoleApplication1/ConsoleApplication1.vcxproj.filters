@@ -194,5 +194,8 @@
     <ClInclude Include="movementTypeEnum.h">
       <Filter>Header Files\entity\movement</Filter>
     </ClInclude>
+    <ClInclude Include="position.h">
+      <Filter>Header Files\entity\stats</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
