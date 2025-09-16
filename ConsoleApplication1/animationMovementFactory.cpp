@@ -1,4 +1,5 @@
 #include "animationMovementFactory.h"
+#include "idleMovement.h"
 #include "northMovement.h"
 //#include "southMovement.h"
 //#include "eastMovement.h"
@@ -8,6 +9,8 @@ std::unique_ptr<animationMovement> animationMovementFactory::createMovement(move
 	switch (type) {
 	case movementTypeEnum::north:
 		return std::make_unique<northMovement>(startX, startY, distance, frames);
+	case movementTypeEnum::idle:
+		return std::make_unique<idleMovement>(startX, startY);
 	//case movementTypeEnum::south:
 	//	return std::make_unique<southMovement>(startX, startY, distance, frames);
 	//case movementDirectionEnum::east:
@@ -28,8 +31,10 @@ std::unique_ptr<animationMovement> animationMovementFactory::createFromJson(
 
 	if (type == "north") {
 		ptr = std::make_unique<northMovement>(0, 0, 0, 1); // dummy init
+	} else
+	if (type == "idle") {
+		ptr = std::make_unique<idleMovement>(0, 0);
 	}
-	// later types...
 
 	if (ptr) {
 		ptr->loadFromJson(j); // overwrite with real state

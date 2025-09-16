@@ -8,7 +8,8 @@ animationManager::animationManager()
 
 animationManager::animationManager(const animationManager& other)
 	: frames(other.frames),
-	name(other.name),
+	entityName(other.entityName),
+	animationName(other.animationName),
 	currentIndex(other.currentIndex),
 	heldCount(other.heldCount),
 	holdFor(other.holdFor),
@@ -20,7 +21,8 @@ animationManager::animationManager(const animationManager& other)
 animationManager& animationManager::operator=(const animationManager& other) {
 	if (this != &other) {
 		frames = other.frames;
-		name = other.name;
+		entityName = other.entityName;
+		animationName = other.animationName;
 		currentIndex = other.currentIndex;
 		heldCount = other.heldCount;
 		holdFor = other.holdFor;
@@ -38,9 +40,9 @@ bool animationManager::loadAnimation(const std::string& baseName) {
 	holdFor = 0;
 	finished = false;
 	chainOverride.clear();
-	name = baseName;
+	animationName = baseName;
 	 
-	std::string firstKey = baseName + "_0";
+	std::string firstKey = entityName + "_" + baseName + "_0";
 	const textureDataStruct* base = textureManager::getInstance().getAnimationData(firstKey);
 	if (!base) {
 		logManager::logThis("No animationData for key ", firstKey);
@@ -52,7 +54,7 @@ bool animationManager::loadAnimation(const std::string& baseName) {
 
 	// Load frames _0 ... _(total-1)
 	for (int i = 0; i < total; ++i) {
-		std::string key = baseName + "_" + std::to_string(i);
+		std::string key = entityName + "_" + baseName + "_" + std::to_string(i);
 		const textureDataStruct* data = textureManager::getInstance().getAnimationData(key);
 		if (!data) {
 			logManager::logThis("Missing Frame: ", key); 
@@ -60,13 +62,16 @@ bool animationManager::loadAnimation(const std::string& baseName) {
 		}
 		frames.push_back(*data); 
 	} 
+	logManager::logThis("EntityNamed " + entityName + " Loaded Animation: ", animationName);
 	return !frames.empty();
+
+	//probably should attach the correct animationMovement here(even idle/no movement)
 }
 
 void animationManager::setMovement(movementTypeEnum type, float startX, float startY, float distance, int frames) {
 	movement = animationMovementFactory::createMovement(type, startX, startY, distance, frames);
 }
-
+ 
 void animationManager::step() {
 	if (frames.empty() || finished) return;
 
@@ -158,14 +163,15 @@ bool animationManager::isFinished() const {
 	return finished;
 }
 
-const std::string& animationManager::getName() const {
-	return name;
+const std::string& animationManager::getAnimationName() const {
+	return animationName;
 }
 
 void to_json(nlohmann::ordered_json& j, const animationManager& m) {
 	j = nlohmann::ordered_json{
 		{"frames", m.getFrames()},
-		{"name", m.getName()},
+		{"entityName", m.getEntityName() },
+		{"animationName", m.getAnimationName()},
 		{"currentIndex", m.getCurrentIndex()},
 		{"heldCount", m.getHeldCount()},
 		{"holdFor", m.getHoldFor()},
@@ -184,8 +190,11 @@ void from_json(const nlohmann::ordered_json& j,animationManager& m) {
 	if (j.contains("frames")) {
 		m.frames = j.at("frames").get<std::vector<textureDataStruct>>();
 	}
-	if (j.contains("name")) {
-		m.setName(j.at("name").get<std::string>());
+	if (j.contains("entityName")) {
+		m.setEntityName(j.at("entityName").get<std::string>());
+	}
+	if (j.contains("animationName")) {
+		m.setAnimationName(j.at("animationName").get<std::string>());
 	}
 	if (j.contains("currentIndex")) {
 		m.setCurrentIndex(j.at("currentIndex").get<int>());

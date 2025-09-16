@@ -8,6 +8,7 @@ enum class movementTypeEnum : int {
 	east,
 	south,
 	west,
+	idle,
 	movementenumcount
 };
 
@@ -19,6 +20,7 @@ inline const char* movementTypeEnumToString(movementTypeEnum e) {
 	case movementTypeEnum::east:           return "east";
 	case movementTypeEnum::south:           return "south";
 	case movementTypeEnum::west:           return "west"; 
+	case movementTypeEnum::idle:           return "idle";
 	default:                        return "missing";
 	}
 }
@@ -31,5 +33,6 @@ inline movementTypeEnum stringToMovementTypeEnum(const std::string& s) {
 	if (upper == "EAST") return movementTypeEnum::east;
 	if (upper == "SOUTH") return movementTypeEnum::south;
 	if (upper == "WEST") return movementTypeEnum::west;
+	if (upper == "IDLE") return movementTypeEnum::idle;
 	return movementTypeEnum::missing; // fallback
 }

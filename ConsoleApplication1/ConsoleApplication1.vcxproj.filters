@@ -105,6 +105,9 @@
     <ClCompile Include="abilityFileLoader.cpp">
       <Filter>Source Files\entity\ability</Filter>
     </ClCompile>
+    <ClCompile Include="idleMovement.cpp">
+      <Filter>Source Files\entity\movement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logManager.h">
@@ -196,6 +199,9 @@
     </ClInclude>
     <ClInclude Include="position.h">
       <Filter>Header Files\entity\stats</Filter>
+    </ClInclude>
+    <ClInclude Include="idleMovement.h">
+      <Filter>Header Files\entity\movement</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -28,7 +28,7 @@ public:
 	void reset();
 	 
 	void setMovement(movementTypeEnum type, float startX, float startY, float distance, int frames);
-	void setMovement(std::unique_ptr<animationMovement> mvt) {	movement = std::move(mvt);	}
+	void setMovement(std::unique_ptr<animationMovement> mvt) {	movement = std::move(mvt);	} 
 
 	// Override the chain animation (die after damage instead of go back to idle, for example)
 	void setChainOverride(const std::string& nextAnim); 
@@ -39,7 +39,8 @@ public:
 	 
 	const textureDataStruct* getCurrentFrame() const; 
 	const std::vector<textureDataStruct>& getFrames() const { return frames; }
-	const std::string& getName() const;
+	const std::string& getAnimationName() const;
+	const std::string& getEntityName() const { return entityName; }
 	const size_t getCurrentIndex() const { return currentIndex; }
 	const int getHeldCount() const { return heldCount;	}
 	const int getHoldFor() const { return holdFor; }
@@ -47,7 +48,8 @@ public:
 	bool isFinished() const; 
 	const std::string getChainOverride() const { return chainOverride; }
 
-	void setName(std::string n) { name = n; }
+	void setEntityName(std::string n) { entityName = n; }
+	void setAnimationName(std::string n) { animationName = n; }
 	void setCurrentIndex(size_t i) { currentIndex = i; }
 	void setHeldCount(int c) { heldCount = c; }
 	void setHoldFor(int c) { holdFor = c; }
@@ -57,7 +59,8 @@ public:
 	friend void from_json(const nlohmann::ordered_json& j, animationManager& m);
 private:
 	std::vector<textureDataStruct> frames;
-	std::string name;
+	std::string animationName;
+	std::string entityName;
 	size_t currentIndex;
 	int heldCount;
 	int holdFor;

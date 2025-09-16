@@ -15,6 +15,8 @@ entity::entity(const entity& other)
 	name = other.name;
 	stats = other.stats;
 	abilities = other.abilities; 
+	pos = other.pos;
+	animationHandler.setEntityName(name);
 }
 
 entity& entity::operator=(const entity& other) {
@@ -25,6 +27,8 @@ entity& entity::operator=(const entity& other) {
 		name = other.name;
 		stats = other.stats;
 		abilities = other.abilities;
+		pos = other.pos; 
+		animationHandler.setEntityName(name);
 	}
 	return *this;
 }

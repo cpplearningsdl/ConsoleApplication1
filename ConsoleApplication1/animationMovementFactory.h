@@ -8,6 +8,6 @@
 class animationMovementFactory {
 public:
 		// Creates and returns a unique_ptr to the requested movement
-		static std::unique_ptr<animationMovement> createMovement(movementTypeEnum  type, float startX, float startY, float distance, int frames );
+		static std::unique_ptr<animationMovement> createMovement(movementTypeEnum  type, float startX, float startY, float distance = 0, int frames = 0); 
 		static std::unique_ptr<animationMovement> createFromJson( const nlohmann::ordered_json& j );
 };

@@ -4,9 +4,9 @@
  
 namespace entityLoader{
 
-	void loadEntityFromFactoryJson(const nlohmann::ordered_json& j, entity& e);
- 
-	void loadEntityFromSaveJson(const nlohmann::ordered_json& j, entity& e);
+	//void loadEntityFromFactoryJson(const nlohmann::ordered_json& j, entity& e);
+ //
+	//void loadEntityFromSaveJson(const nlohmann::ordered_json& j, entity& e);
 
 	void loadAllDefaultEntitiesFromDir(const std::string& dirPath);
 }

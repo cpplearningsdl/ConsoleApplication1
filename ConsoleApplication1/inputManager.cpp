@@ -51,7 +51,7 @@ bool inputManager::pollEvents() {
 		case SDL_EVENT_MOUSE_MOTION:
 			mouseX = event.motion.x;
 			mouseY = event.motion.y;
-			lm::logThis("Mouse moved to: (" + std::to_string(mouseX) + ", " + std::to_string(mouseY) + ")");
+			//lm::logThis("Mouse moved to: (" + std::to_string(mouseX) + ", " + std::to_string(mouseY) + ")");
 			break;
 
 		case SDL_EVENT_MOUSE_BUTTON_DOWN:
