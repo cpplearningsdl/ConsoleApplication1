@@ -100,3 +100,8 @@ nlohmann::ordered_json entity::to_Json(const entity& e) {
 	logManager::logThis("Entity JSON dump:\n" + j.dump(4));
 	return j;
 }
+
+void entity::spill_guts() {
+	nlohmann::ordered_json j = to_Json(*this);
+	logManager::logThis("Entity JSON dump:\n" + j.dump(4));
+}

@@ -1,9 +1,9 @@
 {
-  "animationName": "idle",
+  "animationName": "walk",
   "chainAnimation": "none",
   "frameNumber": 0,
   "height": 128,
-  "key": "black_piece_idle_0",
+  "key": "black_piece_walk_0",
   "loop": false,
   "totalFrames": 1,
   "width": 128,

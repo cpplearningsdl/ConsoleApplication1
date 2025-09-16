@@ -68,7 +68,7 @@ bool animationManager::loadAnimation(const std::string& baseName) {
 	logManager::logThis("EntityNamed " + entityName + " Loaded Animation: ", animationName);
 	return !frames.empty();
 
-	//probably should attach the correct animationMovement here(even idle/no movement) or the place that loads the animation should et it(even more probably)?
+	//probably should attach the correct animationMovement here(even idle/no movement)
 }
 
 void animationManager::setMovement(movementTypeEnum type, float startX, float startY, float distance, int frames) {

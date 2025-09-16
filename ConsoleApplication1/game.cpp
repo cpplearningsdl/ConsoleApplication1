@@ -9,6 +9,7 @@ game::game() {
 
 	entity& test = getEntityById(2);
 	test.getAnimationManager().loadAnimation("idle");
+	test.spill_guts();
 }
 
 game::~game() {

@@ -174,21 +174,24 @@ bool textureManager::loadAllTextures(const std::string& rootDirectory, SDL_Rende
 					nlohmann::ordered_json json;
 					file >> json;
 
-					textureDataStruct newFrameData;
-					newFrameData.animationName = json.value("animationName", animationName);
-					newFrameData.width = json.value("width", 0);
-					newFrameData.height = json.value("height", 0);
-					newFrameData.hitBoxWidth = json.value("hitBoxWidth", 0);
-					newFrameData.hitBoxHeight = json.value("hitBoxHeight", 0);
-					newFrameData.totalFrames = json.value("totalFrames", 0);
-					newFrameData.xOffset = json.value("xOffset", 0);
-					newFrameData.yOffset = json.value("yOffset", 0);
-					newFrameData.loop = json.value("loop", true);
-					newFrameData.chainAnimation = json.value("chainAnimation", "");
+					//textureDataStruct newFrameData;
+					textureDataStruct newFrameData = json.get<textureDataStruct>();
+					//newFrameData.key = json.value("key", "MISSING KEY");
+					//newFrameData.animationName = json.value("animationName", "MISSING");
+					//newFrameData.width = json.value("width", 0);
+					//newFrameData.height = json.value("height", 0);
+					//newFrameData.hitBoxWidth = json.value("hitBoxWidth", 0);
+					//newFrameData.hitBoxHeight = json.value("hitBoxHeight", 0);
+					//newFrameData.frameNumber = json.value("frameNumber", 0);
+					//newFrameData.totalFrames = json.value("totalFrames", 0);
+					//newFrameData.xOffset = json.value("xOffset", 0);
+					//newFrameData.yOffset = json.value("yOffset", 0);
+					//newFrameData.loop = json.value("loop", true);
+					//newFrameData.chainAnimation = json.value("chainAnimation", "NONE SUPPLIED");
 
 					frameDataMap[frameKey] = std::move(newFrameData);
 
-					lm::logThis("    Loaded frame metadata: " + frameKey);
+					lm::logThis("    Loaded frame metadata: " + frameKey+ "\n"+ json.dump(4));
 				}
 				catch (const std::exception& e) {
 					lm::logThis(std::string("    !! JSON parse error: ") + e.what());
