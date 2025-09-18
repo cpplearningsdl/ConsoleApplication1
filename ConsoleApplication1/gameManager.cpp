@@ -4,6 +4,7 @@
 #include "abilityFileLoader.h" 
 #include "entityIncludes.h"
 #include "renderer.h"
+#include "renderManager.h"
 
 
 gameManager& gameManager::getInstance() {
@@ -22,14 +23,26 @@ void gameManager::endGame() {
 void gameManager::processGame() {
 	if (currentGame) {
 		currentGame->update(); 
+		render();
 	}
 }
 
+//void gameManager::render() {
+//	renderEntities();
+//	renderer::getInstance().drawScreen();
+//}
 void gameManager::render() {
-	renderEntities();
+	renderHandler.renderEntities(*currentGame);
+	renderer::getInstance().drawScreen();
 }
 
 void gameManager::renderEntities() {
+	std::vector<entity*> renderables = currentGame->getRenderables();
+	for (auto& e : renderables) {
+		std::string key = e->getAnimationManager().getTextureKey();
+		logManager::logThis("Rendering key: ", key);
+		renderer::getInstance().drawToNextFrame(key, 0, 0);
+	}
 }
 
 

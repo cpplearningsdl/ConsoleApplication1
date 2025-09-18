@@ -33,7 +33,7 @@ entity& entity::operator=(const entity& other) {
 	return *this;
 }
 void entity::update() {
-
+	animationHandler.step();
 }
  
 abilities& entity::getAbilities() {
@@ -79,7 +79,7 @@ void entity::from_Json(const nlohmann::ordered_json& j) {
 	}
 
 	nlohmann::ordered_json dumper = to_Json(*this);
-	logManager::logThis("New Entity Dump \n", dumper.dump(4));
+	//logManager::logThis("New Entity Dump \n", dumper.dump(4));
 }
 nlohmann::ordered_json entity::to_Json(const entity& e) {
 	ordered_json j;

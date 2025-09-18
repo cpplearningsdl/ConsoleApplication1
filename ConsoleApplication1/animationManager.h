@@ -40,6 +40,7 @@ public:
 	const textureDataStruct* getCurrentFrame() const; 
 	const std::vector<textureDataStruct>& getFrames() const { return frames; }
 	const std::string& getAnimationName() const;
+	const std::string getTextureKey() const;
 	const std::string& getEntityName() const { return entityName; }
 	const size_t getCurrentIndex() const { return currentIndex; }
 	const int getHeldCount() const { return heldCount;	}
@@ -58,7 +59,7 @@ public:
 	friend void to_json(nlohmann::ordered_json& j, const animationManager& m);
 	friend void from_json(const nlohmann::ordered_json& j, animationManager& m);
 private:
-	std::vector<textureDataStruct> frames;
+	std::vector<textureDataStruct> frames;//< this could have just been a pointer to the factory container frame number...
 	std::string animationName;
 	std::string entityName;
 	size_t currentIndex;

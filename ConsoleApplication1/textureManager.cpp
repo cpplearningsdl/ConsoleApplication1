@@ -205,8 +205,8 @@ bool textureManager::loadAllTextures(const std::string& rootDirectory, SDL_Rende
 			if (entityAnimationNamesMap.find(entityName) == entityAnimationNamesMap.end()) {
 				entityAnimationNamesMap[entityName] = animationName;
 			}
-			else {
-				entityAnimationNamesMap[entityName] += "," + animationName;
+			else { 
+				entityAnimationNamesMap[entityName] += "," + animationName; 
 			}
 			lm::logThis("Animation Names; ", entityAnimationNamesMap[entityName]);
 			lm::logThis("  Finished animation: " + animationName + " (" + std::to_string(frameCount) + " frames)");

@@ -108,6 +108,9 @@
     <ClCompile Include="idleMovement.cpp">
       <Filter>Source Files\entity\movement</Filter>
     </ClCompile>
+    <ClCompile Include="renderManager.cpp">
+      <Filter>Source Files\rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logManager.h">
@@ -202,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="idleMovement.h">
       <Filter>Header Files\entity\movement</Filter>
+    </ClInclude>
+    <ClInclude Include="renderManager.h">
+      <Filter>Header Files\rendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

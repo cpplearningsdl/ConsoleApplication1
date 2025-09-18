@@ -185,6 +185,7 @@
     <ClCompile Include="logManager.cpp" />
     <ClCompile Include="northMovement.cpp" />
     <ClCompile Include="renderer.cpp" />
+    <ClCompile Include="renderManager.cpp" />
     <ClCompile Include="textureDataStruct.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="windowManager.cpp" />
@@ -214,6 +215,7 @@
     <ClInclude Include="logManager.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="renderer.h" />
+    <ClInclude Include="renderManager.h" />
     <ClInclude Include="statClass.h" />
     <ClInclude Include="statEnum.h" />
     <ClInclude Include="statsContainer.h" />

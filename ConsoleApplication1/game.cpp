@@ -4,11 +4,13 @@
 game::game() {
 	// init map, entities, etc. 
 	logManager::logThis("started first game");
-	entities.push_back(entityFactory::getInstance().create("bone_thug"));
+	//entities.push_back(entityFactory::getInstance().create("bone_thug"));
 	entities.push_back(entityFactory::getInstance().create("black_piece"));
 
 	entity& test = getEntityById(2);
 	test.getAnimationManager().loadAnimation("idle");
+	test.getAnimationManager().setHoldFor(10);
+	logManager::logThis("Spilling Guts: \n");
 	test.spill_guts();
 }
 
@@ -17,7 +19,9 @@ game::~game() {
 }
 
 void game::update() { 
-
+	for (auto& entity : entities) {
+		entity->update();
+	}
  
 }
 std::vector<entity*> game::getRenderables()
@@ -26,10 +30,11 @@ std::vector<entity*> game::getRenderables()
 	list.reserve(entities.size());
 
 	for (auto& e : getEntities()) {
-		list.push_back(e.get()); // expose raw pointer
+		//e->spill_guts();
+		list.push_back(e.get()); 
 	}
 
-	// sort however you like
+	// need to switch to Z-index, but z-index not implemented, only 1 entity per square at moment
 	std::sort(list.begin(), list.end(),
 		[](entity* a, entity* b) {
 		return a->getPos().getY() < b->getPos().getY();

@@ -56,9 +56,10 @@ bool animationManager::loadAnimation(const std::string& baseName) {
 	for (int i = 0; i < total; ++i) {
 		std::string key = entityName + "_" + baseName + "_" + std::to_string(i);
 		const textureDataStruct* data = textureManager::getInstance().getAnimationData(key);
+		/*
 		logManager::logThis("TextureDataStruct: ", key);
 		nlohmann::ordered_json j = *data;
-		logManager::logThis("TextureDataStruct:\n" + j.dump(4));
+		logManager::logThis("TextureDataStruct:\n" + j.dump(4));*/
 		if (!data) {
 			logManager::logThis("Missing Frame: ", key); 
 			continue;
@@ -169,7 +170,10 @@ bool animationManager::isFinished() const {
 const std::string& animationManager::getAnimationName() const {
 	return animationName;
 }
-
+const std::string animationManager::getTextureKey() const {
+	int f = getCurrentIndex();
+	return getEntityName() + "_" + getAnimationName() + "_" + std::to_string(f);
+}
 void to_json(nlohmann::ordered_json& j, const animationManager& m) {
 	j = nlohmann::ordered_json{
 		{"frames", m.getFrames()},

@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include "game.h"   
+#include "renderManager.h"
 #include "abilityFactory.h"
 #include "abilityFileLoader.h" 
 
@@ -22,5 +23,6 @@ private:
 	gameManager& operator=(const gameManager&) = delete;
 
 	std::unique_ptr<game> currentGame;
+	renderManager renderHandler;
 };
  

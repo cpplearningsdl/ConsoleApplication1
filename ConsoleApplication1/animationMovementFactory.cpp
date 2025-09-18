@@ -23,9 +23,7 @@ std::unique_ptr<animationMovement> animationMovementFactory::createMovement(move
 }
  
 
-std::unique_ptr<animationMovement> animationMovementFactory::createFromJson(
-	const nlohmann::ordered_json& j
-) {
+std::unique_ptr<animationMovement> animationMovementFactory::createFromJson(const nlohmann::ordered_json& j) {
 	std::string type = j.at("type").get<std::string>();
 	std::unique_ptr<animationMovement> ptr;
 

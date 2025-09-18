@@ -39,8 +39,10 @@ public:
 	abilities& getAbilities();
 	const abilities& getAbilities() const; 
 	animationManager& getAnimationManager() { return animationHandler; }
+
 	static nlohmann::ordered_json to_Json(const entity& e);
 	void from_Json(const nlohmann::ordered_json& j);
+
 	void spill_guts();
 private:
 	int entityId;
