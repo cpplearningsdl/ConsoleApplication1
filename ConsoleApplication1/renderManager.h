@@ -9,6 +9,7 @@ class renderManager
 private:
 
 public:
+	void renderGame(game& g);
 	void renderEntities(game& g);
 };
 

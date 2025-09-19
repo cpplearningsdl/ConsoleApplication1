@@ -32,16 +32,15 @@ void gameManager::processGame() {
 //	renderer::getInstance().drawScreen();
 //}
 void gameManager::render() {
-	renderHandler.renderEntities(*currentGame);
-	renderer::getInstance().drawScreen();
+	renderHandler.renderGame(*currentGame); 
 }
 
 void gameManager::renderEntities() {
 	std::vector<entity*> renderables = currentGame->getRenderables();
 	for (auto& e : renderables) {
 		std::string key = e->getAnimationManager().getTextureKey();
-		logManager::logThis("Rendering key: ", key);
-		renderer::getInstance().drawToNextFrame(key, 0, 0);
+		//logManager::logThis("Rendering key: ", key);
+		renderer::getInstance().drawToNextFrame(key, 110, 0);
 	}
 }
 

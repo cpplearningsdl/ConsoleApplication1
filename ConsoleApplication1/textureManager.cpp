@@ -137,15 +137,24 @@ bool textureManager::loadAllTextures(const std::string& rootDirectory, SDL_Rende
 				std::string jsonPath;
 
 				// find .png and .json inside frame folder
+				//for (const auto& file : fs::directory_iterator(frameDir)) {
+				//	if (file.path().extension() == ".png") {
+				//		pngPath = file.path().string();
+				//	}
+				//	else if (file.path().extension() == ".json") {
+				//		jsonPath = file.path().string();
+				//	}
+				//}
 				for (const auto& file : fs::directory_iterator(frameDir)) {
 					if (file.path().extension() == ".png") {
-						pngPath = file.path().string();
+						if (file.path().filename().stem().string() == frameFolder) {
+							pngPath = file.path().string();
+						}
 					}
 					else if (file.path().extension() == ".json") {
 						jsonPath = file.path().string();
 					}
 				}
-
 				if (pngPath.empty() || jsonPath.empty()) {
 					lm::logThis("    !! Missing .png or .json in: " + frameDir.path().string());
 					continue;
@@ -156,6 +165,8 @@ bool textureManager::loadAllTextures(const std::string& rootDirectory, SDL_Rende
 
 				// --- Load texture ---
 				SDL_Texture* tex = IMG_LoadTexture(renderer, pngPath.c_str());
+				//SDL_SetTextureBlendMode(tex, SDL_BLENDMODE_BLEND);
+
 				if (!tex) {
 					lm::logThis("    !! Failed to load texture: " + pngPath);
 					continue;

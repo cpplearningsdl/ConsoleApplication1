@@ -10,7 +10,7 @@ game::game() {
 	entity& test = getEntityById(2);
 	test.getAnimationManager().loadAnimation("idle");
 	test.getAnimationManager().setHoldFor(10);
-	logManager::logThis("Spilling Guts: \n");
+	logManager::logThis("Spilling Guts:");
 	test.spill_guts();
 }
 

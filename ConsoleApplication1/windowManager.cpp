@@ -51,7 +51,8 @@ bool windowManager::openWindow(const std::string& title, int width, int height, 
 			window = nullptr;
 			return false;
 		}
-	 
+	//	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+
 		//0disabled 1enabled
 		if (!SDL_SetRenderVSync(renderer, 1)) {
 			lm::logThis("Failed to set VSync.");
