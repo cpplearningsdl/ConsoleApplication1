@@ -42,10 +42,7 @@ int main(int argc, char* argv[]) {
 	} 
 	renderer& renderer = renderer::getInstance();
 	renderer.init(600, 800);
-
-	//renderer.drawToNextFrame("black_piece_idle_0", 0, 0);
-
-	renderer.drawScreen();
+ 
 
 	const int FPS = 60;
 	const int frameDelay = 1000 / FPS;

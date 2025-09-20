@@ -17,6 +17,8 @@ entity::entity(const entity& other)
 	abilities = other.abilities; 
 	pos = other.pos;
 	animationHandler.setEntityName(name);
+	render = other.render;
+	renderInfo = other.renderInfo;
 }
 
 entity& entity::operator=(const entity& other) {
@@ -29,11 +31,14 @@ entity& entity::operator=(const entity& other) {
 		abilities = other.abilities;
 		pos = other.pos; 
 		animationHandler.setEntityName(name);
+		render = other.render;
+		renderInfo = other.renderInfo;
 	}
 	return *this;
 }
 void entity::update() {
 	animationHandler.step();
+	renderInfo.textureKey = animationHandler.getTextureKey(); 
 }
  
 abilities& entity::getAbilities() {
@@ -44,6 +49,14 @@ const abilities& entity::getAbilities() const {
 	return abilities;
 }
 
+const entityRenderInfo& entity::getRenderInfo() const {
+	 return renderInfo; 
+}
+void entity::updateRenderInfo() { 
+	renderInfo.pos = pos;
+	renderInfo.render = render;
+	renderInfo.textureKey = animationHandler.getTextureKey(); 
+}
 void entity::from_Json(const nlohmann::ordered_json& j) {
 	if (j.contains("name")) {
 		setName(j.at("name").get<std::string>());
@@ -58,6 +71,7 @@ void entity::from_Json(const nlohmann::ordered_json& j) {
 		//stats = j.at("stats").get<statsContainer>();
 		from_json(j.at("stats"), stats);
 	}
+	//UPDATE THIS to update the abilities state(to load from saves etc) 
 	if (j.contains("abilities")) {
 		for (const auto& abEntry : j["abilities"]) { 
 			std::string abilityName = abEntry.at("name").get<std::string>(); 
@@ -73,11 +87,13 @@ void entity::from_Json(const nlohmann::ordered_json& j) {
 	if (j.contains("animationManager")) {
 		from_json(j.at("animationManager"), animationHandler);
 	}
-	if (j.contains("position")) {
-
+	if (j.contains("renderInfo")) {
+		from_json(j.at("renderInfo"), renderInfo);
+	} 
+	if (j.contains("position")) { 
 		from_json(j.at("position"), pos);
 	}
-
+	 
 	nlohmann::ordered_json dumper = to_Json(*this);
 	//logManager::logThis("New Entity Dump \n", dumper.dump(4));
 }
@@ -97,7 +113,8 @@ nlohmann::ordered_json entity::to_Json(const entity& e) {
 	}
 	j["abilities"] = abilitiesArray; 
 	j["animationManager"] = e.animationHandler;
-	//logManager::logThis("Entity JSON dump:\n" + j.dump(4));
+	j["renderInfo"] = e.renderInfo; 
+	logManager::logThis("Entity JSON dump:\n" + j.dump(4));
 	return j;
 }
 

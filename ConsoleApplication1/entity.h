@@ -5,7 +5,11 @@
 #include "statsContainer.h"
 #include "position.h"
 #include "abilityFactory.h"
+#include "entityRenderInfo.h"
 #include "json.hpp"
+
+//should probably make a member of this and update it manually instead of polling every frame..
+//porbably should move this to animationHandler as well..
 
 
 class entity {
@@ -24,13 +28,18 @@ public:
 	entity& operator=(entity&&) noexcept = default;
 
 	void update(); 
+	const entityRenderInfo& getRenderInfo() const ;
+	void updateRenderInfo();
 
 	std::string getName() const { return name; };
 	void setName(std::string newName) {	name = newName;	};
-	void setEntityId(int newId) { entityId = newId; };
-	void setFactoryId(int newId) { factoryId = newId; };
 	int getId() const { return entityId; }
-	int getFactoryId() const { return factoryId; } 
+	void setEntityId(int newId) { entityId = newId; };
+	int getFactoryId() const { return factoryId; }
+	void setFactoryId(int newId) { factoryId = newId; };
+	void setRender(bool s) { render = s; renderInfo.render = s; }
+
+	bool getRender() const { return render; }
 	const statsContainer& getStats() const { return stats; }
 	statsContainer& getStats() { return stats; }
 	const position& getPos() const { return pos; }
@@ -48,11 +57,13 @@ private:
 	int entityId;
 	int factoryId;
 	position pos;
+	bool render;
 
 	std::string name;
 	statsContainer stats;
 	abilities abilities; 
 	
 	animationManager animationHandler;
+	entityRenderInfo renderInfo;
 };
  

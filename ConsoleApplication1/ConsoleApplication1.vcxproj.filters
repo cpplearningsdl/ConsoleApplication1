@@ -46,6 +46,9 @@
     <Filter Include="Source Files\entity\ability">
       <UniqueIdentifier>{ece0316f-4977-4cda-8d77-bc6bba9c3db3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\menu">
+      <UniqueIdentifier>{eb0ab26d-100b-451a-afe6-3effd8d7cc20}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp">
@@ -208,6 +211,21 @@
     </ClInclude>
     <ClInclude Include="renderManager.h">
       <Filter>Header Files\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="button.h">
+      <Filter>Header Files\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Header Files\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="menuManager.h">
+      <Filter>Header Files\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="pauseMenu.h">
+      <Filter>Header Files\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="entityRenderInfo.h">
+      <Filter>Header Files\entity\animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

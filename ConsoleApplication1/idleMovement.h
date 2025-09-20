@@ -10,6 +10,7 @@ private:
 public:
 	idleMovement(float startX, float startY);
 	idleMovement(const idleMovement& other);
+
 	void loadFromJson(const nlohmann::ordered_json& j) override;
 	void to_json(nlohmann::ordered_json& j) const override;
 	 

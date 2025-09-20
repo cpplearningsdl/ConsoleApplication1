@@ -5,7 +5,7 @@
 #include "entityIncludes.h"
 #include "renderer.h"
 #include "renderManager.h"
-
+#include "inputManager.h"
 
 gameManager& gameManager::getInstance() {
 	static gameManager instance;
@@ -26,25 +26,11 @@ void gameManager::processGame() {
 		render();
 	}
 }
-
-//void gameManager::render() {
-//	renderEntities();
-//	renderer::getInstance().drawScreen();
-//}
+ 
 void gameManager::render() {
 	renderHandler.renderGame(*currentGame); 
 }
-
-void gameManager::renderEntities() {
-	std::vector<entity*> renderables = currentGame->getRenderables();
-	for (auto& e : renderables) {
-		std::string key = e->getAnimationManager().getTextureKey();
-		//logManager::logThis("Rendering key: ", key);
-		renderer::getInstance().drawToNextFrame(key, 110, 0);
-	}
-}
-
-
+ 
  
 void gameManager::loadDefaultAssets() {
 	abilityFactory::getInstance().loadDefaultAbilities();

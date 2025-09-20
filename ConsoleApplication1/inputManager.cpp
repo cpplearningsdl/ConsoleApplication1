@@ -33,18 +33,20 @@ bool inputManager::pollEvents() {
 			return false;
 
 		case SDL_EVENT_KEY_DOWN: {
-			SDL_Scancode sc = event.key.scancode; // SDL3
+			SDL_Scancode sc = event.key.scancode; 
 			if (!keyStates[sc]) keyPressed[sc] = true;
 			keyStates[sc] = true;
-			lm::logThis("Key down: " + std::string(SDL_GetScancodeName(sc)));
+			lm::logThis("Key down: " +  std::string(SDL_GetScancodeName(sc)));
+			lm::logThis("ScanCode: " + sc);
 			break;
 		}
 
 		case SDL_EVENT_KEY_UP: {
-			SDL_Scancode sc = event.key.scancode; // SDL3
+			SDL_Scancode sc = event.key.scancode; 
 			keyStates[sc] = false;
 			keyReleased[sc] = true;
 			lm::logThis("Key up: " + std::string(SDL_GetScancodeName(sc)));
+			lm::logThis("ScanCode: " + sc);
 			break;
 		}
 

@@ -9,6 +9,7 @@
 namespace fs = std::filesystem;
 
 namespace entityLoader {
+
 	void loadAllDefaultEntitiesFromDir(const std::string& dirPath) {
 		logManager::logThis("Attempting to load entities from path: " + dirPath);
 

@@ -42,7 +42,7 @@ bool animationManager::loadAnimation(const std::string& baseName) {
 	chainOverride.clear();
 	animationName = baseName;
 	 
-	std::string firstKey = entityName + "_" + baseName + "_0";
+	std::string firstKey = entityName + "_" + baseName + "_0";//this doesnt have animation name
 	const textureDataStruct* base = textureManager::getInstance().getAnimationData(firstKey);
 	if (!base) {
 		logManager::logThis("No animationData for key ", firstKey);
@@ -170,9 +170,10 @@ bool animationManager::isFinished() const {
 const std::string& animationManager::getAnimationName() const {
 	return animationName;
 }
-const std::string animationManager::getTextureKey() const {
-	int f = getCurrentIndex();
-	return getEntityName() + "_" + getAnimationName() + "_" + std::to_string(f);
+const std::string animationManager::getTextureKey() const { 
+	//std::string texkey = getEntityName() + "_" + getAnimationName() + "_" + std::to_string(getCurrentIndex());
+	//logManager::logThis("texkey ", texkey);
+	return getEntityName() + "_" + getAnimationName() + "_" + std::to_string(getCurrentIndex());
 }
 void to_json(nlohmann::ordered_json& j, const animationManager& m) {
 	j = nlohmann::ordered_json{

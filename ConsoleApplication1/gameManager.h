@@ -13,8 +13,7 @@ public:
 	void endGame();
 	void loadDefaultAssets();
 	void processGame(); 
-	void render();
-	void renderEntities();
+	void render(); 
 private:
 	gameManager() = default;
 	~gameManager() = default;

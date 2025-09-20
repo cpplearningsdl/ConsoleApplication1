@@ -1,21 +1,21 @@
 #include "renderManager.h"
+#include "entityRenderInfo.h"
 
 
 void renderManager::renderEntities(game& g) { 
-
-	std::vector<entity*> renderables = g.getRenderables();
+	 
+	const auto& renderables = g.getRenderables();
 
 	for (auto& e : renderables) {
-		std::string key = e->getAnimationManager().getTextureKey(); 
-		renderer::getInstance().drawToNextFrame(key, 0, 0);
+		const entityRenderInfo& i = e->getRenderInfo(); 
+		renderer::getInstance().drawToNextFrame(i.textureKey, i.pos.getX(), i.pos.getY());
 	}
 }
 
 void renderManager::renderGame(game& g) {
 	renderer::getInstance().drawToNextFrame("background_idle_0", 0, 0);
 	renderEntities(g);
-
-
+	 
 	renderer::getInstance().drawScreen();
 
 }

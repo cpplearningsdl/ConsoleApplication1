@@ -3,12 +3,13 @@
 
 game::game() {
 	// init map, entities, etc. 
-	logManager::logThis("started first game");
-	//entities.push_back(entityFactory::getInstance().create("bone_thug"));
-	entities.push_back(entityFactory::getInstance().create("black_piece"));
+	logManager::logThis("started first game");  
+	addEntityToGame("black_piece");
 
-	entity& test = getEntityById(2);
+	entity& test = getEntityById(0);
 	test.getAnimationManager().loadAnimation("idle");
+	test.setRender(true);
+	test.updateRenderInfo();
 	test.getAnimationManager().setHoldFor(10);
 	logManager::logThis("Spilling Guts:");
 	test.spill_guts();
@@ -24,28 +25,31 @@ void game::update() {
 	}
  
 }
-std::vector<entity*> game::getRenderables()
-{
-	std::vector<entity*> list;
-	list.reserve(entities.size());
+ 
+void game::addEntityToGame(std::string name) {
+	entities.push_back(entityFactory::getInstance().create("black_piece"));
+	entities.back()->setEntityId(nextId++);
 
-	for (auto& e : getEntities()) {
-		//e->spill_guts();
-		list.push_back(e.get()); 
-	}
+	entity* rawPtr = entities.back().get(); 
+	renderablesCache.push_back(rawPtr);
+}
 
-	// need to switch to Z-index, but z-index not implemented, only 1 entity per square at moment
-	std::sort(list.begin(), list.end(),
-		[](entity* a, entity* b) {
-		return a->getPos().getY() < b->getPos().getY();
-	});
+void game::removeEntityFromGame(int id) {
+	auto it = std::remove_if(entities.begin(), entities.end(),
+		[id](const std::unique_ptr<entity>& e) { return e->getId() == id; });
+	entities.erase(it, entities.end());
 
-	return list;
+	// Remove from cache
+	auto pit = std::remove_if(renderablesCache.begin(), renderablesCache.end(),
+		[id](entity* e) { return e->getId() == id; });
+	renderablesCache.erase(pit, renderablesCache.end());
 }
 
 entity& game::getEntityById(int id) {
-	for (auto& e : entities) {
-		if (e && e->getFactoryId() == id) {
+	logManager::logThis("getting entity by id ", id);
+	for (auto& e : entities) { 
+		logManager::logThis("checking id ", e->getId());
+		if (e && e->getId() == id) {
 			return *e;  // return reference to the entity
 		}
 	}

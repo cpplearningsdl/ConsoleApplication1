@@ -195,6 +195,10 @@
     <ClInclude Include="ability.h" />
     <ClInclude Include="abilityFactory.h" />
     <ClInclude Include="abilityFileLoader.h" />
+    <ClInclude Include="button.h" />
+    <ClInclude Include="entityRenderInfo.h" />
+    <ClInclude Include="menuManager.h" />
+    <ClInclude Include="menu.h" />
     <ClInclude Include="idleMovement.h" />
     <ClInclude Include="movementTypeEnum.h" />
     <ClInclude Include="heal.h" />
@@ -213,6 +217,7 @@
     <ClInclude Include="gameManager.h" />
     <ClInclude Include="inputManager.h" />
     <ClInclude Include="logManager.h" />
+    <ClInclude Include="pauseMenu.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="renderManager.h" />

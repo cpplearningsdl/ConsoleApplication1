@@ -7,7 +7,9 @@ namespace entityLoader {
 }
 
 class entityFactory {
+
 public:
+
 	static entityFactory& getInstance() {
 		static entityFactory instance;
 		return instance;

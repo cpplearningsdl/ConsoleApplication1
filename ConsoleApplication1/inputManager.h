@@ -26,9 +26,7 @@ private:
 
 	inputManager(const inputManager&) = delete;
 	inputManager& operator=(const inputManager&) = delete;
-	 
-	//bool running = true;
-
+	  
 		// State storage
 	std::array<bool, SDL_SCANCODE_COUNT> keyStates{};
 	std::array<bool, SDL_SCANCODE_COUNT> keyPressed{};
