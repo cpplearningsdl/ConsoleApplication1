@@ -20,11 +20,6 @@ public:
 	float getX() const;
 	float getY() const;
 	bool isFinished() const override;
-
-	//void step() override;
-	//float getX() const override;
-	//float getY() const override;
-	//bool isFinished() const override;
 	 
 	std::unique_ptr<animationMovement> clone() const override;
 	
