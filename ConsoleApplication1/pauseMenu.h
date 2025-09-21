@@ -2,27 +2,31 @@
 #include "menuManager.h"
 #include "menu.h"
 #include "button.h"
+#include "json.hpp"
 
 class pauseMenu : public menuObj {
 public:
-	pauseMenu(menuManager& uiMgr) { setModal(true);
+	pauseMenu();
+	void update() override;
+	 
+private:
 
-		buttons.emplace_back(
-			Vec2{ 100, 100 }, Vec2{ 200, 50 },
-			[&]() {  hide(); },
-			"Resume"
-		);
-
-		buttons.emplace_back(
-			Vec2{ 100, 200 }, Vec2{ 200, 50 },
-			[&]() {  },
-			"Save"
-		);
-
-		buttons.emplace_back(
-			Vec2{ 100, 300 }, Vec2{ 200, 50 },
-			[&]() {  },
-			"Quit"
-		);
-	}
 };
+
+inline void from_json(const nlohmann::ordered_json& j, menuObj& m) {
+	if (j.contains("position")) {
+		j.at("position").get_to(m.pos);
+	}
+	if (j.contains("renderInfo")) {
+		j.at("renderInfo").get_to(m.renderInfo);
+	}
+	if (j.contains("animationHandler")) {
+		j.at("animationHandler").get_to(m.animationHandler);
+	}
+	if (j.contains("render")) {
+		m.show(); // if render is true
+		if (!j.at("render").get<bool>()) {
+			m.hide();
+		}
+	} 
+}

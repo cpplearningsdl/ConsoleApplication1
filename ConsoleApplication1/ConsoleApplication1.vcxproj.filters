@@ -49,6 +49,15 @@
     <Filter Include="Header Files\menu">
       <UniqueIdentifier>{eb0ab26d-100b-451a-afe6-3effd8d7cc20}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\game">
+      <UniqueIdentifier>{176b03e9-955b-444c-af15-e517c20230d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game">
+      <UniqueIdentifier>{5b8ecad4-2960-4bdf-909c-426455b128b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\menu">
+      <UniqueIdentifier>{84950712-5a5b-439e-9183-cc71e49ec1e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp">
@@ -61,12 +70,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="logManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gameManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="abilities.cpp">
@@ -114,6 +117,15 @@
     <ClCompile Include="renderManager.cpp">
       <Filter>Source Files\rendering</Filter>
     </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="gameManager.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="pauseMenu.cpp">
+      <Filter>Source Files\menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logManager.h">
@@ -122,13 +134,7 @@
     <ClInclude Include="inputManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="fileManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="gameManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="abilities.h">
@@ -226,6 +232,15 @@
     </ClInclude>
     <ClInclude Include="entityRenderInfo.h">
       <Filter>Header Files\entity\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="fileManager.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="gameStateEnum.h">
+      <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@
 #include "renderer.h"
 #include "renderManager.h"
 #include "inputManager.h"
+#include "menuManager.h"
 
 gameManager& gameManager::getInstance() {
 	static gameManager instance;
@@ -13,6 +14,7 @@ gameManager& gameManager::getInstance() {
 }
 
 void gameManager::newGame() {
+	setState(gameStateEnum::PLAYING);
 	currentGame = std::make_unique<game>();
 }
 
@@ -21,12 +23,26 @@ void gameManager::endGame() {
 }
 
 void gameManager::processGame() {
+	inputManager& input = inputManager::getInstance();
+	processMenu(input);
+
 	if (currentGame) {
 		currentGame->update(); 
 		render();
 	}
 }
- 
+void gameManager::processMenu(inputManager& input) {
+	if (getState() == gameStateEnum::PLAYING) {
+		if (input.wasKeyReleased(SDL_SCANCODE_ESCAPE)) {
+			setState(gameStateEnum::PAUSED);
+			//menus.openPauseMenu();
+			mainMenu.openMenu(std::make_unique<pauseMenu>());
+		}
+	}
+
+ }
+
+
 void gameManager::render() {
 	renderHandler.renderGame(*currentGame); 
 }

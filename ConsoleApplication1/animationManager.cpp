@@ -42,7 +42,7 @@ bool animationManager::loadAnimation(const std::string& baseName) {
 	chainOverride.clear();
 	animationName = baseName;
 	 
-	std::string firstKey = entityName + "_" + baseName + "_0";//this doesnt have animation name
+	std::string firstKey = entityName + "_" + baseName + "_0";
 	const textureDataStruct* base = textureManager::getInstance().getAnimationData(firstKey);
 	if (!base) {
 		logManager::logThis("No animationData for key ", firstKey);

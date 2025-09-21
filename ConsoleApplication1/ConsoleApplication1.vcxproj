@@ -184,6 +184,7 @@
     <ClCompile Include="inputManager.cpp" />
     <ClCompile Include="logManager.cpp" />
     <ClCompile Include="northMovement.cpp" />
+    <ClCompile Include="pauseMenu.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="renderManager.cpp" />
     <ClCompile Include="textureDataStruct.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="abilityFileLoader.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="entityRenderInfo.h" />
+    <ClInclude Include="gameStateEnum.h" />
     <ClInclude Include="menuManager.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="idleMovement.h" />

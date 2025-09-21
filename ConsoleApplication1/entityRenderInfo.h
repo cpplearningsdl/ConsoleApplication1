@@ -9,6 +9,12 @@ struct entityRenderInfo {
 	bool render;  
 };
 
+inline void updateEntityRenderInfo(entityRenderInfo& eri, const std::string s, position& pos, bool& visible) {
+	eri.textureKey = s;
+	eri.pos = pos;
+	eri.render = visible;
+
+}
 // to_json
 inline void to_json(nlohmann::ordered_json& j, const entityRenderInfo& s) {
 	j = nlohmann::ordered_json{

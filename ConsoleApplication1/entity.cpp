@@ -53,7 +53,7 @@ const entityRenderInfo& entity::getRenderInfo() const {
 	 return renderInfo; 
 }
 void entity::updateRenderInfo() { 
-	renderInfo.pos = pos;
+	renderInfo.pos = pos;//check to see if you need to offset with animation handler movement data
 	renderInfo.render = render;
 	renderInfo.textureKey = animationHandler.getTextureKey(); 
 }

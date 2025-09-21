@@ -29,6 +29,7 @@ bool inputManager::pollEvents() {
 		switch (event.type) {
 		case SDL_EVENT_QUIT:
 			lm::logThis("Quit event received. Closing window.");
+			lm::logThis("\n");
 			windowManager::initWindowManager().closeWindow();
 			return false;
 
@@ -37,7 +38,9 @@ bool inputManager::pollEvents() {
 			if (!keyStates[sc]) keyPressed[sc] = true;
 			keyStates[sc] = true;
 			lm::logThis("Key down: " +  std::string(SDL_GetScancodeName(sc)));
-			lm::logThis("ScanCode: " + sc);
+			lm::logThis("========");
+			lm::logThis("ScanCode: " + std::to_string(sc));
+			lm::logThis("========");
 			break;
 		}
 
@@ -46,7 +49,9 @@ bool inputManager::pollEvents() {
 			keyStates[sc] = false;
 			keyReleased[sc] = true;
 			lm::logThis("Key up: " + std::string(SDL_GetScancodeName(sc)));
-			lm::logThis("ScanCode: " + sc);
+			lm::logThis("========");
+			lm::logThis("ScanCode: " + std::to_string(sc));
+			lm::logThis("========");
 			break;
 		}
 

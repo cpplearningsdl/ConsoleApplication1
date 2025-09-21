@@ -4,6 +4,7 @@
 #include "logManager.h"
 #include "menu.h"
 #include "button.h"
+#include "pauseMenu.h"
 
 class menuManager {
 	std::vector<std::unique_ptr<menuObj>> menus;
@@ -18,6 +19,7 @@ public:
 		}
 		menu->show();
 		menus.push_back(std::move(menu));
+		logManager::logThis("opened window");
 	}
 
 	void closeMenu(menuObj* menu) {
