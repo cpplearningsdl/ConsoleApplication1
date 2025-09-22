@@ -7,6 +7,9 @@
 class pauseMenu : public menuObj {
 public:
 	pauseMenu();
+	void loadJson();
+	void loadButtons();
+	void load();
 	void update() override;
 	 
 private:
