@@ -36,36 +36,42 @@ public:
 	void clearChainOverride(); 
 	// Immediately restart with the chain animation (override if set)
 	void restartChain();
-	 
-	const textureDataStruct* getCurrentFrame() const; 
-	const std::vector<textureDataStruct>& getFrames() const { return frames; }
+	   
 	const std::string& getAnimationName() const;
 	const std::string getTextureKey() const;
-	const std::string& getEntityName() const { return entityName; }
+	const std::string& getEntityName() const { return entityName; } 
 	const size_t getCurrentIndex() const { return currentIndex; }
 	const int getHeldCount() const { return heldCount;	}
+	const int getSize() const { return size; }
 	const int getHoldFor() const { return holdFor; }
 	const bool getFinished() const { return finished; }
+	const bool getLoop() const { return loop; }
 	bool isFinished() const; 
+	const std::string getChainAnimationName() const { return chainAnimationName; }
 	const std::string getChainOverride() const { return chainOverride; }
 
 	void setEntityName(std::string n) { entityName = n; }
-	void setAnimationName(std::string n) { animationName = n; }
+	void setAnimationName(std::string n) { animationName = n; } 
+	void setChainAnimationName(std::string n) { chainAnimationName = n; } 
+	void setSize(int t) { size = t; }
 	void setCurrentIndex(size_t i) { currentIndex = i; }
 	void setHeldCount(int c) { heldCount = c; }
 	void setHoldFor(int c) { holdFor = c; }
+	void setLoop(bool l) { loop = l; }
 	void setFinished(bool f) { finished = f; }
 
 	friend void to_json(nlohmann::ordered_json& j, const animationManager& m);
 	friend void from_json(const nlohmann::ordered_json& j, animationManager& m);
-private:
-	std::vector<textureDataStruct> frames;//< this could have just been a pointer to the factory container frame number...
+private: 
 	std::string animationName;
 	std::string entityName;
 	size_t currentIndex;
+	int size;
 	int heldCount;
 	int holdFor;
-	bool finished;
+	bool loop;
+	bool finished; 
+	std::string chainAnimationName;
 	std::string chainOverride; 
 	std::unique_ptr<animationMovement> movement;
 };

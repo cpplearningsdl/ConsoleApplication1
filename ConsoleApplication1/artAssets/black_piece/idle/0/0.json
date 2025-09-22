@@ -1,6 +1,6 @@
 {
   "animationName": "idle",
-  "chainAnimation": "none",
+  "chainAnimation": "",
   "frameNumber": 0,
   "height": 128,
   "key": "black_piece_idle_0",

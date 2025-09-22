@@ -3,71 +3,57 @@
 #include "textureManager.h" 
 #include "logManager.h"
 
+
+
 animationManager::animationManager()
-	: currentIndex(0), heldCount(0), holdFor(0), finished(false) {}
+	:animationName("idle"), size(0), currentIndex(0), heldCount(0), holdFor(0), finished(false), loop(true) {}
 
 animationManager::animationManager(const animationManager& other)
-	: frames(other.frames),
-	entityName(other.entityName),
-	animationName(other.animationName),
+	: entityName(other.entityName),
+	animationName(other.animationName), 
+	size(other.size),
 	currentIndex(other.currentIndex),
 	heldCount(other.heldCount),
 	holdFor(other.holdFor),
 	finished(other.finished),
+	loop(other.loop),
 	chainOverride(other.chainOverride),
+	chainAnimationName(other.chainAnimationName),
 	movement(other.movement ? other.movement->clone() : nullptr) // deep clone
 {}
 
 animationManager& animationManager::operator=(const animationManager& other) {
-	if (this != &other) {
-		frames = other.frames;
+	if (this != &other) { 
 		entityName = other.entityName;
-		animationName = other.animationName;
+		animationName = other.animationName; 
+		size = other.size;
 		currentIndex = other.currentIndex;
 		heldCount = other.heldCount;
 		holdFor = other.holdFor;
 		finished = other.finished;
+		loop = other.loop;
 		chainOverride = other.chainOverride;
+		chainAnimationName = other.chainAnimationName;
 		movement = other.movement ? other.movement->clone() : nullptr;
 	}
 	return *this;
 }
 
 bool animationManager::loadAnimation(const std::string& baseName) {
-	frames.clear();
+	const textureDataStruct* data = textureManager::getInstance().getAnimationData(getTextureKey());
+	logManager::logThis("KEY? ", getTextureKey());
+	size = data->totalFrames;
+	loop = data->loop; 
 	currentIndex = 0;
 	heldCount = 0;
 	holdFor = 0;
 	finished = false;
-	chainOverride.clear();
-	animationName = baseName;
-	 
-	std::string firstKey = entityName + "_" + baseName + "_0";
-	const textureDataStruct* base = textureManager::getInstance().getAnimationData(firstKey);
-	if (!base) {
-		logManager::logThis("No animationData for key ", firstKey);
-		return false;
-	}
+	chainOverride = "";
+	chainAnimationName = data->chainAnimation;
+	animationName = baseName; 
 
-	int total = base->totalFrames;
-	if (total <= 0) total = 1; 
-
-	// Load frames _0 ... _(total-1)
-	for (int i = 0; i < total; ++i) {
-		std::string key = entityName + "_" + baseName + "_" + std::to_string(i);
-		const textureDataStruct* data = textureManager::getInstance().getAnimationData(key);
-		/*
-		logManager::logThis("TextureDataStruct: ", key);
-		nlohmann::ordered_json j = *data;
-		logManager::logThis("TextureDataStruct:\n" + j.dump(4));*/
-		if (!data) {
-			logManager::logThis("Missing Frame: ", key); 
-			continue;
-		}
-		frames.push_back(*data); 
-	} 
 	logManager::logThis("EntityNamed " + entityName + " Loaded Animation: ", animationName);
-	return !frames.empty();
+	return true;
 
 	//probably should attach the correct animationMovement here(even idle/no movement) or the place that loads the animation should et it(even more probably)?
 }
@@ -77,16 +63,12 @@ void animationManager::setMovement(movementTypeEnum type, float startX, float st
 }
  
 void animationManager::step() {
-	if (frames.empty() || finished) return;
-
-	const textureDataStruct& frame = frames[currentIndex];
-
+	if (finished) return; 
 	// Hold frame for N steps
 	if (heldCount < holdFor) {
 		heldCount++;
 		return;
-	}
-
+	} 
 	// Reset hold counter and advance frame
 	heldCount = 0;
 	currentIndex++;
@@ -96,8 +78,8 @@ void animationManager::step() {
 		movement->step();
 	}
 
-	if (currentIndex >= frames.size()) {
-		if (frames.back().loop) {
+	if (currentIndex >= getSize()) {
+		if (getLoop()) {
 			currentIndex = 0;
 		}
 		else {
@@ -105,8 +87,8 @@ void animationManager::step() {
 
 			// Use override if present, otherwise use frame.chainAnimation
 			std::string nextAnim = chainOverride.empty()
-				? frames.back().chainAnimation
-				: chainOverride;
+				? getChainAnimationName()
+				: getChainOverride();
 
 			// clear override after use
 			chainOverride.clear();
@@ -116,7 +98,7 @@ void animationManager::step() {
 			}
 			else {
 				// Freeze on last frame
-				currentIndex = frames.size() - 1;
+				currentIndex = getSize() - 1;
 			}
 		}
 	}
@@ -138,12 +120,11 @@ void animationManager::clearChainOverride() {
 }
 
 void animationManager::restartChain() {
-	if (frames.empty()) return;
-
+	if (getCurrentIndex() > getSize()) return; 
 	// Use override if present, otherwise use frame.chainAnimation
 	std::string nextAnim = chainOverride.empty()
-		? frames.back().chainAnimation
-		: chainOverride;
+		? getChainAnimationName()
+		: getChainOverride();
 
 	// clear override after use
 	chainOverride.clear();
@@ -153,16 +134,12 @@ void animationManager::restartChain() {
 	}
 	else {
 		// No chain specified, freeze at last frame
-		currentIndex = frames.size() - 1;
+		currentIndex = getSize() - 1;
 		finished = true;
 	}
 }
 
-const textureDataStruct* animationManager::getCurrentFrame() const {
-	if (frames.empty()) return nullptr;
-	return &frames[currentIndex];
-}
-
+  
 bool animationManager::isFinished() const {
 	return finished;
 }
@@ -177,13 +154,15 @@ const std::string animationManager::getTextureKey() const {
 }
 void to_json(nlohmann::ordered_json& j, const animationManager& m) {
 	j = nlohmann::ordered_json{
-		{"frames", m.getFrames()},
 		{"entityName", m.getEntityName() },
 		{"animationName", m.getAnimationName()},
+		{"chainAnimationName", m.getChainAnimationName()},
+		{"size", m.getSize() },
 		{"currentIndex", m.getCurrentIndex()},
 		{"heldCount", m.getHeldCount()},
 		{"holdFor", m.getHoldFor()},
 		{"finished", m.getFinished()},
+		{"loop", m.getLoop()},
 		{"chainOverride", m.getChainOverride()}
 	};
 
@@ -194,15 +173,18 @@ void to_json(nlohmann::ordered_json& j, const animationManager& m) {
 	}
 }
 
-void from_json(const nlohmann::ordered_json& j,animationManager& m) {
-	if (j.contains("frames")) {
-		m.frames = j.at("frames").get<std::vector<textureDataStruct>>();
-	}
+void from_json(const nlohmann::ordered_json& j,animationManager& m) { 
 	if (j.contains("entityName")) {
 		m.setEntityName(j.at("entityName").get<std::string>());
 	}
 	if (j.contains("animationName")) {
 		m.setAnimationName(j.at("animationName").get<std::string>());
+	}
+	if (j.contains("chainAnimationName")) {
+		m.setChainAnimationName(j.at("chainAnimationName").get<std::string>());
+	}
+	if (j.contains("size")) {
+		m.setSize(j.at("size").get<int>());
 	}
 	if (j.contains("currentIndex")) {
 		m.setCurrentIndex(j.at("currentIndex").get<int>());
@@ -215,6 +197,9 @@ void from_json(const nlohmann::ordered_json& j,animationManager& m) {
 	}
 	if (j.contains("finished")) {
 		m.setFinished(j.at("finished").get<bool>());
+	}
+	if (j.contains("loop")) {
+		m.setLoop(j.at("loop").get<bool>());
 	}
 	if (j.contains("chainOverride")) {
 		m.setChainOverride(j.at("chainOverride").get<std::string>());
