@@ -43,7 +43,7 @@ void pauseMenu::loadButtons() {
 }
 
 void pauseMenu::loadJson( ) {
-	std::string fileName = "C:\\Users\\Keary\\source\\repos\\ConsoleApplication1-working\\ConsoleApplication1\\menuJsons\\pause_menu.json";
+	std::string fileName = "C:\\Users\\Keary\\source\\repos\\ConsoleApplication1-working\\ConsoleApplication1\\menuJsons\\pause_menu_background.json";
 	std::ifstream file(fileName);
 	if (!file.is_open()) {
 		logManager::logThis("Couldn't open pause menu .json");

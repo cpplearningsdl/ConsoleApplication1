@@ -245,5 +245,8 @@
     <ClInclude Include="gameManager.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
+    <ClInclude Include="aNotes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -197,6 +197,7 @@
     <ClInclude Include="ability.h" />
     <ClInclude Include="abilityFactory.h" />
     <ClInclude Include="abilityFileLoader.h" />
+    <ClInclude Include="aNotes.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="entityRenderInfo.h" />
     <ClInclude Include="gameStateEnum.h" />
