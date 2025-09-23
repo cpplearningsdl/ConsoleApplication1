@@ -6,12 +6,12 @@
 
 
 animationManager::animationManager()
-	:animationName("idle"), size(0), currentIndex(0), heldCount(0), holdFor(0), finished(false), loop(true) {}
+	:animationName("idle"), frameCount(0), currentIndex(0), heldCount(0), holdFor(0), finished(false), loop(true) {}
 
 animationManager::animationManager(const animationManager& other)
 	: entityName(other.entityName),
 	animationName(other.animationName), 
-	size(other.size),
+	frameCount(other.frameCount),
 	currentIndex(other.currentIndex),
 	heldCount(other.heldCount),
 	holdFor(other.holdFor),
@@ -26,7 +26,7 @@ animationManager& animationManager::operator=(const animationManager& other) {
 	if (this != &other) { 
 		entityName = other.entityName;
 		animationName = other.animationName; 
-		size = other.size;
+		frameCount = other.frameCount;
 		currentIndex = other.currentIndex;
 		heldCount = other.heldCount;
 		holdFor = other.holdFor;
@@ -42,7 +42,7 @@ animationManager& animationManager::operator=(const animationManager& other) {
 bool animationManager::loadAnimation(const std::string& baseName) {
 	const textureDataStruct* data = textureManager::getInstance().getAnimationData(getTextureKey());
 	logManager::logThis("KEY? ", getTextureKey());
-	size = data->totalFrames;
+	frameCount = data->totalFrames;
 	loop = data->loop; 
 	currentIndex = 0;
 	heldCount = 0;
@@ -78,7 +78,7 @@ void animationManager::step() {
 		movement->step();
 	}
 
-	if (currentIndex >= getSize()) {
+	if (currentIndex >= getFrameCount()) {
 		if (getLoop()) {
 			currentIndex = 0;
 		}
@@ -98,7 +98,7 @@ void animationManager::step() {
 			}
 			else {
 				// Freeze on last frame
-				currentIndex = getSize() - 1;
+				currentIndex = getFrameCount() - 1;
 			}
 		}
 	}
@@ -120,7 +120,7 @@ void animationManager::clearChainOverride() {
 }
 
 void animationManager::restartChain() {
-	if (getCurrentIndex() > getSize()) return; 
+	if (getCurrentIndex() > getFrameCount()) return; 
 	// Use override if present, otherwise use frame.chainAnimation
 	std::string nextAnim = chainOverride.empty()
 		? getChainAnimationName()
@@ -134,7 +134,7 @@ void animationManager::restartChain() {
 	}
 	else {
 		// No chain specified, freeze at last frame
-		currentIndex = getSize() - 1;
+		currentIndex = getFrameCount() - 1;
 		finished = true;
 	}
 }
@@ -157,7 +157,7 @@ void to_json(nlohmann::ordered_json& j, const animationManager& m) {
 		{"entityName", m.getEntityName() },
 		{"animationName", m.getAnimationName()},
 		{"chainAnimationName", m.getChainAnimationName()},
-		{"size", m.getSize() },
+		{"frameCount", m.getFrameCount() },
 		{"currentIndex", m.getCurrentIndex()},
 		{"heldCount", m.getHeldCount()},
 		{"holdFor", m.getHoldFor()},
@@ -184,7 +184,7 @@ void from_json(const nlohmann::ordered_json& j,animationManager& m) {
 		m.setChainAnimationName(j.at("chainAnimationName").get<std::string>());
 	}
 	if (j.contains("size")) {
-		m.setSize(j.at("size").get<int>());
+		m.setFrameCount(j.at("size").get<int>());
 	}
 	if (j.contains("currentIndex")) {
 		m.setCurrentIndex(j.at("currentIndex").get<int>());

@@ -8,7 +8,7 @@
   "animationManager": {
     "frames": [
       {
-        "key": "pause_menu_idle_0",
+        "key": "pause_menu_background_idle_0",
         "animationName": "idle",
         "frameNumber": 0,
         "totalFrames": 2,
@@ -22,7 +22,7 @@
         "chainAnimation": "none"
       },
       {
-        "key": "pause_menu_idle_0",
+        "key": "pause_menu_background_idle_0",
         "animationName": "idle",
         "frameNumber": 1,
         "totalFrames": 2,

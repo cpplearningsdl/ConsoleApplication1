@@ -9,8 +9,8 @@ public:
 	pauseMenu();
 	void loadJson();
 	void loadButtons();
-	void load();
-	void update() override;
+	void init();
+	void update(inputManager& input) override;
 	 
 private:
 

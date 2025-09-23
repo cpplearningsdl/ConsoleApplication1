@@ -2,6 +2,8 @@
 #include <vector>
 #include "logManager.h"
 #include "game.h"
+#include "menuManager.h"
+#include "menu.h"
 #include "renderer.h"
 
 class renderManager
@@ -9,7 +11,9 @@ class renderManager
 private:
 
 public:
-	void renderGame(game& g);
-	void renderEntities(game& g);
+	void renderGame(game& g, menuManager& m);
+	void renderMainMenu(menuManager& m);
+	void renderBackground();
+	void renderEntities(game& g); 
 };
 

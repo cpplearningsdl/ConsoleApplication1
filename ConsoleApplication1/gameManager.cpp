@@ -27,25 +27,31 @@ void gameManager::processGame() {
 	processMenu(input);
 
 	if (currentGame) {
-		currentGame->update(); 
+		if (getState() == gameStateEnum::PLAYING) {
+			currentGame->update();
+		}
 		render();
 	}
 }
+
+void gameManager::render() {
+	renderHandler.renderGame(*currentGame, mainMenu); 
+}
+
 void gameManager::processMenu(inputManager& input) {
 	if (getState() == gameStateEnum::PLAYING) {
 		if (input.wasKeyReleased(SDL_SCANCODE_ESCAPE)) {
-			setState(gameStateEnum::PAUSED);
-			//menus.openPauseMenu();
+			setState(gameStateEnum::PAUSED); 
 			mainMenu.openMenu(std::make_unique<pauseMenu>());
 		}
+	} else if (getState() == gameStateEnum::PAUSED) { 
+		mainMenu.update(input);
+		if (input.wasKeyReleased(SDL_SCANCODE_ESCAPE)) {
+			setState(gameStateEnum::PLAYING);
+			mainMenu.closeTopMenu();
+		}
 	}
-
  }
-
-
-void gameManager::render() {
-	renderHandler.renderGame(*currentGame); 
-}
  
  
 void gameManager::loadDefaultAssets() {

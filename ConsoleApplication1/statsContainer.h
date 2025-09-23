@@ -43,10 +43,8 @@ public:
 //json erialize the container
 inline void to_json(nlohmann::ordered_json& j, const statsContainer& sc) {
 	j = nlohmann::ordered_json::object();
-	for (const auto&[key, stat] : sc.statsMap) {
-		// convert enum key to string for JSON object keys
-		j[statEnumToString(key)] = stat;  // uses to_json(statClass) via ADL
-		// If you want numeric keys instead: j[std::to_string(static_cast<int>(key))] = stat;
+	for (const auto&[key, stat] : sc.statsMap) { 
+		j[statEnumToString(key)] = stat;  
 	}
 } 
 

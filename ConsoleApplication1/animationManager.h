@@ -42,18 +42,18 @@ public:
 	const std::string& getEntityName() const { return entityName; } 
 	const size_t getCurrentIndex() const { return currentIndex; }
 	const int getHeldCount() const { return heldCount;	}
-	const int getSize() const { return size; }
+	const int getFrameCount() const { return frameCount; }
 	const int getHoldFor() const { return holdFor; }
 	const bool getFinished() const { return finished; }
 	const bool getLoop() const { return loop; }
 	bool isFinished() const; 
-	const std::string getChainAnimationName() const { return chainAnimationName; }
-	const std::string getChainOverride() const { return chainOverride; }
+	const std::string& getChainAnimationName() const { return chainAnimationName; }
+	const std::string& getChainOverride() const { return chainOverride; }
 
 	void setEntityName(std::string n) { entityName = n; }
 	void setAnimationName(std::string n) { animationName = n; } 
 	void setChainAnimationName(std::string n) { chainAnimationName = n; } 
-	void setSize(int t) { size = t; }
+	void setFrameCount(int t) { frameCount = t; }
 	void setCurrentIndex(size_t i) { currentIndex = i; }
 	void setHeldCount(int c) { heldCount = c; }
 	void setHoldFor(int c) { holdFor = c; }
@@ -66,7 +66,7 @@ private:
 	std::string animationName;
 	std::string entityName;
 	size_t currentIndex;
-	int size;
+	int frameCount;
 	int heldCount;
 	int holdFor;
 	bool loop;

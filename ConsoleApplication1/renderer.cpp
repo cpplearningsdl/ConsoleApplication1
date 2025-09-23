@@ -91,7 +91,7 @@ void renderer::drawToNextFrame(const std::string& key, int x, int y) {
 	//SDL_SetTextureBlendMode(tex, SDL_BLENDMODE_BLEND);
 
 	if (!texData || !tex) { 
-		logManager::logThis("Failure loading texture meta data or texture "); 
+		logManager::logThis("Failure loading texture meta data or texture; key: ", key); 
 		return;
 	}
 

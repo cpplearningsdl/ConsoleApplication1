@@ -126,15 +126,15 @@
     <ClCompile Include="pauseMenu.cpp">
       <Filter>Source Files\menu</Filter>
     </ClCompile>
+    <ClCompile Include="dimensions.h">
+      <Filter>Header Files\entity\stats</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="inputManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gameManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="abilities.h">
@@ -240,6 +240,9 @@
       <Filter>Header Files\game</Filter>
     </ClInclude>
     <ClInclude Include="gameStateEnum.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="gameManager.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>

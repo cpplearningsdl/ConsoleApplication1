@@ -15,7 +15,7 @@ inline void updateEntityRenderInfo(entityRenderInfo& eri, const std::string s, p
 	eri.render = visible;
 
 }
-// to_json
+	
 inline void to_json(nlohmann::ordered_json& j, const entityRenderInfo& s) {
 	j = nlohmann::ordered_json{
 		{ "textureKey", s.textureKey },

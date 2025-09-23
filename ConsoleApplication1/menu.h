@@ -4,6 +4,7 @@
 #include "logManager.h"
 #include "animationManager.h"
 #include "entityRenderInfo.h"
+#include "inputManager.h"
 
 class menuObj { 
 protected:
@@ -17,13 +18,15 @@ protected:
 public:
 	virtual ~menuObj() = default;
 
-	virtual void update() {};
+	virtual void update(inputManager& input) = 0;
 	void show() { render = true; }
 	void hide() { render = false; }
-	bool isVisible() const { return render; }
-
+	bool isVisible() const { return render; } 
 	void setModal(bool m) { modal = m; }
-	bool isModal() const { return modal; }
+	bool isModal() const { return modal; } 
+
+	const entityRenderInfo & getEntityRenderInfo() const { return renderInfo; }
+	const std::vector<buttonObj>& getButtons() const { return buttons; }
 
 	// Handle mouse clicks
 	void handleMouseClick(int mouseX, int mouseY) {

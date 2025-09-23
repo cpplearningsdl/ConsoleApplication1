@@ -33,7 +33,7 @@ public:
 			return it->second->clone(); 
 		}
 		logManager::logThis("Unable to create ability by name: ", name);
-		return nullptr; // not found
+		return nullptr; 
 	}
 
 private:

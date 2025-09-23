@@ -66,55 +66,5 @@ namespace entityLoader {
 		}
 	}
 
-
-	//void loadEntityFromFactoryJson(const nlohmann::ordered_json& j, entity& e) {
-	//	if (j.contains("name")) e.setName(j.at("name").get<std::string>());
-	//	if (j.contains("entityId")) e.setEntityId(j.at("entityId").get<int>());
-	//	if (j.contains("factoryId")) e.setFactoryId(j.at("factoryId").get<int>());
-	//	if (j.contains("stats")) e.getStats() = j.at("stats").get<statsContainer>();
-
-	//	if (j.contains("abilities")) {
-	//		for (const auto& abName : j["abilities"]) {
-	//			auto ability = abilityFactory::getInstance().create(abName.get<std::string>());
-	//			if (ability) {
-	//				e.getAbilities().addAbility(std::move(ability));
-	//			}
-	//		}
-	//	} 
-	//	if (j.contains("position")) {
-	//		e.getPos() = j.at("position").get<position>();
-	//	}  
-	//}
-
-	//void loadEntityFromSaveJson(const nlohmann::ordered_json& j, entity& e) {
-	//	if (j.contains("name")) e.setName(j.at("name").get<std::string>());
-	//	if (j.contains("entityId")) e.setEntityId(j.at("entityId").get<int>());
-	//	if (j.contains("factoryId")) e.setFactoryId(j.at("factoryId").get<int>());
-	//	if (j.contains("stats")) e.getStats() = j.at("stats").get<statsContainer>();
-	//	if (j.contains("position")) {
-	//		e.getPos() = j.at("position").get<position>();
-	//	}
-	//	if (j.contains("abilities")) {
-	//		for (const auto& abJson : j["abilities"]) {
-	//			if (!abJson.contains("name")) {
-	//				logManager::logThis("Ability JSON missing 'name' field.");
-	//				continue;
-	//			}
-
-	//			std::string name = abJson.at("name").get<std::string>();
-	//			std::unique_ptr<ability> ab;
-
-	//			if (name == "heal") {
-	//				auto h = std::make_unique<heal>();
-	//				h->from_Json(abJson);
-	//				ab = std::move(h);
-	//			}
-	//			// else if (name == "fireball") { ... }
-
-	//			if (ab) {
-	//				e.getAbilities().addAbility(std::move(ab));
-	//			}
-	//		}
-	//	}
-	//}
+	//ADD ENTITY LOADING FROM SAVED JSON NOT JUST FACTORY
 }

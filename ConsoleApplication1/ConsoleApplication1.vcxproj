@@ -175,6 +175,7 @@
     <ClCompile Include="animationMovement.cpp" />
     <ClCompile Include="animationMovementFactory.cpp" />
     <ClCompile Include="ConsoleApplication1.cpp" />
+    <ClCompile Include="dimensions.h" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="entityLoader.cpp" />
     <ClCompile Include="fileManager.cpp" />
