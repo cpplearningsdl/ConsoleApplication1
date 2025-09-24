@@ -1,24 +1,26 @@
 #include "idleMovement.h"
 
-idleMovement::idleMovement(float startX, float startY)
-	: x(startX), y(startY)
+idleMovement::idleMovement(int startX, int startY)
 { 
+	setX(startX);
+	setY(startY);
 }
 
-idleMovement::idleMovement(const idleMovement& other)
-	: x(other.x), y(other.y)
+idleMovement::idleMovement(const idleMovement& other) 
 {
+	setX(other.getX());
+	setY(other.getY());
 }
 
 void idleMovement::loadFromJson(const nlohmann::ordered_json& j) {
-	x = j.value("x", 0.0f);
-	y = j.value("y", 0.0f); 
+	setX( j.value("x", 0));
+	setY(j.value("y", 0)); 
 }
 void idleMovement::to_json(nlohmann::ordered_json& j) const {
 	j = {
 		{"type", movementTypeEnumToString(movementTypeEnum::idle)},
-		{"x", x},
-		{"y", y}
+		{"x", getX()},
+		{"y", getY()}
 	};
 }
  

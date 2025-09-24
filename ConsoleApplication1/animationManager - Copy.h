@@ -4,9 +4,7 @@
 #include "textureManager.h" 
 #include "animationMovement.h"
 #include "movementTypeEnum.h"
-#include "position.h"
 #include "json.hpp"
-#include <SDL3/SDL.h>
 
 class animationManager {
 public:
@@ -61,19 +59,10 @@ public:
 	void setHoldFor(int c) { holdFor = c; }
 	void setLoop(bool l) { loop = l; }
 	void setFinished(bool f) { finished = f; }
-	const position getPos() { return { movement->getX(), movement->getY() }; }
-
-	SDL_Texture* getCurrentTexture() { return frameTextures[getCurrentIndex()]; }
-	const int getHeight() const { return height[getCurrentIndex()]; }
-	const int getWidth() const { return width[getCurrentIndex()]; }
 
 	friend void to_json(nlohmann::ordered_json& j, const animationManager& m);
 	friend void from_json(const nlohmann::ordered_json& j, animationManager& m);
 private: 
-	std::vector<SDL_Texture*> frameTextures;
-	std::vector<int> height;
-	std::vector<int> width;
-
 	std::string animationName;
 	std::string entityName;
 	size_t currentIndex;

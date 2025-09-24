@@ -11,6 +11,7 @@ public:
 	void loadButtons();
 	void init();
 	void update(inputManager& input) override;
+	void updateRenderInfo();
 	 
 private:
 

@@ -8,8 +8,8 @@ game::game() {
 
 	entity& test = getEntityById(0);
 	test.getAnimationManager().loadAnimation("idle");
-	test.setRender(true);
 	test.updateRenderInfo();
+	test.setRender(true); 
 	test.getAnimationManager().setHoldFor(10);
 	logManager::logThis("Spilling Guts:");
 	test.spill_guts();

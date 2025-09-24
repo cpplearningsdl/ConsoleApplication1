@@ -28,8 +28,7 @@ public:
 	entity& operator=(entity&&) noexcept = default;
 
 	void update(); 
-	const entityRenderInfo& getRenderInfo() const ;
-	void updateRenderInfo();
+	const entityRenderInfo& getRenderInfo() const ; 
 
 	std::string getName() const { return name; };
 	void setName(std::string newName) {	name = newName;	};
@@ -39,16 +38,23 @@ public:
 	void setFactoryId(int newId) { factoryId = newId; };
 	void setRender(bool s) { render = s; renderInfo.render = s; }
 
-	bool getRender() const { return render; }
+	const bool&  getRender() const { return render; }
 	const statsContainer& getStats() const { return stats; }
 	statsContainer& getStats() { return stats; }
+
 	const position& getPos() const { return pos; }
 	position& getPos() { return pos; }
+
+	const position getCombinedPos() {
+		position movementPos = animationHandler.getPos();
+		return { movementPos.getX() + pos.getX(), movementPos.getY() + pos.getY() };
+	}
 
 	abilities& getAbilities();
 	const abilities& getAbilities() const; 
 	animationManager& getAnimationManager() { return animationHandler; }
 
+	void updateRenderInfo();
 	static nlohmann::ordered_json to_Json(const entity& e);
 	void from_Json(const nlohmann::ordered_json& j);
 

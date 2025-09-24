@@ -24,6 +24,7 @@ public:
 	bool isVisible() const { return render; } 
 	void setModal(bool m) { modal = m; }
 	bool isModal() const { return modal; } 
+	bool getRender() const { return render; }
 
 	const entityRenderInfo & getEntityRenderInfo() const { return renderInfo; }
 	const std::vector<buttonObj>& getButtons() const { return buttons; }

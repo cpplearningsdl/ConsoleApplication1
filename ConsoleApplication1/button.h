@@ -21,7 +21,7 @@ public:
 		animationHandler.setAnimationName(animationName);
 		animationHandler.setEntityName(newName); 
 		animationHandler.loadAnimation(animationName); 
-		updateEntityRenderInfo(renderInfo, animationHandler.getTextureKey(), pos, render);
+		updateRenderInfo();
 	}
 
 	void loadAnimation(std::string s) { animationHandler.loadAnimation(s); }
@@ -32,9 +32,11 @@ public:
 
 	void update() { 
 		animationHandler.step(); 
-		updateEntityRenderInfo(renderInfo, animationHandler.getTextureKey(), pos, render);
+		updateRenderInfo();
 	}
-
+	void updateRenderInfo() {
+		updateEntityRenderInfo(renderInfo, animationHandler.getCurrentTexture(), pos, animationHandler.getHeight(), animationHandler.getWidth(), render);
+	}
 	std::function<void()> onClick;
 	 
 	bool contains(int mouseX, int mouseY) const {

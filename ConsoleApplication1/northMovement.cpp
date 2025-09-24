@@ -1,20 +1,24 @@
 #include "northMovement.h"
 
-northMovement::northMovement(float startX, float startY, float distance, int frames)
-	: x(startX), y(startY), deltaY(distance / frames), totalFrames(frames), currentFrame(0)
+northMovement::northMovement(int startX, int startY, float distance, int frames)
+	: deltaY(distance / frames), totalFrames(frames), currentFrame(0)
 {
+	setX(startX);
+	setY(startY);
 	if (totalFrames <= 0) totalFrames = 1;
 	deltaY = distance / static_cast<float>(totalFrames); 
 }
 
 northMovement::northMovement(const northMovement& other)
-	: x(other.x), y(other.y), deltaY(other.deltaY), totalFrames(other.totalFrames), currentFrame(other.currentFrame)
+	: deltaY(other.deltaY), totalFrames(other.totalFrames), currentFrame(other.currentFrame)
 {
+	setX(other.getX());
+	setY(other.getY());
 }
 
 void northMovement::loadFromJson(const nlohmann::ordered_json& j){ 
-	x = j.value("x", 0.0f);
-	y = j.value("y", 0.0f);
+	setX(j.value("x", 0));
+	setY(j.value("y", 0));
 	deltaY = j.value("deltaY", 0.0f);
 	totalFrames = j.value("totalFrames", 1);
 	currentFrame = j.value("currentFrame", 0);
@@ -22,8 +26,8 @@ void northMovement::loadFromJson(const nlohmann::ordered_json& j){
 void northMovement::to_json(nlohmann::ordered_json& j) const {
 	j = { 
 		{"type", movementTypeEnumToString(movementTypeEnum::north)},
-		{"x", x},
-		{"y", y},
+		{"x", getX()},
+		{"y", getY()},
 		{"deltaY", deltaY},
 		{"totalFrames", totalFrames},
 		{"currentFrame", currentFrame}
@@ -31,13 +35,11 @@ void northMovement::to_json(nlohmann::ordered_json& j) const {
 }
 void northMovement::step() {
 	if (currentFrame < totalFrames) {
-		y -= deltaY; // moves north
+		setY(getY() - deltaY); 
 		currentFrame++;
 	}
 }
-
-float northMovement::getX() const { return x; }
-float northMovement::getY() const { return y; }
+ 
 bool northMovement::isFinished() const { return currentFrame >= totalFrames; }
 
 std::unique_ptr<animationMovement> northMovement::clone() const {

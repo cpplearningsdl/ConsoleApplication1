@@ -41,11 +41,7 @@ animationManager& animationManager::operator=(const animationManager& other) {
 
 bool animationManager::loadAnimation(const std::string& baseName) {
 	const textureDataStruct* data = textureManager::getInstance().getAnimationData(getTextureKey());
-	if (!data) {
-		logManager::logThis("Error: could not find animation data for " + getTextureKey());
-		return false;
-	}
-
+	logManager::logThis("KEY? ", getTextureKey());
 	frameCount = data->totalFrames;
 	loop = data->loop; 
 	currentIndex = 0;
@@ -55,22 +51,6 @@ bool animationManager::loadAnimation(const std::string& baseName) {
 	chainOverride = "";
 	chainAnimationName = data->chainAnimation;
 	animationName = baseName; 
-
-	frameTextures.clear();
-	frameTextures.reserve(data->totalFrames);
-
-	for (int frame = 0; frame < data->totalFrames; ++frame) {
-		std::string key = entityName + "_" + baseName + "_" + std::to_string(frame);
-
-		SDL_Texture* tex = textureManager::getInstance().getFrame(key);
-		if (!tex) {
-			logManager::logThis("Warning: missing texture for key: " + key);
-			return false; 
-		}
-		frameTextures.push_back(tex);
-		height.push_back(data->height);
-		width.push_back(data->width);
-	}
 
 	logManager::logThis("EntityNamed " + entityName + " Loaded Animation: ", animationName);
 	return true;

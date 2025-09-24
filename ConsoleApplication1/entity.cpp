@@ -36,11 +36,20 @@ entity& entity::operator=(const entity& other) {
 	}
 	return *this;
 }
+//void entity::update() {
+//	animationHandler.step();
+//	renderInfo.textureKey = animationHandler.getTextureKey(); 
+//}
+// 
+//NEED TO ADD MOVEMENT OFFSET TO  POSITION!!!!!
 void entity::update() {
-	animationHandler.step();
-	renderInfo.textureKey = animationHandler.getTextureKey(); 
+	animationHandler.step(); 
+	updateEntityRenderInfo(renderInfo, animationHandler.getCurrentTexture(), getCombinedPos(), animationHandler.getHeight(), animationHandler.getWidth(), getRender());
+	//updateEntityRenderInfo(renderInfo,animationHandler.frameTextures)
+} 
+void entity::updateRenderInfo() {
+	updateEntityRenderInfo(renderInfo, animationHandler.getCurrentTexture(), getCombinedPos(), animationHandler.getHeight(), animationHandler.getWidth(), getRender());
 }
- 
 abilities& entity::getAbilities() {
 	return abilities;
 }
@@ -52,11 +61,11 @@ const abilities& entity::getAbilities() const {
 const entityRenderInfo& entity::getRenderInfo() const {
 	 return renderInfo; 
 }
-void entity::updateRenderInfo() { 
-	renderInfo.pos = pos;//check to see if you need to offset with animation handler movement data
-	renderInfo.render = render;
-	renderInfo.textureKey = animationHandler.getTextureKey(); 
-}
+//void entity::updateRenderInfo() { 
+//	renderInfo.pos = pos;//check to see if you need to offset with animation handler movement data
+//	renderInfo.render = render;
+//	renderInfo.textureKey = animationHandler.getTextureKey(); 
+//}
 void entity::from_Json(const nlohmann::ordered_json& j) {
 	if (j.contains("name")) {
 		setName(j.at("name").get<std::string>());

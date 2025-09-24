@@ -11,9 +11,10 @@ pauseMenu::pauseMenu() {
 void pauseMenu::init() {
 	loadJson();
 	loadButtons();
-	animationHandler.setEntityName("pause_menu_background");//WHY ISNT THIS THE KEY THE FIRST FRAME MENU IS OPEN?
-	animationHandler.setAnimationName("idle");
+	animationHandler.setEntityName("pause_menu_background"); 
+	animationHandler.loadAnimation("idle");
 	pos.setPosition(10, 100);
+	updateRenderInfo();
 }
 
 //	buttonObj(position pos, position sz, std::function<void()> cb, std::string newName, std::string animationName, bool visible )
@@ -41,7 +42,9 @@ void pauseMenu::loadButtons() {
 	//	true
 	//);
 }
-
+void pauseMenu::updateRenderInfo() {
+	updateEntityRenderInfo(renderInfo, animationHandler.getCurrentTexture(), pos, animationHandler.getHeight(), animationHandler.getWidth(), getRender());
+}
 void pauseMenu::loadJson( ) {
 	std::string fileName = "C:\\Users\\Keary\\source\\repos\\ConsoleApplication1-working\\ConsoleApplication1\\menuJsons\\pause_menu_background.json";
 	std::ifstream file(fileName);
@@ -56,7 +59,7 @@ void pauseMenu::loadJson( ) {
 
 void pauseMenu::update(inputManager& input) {
 	animationHandler.step();
-	updateEntityRenderInfo(renderInfo, animationHandler.getTextureKey(), pos, render);
+	updateEntityRenderInfo(renderInfo, animationHandler.getCurrentTexture(), pos, animationHandler.getHeight(), animationHandler.getWidth(), render);
 	for (auto& btn : buttons) {
 		btn.update();
 	}

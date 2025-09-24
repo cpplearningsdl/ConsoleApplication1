@@ -11,7 +11,7 @@ public:
 	void shutdown();
 
 	void clearNextFrame(); // Clears the off-screen frame
-	void drawToNextFrame(const std::string& key, int x, int y); // Draws a texture
+	void drawToNextFrame(SDL_Texture* t, int x, int y, int h, int w); // Draws a texture
 	void presentFrame(); // Copies next frame to screen
 
 	void drawScreen(); // Clears nextFrame and presents it to screen (convenience)

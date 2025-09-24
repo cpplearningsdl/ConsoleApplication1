@@ -2,6 +2,10 @@
 #include "json.hpp"
 #include <memory>
 class animationMovement {
+private:
+	int x;
+	int y;
+
 public:
 	virtual ~animationMovement() = default;
 	virtual std::unique_ptr<animationMovement> clone() const = 0;
@@ -11,6 +15,8 @@ public:
 	virtual void step() = 0; 
 	virtual bool isFinished() const = 0;
 
-	//virtual float getX() const = 0;
-	//virtual float getY() const = 0;
+	int getX() const { return x;	}
+	int getY() const { return y;	}
+	void setX(int nx) { x = nx; }
+	void setY(int ny) { y = ny; }
 };

@@ -85,25 +85,19 @@ void renderer::clearNextFrame() {
 	SDL_RenderClear(sdlRenderer);
 }
 
-void renderer::drawToNextFrame(const std::string& key, int x, int y) {
-	const textureDataStruct* texData = textureManager::getInstance().getAnimationData(key);
-	SDL_Texture* tex = textureManager::getInstance().getFrame(key);
+void renderer::drawToNextFrame(SDL_Texture* t, int x, int y, int h, int w) {  
 	//SDL_SetTextureBlendMode(tex, SDL_BLENDMODE_BLEND);
 
-	if (!texData || !tex) { 
-		logManager::logThis("Failure loading texture meta data or texture; key: ", key); 
-		return;
-	}
-
+ 
 	SDL_SetRenderTarget(sdlRenderer, nextFrame);
 
 	SDL_FRect dst;
 	dst.x = static_cast<float>(x);
 	dst.y = static_cast<float>(y);
-	dst.w = static_cast<float>(texData->width);
-	dst.h = static_cast<float>(texData->height);
+	dst.w = static_cast<float>(w);
+	dst.h = static_cast<float>(h);
 
-	SDL_RenderTexture(sdlRenderer, tex, nullptr, &dst);
+	SDL_RenderTexture(sdlRenderer, t, nullptr, &dst);
 }
 
 void renderer::presentFrame() {

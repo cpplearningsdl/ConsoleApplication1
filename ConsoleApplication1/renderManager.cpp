@@ -7,17 +7,17 @@ void renderManager::renderMainMenu(menuManager& m) {
 		if (!menu->isVisible()) continue;
 		 
 		const entityRenderInfo& menuInfo = menu->getEntityRenderInfo();
-		renderer::getInstance().drawToNextFrame( menuInfo.textureKey, menuInfo.pos.getX(), menuInfo.pos.getY()	); 
+		renderer::getInstance().drawToNextFrame( menuInfo.tex, menuInfo.pos.getX(), menuInfo.pos.getY(), menuInfo.height, menuInfo.width ); 
 		 
 		for (const auto& button : menu->getButtons()) {
 			const entityRenderInfo& btnInfo = button.getEntityRenderInfo();
-			renderer::getInstance().drawToNextFrame( btnInfo.textureKey,	btnInfo.pos.getX(),	btnInfo.pos.getY()	);
+			renderer::getInstance().drawToNextFrame( btnInfo.tex,	btnInfo.pos.getX(),	btnInfo.pos.getY(), btnInfo.height, btnInfo.width	);
 		}
 	} 
 }
 
 void renderManager::renderBackground() {
-	renderer::getInstance().drawToNextFrame("background_idle_0", 0, 0);
+	//renderer::getInstance().drawToNextFrame("background_idle_0", 0, 0);
 }
 void renderManager::renderEntities(game& g) { 
 	 
@@ -26,7 +26,7 @@ void renderManager::renderEntities(game& g) {
 	//also need to add function for converting map position to x/y position as well
 	for (auto& e : renderables) {
 		const entityRenderInfo& i = e->getRenderInfo(); 
-		renderer::getInstance().drawToNextFrame(i.textureKey, i.pos.getX(), i.pos.getY());
+		renderer::getInstance().drawToNextFrame(i.tex, i.pos.getX(), i.pos.getY(), i.height, i.width);
 	}
 }
 
