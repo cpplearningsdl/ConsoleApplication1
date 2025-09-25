@@ -6,7 +6,9 @@
 
 
 animationManager::animationManager()
-	:animationName("idle"), frameCount(0), currentIndex(0), heldCount(0), holdFor(0), finished(false), loop(true) {}
+	:animationName("idle"), frameCount(0), currentIndex(0), heldCount(0), holdFor(0), finished(false), loop(true) {
+	setMovement(movementTypeEnum::idle, 0, 0, 0, 1);
+}
 
 animationManager::animationManager(const animationManager& other)
 	: entityName(other.entityName),
@@ -74,7 +76,10 @@ bool animationManager::loadAnimation(const std::string& baseName) {
 
 	logManager::logThis("EntityNamed " + entityName + " Loaded Animation: ", animationName);
 	return true;
-
+	//this system is stupid. need lookups for movement for each animation or something. also it should always start at 0,0 and just be added to entities pos when drawn
+	if (baseName == "idle") {
+		setMovement(animationMovementFactory::createMovement(movementTypeEnum::idle, 0, 0, 0, frameCount));
+	}
 	//probably should attach the correct animationMovement here(even idle/no movement) or the place that loads the animation should et it(even more probably)?
 }
 

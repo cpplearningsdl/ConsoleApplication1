@@ -9,17 +9,31 @@
 
 class menuManager {
 	std::vector<std::unique_ptr<menuObj>> menus;
+	bool closedThisFrame = false;
 
 public:
 
 	void update(inputManager& input) {
 		for (auto it = menus.rbegin(); it != menus.rend(); ++it) {
 			if ((*it)->isVisible()) {
-				(*it)->update(input);  
-				if ((*it)->isModal()) break; 
+
+				(*it)->update(input);
+				if ((*it)->isModal()) break;
+			} 
+		} 
+
+		for (auto it = menus.begin(); it != menus.end(); ) {
+			if ((*it)->isPendingClose()) {
+				menuObj* menu = it->get();   // get the raw pointer
+				closeMenu(menu);             // pass pointer, as expected
+				it = menus.begin();          // start over, safe
+			}
+			else {
+				++it;
 			}
 		}
 	}
+ 
 
 	const std::vector < std::unique_ptr<menuObj>>& getMenus() const {	return menus;	}
 
@@ -29,6 +43,7 @@ public:
 				if (m->isModal()) m->hide();
 			}
 		}
+		menu->setParentMenu(this);
 		menu->show();
 		menus.push_back(std::move(menu));
 		logManager::logThis("opened window");
@@ -43,7 +58,9 @@ public:
 		menus.erase(std::remove_if(menus.begin(), menus.end(),
 			[menu](const std::unique_ptr<menuObj>& m) { return m.get() == menu; }),
 			menus.end());
+		logManager::logThis("closedwindow");
 	}
+ 
 
 	void handleMouseClick(int mouseX, int mouseY) {
 		// Topmost visible modal menu receives input first

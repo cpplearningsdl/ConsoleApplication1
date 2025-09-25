@@ -2,6 +2,7 @@
 #define INPUTMANAGER_H 
 #include <SDL3/SDL.h>
 #include <array>
+#include <vector>
  
 
 class inputManager {
@@ -18,6 +19,9 @@ public:
 	int getMouseX() const { return mouseX; }
 	int getMouseY() const { return mouseY; }
 	bool isMouseButtonDown(Uint8 button) const { return mouseButtons[button]; }
+	bool wasMouseReleased() { return mouseReleased; }
+
+	const std::vector<Uint32>& getEvents() const { return eventTypesThisFrame; }
 
 private:
 	 
@@ -28,12 +32,14 @@ private:
 	inputManager& operator=(const inputManager&) = delete;
 	  
 		// State storage
+	std::vector<Uint32> eventTypesThisFrame;
 	std::array<bool, SDL_SCANCODE_COUNT> keyStates{};
 	std::array<bool, SDL_SCANCODE_COUNT> keyPressed{};
 	std::array<bool, SDL_SCANCODE_COUNT> keyReleased{};
 
 	int mouseX = 0;
 	int mouseY = 0;
+	bool mouseReleased = false;
 	std::array<bool, 5> mouseButtons{};
 };
 

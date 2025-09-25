@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <functional>
+#include <SDL3/SDL.h>
+#include "inputManager.h"
 #include "logManager.h"
 #include "animationManager.h"
 #include "entityRenderInfo.h"
@@ -23,22 +25,29 @@ public:
 		animationHandler.loadAnimation(animationName); 
 		updateRenderInfo();
 	}
-
+	std::function<void()> onClick;
 	void loadAnimation(std::string s) { animationHandler.loadAnimation(s); }
 	void setRender(bool b) { render = b; } 
 	const position& getPos() const { return pos; }
 	const dimensions& getSize() const { return size; }
 	const entityRenderInfo& getEntityRenderInfo() const { return renderInfo; }
 
-	void update() { 
+	void update(inputManager& input) {
+		handleInput(input);
 		animationHandler.step(); 
 		updateRenderInfo();
 	}
 	void updateRenderInfo() {
 		updateEntityRenderInfo(renderInfo, animationHandler.getCurrentTexture(), pos, animationHandler.getHeight(), animationHandler.getWidth(), render);
 	}
-	std::function<void()> onClick;
-	 
+
+	void handleInput(inputManager& input) {
+		logManager::logThis("Menu Input:");
+		if (input.wasMouseReleased() && contains(input.getMouseX(),input.getMouseY())) {
+			click();
+			logManager::logThis("Clicked button.");
+		}
+	 }
 	bool contains(int mouseX, int mouseY) const {
 		return mouseX >= pos.getX() && mouseX <= pos.getX() + size.getW() &&
 			mouseY >= pos.getY() && mouseY <= pos.getY() + size.getH();

@@ -85,10 +85,8 @@ void renderer::clearNextFrame() {
 	SDL_RenderClear(sdlRenderer);
 }
 
-void renderer::drawToNextFrame(SDL_Texture* t, int x, int y, int h, int w) {  
-	//SDL_SetTextureBlendMode(tex, SDL_BLENDMODE_BLEND);
-
- 
+void renderer::drawToNextFrame(SDL_Texture* t, int x, int y, int h, int w) {   
+	 
 	SDL_SetRenderTarget(sdlRenderer, nextFrame);
 
 	SDL_FRect dst;

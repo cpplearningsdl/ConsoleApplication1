@@ -17,15 +17,18 @@ inputManager& inputManager::getInstance() {
 	static inputManager instance;
 	return instance;
 }
- 
- 
+  
 bool inputManager::pollEvents() {
 	// reset per-frame pressed/released keys
+	mouseReleased = false;
 	keyPressed.fill(false);
 	keyReleased.fill(false); 
+	eventTypesThisFrame.clear();
 
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
+		eventTypesThisFrame.push_back(event.type);
+
 		switch (event.type) {
 		case SDL_EVENT_QUIT:
 			lm::logThis("Quit event received. Closing window.");
@@ -69,6 +72,7 @@ bool inputManager::pollEvents() {
 
 		case SDL_EVENT_MOUSE_BUTTON_UP:
 			if (event.button.button < mouseButtons.size())
+				mouseReleased = true;
 				mouseButtons[event.button.button] = false;
 				lm::logThis("Mouse button up: " + std::to_string(event.button.button));
 			break;

@@ -17,7 +17,8 @@ void renderManager::renderMainMenu(menuManager& m) {
 }
 
 void renderManager::renderBackground() {
-	//renderer::getInstance().drawToNextFrame("background_idle_0", 0, 0);
+	SDL_Texture* tex = textureManager::getInstance().getFrame("background_idle_0");
+	renderer::getInstance().drawToNextFrame(tex, 0, 0, 600, 800);
 }
 void renderManager::renderEntities(game& g) { 
 	 

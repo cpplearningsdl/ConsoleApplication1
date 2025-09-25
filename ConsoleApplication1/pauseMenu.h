@@ -1,4 +1,5 @@
 #pragma once
+#include "inputManager.h"
 #include "menuManager.h"
 #include "menu.h"
 #include "button.h"

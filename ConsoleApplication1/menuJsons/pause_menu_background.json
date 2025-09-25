@@ -1,7 +1,7 @@
 {
   "pos": {
-    "x": 200,
-    "y": 0
+    "x": 552,
+    "y": 50
   },
   "render": true,
   "modal":  true,
@@ -47,8 +47,8 @@
   "renderInfo": {
     "textureKey": "pause_menu_background_idle_0",
     "pos": {
-      "x": 200,
-      "y": 0
+      "x": 552,
+      "y": 50
     },
     "render": true
   }

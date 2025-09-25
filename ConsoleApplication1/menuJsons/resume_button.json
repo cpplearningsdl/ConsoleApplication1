@@ -1,7 +1,7 @@
 {
   "pos": {
-    "x": 200,
-    "y": 0
+    "x": 704,
+    "y": 100
   },
   "render": true,
   "modal":  true,
@@ -12,8 +12,8 @@
         "animationName": "idle",
         "frameNumber": 0,
         "totalFrames": 2,
-        "width": 248,
-        "height": 376,
+        "width":188,
+        "height": 88,
         "hitBoxWidth": 0,
         "hitBoxHeight": 0,
         "xOffset": 0,
@@ -26,8 +26,8 @@
         "animationName": "idle",
         "frameNumber": 1,
         "totalFrames": 2,
-        "width": 248,
-        "height": 376,
+        "width": 188,
+        "height": 88,
         "hitBoxWidth": 0,
         "hitBoxHeight": 0,
         "xOffset": 0,
@@ -47,8 +47,8 @@
   "renderInfo": {
     "textureKey": "pause_menu_idle_0",
     "pos": {
-      "x": 200,
-      "y": 0
+      "x": 704,
+      "y": 100
     },
     "render": true
   }

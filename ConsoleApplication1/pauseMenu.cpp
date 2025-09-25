@@ -13,15 +13,15 @@ void pauseMenu::init() {
 	loadButtons();
 	animationHandler.setEntityName("pause_menu_background"); 
 	animationHandler.loadAnimation("idle");
-	pos.setPosition(10, 100);
+	pos.setPosition(552, 100);
 	updateRenderInfo();
 }
 
 //	buttonObj(position pos, position sz, std::function<void()> cb, std::string newName, std::string animationName, bool visible )
 void pauseMenu::loadButtons() {
 	buttons.emplace_back(
-		position{ 100, 100 }, dimensions{ 200, 50 },
-		[&]() {  hide(); },
+		position{ 582, 150 }, dimensions{ 188, 88 },
+		[this]() { logManager::logThis("lambda"); if (parentMenu) { this->requestClose(); }  },
 		"resume_button",
 		"idle",
 		true
@@ -61,6 +61,6 @@ void pauseMenu::update(inputManager& input) {
 	animationHandler.step();
 	updateEntityRenderInfo(renderInfo, animationHandler.getCurrentTexture(), pos, animationHandler.getHeight(), animationHandler.getWidth(), render);
 	for (auto& btn : buttons) {
-		btn.update();
+		btn.update(input);
 	}
 }

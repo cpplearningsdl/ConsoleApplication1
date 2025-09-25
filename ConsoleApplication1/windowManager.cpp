@@ -11,26 +11,7 @@ windowManager& windowManager::initWindowManager() {
 
 windowManager::windowManager() : window(nullptr) {}
 
-//bool windowManager::openWindow(const std::string& title, int width, int height, Uint32 flags) {
-	//if (window) return true; 
-
-	//window = SDL_CreateWindow(title.c_str(), width, height, flags);
-	//if (!window) {
-	//	lm::logThis("Failed to create window.");
-	//	return false;
-	//}
-
-	//renderer = SDL_CreateRenderer(window, nullptr);
-	//if (!renderer) {
-	//	lm::logThis("Failed to create renderer.");
-	//	SDL_DestroyWindow(window);
-	//	window = nullptr;
-	//	return false;
-	//}
-
-	//lm::logThis("Created window.");
-	//return true;
-//}
+ 
 
 bool windowManager::openWindow(const std::string& title, int width, int height, Uint32 flags) {
 	

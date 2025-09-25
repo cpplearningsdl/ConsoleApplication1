@@ -6,11 +6,16 @@
 #include "entityRenderInfo.h"
 #include "inputManager.h"
 
+class menuManager;
+
 class menuObj { 
 protected:
+	menuManager* parentMenu = nullptr;
 	std::vector<buttonObj> buttons;
 	bool render = false;
 	bool modal = false;
+	bool pendingClose = false;
+
 	animationManager animationHandler;
 	entityRenderInfo renderInfo;
 	position pos;
@@ -18,6 +23,7 @@ protected:
 public:
 	virtual ~menuObj() = default;
 
+	void setParentMenu(menuManager* m) { parentMenu = m; }
 	virtual void update(inputManager& input) = 0;
 	void show() { render = true; }
 	void hide() { render = false; }
@@ -25,6 +31,12 @@ public:
 	void setModal(bool m) { modal = m; }
 	bool isModal() const { return modal; } 
 	bool getRender() const { return render; }
+	bool isPendingClose() const { return pendingClose; }
+
+
+	void requestClose() {
+		pendingClose = true;
+	}
 
 	const entityRenderInfo & getEntityRenderInfo() const { return renderInfo; }
 	const std::vector<buttonObj>& getButtons() const { return buttons; }

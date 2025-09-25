@@ -84,9 +84,6 @@
     <ClCompile Include="animationMovement.cpp">
       <Filter>Source Files\entity\animation</Filter>
     </ClCompile>
-    <ClCompile Include="animationMovementFactory.cpp">
-      <Filter>Source Files\entity\animation</Filter>
-    </ClCompile>
     <ClCompile Include="entity.cpp">
       <Filter>Source Files\entity</Filter>
     </ClCompile>
@@ -129,6 +126,12 @@
     <ClCompile Include="dimensions.h">
       <Filter>Header Files\entity\stats</Filter>
     </ClCompile>
+    <ClCompile Include="animationMovementFactory.cpp">
+      <Filter>Source Files\entity\movement</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>Source Files\menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logManager.h">
@@ -150,9 +153,6 @@
       <Filter>Header Files\entity\animation</Filter>
     </ClInclude>
     <ClInclude Include="animationMovement.h">
-      <Filter>Header Files\entity\animation</Filter>
-    </ClInclude>
-    <ClInclude Include="animationMovementFactory.h">
       <Filter>Header Files\entity\animation</Filter>
     </ClInclude>
     <ClInclude Include="entity.h">
@@ -247,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="aNotes.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="animationMovementFactory.h">
+      <Filter>Header Files\entity\movement</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

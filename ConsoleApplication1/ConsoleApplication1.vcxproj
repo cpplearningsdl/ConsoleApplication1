@@ -184,6 +184,7 @@
     <ClCompile Include="idleMovement.cpp" />
     <ClCompile Include="inputManager.cpp" />
     <ClCompile Include="logManager.cpp" />
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="northMovement.cpp" />
     <ClCompile Include="pauseMenu.cpp" />
     <ClCompile Include="renderer.cpp" />
