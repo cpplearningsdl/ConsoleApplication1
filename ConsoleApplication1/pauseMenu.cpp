@@ -20,12 +20,12 @@ void pauseMenu::init() {
 //	buttonObj(position pos, position sz, std::function<void()> cb, std::string newName, std::string animationName, bool visible )
 void pauseMenu::loadButtons() {
 	buttons.emplace_back(
-		position{ 582, 150 }, dimensions{ 188, 88 },
-		[this]() { logManager::logThis("lambda"); if (parentMenu) { this->requestClose(); }  },
+		position{ 582, 150 }, dimensions{ 188, 88 }, 
 		"resume_button",
 		"idle",
 		true
 	); 
+	setButtonMenuData(buttons, morphToCloseButton(1));
 	//buttons.emplace_back(
 	//	position{ 100, 200 }, dimensions{ 200, 50 },
 	//	[&]() {},
@@ -58,9 +58,14 @@ void pauseMenu::loadJson( ) {
 }
 
 void pauseMenu::update(inputManager& input) {
-	animationHandler.step();
-	updateEntityRenderInfo(renderInfo, animationHandler.getCurrentTexture(), pos, animationHandler.getHeight(), animationHandler.getWidth(), render);
 	for (auto& btn : buttons) {
 		btn.update(input);
+		if (btn.wasClicked()) {
+			//handleClick
+		}
 	}
+	animationHandler.step();
+	updateEntityRenderInfo(renderInfo, animationHandler.getCurrentTexture(), pos, animationHandler.getHeight(), animationHandler.getWidth(), render);
+
 }
+

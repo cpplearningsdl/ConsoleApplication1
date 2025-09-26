@@ -8,15 +8,13 @@
 #include "inputManager.h"
 
 class menuManager {
-	std::vector<std::unique_ptr<menuObj>> menus;
-	bool closedThisFrame = false;
+	std::vector<std::unique_ptr<menuObj>> menus; 
 
 public:
 
 	void update(inputManager& input) {
 		for (auto it = menus.rbegin(); it != menus.rend(); ++it) {
-			if ((*it)->isVisible()) {
-
+			if ((*it)->isVisible()) { 
 				(*it)->update(input);
 				if ((*it)->isModal()) break;
 			} 
@@ -62,16 +60,16 @@ public:
 	}
  
 
-	void handleMouseClick(int mouseX, int mouseY) {
-		// Topmost visible modal menu receives input first
-		for (auto it = menus.rbegin(); it != menus.rend(); ++it) {
-			if ((*it)->isVisible()) {
-				(*it)->handleMouseClick(mouseX, mouseY);
-				if ((*it)->isModal()) break; // block underlying menus/game
-			}
-		}
-	}
- 
+	//void handleMouseClick(int mouseX, int mouseY) {
+	//	// Topmost visible modal menu receives input first
+	//	for (auto it = menus.rbegin(); it != menus.rend(); ++it) {
+	//		if ((*it)->isVisible()) {
+	//			//(*it)->handleMouseClick(mouseX, mouseY);
+	//			if ((*it)->isModal()) break; // block underlying menus/game
+	//		}
+	//	}
+	//}
+ //
 
 	// Optional helper: check if a modal is active
 	bool hasActiveModal() const {

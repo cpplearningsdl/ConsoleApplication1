@@ -199,7 +199,10 @@
     <ClInclude Include="abilityFactory.h" />
     <ClInclude Include="abilityFileLoader.h" />
     <ClInclude Include="aNotes.h" />
+    <ClInclude Include="buttonData.h" />
     <ClInclude Include="button.h" />
+    <ClInclude Include="buttonEnums.h" />
+    <ClInclude Include="defaultButtonSettings.h" />
     <ClInclude Include="entityRenderInfo.h" />
     <ClInclude Include="gameStateEnum.h" />
     <ClInclude Include="menuManager.h" />

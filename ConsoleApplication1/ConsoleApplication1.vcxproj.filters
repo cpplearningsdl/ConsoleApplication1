@@ -251,5 +251,14 @@
     <ClInclude Include="animationMovementFactory.h">
       <Filter>Header Files\entity\movement</Filter>
     </ClInclude>
+    <ClInclude Include="buttonData.h">
+      <Filter>Header Files\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="buttonEnums.h">
+      <Filter>Header Files\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="defaultButtonSettings.h">
+      <Filter>Header Files\menu</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

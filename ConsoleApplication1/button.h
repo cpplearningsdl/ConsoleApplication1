@@ -1,6 +1,5 @@
 #pragma once
-#include <string>
-#include <functional>
+#include <string> 
 #include <SDL3/SDL.h>
 #include "inputManager.h"
 #include "logManager.h"
@@ -8,6 +7,7 @@
 #include "entityRenderInfo.h"
 #include "position.h"
 #include "dimensions.h"
+#include "buttonData.h"
 
   
 class buttonObj {
@@ -18,21 +18,26 @@ private:
 	std::string name;
 	animationManager animationHandler;
 	entityRenderInfo renderInfo;
+	buttonsActionData butData;
+
 public:
-	buttonObj(position pos, dimensions sz, std::function<void()> cb, std::string newName, std::string animationName, bool visible ) : pos(pos), size(sz), onClick(std::move(cb)), name(newName), render(visible) {
+	buttonObj(position pos, dimensions sz, std::string newName, std::string animationName, bool visible ) : pos(pos), size(sz),  name(newName), render(visible) {
 		animationHandler.setAnimationName(animationName);
 		animationHandler.setEntityName(newName); 
 		animationHandler.loadAnimation(animationName); 
 		updateRenderInfo();
 	}
-	std::function<void()> onClick;
+
+	void configure(const buttonsActionData& newData) { butData = newData; }
 	void loadAnimation(std::string s) { animationHandler.loadAnimation(s); }
 	void setRender(bool b) { render = b; } 
 	const position& getPos() const { return pos; }
 	const dimensions& getSize() const { return size; }
 	const entityRenderInfo& getEntityRenderInfo() const { return renderInfo; }
+	void setMenuData(const buttonsActionData& data) { butData = data; }
+	bool wasClicked() { return butData.clicked; }
 
-	void update(inputManager& input) {
+	void update(inputManager& input) {	
 		handleInput(input);
 		animationHandler.step(); 
 		updateRenderInfo();
@@ -41,8 +46,7 @@ public:
 		updateEntityRenderInfo(renderInfo, animationHandler.getCurrentTexture(), pos, animationHandler.getHeight(), animationHandler.getWidth(), render);
 	}
 
-	void handleInput(inputManager& input) {
-		logManager::logThis("Menu Input:");
+	void handleInput(inputManager& input) { 
 		if (input.wasMouseReleased() && contains(input.getMouseX(),input.getMouseY())) {
 			click();
 			logManager::logThis("Clicked button.");
@@ -54,7 +58,6 @@ public:
 	}
 	 
 	void click() {
-		if (onClick) onClick();
-		logManager::logThis("Clicked button.");
-	}
+		butData.clicked = true;
+	};
 };
