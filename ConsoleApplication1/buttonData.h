@@ -27,20 +27,20 @@ struct buttonsMenuData {
 };
 
 
-inline void buttonSpillGuts(buttonsActionData* bd) {
+inline void buttonSpillGuts(buttonsActionData bd) {
 	logManager::logThis("Button Spills Guts:");
-	logManager::logThis("id: ", bd->id);
-	logManager::logThis("clicked: ", bd->clicked);
-	logManager::logThis("Action: ", butDataToString(bd->action));
-	logManager::logThis("Index1: ", bd->actionIndex1);
-	logManager::logThis("Index2: ", bd->actionIndex2);
+	logManager::logThis("id: ", bd.id);
+	logManager::logThis("clicked: ", bd.clicked);
+	logManager::logThis("Action: ", butDataToString(bd.action));
+	logManager::logThis("Index1: ", bd.actionIndex1);
+	logManager::logThis("Index2: ", bd.actionIndex2);
 }
 
-inline void buttonSpillGuts(buttonsMenuData* bd) {
+inline void buttonSpillGuts(buttonsMenuData bd) {
 	logManager::logThis("Button Spills Guts:");
-	logManager::logThis("id: ", bd->id);
-	logManager::logThis("pos: ", bd->pos.getX() + " " + bd->pos.getY());
-	logManager::logThis("size: ", bd->size.getH() + " " + bd->size.getW());
-	logManager::logThis("render: ", bd->render);
-	logManager::logThis("name: ", bd->name);
+	logManager::logThis("id: ", bd.id);
+	logManager::logThis("pos: ", bd.pos.getX() + " " + bd.pos.getY());
+	logManager::logThis("size: ", bd.size.getH() + " " + bd.size.getW());
+	logManager::logThis("render: ", bd.render);
+	logManager::logThis("name: ", bd.name);
 }

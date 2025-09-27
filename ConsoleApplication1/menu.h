@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "button.h"
+#include "buttonEnums.h"
 #include "defaultButtonSettings.h"
 #include "logManager.h"
 #include "animationManager.h"

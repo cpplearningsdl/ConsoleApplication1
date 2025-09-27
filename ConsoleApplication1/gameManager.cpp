@@ -50,6 +50,9 @@ void gameManager::processMenu(inputManager& input) {
 			setState(gameStateEnum::PLAYING);
 			mainMenu.closeTopMenu();
 		}
+		 else if (mainMenu.getMenus().empty()) {
+			setState(gameStateEnum::PLAYING);
+		}
 	}
  }
  

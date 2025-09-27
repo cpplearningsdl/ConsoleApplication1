@@ -57,11 +57,19 @@ void pauseMenu::loadJson( ) {
 	from_json(j, *this);
 }
 
-void pauseMenu::update(inputManager& input) {
+void pauseMenu::update(inputManager& input) { 
+	bool clicked = false;
 	for (auto& btn : buttons) {
 		btn.update(input);
 		if (btn.wasClicked()) {
-			//handleClick
+			clickedButtons.push_back(btn.getButData()); 
+			clicked = true;
+			break;
+		}
+	} 
+	if (clicked) {
+		if (clickedButtons.back().action == butEnum::CLOSEMENU) {
+			requestClose();
 		}
 	}
 	animationHandler.step();

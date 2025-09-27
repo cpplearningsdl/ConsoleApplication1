@@ -9,6 +9,7 @@
 
 class menuManager {
 	std::vector<std::unique_ptr<menuObj>> menus; 
+	bool closed = false;
 
 public:
 
@@ -59,17 +60,7 @@ public:
 		logManager::logThis("closedwindow");
 	}
  
-
-	//void handleMouseClick(int mouseX, int mouseY) {
-	//	// Topmost visible modal menu receives input first
-	//	for (auto it = menus.rbegin(); it != menus.rend(); ++it) {
-	//		if ((*it)->isVisible()) {
-	//			//(*it)->handleMouseClick(mouseX, mouseY);
-	//			if ((*it)->isModal()) break; // block underlying menus/game
-	//		}
-	//	}
-	//}
- //
+ 
 
 	// Optional helper: check if a modal is active
 	bool hasActiveModal() const {

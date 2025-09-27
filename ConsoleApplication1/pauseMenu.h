@@ -3,6 +3,7 @@
 #include "menuManager.h"
 #include "menu.h"
 #include "button.h"
+#include "buttonEnums.h"
 #include "json.hpp"
 
 class pauseMenu : public menuObj {

@@ -36,6 +36,8 @@ public:
 	const entityRenderInfo& getEntityRenderInfo() const { return renderInfo; }
 	void setMenuData(const buttonsActionData& data) { butData = data; }
 	bool wasClicked() { return butData.clicked; }
+	void setClicked(bool b) { butData.clicked = b; }
+	buttonsActionData getButData() { return butData; }
 
 	void update(inputManager& input) {	
 		handleInput(input);
