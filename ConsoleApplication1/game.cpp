@@ -8,6 +8,7 @@ game::game() {
 
 	entity& test = getEntityById(0);
 	test.getAnimationManager().loadAnimation("idle");
+	test.getAnimationManager().setMovement(movementTypeEnum::north, 0, 0, 50, 10);
 	test.updateRenderInfo();
 	test.setRender(true); 
 	test.getAnimationManager().setHoldFor(10);
@@ -27,7 +28,9 @@ void game::update() {
 }
  
 void game::addEntityToGame(std::string name) {
-	entities.push_back(entityFactory::getInstance().create("black_piece"));
+	//tmp
+	name = "black_piece";
+	entities.push_back(entityFactory::getInstance().create(name));
 	entities.back()->setEntityId(nextId++);
 
 	entity* rawPtr = entities.back().get(); 

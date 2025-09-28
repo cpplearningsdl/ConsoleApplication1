@@ -58,6 +58,12 @@
     <Filter Include="Source Files\menu">
       <UniqueIdentifier>{84950712-5a5b-439e-9183-cc71e49ec1e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\entity\inventory">
+      <UniqueIdentifier>{d492fe86-e9dd-4c41-b835-51182d433e1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\entity\inventory">
+      <UniqueIdentifier>{61187205-f58e-4d35-86a4-8b9b05e1084c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp">
@@ -131,6 +137,12 @@
     </ClCompile>
     <ClCompile Include="menu.cpp">
       <Filter>Source Files\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory.cpp">
+      <Filter>Source Files\entity\inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="item.cpp">
+      <Filter>Source Files\entity\inventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +271,12 @@
     </ClInclude>
     <ClInclude Include="defaultButtonSettings.h">
       <Filter>Header Files\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="inventory.h">
+      <Filter>Header Files\entity\inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="item.h">
+      <Filter>Header Files\entity\inventory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

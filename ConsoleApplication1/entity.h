@@ -18,11 +18,9 @@ public:
 	~entity() = default;
 
 	// Deep copy constructor
-	entity(const entity& other);
-
+	entity(const entity& other); 
 	// Deep copy assignment
-	entity& operator=(const entity& other);
-
+	entity& operator=(const entity& other); 
 	// Move semantics
 	entity(entity&&) noexcept = default;
 	entity& operator=(entity&&) noexcept = default;

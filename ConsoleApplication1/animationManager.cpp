@@ -218,7 +218,7 @@ void from_json(const nlohmann::ordered_json& j,animationManager& m) {
 		m.setHeldCount(j.at("heldCount").get<int>());
 	}
 	if (j.contains("holdFor")) {
-		m.setHoldFor(j.at("holdCount").get<int>());
+		m.setHoldFor(j.at("holdFor").get<int>());
 	}
 	if (j.contains("finished")) {
 		m.setFinished(j.at("finished").get<bool>());

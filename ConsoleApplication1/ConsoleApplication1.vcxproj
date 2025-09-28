@@ -183,6 +183,8 @@
     <ClCompile Include="gameManager.cpp" />
     <ClCompile Include="idleMovement.cpp" />
     <ClCompile Include="inputManager.cpp" />
+    <ClCompile Include="inventory.cpp" />
+    <ClCompile Include="item.cpp" />
     <ClCompile Include="logManager.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="northMovement.cpp" />
@@ -205,6 +207,8 @@
     <ClInclude Include="defaultButtonSettings.h" />
     <ClInclude Include="entityRenderInfo.h" />
     <ClInclude Include="gameStateEnum.h" />
+    <ClInclude Include="inventory.h" />
+    <ClInclude Include="item.h" />
     <ClInclude Include="menuManager.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="idleMovement.h" />
