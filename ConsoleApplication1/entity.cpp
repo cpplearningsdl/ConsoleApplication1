@@ -35,17 +35,29 @@ entity& entity::operator=(const entity& other) {
 		renderInfo = other.renderInfo;
 	}
 	return *this;
-}
-//void entity::update() {
-//	animationHandler.step();
-//	renderInfo.textureKey = animationHandler.getTextureKey(); 
-//}
-// 
-//NEED TO ADD MOVEMENT OFFSET TO  POSITION!!!!!
+} 
 void entity::update() {
-	animationHandler.step(); 
-	updateEntityRenderInfo(renderInfo, animationHandler.getCurrentTexture(), getCombinedPos(), animationHandler.getHeight(), animationHandler.getWidth(), getRender());
-	//updateEntityRenderInfo(renderInfo,animationHandler.frameTextures)
+	if (moving()) {
+		//if current movement is finished check path and continue, or finish moving
+		if (animationHandler.getMovement()->isFinished()) {
+			if (path.turns.size() > 0) {
+				animationHandler.setMovement(getNextDirection(path), 0, 0, 128, 10);
+			}
+			else {
+				setMoving(false);
+				animationHandler.loadAnimation("idle");
+				animationHandler.setMovement(movementTypeEnum::idle, 0, 0, 0, animationHandler.getFrameCount()); 
+			}
+		}
+		//if current movement isnt finsihed, continue
+		else {
+			animationHandler.step(); 
+		}
+	}
+	else{
+		animationHandler.step();  
+	}
+	updateRenderInfo();
 } 
 void entity::updateRenderInfo() {
 	updateEntityRenderInfo(renderInfo, animationHandler.getCurrentTexture(), getCombinedPos(), animationHandler.getHeight(), animationHandler.getWidth(), getRender());

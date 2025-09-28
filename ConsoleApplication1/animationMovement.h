@@ -1,10 +1,12 @@
 #pragma once
+#include "path.h"
 #include "json.hpp"
 #include <memory>
 class animationMovement {
 private:
 	int x;
 	int y;
+
 
 public:
 	virtual ~animationMovement() = default;
@@ -19,4 +21,5 @@ public:
 	int getY() const { return y;	}
 	void setX(int nx) { x = nx; }
 	void setY(int ny) { y = ny; }
+
 };

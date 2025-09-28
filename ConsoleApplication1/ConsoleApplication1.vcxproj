@@ -229,6 +229,7 @@
     <ClInclude Include="gameManager.h" />
     <ClInclude Include="inputManager.h" />
     <ClInclude Include="logManager.h" />
+    <ClInclude Include="path.h" />
     <ClInclude Include="pauseMenu.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="renderer.h" />

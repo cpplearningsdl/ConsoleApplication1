@@ -37,6 +37,15 @@ public:
 	void setRender(bool s) { render = s; renderInfo.render = s; }
 
 	const bool&  getRender() const { return render; }
+	
+	movementPath& getPath() { return path; }
+
+	const bool moving() const { return isMoving; }
+	void setMoving(bool b) { isMoving = b; }
+
+	const bool blockingMenus() const { return blockMenus; }
+	void setBlockMenus(bool b) { blockMenus = b; }
+
 	const statsContainer& getStats() const { return stats; }
 	statsContainer& getStats() { return stats; }
 
@@ -62,6 +71,10 @@ private:
 	int factoryId;
 	position pos;
 	bool render;
+	bool blockMenus;
+	bool isMoving;
+
+	movementPath path;
 
 	std::string name;
 	statsContainer stats;
