@@ -28,7 +28,7 @@ void gameManager::processGame() {
 
 	if (currentGame) {
 		if (getState() == gameStateEnum::PLAYING) {
-			currentGame->update();
+			currentGame->update(input);
 		}
 		render();
 	}

@@ -70,6 +70,9 @@
     <Filter Include="Source Files\entity\movement\movements">
       <UniqueIdentifier>{2f456567-9386-484d-b8c8-b688f99ca5ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\decisions">
+      <UniqueIdentifier>{dd32b624-4e2d-4917-8219-1f4b56b0adb7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp">
@@ -286,6 +289,9 @@
     </ClInclude>
     <ClInclude Include="northMovement.h">
       <Filter>Header Files\entity\movement\movements</Filter>
+    </ClInclude>
+    <ClInclude Include="decisionContext.h">
+      <Filter>Header Files\decisions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

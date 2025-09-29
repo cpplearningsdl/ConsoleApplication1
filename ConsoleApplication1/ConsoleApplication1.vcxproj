@@ -207,6 +207,7 @@
     <ClInclude Include="defaultButtonSettings.h" />
     <ClInclude Include="entityRenderInfo.h" />
     <ClInclude Include="gameStateEnum.h" />
+    <ClInclude Include="decisionContext.h" />
     <ClInclude Include="inventory.h" />
     <ClInclude Include="item.h" />
     <ClInclude Include="menuManager.h" />

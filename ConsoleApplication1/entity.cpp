@@ -45,6 +45,7 @@ void entity::update() {
 			}
 			else {
 				setMoving(false);
+				setBlockMenus(false);
 				animationHandler.loadAnimation("idle");
 				animationHandler.setMovement(movementTypeEnum::idle, 0, 0, 0, animationHandler.getFrameCount()); 
 			}

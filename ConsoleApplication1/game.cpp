@@ -20,9 +20,9 @@ game::~game() {
 	// cleanup
 }
 
-void game::update() { 
+void game::update(inputManager& input) {
 	for (auto& entity : entities) {
-		entity->update();
+		entity->update(); 
 	}
  
 }
