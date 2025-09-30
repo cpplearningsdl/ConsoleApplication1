@@ -213,6 +213,7 @@
     <ClInclude Include="menuManager.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="idleMovement.h" />
+    <ClInclude Include="movementHandler.h" />
     <ClInclude Include="movementTypeEnum.h" />
     <ClInclude Include="heal.h" />
     <ClInclude Include="abilityIncludes.h" />

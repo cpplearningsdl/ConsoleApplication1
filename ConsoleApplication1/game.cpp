@@ -1,5 +1,6 @@
 #include "game.h"
 #include <iostream>
+#include "movementHandler.h"
 
 game::game() {
 	// init map, entities, etc. 
@@ -21,10 +22,12 @@ game::~game() {
 }
 
 void game::update(inputManager& input) {
-	for (auto& entity : entities) {
-		entity->update(); 
-	}
- 
+	for (auto& e : entities) {
+		//entity->update(); 
+		e->getAnimationManager().step();
+		handleMovement(*e);
+		e->updateRenderInfo();
+	} 
 }
  
 void game::addEntityToGame(std::string name) {

@@ -293,5 +293,8 @@
     <ClInclude Include="decisionContext.h">
       <Filter>Header Files\decisions</Filter>
     </ClInclude>
+    <ClInclude Include="movementHandler.h">
+      <Filter>Header Files\entity\movement</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
