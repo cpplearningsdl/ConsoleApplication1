@@ -42,6 +42,8 @@ animationManager& animationManager::operator=(const animationManager& other) {
 }
 
 bool animationManager::loadAnimation(const std::string& baseName) {
+	animationName = baseName;
+	currentIndex = 0;
 	const textureDataStruct* data = textureManager::getInstance().getAnimationData(getTextureKey());
 	if (!data) {
 		logManager::logThis("Error: could not find animation data for " + getTextureKey());
@@ -49,14 +51,13 @@ bool animationManager::loadAnimation(const std::string& baseName) {
 	}
 
 	frameCount = data->totalFrames;
-	loop = data->loop; 
-	currentIndex = 0;
+	loop = data->loop;  
 	heldCount = 0;
 	holdFor = 0;
 	finished = false;
 	chainOverride = "";
 	chainAnimationName = data->chainAnimation;
-	animationName = baseName; 
+	 
 
 	frameTextures.clear();
 	frameTextures.reserve(data->totalFrames);
@@ -75,12 +76,12 @@ bool animationManager::loadAnimation(const std::string& baseName) {
 	}
 
 	logManager::logThis("EntityNamed " + entityName + " Loaded Animation: ", animationName);
-	return true;
-	//this system is stupid. need lookups for movement for each animation or something. also it should always start at 0,0 and just be added to entities pos when drawn
+
+	//this system is stupid. need lookups for movement for each animation or something. 
 	if (baseName == "idle") {
-		setMovement(animationMovementFactory::createMovement(movementTypeEnum::idle, 0, 0, 0, frameCount));
-	}
-	//probably should attach the correct animationMovement here(even idle/no movement) or the place that loads the animation should et it(even more probably)?
+		//setMovement(animationMovementFactory::createMovement(movementTypeEnum::idle, 0, 0, 0, frameCount));
+	} 
+	return true;
 }
 
 void animationManager::setMovement(movementTypeEnum type, float startX, float startY, float distance, int frames) {

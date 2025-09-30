@@ -1,6 +1,6 @@
 {
   "animationName": "walk",
-  "chainAnimation": "none",
+  "chainAnimation": "idle",
   "frameNumber": 0,
   "height": 128,
   "key": "black_piece_walk_0",

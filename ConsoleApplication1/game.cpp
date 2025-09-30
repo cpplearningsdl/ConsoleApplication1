@@ -8,7 +8,7 @@ game::game() {
 	addEntityToGame("black_piece");
 
 	entity& test = getEntityById(0);
-	test.getAnimationManager().loadAnimation("idle");//FIGURE OUT HOW TO USE WALK ANIMATION
+	test.getAnimationManager().loadAnimation("walk");//FIGURE OUT HOW TO USE WALK ANIMATION
 	test.getAnimationManager().setMovement(movementTypeEnum::north, 0, 0, 250, 40);
 	test.updateRenderInfo();
 	test.setRender(true); 
