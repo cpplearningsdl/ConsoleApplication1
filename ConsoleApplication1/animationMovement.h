@@ -4,8 +4,8 @@
 #include <memory>
 class animationMovement {
 private:
-	int x;
-	int y;
+	float x;
+	float y;
 
 
 public:
@@ -17,9 +17,9 @@ public:
 	virtual void step() = 0; 
 	virtual bool isFinished() const = 0;
 
-	int getX() const { return x;	}
-	int getY() const { return y;	}
-	void setX(int nx) { x = nx; }
-	void setY(int ny) { y = ny; }
+	float getX() const { return x;	}
+	float getY() const { return y;	}
+	void setX(float nx) { x = nx; }
+	void setY(float ny) { y = ny; }
 
 };

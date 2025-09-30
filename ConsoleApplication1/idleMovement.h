@@ -7,7 +7,7 @@ class idleMovement : public animationMovement {
 private: 
 
 public:
-	idleMovement(int startX, int startY);
+	idleMovement(float startX, float startY);
 	idleMovement(const idleMovement& other);
 
 	void loadFromJson(const nlohmann::ordered_json& j) override;

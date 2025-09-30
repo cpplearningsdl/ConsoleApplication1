@@ -10,7 +10,7 @@ private:
 	int currentFrame;
 
 public:
-	northMovement(int startX, int startY, float distance, int frames); 
+	northMovement(float startX, float startY, float distance, int frames);
 	northMovement(const northMovement& other);
 	void loadFromJson(const nlohmann::ordered_json& j) override;
 	void to_json(nlohmann::ordered_json& j) const override;

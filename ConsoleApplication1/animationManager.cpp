@@ -105,11 +105,12 @@ void animationManager::step() {
 
 	if (currentIndex >= getFrameCount()) {
 		if (getLoop()) {
+			logManager::logThis("LOOP");
 			currentIndex = 0;
 		}
 		else {
 			finished = true;
-
+			logManager::logThis("FINISHED"); 
 			// Use override if present, otherwise use frame.chainAnimation
 			std::string nextAnim = chainOverride.empty()
 				? getChainAnimationName()

@@ -24,7 +24,7 @@
     },
     "position": {
         "x": 50,
-        "y": 50
+        "y": 330
     },
     "abilities": [
         {
@@ -84,7 +84,7 @@
         "heldCount": 0,
         "holdFor": 10,
         "finished": false,
-        "loop": true,
+        "loop": false,
         "chainOverride": "",
         "animationMovement": {
             "type": "idle",

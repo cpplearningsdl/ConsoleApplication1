@@ -39,7 +39,7 @@ inline void buttonSpillGuts(buttonsActionData bd) {
 inline void buttonSpillGuts(buttonsMenuData bd) {
 	logManager::logThis("Button Spills Guts:");
 	logManager::logThis("id: ", bd.id);
-	logManager::logThis("pos: ", bd.pos.getX() + " " + bd.pos.getY());
+	logManager::logThis("pos: " + std::to_string(bd.pos.getX()) + " " + std::to_string(bd.pos.getY()));
 	logManager::logThis("size: ", bd.size.getH() + " " + bd.size.getW());
 	logManager::logThis("render: ", bd.render);
 	logManager::logThis("name: ", bd.name);

@@ -11,6 +11,7 @@ inline void handleMovement(entity& e) {
 			movementPath& p = e.getPath();
 			if (p.turns.size() > 0) {
 				eam.setMovement(getNextDirection(p), 0, 0, 128, 10);
+				logManager::logThis("HM");
 			}
 			else {
 				e.setMoving(false);

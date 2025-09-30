@@ -1,6 +1,6 @@
 #include "idleMovement.h"
 
-idleMovement::idleMovement(int startX, int startY)
+idleMovement::idleMovement(float startX, float startY)
 { 
 	setX(startX);
 	setY(startY);
@@ -13,8 +13,8 @@ idleMovement::idleMovement(const idleMovement& other)
 }
 
 void idleMovement::loadFromJson(const nlohmann::ordered_json& j) {
-	setX( j.value("x", 0));
-	setY(j.value("y", 0)); 
+	setX( j.value("x", 0.0f));
+	setY(j.value("y", 0.0f)); 
 }
 void idleMovement::to_json(nlohmann::ordered_json& j) const {
 	j = {

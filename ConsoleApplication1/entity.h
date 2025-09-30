@@ -52,9 +52,25 @@ public:
 	const position& getPos() const { return pos; }
 	position& getPos() { return pos; }
 
+	//const position getCombinedPos() {
+	//	logManager::logThis("pos: " + std::to_string(pos.getX()) + " " + std::to_string(pos.getY()));
+	//	position movementPos = animationHandler.getPos();
+	//	return { movementPos.getX() + pos.getX(), movementPos.getY() + pos.getY() };
+	//}
 	const position getCombinedPos() {
 		position movementPos = animationHandler.getPos();
-		return { movementPos.getX() + pos.getX(), movementPos.getY() + pos.getY() };
+		position combinedPos{ movementPos.getX() + pos.getX(),
+							  movementPos.getY() + pos.getY() };
+
+		logManager::logThis(
+			"pos: " + std::to_string(pos.getX()) + " " + std::to_string(pos.getY())
+		);
+
+		logManager::logThis(
+			"combinedPos: " + std::to_string(combinedPos.getX()) + " " + std::to_string(combinedPos.getY())
+		);
+
+		return combinedPos;
 	}
 
 	abilities& getAbilities();

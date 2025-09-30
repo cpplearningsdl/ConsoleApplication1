@@ -85,13 +85,13 @@ void renderer::clearNextFrame() {
 	SDL_RenderClear(sdlRenderer);
 }
 
-void renderer::drawToNextFrame(SDL_Texture* t, int x, int y, int h, int w) {   
+void renderer::drawToNextFrame(SDL_Texture* t, float x, float y, int h, int w) {
 	 
 	SDL_SetRenderTarget(sdlRenderer, nextFrame);
 
 	SDL_FRect dst;
-	dst.x = static_cast<float>(x);
-	dst.y = static_cast<float>(y);
+	dst.x = (x);
+	dst.y = (y);
 	dst.w = static_cast<float>(w);
 	dst.h = static_cast<float>(h);
 
