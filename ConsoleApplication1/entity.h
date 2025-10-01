@@ -62,13 +62,9 @@ public:
 		position combinedPos{ movementPos.getX() + pos.getX(),
 							  movementPos.getY() + pos.getY() };
 
-		logManager::logThis(
-			"pos: " + std::to_string(pos.getX()) + " " + std::to_string(pos.getY())
-		);
+		//logManager::logThis("pos: " + std::to_string(pos.getX()) + " " + std::to_string(pos.getY())		);
 
-		logManager::logThis(
-			"combinedPos: " + std::to_string(combinedPos.getX()) + " " + std::to_string(combinedPos.getY())
-		);
+		//logManager::logThis("combinedPos: " + std::to_string(combinedPos.getX()) + " " + std::to_string(combinedPos.getY()));
 
 		return combinedPos;
 	}

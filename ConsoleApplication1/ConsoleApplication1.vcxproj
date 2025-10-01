@@ -205,11 +205,13 @@
     <ClInclude Include="button.h" />
     <ClInclude Include="buttonEnums.h" />
     <ClInclude Include="defaultButtonSettings.h" />
+    <ClInclude Include="entityOverrides.h" />
     <ClInclude Include="entityRenderInfo.h" />
     <ClInclude Include="gameStateEnum.h" />
     <ClInclude Include="decisionContext.h" />
     <ClInclude Include="inventory.h" />
     <ClInclude Include="item.h" />
+    <ClInclude Include="level.h" />
     <ClInclude Include="menuManager.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="idleMovement.h" />

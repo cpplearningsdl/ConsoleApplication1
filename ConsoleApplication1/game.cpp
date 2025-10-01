@@ -5,14 +5,14 @@
 game::game() {
 	// init map, entities, etc. 
 	logManager::logThis("started first game");  
-	addEntityToGame("black_piece");
+	addEntityToGame("Bone Thug");
 
 	entity& test = getEntityById(0);
-	test.getAnimationManager().loadAnimation("walk");//FIGURE OUT HOW TO USE WALK ANIMATION
+	test.getAnimationManager().loadAnimation("idle"); 
 	test.getAnimationManager().setMovement(movementTypeEnum::north, 0, 0, 250, 40);
 	test.updateRenderInfo();
 	test.setRender(true); 
-	test.getAnimationManager().setHoldFor(5);
+	test.getAnimationManager().setHoldFor(45);
 	logManager::logThis("Spilling Guts:");
 	test.spill_guts();
 }
@@ -32,7 +32,7 @@ void game::update(inputManager& input) {
  
 void game::addEntityToGame(std::string name) {
 	//tmp
-	name = "black_piece";
+	//name = "black_piece";
 	entities.push_back(entityFactory::getInstance().create(name));
 	entities.back()->setEntityId(nextId++);
 

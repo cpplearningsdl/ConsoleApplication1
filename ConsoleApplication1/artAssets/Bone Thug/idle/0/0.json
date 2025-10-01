@@ -1,0 +1,12 @@
+{
+  "animationName": "idle",
+  "chainAnimation": "",
+  "frameNumber": 0,
+  "height": 128,
+  "key": "bone_thug_idle_0",
+  "loop": true,
+  "totalFrames": 1,
+  "width": 128,
+  "xOffset": 0,
+  "yOffset": 0
+}

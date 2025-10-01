@@ -79,7 +79,7 @@ bool animationManager::loadAnimation(const std::string& baseName) {
 
 	//this system is stupid. need lookups for movement for each animation or something. 
 	if (baseName == "idle") {
-		//setMovement(animationMovementFactory::createMovement(movementTypeEnum::idle, 0, 0, 0, frameCount));
+		setMovement(animationMovementFactory::createMovement(movementTypeEnum::idle, 0, 0, 0, frameCount));
 	} 
 	return true;
 }
@@ -105,8 +105,7 @@ void animationManager::step() {
 	}
 
 	if (currentIndex >= getFrameCount()) {
-		if (getLoop()) {
-			logManager::logThis("LOOP");
+		if (getLoop()) { 
 			currentIndex = 0;
 		}
 		else {

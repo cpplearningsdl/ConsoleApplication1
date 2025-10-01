@@ -73,6 +73,9 @@
     <Filter Include="Header Files\decisions">
       <UniqueIdentifier>{dd32b624-4e2d-4917-8219-1f4b56b0adb7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\level">
+      <UniqueIdentifier>{bd3a3566-51f9-464e-980e-7021f46edd80}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp">
@@ -295,6 +298,12 @@
     </ClInclude>
     <ClInclude Include="movementHandler.h">
       <Filter>Header Files\entity\movement</Filter>
+    </ClInclude>
+    <ClInclude Include="level.h">
+      <Filter>Header Files\level</Filter>
+    </ClInclude>
+    <ClInclude Include="entityOverrides.h">
+      <Filter>Header Files\level</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
