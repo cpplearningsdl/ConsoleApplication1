@@ -186,6 +186,7 @@
     <ClCompile Include="inventory.cpp" />
     <ClCompile Include="item.cpp" />
     <ClCompile Include="logManager.cpp" />
+    <ClCompile Include="mainMenu.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="northMovement.cpp" />
     <ClCompile Include="pauseMenu.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="inventory.h" />
     <ClInclude Include="item.h" />
     <ClInclude Include="level.h" />
+    <ClInclude Include="mainMenu.h" />
     <ClInclude Include="menuManager.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="idleMovement.h" />

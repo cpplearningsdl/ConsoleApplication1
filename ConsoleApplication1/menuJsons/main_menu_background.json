@@ -1,7 +1,7 @@
 {
   "pos": {
-    "x": 50,
-    "y": 50
+    "x": 0,
+    "y": 0
   },
   "render": true,
   "modal":  true,
@@ -12,8 +12,8 @@
         "animationName": "idle",
         "frameNumber": 0,
         "totalFrames": 2,
-        "width": 248,
-        "height": 376,
+        "width": 1274,
+        "height": 785,
         "hitBoxWidth": 0,
         "hitBoxHeight": 0,
         "xOffset": 0,
@@ -33,8 +33,8 @@
   "renderInfo": {
     "textureKey": "main_menu_background_idle_0",
     "pos": {
-      "x": 50,
-      "y": 50
+      "x": 0,
+      "y": 0
     },
     "render": true
   }

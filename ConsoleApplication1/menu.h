@@ -3,6 +3,7 @@
 #include "button.h"
 #include "buttonEnums.h"
 #include "defaultButtonSettings.h"
+#include "windowSettings.h"
 #include "logManager.h"
 #include "animationManager.h"
 #include "entityRenderInfo.h"
@@ -45,16 +46,29 @@ public:
 	  
 	void setButtonMenuData(std::vector<buttonObj>& buttons, const buttonsActionData data); 
 
-	// Handle mouse clicks
-	//void handleMouseClick(int mouseX, int mouseY) {
-	//	if (!render) return;
-	//	for (auto& btn : buttons) {
-	//		if (btn.contains(mouseX, mouseY)) {
-	//			btn.click();
-	//			break;
-	//		}
-	//	}
-	//}  
+ 
 
-	friend void from_json(const nlohmann::ordered_json& j, menuObj& m);
+	friend void from_json(const nlohmann::ordered_json& j, menuObj& m); 
 };
+inline void from_json(const nlohmann::ordered_json& j, menuObj& m) {
+	if (j.contains("modal")) {
+		j.at("modal").get_to(m.modal);
+	}
+	if (j.contains("position")) {
+		j.at("position").get_to(m.pos);
+	}
+	if (j.contains("renderInfo")) {
+		j.at("renderInfo").get_to(m.renderInfo);
+	}
+	if (j.contains("animationHandler")) {
+		j.at("animationHandler").get_to(m.animationHandler);
+	}
+	if (j.contains("render")) {
+		if (j.at("render").get<bool>()) {
+			m.show();
+		}
+		else {
+			m.hide();
+		}
+	}
+}

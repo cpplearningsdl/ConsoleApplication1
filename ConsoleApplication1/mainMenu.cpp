@@ -1,6 +1,5 @@
 #pragma once
 #include "mainMenu.h"
-#include "windowSettings.h"
 #include "json.hpp"
 #include <fstream>
 #include <stdexcept>
@@ -14,11 +13,10 @@ void mainMenu::init() {
 	loadButtons();
 	animationHandler.setEntityName("main_menu_background");
 	animationHandler.loadAnimation("idle");
-	pos.setPosition((windowWidth - 1274) / 2, (windowHeight - 785) / 2);
+	pos.setPosition((gWindowWidth-1274)/2, (gWindowHeight-785)/2);
 	updateRenderInfo();
 }
-
-//	buttonObj(position pos, position sz, std::function<void()> cb, std::string newName, std::string animationName, bool visible )
+ 
 void mainMenu::loadButtons() {
 	//buttons.emplace_back(
 	//	position{ 582, 150 }, dimensions{ 188, 88 },
@@ -26,8 +24,7 @@ void mainMenu::loadButtons() {
 	//	"idle",
 	//	true
 	//);
-	//setButtonMenuData(buttons, morphToCloseButton(1));
- 
+	//setButtonMenuData(buttons, morphToCloseButton(1)); 
 }
 void mainMenu::updateRenderInfo() {
 	updateEntityRenderInfo(renderInfo, animationHandler.getCurrentTexture(), pos, animationHandler.getHeight(), animationHandler.getWidth(), getRender());
@@ -36,8 +33,8 @@ void mainMenu::loadJson() {
 	std::string fileName = "C:\\Users\\Keary\\source\\repos\\ConsoleApplication1-working\\ConsoleApplication1\\menuJsons\\main_menu_background.json";
 	std::ifstream file(fileName);
 	if (!file.is_open()) {
-		logManager::logThis("Couldn't open main menu .json");
-		throw std::runtime_error("Failed to open mainMenu JSON: " + fileName);
+		logManager::logThis("Couldn't open pause menu .json");
+		throw std::runtime_error("Failed to open mainMenu.JSON: " + fileName);
 	}
 	nlohmann::ordered_json j;
 	file >> j;
@@ -63,6 +60,4 @@ void mainMenu::update(inputManager& input) {
 	updateEntityRenderInfo(renderInfo, animationHandler.getCurrentTexture(), pos, animationHandler.getHeight(), animationHandler.getWidth(), render);
 
 }
-
-
 

@@ -19,6 +19,7 @@ void pauseMenu::init() {
 
 //	buttonObj(position pos, position sz, std::function<void()> cb, std::string newName, std::string animationName, bool visible )
 void pauseMenu::loadButtons() {
+	//change this from emplace to push so setbuttonmenudata doesn't need to be restricted to the last entry in buttons vector
 	buttons.emplace_back(
 		position{ 582, 150 }, dimensions{ 188, 88 }, 
 		"resume_button",
