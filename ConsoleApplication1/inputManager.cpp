@@ -1,5 +1,7 @@
 	#include "inputManager.h"
 #include "windowManager.h"
+#include "windowSettings.h"
+#include "renderer.h"
 #include <SDL3/SDL.h> 
 #include "logManager.h"
 #include <iostream> 
@@ -28,6 +30,7 @@ bool inputManager::pollEvents() {
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
 		eventTypesThisFrame.push_back(event.type);
+		adjustMouseEventToLogical(event);
 
 		switch (event.type) {
 		case SDL_EVENT_QUIT:
@@ -68,6 +71,7 @@ bool inputManager::pollEvents() {
 			if (event.button.button < mouseButtons.size())
 				mouseButtons[event.button.button] = true;
 			lm::logThis("Mouse button down: " + std::to_string(event.button.button));
+			lm::logThis("Mouse at: (" + std::to_string(event.motion.x) + ", " + std::to_string(event.motion.y) + ")");
 			break;
 
 		case SDL_EVENT_MOUSE_BUTTON_UP:
@@ -75,6 +79,10 @@ bool inputManager::pollEvents() {
 				mouseReleased = true;
 				mouseButtons[event.button.button] = false;
 				lm::logThis("Mouse button up: " + std::to_string(event.button.button));
+				lm::logThis("Mouse at: (" + std::to_string(event.motion.x) + ", " + std::to_string(event.motion.y) + ")");
+			break;
+		case SDL_EVENT_WINDOW_RESIZED:
+			updateWindowSize(windowManager::initWindowManager().getWindow());
 			break;
 
 		default:
@@ -84,3 +92,16 @@ bool inputManager::pollEvents() {
 	return true;
 }
  
+void inputManager::adjustMouseEventToLogical(SDL_Event& e) {
+	switch (e.type) {
+	case SDL_EVENT_MOUSE_MOTION:
+	case SDL_EVENT_MOUSE_BUTTON_DOWN:
+	case SDL_EVENT_MOUSE_BUTTON_UP: { 
+		SDL_ConvertEventToRenderCoordinates(renderer::getInstance().getSDLRenderer(), &e);
+		break;
+	}
+	default:
+		break;
+	}
+}
+

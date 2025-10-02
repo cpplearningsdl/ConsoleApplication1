@@ -156,6 +156,9 @@
     <ClCompile Include="northMovement.cpp">
       <Filter>Source Files\entity\movement\movements</Filter>
     </ClCompile>
+    <ClCompile Include="windowSettings.cpp">
+      <Filter>Source Files\rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logManager.h">
@@ -304,6 +307,9 @@
     </ClInclude>
     <ClInclude Include="entityOverrides.h">
       <Filter>Header Files\level</Filter>
+    </ClInclude>
+    <ClInclude Include="windowSettings.h">
+      <Filter>Header Files\rendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

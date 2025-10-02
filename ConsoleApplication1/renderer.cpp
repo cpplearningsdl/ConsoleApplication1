@@ -2,6 +2,7 @@
 #include "windowManager.h"
 #include "textureManager.h"
 #include "textureDataStruct.h"
+#include "windowSettings.h"
 #include "logManager.h"
 
 #define lm logManager

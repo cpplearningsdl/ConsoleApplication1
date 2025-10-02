@@ -194,6 +194,7 @@
     <ClCompile Include="textureDataStruct.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="windowManager.cpp" />
+    <ClCompile Include="windowSettings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="abilities.h" />
@@ -245,6 +246,7 @@
     <ClInclude Include="textureManager.h" />
     <ClInclude Include="uses.h" />
     <ClInclude Include="windowManager.h" />
+    <ClInclude Include="windowSettings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

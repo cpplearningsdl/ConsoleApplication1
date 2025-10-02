@@ -1,4 +1,7 @@
-#pragma once
+#pragma once  
+#include <SDL3/SDL.h>
 
-int windowHeight = 600;
-int windowWidth = 800;
+extern int gWindowWidth;
+extern int gWindowHeight;
+
+void updateWindowSize(SDL_Window* window);

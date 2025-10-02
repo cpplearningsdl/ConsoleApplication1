@@ -4,6 +4,7 @@
 #include <SDL3_image/SDL_image.h>
 #include "gameManager.h"
 #include "windowManager.h"
+#include "windowSettings.h"
 #include "inputManager.h"
 #include "textureManager.h"
 #include "renderer.h"
@@ -18,8 +19,8 @@ using json = nlohmann::ordered_json;
 int main(int argc, char* argv[]) {
 	std::string input; 
 	std::string windowTitle;
-	int windowHeight = 600;
-	int windowWidth = 800;
+	//int windowHeight = 600;
+	//int windowWidth = 800;
 	 
 	if (int success = SDL_Init(SDL_INIT_VIDEO) < 1) {
 		logManager::logThis("SDL Failed to initialize."); 
@@ -29,7 +30,7 @@ int main(int argc, char* argv[]) {
 	 
 	windowManager& windowManager = windowManager::initWindowManager();
 
-	if (!windowManager.openWindow(windowTitle, windowWidth, windowHeight)) { 
+	if (!windowManager.openWindow(windowTitle, gWindowWidth, gWindowHeight)) { 
 		logManager::logThis("Failed to open window");
 		return 1;
 	}
@@ -48,6 +49,7 @@ int main(int argc, char* argv[]) {
 	const int frameDelay = 1000 / FPS;
 
 	bool running = true;
+	bool startedGame = false;
 	int frameNumber = 1;
 	bool displayFrameNumber = false; 
 
@@ -58,20 +60,14 @@ int main(int argc, char* argv[]) {
 		Uint64 frameStart = SDL_GetTicks();
 		if(displayFrameNumber) logManager::logThis("Frame start ", frameNumber);
 
-		if (frameNumber == 1) {
-			
-		}
+		if (frameNumber == 1) { }
 		// 1. Input
 		running = inputManager::getInstance().pollEvents();
 
+
+
 		gameManager::getInstance().processGame();
-		// 2. Update (placeholder)
-		// game.update();
-
-		// 3. Render (placeholder)
-		// game.render();
-
-		// 4. Timing
+ 
 		Uint64 frameTime = SDL_GetTicks() - frameStart;
 		if (frameTime < frameDelay) {
 			SDL_Delay(static_cast<Uint32>(frameDelay - frameTime));

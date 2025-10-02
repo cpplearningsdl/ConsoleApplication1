@@ -1,4 +1,5 @@
 #include "windowManager.h"
+#include "windowSettings.h"
 #include "logManager.h"
 #include <SDL3/SDL_render.h>
 #include <iostream>
@@ -17,9 +18,11 @@ bool windowManager::openWindow(const std::string& title, int width, int height, 
 	
 		if (window) return true;
 
+
 		flags |= SDL_WINDOW_RESIZABLE; 
 
-		window = SDL_CreateWindow(title.c_str(), width, height, flags);
+		window = SDL_CreateWindow(title.c_str(), gWindowWidth, gWindowHeight, flags);
+		updateWindowSize(window);
 		if (!window) {
 			lm::logThis("Failed to create window.");
 			return false;

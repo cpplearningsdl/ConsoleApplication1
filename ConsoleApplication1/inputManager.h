@@ -20,6 +20,7 @@ public:
 	int getMouseY() const { return mouseY; }
 	bool isMouseButtonDown(Uint8 button) const { return mouseButtons[button]; }
 	bool wasMouseReleased() { return mouseReleased; }
+	void adjustMouseEventToLogical(SDL_Event& e);
 
 	const std::vector<Uint32>& getEvents() const { return eventTypesThisFrame; }
 
