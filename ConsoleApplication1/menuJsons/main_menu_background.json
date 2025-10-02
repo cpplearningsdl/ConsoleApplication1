@@ -1,0 +1,41 @@
+{
+  "pos": {
+    "x": 50,
+    "y": 50
+  },
+  "render": true,
+  "modal":  true,
+  "animationManager": {
+    "frames": [
+      {
+        "key": "main_menu_background_idle_0",
+        "animationName": "idle",
+        "frameNumber": 0,
+        "totalFrames": 2,
+        "width": 248,
+        "height": 376,
+        "hitBoxWidth": 0,
+        "hitBoxHeight": 0,
+        "xOffset": 0,
+        "yOffset": 0,
+        "loop": true,
+        "chainAnimation": "none"
+      }
+    ],
+    "entityName": "main_menu_background",
+    "animationName": "idle",
+    "currentIndex": 0,
+    "heldCount": 0,
+    "holdFor": 10,
+    "finished": false,
+    "chainOverride": ""
+  },
+  "renderInfo": {
+    "textureKey": "main_menu_background_idle_0",
+    "pos": {
+      "x": 50,
+      "y": 50
+    },
+    "render": true
+  }
+}
