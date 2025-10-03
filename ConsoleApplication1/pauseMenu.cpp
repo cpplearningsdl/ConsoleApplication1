@@ -16,6 +16,9 @@ void pauseMenu::init() {
 	pos.setPosition(552, 100);
 	updateRenderInfo(); 
 	buttonSpillGuts(buttons.back());
+	nlohmann::ordered_json j;
+	to_json(j, *this);
+	logManager::logThis("Dump pause Menu: \n", j.dump(4));
 }
 
 //	buttonObj(position pos, position sz, std::function<void()> cb, std::string newName, std::string animationName, bool visible )

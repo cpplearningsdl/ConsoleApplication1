@@ -105,14 +105,14 @@ inline void from_json(const nlohmann::ordered_json& j, menuObj& m) {
 	if (j.contains("position")) from_json(j.at("position"), m.pos);
 }
 inline void to_json(nlohmann::ordered_json& j, const menuObj& m) {
-	j = nlohmann::ordered_json{ 
-		{"buttons", m.getButtons()},
-		{"clickedButtons", m.clickedButtons},
+	j = nlohmann::ordered_json{  
 		{"render", m.getRender()},
 		{"modal", m.isModal()},
 		{"pendingClose", m.isPendingClose()},
 		{"animationHandler", m.animationHandler},
 		{"renderInfo", m.getEntityRenderInfo()},
-		{"pos", m.pos}
+		{"pos", m.pos},
+		{"buttons", m.getButtons()},
+		{"clickedButtons", m.clickedButtons}
 	};
 }

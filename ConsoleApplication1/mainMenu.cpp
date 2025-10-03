@@ -9,28 +9,19 @@ mainMenu::mainMenu() {
 }
 
 void mainMenu::init() {
-	loadJson();
-	loadButtons();
-	animationHandler.setEntityName("main_menu_background");
-	animationHandler.loadAnimation("idle");
+	loadJson(); 
 	pos.setPosition((static_cast<int>(gWindowWidth) -1274)/2, (static_cast<int>(gWindowHeight) -785)/2);
-	updateRenderInfo();
+	updateRenderInfo(); 
 }
  
 void mainMenu::loadButtons() {
-	//buttons.emplace_back(
-	//	position{ 582, 150 }, dimensions{ 188, 88 },
-	//	"resume_button",
-	//	"idle",
-	//	true
-	//);
-	//setButtonMenuData(buttons, morphToCloseButton(1)); 
+  
 }
 void mainMenu::updateRenderInfo() {
 	updateEntityRenderInfo(renderInfo, animationHandler.getCurrentTexture(), pos, animationHandler.getHeight(), animationHandler.getWidth(), getRender());
 }
 void mainMenu::loadJson() {
-	std::string fileName = "C:\\Users\\Keary\\source\\repos\\ConsoleApplication1-working\\ConsoleApplication1\\menuJsons\\main_menu_background.json";
+	std::string fileName = "C:\\Users\\Keary\\source\\repos\\ConsoleApplication1-working\\ConsoleApplication1\\menuJsons\\main_menu.json";
 	std::ifstream file(fileName);
 	if (!file.is_open()) {
 		logManager::logThis("Couldn't open pause menu .json");

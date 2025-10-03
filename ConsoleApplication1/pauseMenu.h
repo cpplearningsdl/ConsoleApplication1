@@ -15,10 +15,16 @@ public:
 	void update(inputManager& input) override;
 	void updateRenderInfo();
 
-	 
+	friend void to_json(nlohmann::ordered_json& j, const pauseMenu& m);
+	friend void from_json(const nlohmann::ordered_json& j, pauseMenu& m);
 private:
 
 };
+
+inline void to_json(nlohmann::ordered_json& j, const pauseMenu& m) {
+	to_json(j, static_cast<const menuObj&>(m));
+//	j["extraValue"] = m.extraValue;
+}
 
 inline void from_json(const nlohmann::ordered_json& j, pauseMenu& m) {
 

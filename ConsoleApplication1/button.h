@@ -69,7 +69,8 @@ public:
 };
 
 inline void buttonSpillGuts(buttonObj& b) {
-	nlohmann::ordered_json j;  to_json(j, b);
+	nlohmann::ordered_json j;  
+	to_json(j, b);
 	logManager::logThis(j.dump(4));
 }
 
