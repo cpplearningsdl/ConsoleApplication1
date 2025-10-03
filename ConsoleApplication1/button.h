@@ -28,13 +28,12 @@ public:
 		updateRenderInfo();
 	}
 
-	void configure(const buttonsActionData& newData) { butData = newData; }
+	void configureButton(const buttonsActionData& newData) { butData = newData; }
 	void loadAnimation(std::string s) { animationHandler.loadAnimation(s); }
 	void setRender(bool b) { render = b; } 
 	const position& getPos() const { return pos; }
 	const dimensions& getSize() const { return size; }
-	const entityRenderInfo& getEntityRenderInfo() const { return renderInfo; }
-	void setMenuData(const buttonsActionData& data) { butData = data; }
+	const entityRenderInfo& getEntityRenderInfo() const { return renderInfo; } 
 	bool wasClicked() { return butData.clicked; }
 	void setClicked(bool b) { butData.clicked = b; }
 	buttonsActionData getButData() { return butData; }
@@ -62,4 +61,30 @@ public:
 	void click() {
 		butData.clicked = true;
 	};
+	friend void to_json(nlohmann::ordered_json& j, const buttonObj& b);
+	friend void from_json(const nlohmann::ordered_json& j, buttonObj& b);
+
 };
+// ---------------------- TO JSON ----------------------
+inline void to_json(nlohmann::ordered_json& j, const buttonObj& b) {
+	j = nlohmann::ordered_json{
+		{"position", b.pos},
+		{"size", b.size},
+		{"render", b.render},
+		{"name", b.name},
+		{"animationHandler", b.animationHandler},
+		{"renderInfo", b.renderInfo},
+		{"buttonData", b.butData}
+	};
+}
+
+// ---------------------- FROM JSON ----------------------
+inline void from_json(const nlohmann::ordered_json& j, buttonObj& b) {
+	j.at("position").get_to(b.pos);
+	j.at("size").get_to(b.size);
+	j.at("render").get_to(b.render);
+	j.at("name").get_to(b.name);
+	j.at("animationHandler").get_to(b.animationHandler);
+	j.at("renderInfo").get_to(b.renderInfo);
+	j.at("buttonData").get_to(b.butData);
+}

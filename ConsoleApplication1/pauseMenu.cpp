@@ -26,7 +26,7 @@ void pauseMenu::loadButtons() {
 		"idle",
 		true
 	); 
-	setButtonMenuData(buttons, morphToCloseButton(1));
+	setButtonActionData(buttons, morphToCloseButton(1));
 	//buttons.emplace_back(
 	//	position{ 100, 200 }, dimensions{ 200, 50 },
 	//	[&]() {},

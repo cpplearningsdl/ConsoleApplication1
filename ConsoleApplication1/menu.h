@@ -44,7 +44,7 @@ public:
 	const entityRenderInfo & getEntityRenderInfo() const { return renderInfo; }
 	const std::vector<buttonObj>& getButtons() const { return buttons; }
 	  
-	void setButtonMenuData(std::vector<buttonObj>& buttons, const buttonsActionData data); 
+	void setButtonActionData(std::vector<buttonObj>& buttons, const buttonsActionData data); 
 
  
 
