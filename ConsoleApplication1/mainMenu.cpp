@@ -13,7 +13,7 @@ void mainMenu::init() {
 	loadButtons();
 	animationHandler.setEntityName("main_menu_background");
 	animationHandler.loadAnimation("idle");
-	pos.setPosition((gWindowWidth-1274)/2, (gWindowHeight-785)/2);
+	pos.setPosition((static_cast<int>(gWindowWidth) -1274)/2, (static_cast<int>(gWindowHeight) -785)/2);
 	updateRenderInfo();
 }
  

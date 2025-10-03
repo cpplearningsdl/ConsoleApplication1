@@ -1,4 +1,5 @@
 #include "logManager.h"
+#include "json.hpp"
 #include <iostream>
 #include <chrono>
 #include <ctime>
@@ -33,4 +34,10 @@ std::string logManager::getFormattedTimeNow() {
 	std::ostringstream oss;
 	oss << std::put_time(&timeStruct, "%Y-%m-%d %H:%M:%S");
 	return oss.str();
+}
+
+template<typename T>
+inline void spillGuts(const T& obj) {
+	nlohmann::ordered_json j = obj;
+	lm::logThis("Spilling Guts: \n", j.dump(4));
 }

@@ -20,6 +20,7 @@ private:
 	entityRenderInfo renderInfo;
 	buttonsActionData butData;
 
+
 public:
 	buttonObj(position pos, dimensions sz, std::string newName, std::string animationName, bool visible ) : pos(pos), size(sz),  name(newName), render(visible) {
 		animationHandler.setAnimationName(animationName);
@@ -65,6 +66,12 @@ public:
 	friend void from_json(const nlohmann::ordered_json& j, buttonObj& b);
 
 };
+
+inline void buttonSpillGuts(buttonObj& b) {
+	nlohmann::ordered_json j;  to_json(j, b);
+	logManager::logThis(j.dump(4));
+}
+
 // ---------------------- TO JSON ----------------------
 inline void to_json(nlohmann::ordered_json& j, const buttonObj& b) {
 	j = nlohmann::ordered_json{

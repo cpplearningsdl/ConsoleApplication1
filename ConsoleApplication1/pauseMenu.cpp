@@ -14,7 +14,8 @@ void pauseMenu::init() {
 	animationHandler.setEntityName("pause_menu_background"); 
 	animationHandler.loadAnimation("idle");
 	pos.setPosition(552, 100);
-	updateRenderInfo();
+	updateRenderInfo(); 
+	buttonSpillGuts(buttons.back());
 }
 
 //	buttonObj(position pos, position sz, std::function<void()> cb, std::string newName, std::string animationName, bool visible )

@@ -51,6 +51,8 @@ inline void buttonSpillGuts(buttonsActionData bd) {
 	logManager::logThis("Action: ", butDataToString(bd.action));
 	logManager::logThis("Index1: ", bd.actionIndex1);
 	logManager::logThis("Index2: ", bd.actionIndex2);
+	logManager::logThis("Value1: ", bd.value1);
+	logManager::logThis("Value2: ", bd.value2); 
 }
 
  
