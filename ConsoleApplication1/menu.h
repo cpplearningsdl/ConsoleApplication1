@@ -49,26 +49,70 @@ public:
  
 
 	friend void from_json(const nlohmann::ordered_json& j, menuObj& m); 
+	friend void to_json(nlohmann::ordered_json& j, const menuObj& m);
 };
+//inline void from_json(const nlohmann::ordered_json& j, menuObj& m) {
+//	if (j.contains("modal")) {
+//		j.at("modal").get_to(m.modal);
+//	}
+//	if (j.contains("position")) {
+//		j.at("position").get_to(m.pos);
+//	}
+//	if (j.contains("renderInfo")) {
+//		j.at("renderInfo").get_to(m.renderInfo);
+//	}
+//	if (j.contains("animationHandler")) {
+//		j.at("animationHandler").get_to(m.animationHandler);
+//	}
+//	if (j.contains("render")) {
+//		if (j.at("render").get<bool>()) {
+//			m.show();
+//		}
+//		else {
+//			m.hide();
+//		}
+//	}
+//} 
 inline void from_json(const nlohmann::ordered_json& j, menuObj& m) {
-	if (j.contains("modal")) {
-		j.at("modal").get_to(m.modal);
-	}
-	if (j.contains("position")) {
-		j.at("position").get_to(m.pos);
-	}
-	if (j.contains("renderInfo")) {
-		j.at("renderInfo").get_to(m.renderInfo);
-	}
-	if (j.contains("animationHandler")) {
-		j.at("animationHandler").get_to(m.animationHandler);
-	}
-	if (j.contains("render")) {
-		if (j.at("render").get<bool>()) {
-			m.show();
-		}
-		else {
-			m.hide();
+	// --- buttons ---
+	if (j.contains("buttons")) {
+		m.buttons.clear();
+		for (const auto& el : j.at("buttons")) {
+			buttonObj b;
+			from_json(el, b);  // explicit call to buttonObj's from_json
+			m.buttons.push_back(std::move(b));
 		}
 	}
+
+	// --- clickedButtons ---
+	if (j.contains("clickedButtons")) {
+		m.clickedButtons.clear();
+		for (const auto& el : j.at("clickedButtons")) {
+			buttonsActionData d;
+			from_json(el, d);  // explicit call to BAD's from_json
+			m.clickedButtons.push_back(std::move(d));
+		}
+	}
+
+	// --- simple members ---
+	if (j.contains("render")) m.render = j.at("render").get<bool>();
+	if (j.contains("modal")) m.modal = j.at("modal").get<bool>();
+	if (j.contains("pendingClose")) m.pendingClose = j.at("pendingClose").get<bool>();
+
+	// --- custom classes ---
+	if (j.contains("animationHandler")) from_json(j.at("animationHandler"), m.animationHandler);
+	if (j.contains("renderInfo")) from_json(j.at("renderInfo"), m.renderInfo);
+	if (j.contains("position")) from_json(j.at("position"), m.pos);
+}
+inline void to_json(nlohmann::ordered_json& j, const menuObj& m) {
+	j = nlohmann::ordered_json{ 
+		{"buttons", m.getButtons()},
+		{"clickedButtons", m.clickedButtons},
+		{"render", m.getRender()},
+		{"modal", m.isModal()},
+		{"pendingClose", m.isPendingClose()},
+		{"animationHandler", m.animationHandler},
+		{"renderInfo", m.getEntityRenderInfo()},
+		{"pos", m.pos}
+	};
 }

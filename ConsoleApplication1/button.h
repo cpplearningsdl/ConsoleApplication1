@@ -22,6 +22,7 @@ private:
 
 
 public:
+	buttonObj() {};
 	buttonObj(position pos, dimensions sz, std::string newName, std::string animationName, bool visible ) : pos(pos), size(sz),  name(newName), render(visible) {
 		animationHandler.setAnimationName(animationName);
 		animationHandler.setEntityName(newName); 
