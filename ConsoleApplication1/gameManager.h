@@ -20,7 +20,7 @@ public:
 	void processMenu(inputManager& input);
 	void setState(gameStateEnum nState) { state = nState; }
 	gameStateEnum getState() { return state; }
-	menuManager& getMainMenu() { return mainMenu; }
+	menuManager& getPauseMenu() { return thePauseMenu; }
 	void render(); 
 private:
 	gameManager() = default;
@@ -31,7 +31,7 @@ private:
 
 	std::unique_ptr<game> currentGame;
 	renderManager renderHandler;
-	menuManager mainMenu;
+	menuManager thePauseMenu;
 
 	gameStateEnum state;
 };

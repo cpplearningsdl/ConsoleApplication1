@@ -35,22 +35,22 @@ void gameManager::processGame() {
 }
 
 void gameManager::render() {
-	renderHandler.renderGame(*currentGame, mainMenu); 
+	renderHandler.renderGame(*currentGame, thePauseMenu);
 }
 
 void gameManager::processMenu(inputManager& input) {
 	if (getState() == gameStateEnum::PLAYING) {
 		if (input.wasKeyReleased(SDL_SCANCODE_ESCAPE)) {
 			setState(gameStateEnum::PAUSED); 
-			mainMenu.openMenu(std::make_unique<pauseMenu>());
+			thePauseMenu.openMenu(std::make_unique<pauseMenu>());
 		}
 	} else if (getState() == gameStateEnum::PAUSED) { 
-		mainMenu.update(input);
+		thePauseMenu.update(input);
 		if (input.wasKeyReleased(SDL_SCANCODE_ESCAPE)) {
 			setState(gameStateEnum::PLAYING);
-			mainMenu.closeTopMenu();
+			thePauseMenu.closeTopMenu();
 		}
-		 else if (mainMenu.getMenus().empty()) {
+		 else if (thePauseMenu.getMenus().empty()) {
 			setState(gameStateEnum::PLAYING);
 		}
 	}

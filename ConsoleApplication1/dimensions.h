@@ -4,16 +4,16 @@
 class dimensions {
 
 private:
-	int w, h;
+	int width, height;
 public:
-	dimensions(int nw, int nh) : w(nw), h(nh) {}
-	dimensions() : w(0), h(0) {}
+	dimensions(int nw, int nh) : width(nw), height(nh) {}
+	dimensions() : width(0), height(0) {}
 
-	void setSize(int nw, int nh) { w = nw, h = nh; }
-	void setW(int nw) { w = nw; }
-	void setH(int nh) { h = nh; }
-	int getW() const { return w; }
-	int getH() const { return h; }
+	void setSize(int nw, int nh) { width = nw, height = nh; }
+	void setW(int nw) { width = nw; }
+	void setH(int nh) { height = nh; }
+	int getW() const { return width; }
+	int getH() const { return height; }
 
 	friend void to_json(nlohmann::ordered_json& j, const dimensions& size);
 	friend void from_json(const nlohmann::ordered_json& j, dimensions& size);
@@ -21,10 +21,10 @@ public:
 
 inline void to_json(nlohmann::ordered_json& j, const dimensions& size) {
 	j = nlohmann::ordered_json{
-	{"w", size.getW()},
-	{"h", size.getH()},
+	{"width", size.getW()},
+	{"height", size.getH()},
 	};
 }
 inline void from_json(const nlohmann::ordered_json& j, dimensions& size) {
-	size.setSize(j.value("w", 0), j.value("h", 0));
+	size.setSize(j.value("width", 0), j.value("height", 0));
 }

@@ -1,0 +1,14 @@
+{
+    "key": "new_game_button_idle_0",
+    "animationName": "idle",
+    "frameNumber": 0,
+    "totalFrames": 1,
+    "width": 625,
+    "height": 151,
+    "hitBoxWidth": 0,
+    "hitBoxHeight": 0,
+    "xOffset": 0,
+    "yOffset": 0,
+    "loop": true,
+    "chainAnimation": "none"
+}

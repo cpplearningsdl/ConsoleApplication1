@@ -1,0 +1,85 @@
+{
+    "render": true,
+    "modal": true,
+    "pendingClose": false,
+    "animationHandler": {
+        "entityName": "start_menu_background",
+        "animationName": "idle",
+        "chainAnimationName": "none",
+        "frameCount": 1,
+        "currentIndex": 0,
+        "heldCount": 0,
+        "holdFor": 0,
+        "finished": false,
+        "loop": true,
+        "chainOverride": "",
+        "animationMovement": {
+            "type": "idle",
+            "x": 0.0,
+            "y": 0.0
+        }
+    },
+    "renderInfo": {
+        "pos": {
+            "x": 11.0,
+            "y": 11.0
+        },
+        "height": 785,
+        "width": 1274,
+        "render": true
+    },
+    "pos": {
+        "x": 11.0,
+        "y": 11.0
+    },
+    "buttons": [
+      {
+        "position": {
+          "x": 111.0,
+          "y": 111.0
+        },
+        "size": {
+          "width": 625,
+          "height": 151
+        },
+        "render": true,
+        "name": "new_game_button",
+        "animationHandler": {
+          "entityName": "new_game_button",
+          "animationName": "idle",
+          "chainAnimationName": "none",
+          "frameCount": 1,
+          "currentIndex": 0,
+          "heldCount": 0,
+          "holdFor": 0,
+          "finished": false,
+          "loop": true,
+          "chainOverride": "",
+          "animationMovement": {
+            "type": "idle",
+            "x": 0.0,
+            "y": 0.0
+          }
+        },
+        "renderInfo": {
+          "pos": {
+            "x": 111.0,
+            "y": 111.0
+          },
+          "width": 625,
+          "height": 151,
+          "render": true
+        },
+        "buttonData": {
+          "id": 1,
+          "clicked": false,
+          "action": "CLOSEMENU",
+          "actionIndex1": -1,
+          "actionIndex2": -1,
+          "value1": 0,
+          "value2": 0
+        }
+      }
+    ],
+    "clickedButtons": []
+}

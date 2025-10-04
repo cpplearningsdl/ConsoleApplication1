@@ -209,8 +209,8 @@ void from_json(const nlohmann::ordered_json& j,animationManager& m) {
 	if (j.contains("chainAnimationName")) {
 		m.setChainAnimationName(j.at("chainAnimationName").get<std::string>());
 	}
-	if (j.contains("size")) {
-		m.setFrameCount(j.at("size").get<int>());
+	if (j.contains("frameCount")) {
+		m.setFrameCount(j.at("frameCount").get<int>());
 	}
 	if (j.contains("currentIndex")) {
 		m.setCurrentIndex(j.at("currentIndex").get<int>());
@@ -240,4 +240,5 @@ void from_json(const nlohmann::ordered_json& j,animationManager& m) {
 			m.setMovement(std::move(movePtr));
 		}
 	}
+	m.loadAnimation(m.getAnimationName());
 }

@@ -1,0 +1,42 @@
+{
+  "pos": {
+    "x": 111,
+    "y": 111
+  },
+  "render": true,
+  "modal":  true,
+  "animationManager": {
+    "frames": [
+      {
+        "key": "new_game_button_idle_0",
+        "animationName": "idle",
+        "frameNumber": 0,
+        "totalFrames": 1,
+        "width": 151,
+        "height": 625,
+        "hitBoxWidth": 0,
+        "hitBoxHeight": 0,
+        "xOffset": 0,
+        "yOffset": 0,
+        "loop": true,
+        "chainAnimation": "none"
+      }
+    ],
+    "entityName": "new_game_button",
+    "animationName": "idle",
+    "currentIndex": 0,
+    "heldCount": 0,
+    "holdFor": 10,
+    "finished": false,
+    "chainOverride": ""
+  },
+  "renderInfo": { 
+    "pos": {
+      "x": 111,
+      "y": 111
+    },
+    "w": 625,
+    "h": 151,
+    "render": true
+  }
+}

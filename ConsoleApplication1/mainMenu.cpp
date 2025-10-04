@@ -21,11 +21,11 @@ void mainMenu::updateRenderInfo() {
 	updateEntityRenderInfo(renderInfo, animationHandler.getCurrentTexture(), pos, animationHandler.getHeight(), animationHandler.getWidth(), getRender());
 }
 void mainMenu::loadJson() {
-	std::string fileName = "C:\\Users\\Keary\\source\\repos\\ConsoleApplication1-working\\ConsoleApplication1\\menuJsons\\main_menu.json";
+	std::string fileName = "C:\\Users\\Keary\\source\\repos\\ConsoleApplication1-working\\ConsoleApplication1\\menuJsons\\start_menu.json";
 	std::ifstream file(fileName);
 	if (!file.is_open()) {
-		logManager::logThis("Couldn't open pause menu .json");
-		throw std::runtime_error("Failed to open mainMenu.JSON: " + fileName);
+		logManager::logThis("Couldn't open start menu .json");
+		throw std::runtime_error("Failed to open start menu.JSON: " + fileName);
 	}
 	nlohmann::ordered_json j;
 	file >> j;

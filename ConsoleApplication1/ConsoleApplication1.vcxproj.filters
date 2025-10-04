@@ -182,9 +182,6 @@
     <ClInclude Include="animationManager.h">
       <Filter>Header Files\entity\animation</Filter>
     </ClInclude>
-    <ClInclude Include="entity.h">
-      <Filter>Header Files\entity</Filter>
-    </ClInclude>
     <ClInclude Include="statClass.h">
       <Filter>Header Files\entity\stats</Filter>
     </ClInclude>
@@ -316,6 +313,9 @@
     </ClInclude>
     <ClInclude Include="mainMenu.h">
       <Filter>Header Files\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="entity.h">
+      <Filter>Header Files\entity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

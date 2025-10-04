@@ -51,28 +51,7 @@ public:
 	friend void from_json(const nlohmann::ordered_json& j, menuObj& m); 
 	friend void to_json(nlohmann::ordered_json& j, const menuObj& m);
 };
-//inline void from_json(const nlohmann::ordered_json& j, menuObj& m) {
-//	if (j.contains("modal")) {
-//		j.at("modal").get_to(m.modal);
-//	}
-//	if (j.contains("position")) {
-//		j.at("position").get_to(m.pos);
-//	}
-//	if (j.contains("renderInfo")) {
-//		j.at("renderInfo").get_to(m.renderInfo);
-//	}
-//	if (j.contains("animationHandler")) {
-//		j.at("animationHandler").get_to(m.animationHandler);
-//	}
-//	if (j.contains("render")) {
-//		if (j.at("render").get<bool>()) {
-//			m.show();
-//		}
-//		else {
-//			m.hide();
-//		}
-//	}
-//} 
+ 
 inline void from_json(const nlohmann::ordered_json& j, menuObj& m) {
 	// --- buttons ---
 	if (j.contains("buttons")) {

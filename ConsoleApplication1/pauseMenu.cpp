@@ -9,6 +9,7 @@ pauseMenu::pauseMenu() {
 } 
 
 void pauseMenu::init() {
+	//this isn't quite right, the json is not up to date thats why using other function calls here for animhandler
 	loadJson();
 	loadButtons();
 	animationHandler.setEntityName("pause_menu_background"); 

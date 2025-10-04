@@ -5,6 +5,8 @@
 #include "gameManager.h"
 #include "windowManager.h"
 #include "windowSettings.h"
+#include "menuManager.h"
+#include "mainMenu.h"
 #include "inputManager.h"
 #include "textureManager.h"
 #include "renderer.h"
@@ -56,6 +58,9 @@ int main(int argc, char* argv[]) {
 	gameManager::getInstance().loadDefaultAssets();
 	gameManager::getInstance().newGame(); 
 	 
+	menuManager theStartMenu;
+	theStartMenu.openMenu(std::make_unique<mainMenu>());
+
 	while (running && windowManager.getWindow()) {
 		Uint64 frameStart = SDL_GetTicks();
 		if(displayFrameNumber) logManager::logThis("Frame start ", frameNumber);

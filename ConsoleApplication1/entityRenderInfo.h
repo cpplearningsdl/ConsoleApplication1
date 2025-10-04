@@ -39,7 +39,7 @@ inline void from_json(const nlohmann::ordered_json& j, entityRenderInfo& s) {
 		s.height = j.at("height").get<int>();
 	}
 	if (j.contains("width")) {
-		s.height = j.at("width").get<int>();
+		s.width = j.at("width").get<int>();
 	}
 	if (j.contains("render")) {
 		s.render = j.at("render").get<bool>();
