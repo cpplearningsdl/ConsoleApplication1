@@ -57,9 +57,8 @@ int main(int argc, char* argv[]) {
 
 	gameManager::getInstance().loadDefaultAssets();
 	gameManager::getInstance().newGame(); 
-	 
-	menuManager theStartMenu;
-	theStartMenu.openMenu(std::make_unique<mainMenu>());
+	  
+	gameManager::getInstance().init();
 
 	while (running && windowManager.getWindow()) {
 		Uint64 frameStart = SDL_GetTicks();
@@ -68,8 +67,7 @@ int main(int argc, char* argv[]) {
 		if (frameNumber == 1) { }
 		// 1. Input
 		running = inputManager::getInstance().pollEvents();
-
-
+		
 
 		gameManager::getInstance().processGame();
  

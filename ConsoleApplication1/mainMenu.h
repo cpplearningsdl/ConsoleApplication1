@@ -14,10 +14,9 @@ public:
 	void init();
 	void update(inputManager& input) override;
 	void updateRenderInfo();
+	 
 
-
-private:
-
+private: 
 };
 
 inline void from_json(const nlohmann::ordered_json& j, mainMenu& m) {

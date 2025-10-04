@@ -13,6 +13,7 @@ class menuManager {
 
 public:
 
+	bool hasOpenWindow() const { return !menus.empty(); }
 	void update(inputManager& input) {
 		for (auto it = menus.rbegin(); it != menus.rend(); ++it) {
 			if ((*it)->isVisible()) { 

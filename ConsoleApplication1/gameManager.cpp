@@ -21,17 +21,26 @@ void gameManager::newGame() {
 void gameManager::endGame() {
 	currentGame.reset();  
 }
-
+ 
 void gameManager::processGame() {
 	inputManager& input = inputManager::getInstance();
-	processMenu(input);
-
-	if (currentGame) {
-		if (getState() == gameStateEnum::PLAYING) {
-			currentGame->update(input);
+	//start menu(when starting game)CLICKING NEW GAME DOESNT START NEW GAME, JUST CLOSES MENU FOR NOW
+	if (theStartMenu.hasOpenWindow()) {
+		theStartMenu.update(input);
+		renderHandler.renderMainMenu(theStartMenu);
+		renderer::getInstance().drawScreen();
+	}
+	else {
+		//pause menu, in game
+		processMenu(input); 
+		if (currentGame) {
+			if (getState() == gameStateEnum::PLAYING) {
+				currentGame->update(input);
+			} 
 		}
 		render();
 	}
+
 }
 
 void gameManager::render() {

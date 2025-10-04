@@ -12,6 +12,7 @@ void mainMenu::init() {
 	loadJson(); 
 	pos.setPosition((static_cast<int>(gWindowWidth) -1274)/2, (static_cast<int>(gWindowHeight) -785)/2);
 	updateRenderInfo(); 
+	show();
 }
  
 void mainMenu::loadButtons() {

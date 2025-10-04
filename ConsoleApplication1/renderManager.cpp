@@ -1,7 +1,7 @@
 #include "renderManager.h"
 #include "entityRenderInfo.h"
 
-//the key to get the texture(And animation data for that matter) are strings, should save pointers to each texture in an animation in the animationhandler then just use that and no string lookups!
+
 void renderManager::renderMainMenu(menuManager& m) {
 	for (const auto& menu : m.getMenus()) {
 		if (!menu->isVisible()) continue;
