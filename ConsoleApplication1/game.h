@@ -2,6 +2,7 @@
 #include <vector> 
 #include "entityIncludes.h"
 #include "inputManager.h"
+#include "view.h"
 
 class game {
 public:
@@ -11,15 +12,19 @@ public:
 	void update(inputManager& input);
 	entity&  getEntityById(int id);
 	std::vector<std::unique_ptr<entity>>& getEntities() { return entities; } 
-	const std::vector<entity*>& getRenderables() const { return renderablesCache; }
+	const std::vector<entity*>& getRenderableEntities() const { return renderableEntitiesCache; }
+	const std::vector<entity*>& getRenderableTiles() const { return renderableTilesCache; }
 
-	void addEntityToGame(std::string name);
+	void addEntityToGame(std::string name, ENTITYTYPEENUM type);
 	void removeEntityFromGame(int id);
 
 private:
 	int nextId = 0;
+
+	viewPort view;
 	std::vector<std::unique_ptr<entity>> entities;
-	std::vector<entity*> renderablesCache; 
+	std::vector<entity*> renderableEntitiesCache; 
 	std::vector<std::unique_ptr<entity>> tiles;
+	std::vector<entity*> renderableTilesCache;
 
 }; 

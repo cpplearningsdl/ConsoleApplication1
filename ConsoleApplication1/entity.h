@@ -52,6 +52,8 @@ public:
 	const position& getPos() const { return pos; }
 	position& getPos() { return pos; }
 
+	void setPos(position p) { pos = p; }
+
 	//const position getCombinedPos() {
 	//	logManager::logThis("pos: " + std::to_string(pos.getX()) + " " + std::to_string(pos.getY()));
 	//	position movementPos = animationHandler.getPos();

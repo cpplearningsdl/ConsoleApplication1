@@ -317,5 +317,14 @@
     <ClInclude Include="entity.h">
       <Filter>Header Files\entity</Filter>
     </ClInclude>
+    <ClInclude Include="renderablesCacheHandler.h">
+      <Filter>Source Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="view.h">
+      <Filter>Source Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="entityTypeEnum.h">
+      <Filter>Header Files\entity</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

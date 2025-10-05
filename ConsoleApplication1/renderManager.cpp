@@ -22,7 +22,7 @@ void renderManager::renderBackground() {
 }
 void renderManager::renderEntities(game& g) { 
 	 
-	const auto& renderables = g.getRenderables(); 
+	const auto& renderables = g.getRenderableEntities(); 
 	//also need to add function for converting map position to x/y position as well
 	for (auto& e : renderables) {
 		const entityRenderInfo& i = e->getRenderInfo(); 

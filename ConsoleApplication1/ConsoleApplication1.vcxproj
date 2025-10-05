@@ -209,6 +209,7 @@
     <ClInclude Include="defaultButtonSettings.h" />
     <ClInclude Include="entityOverrides.h" />
     <ClInclude Include="entityRenderInfo.h" />
+    <ClInclude Include="entityTypeEnum.h" />
     <ClInclude Include="gameStateEnum.h" />
     <ClInclude Include="decisionContext.h" />
     <ClInclude Include="inventory.h" />
@@ -239,6 +240,7 @@
     <ClInclude Include="path.h" />
     <ClInclude Include="pauseMenu.h" />
     <ClInclude Include="position.h" />
+    <ClInclude Include="renderablesCacheHandler.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="renderManager.h" />
     <ClInclude Include="statClass.h" />
@@ -247,6 +249,7 @@
     <ClInclude Include="textureDataStruct.h" />
     <ClInclude Include="textureManager.h" />
     <ClInclude Include="uses.h" />
+    <ClInclude Include="view.h" />
     <ClInclude Include="windowManager.h" />
     <ClInclude Include="windowSettings.h" />
   </ItemGroup>
