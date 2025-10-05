@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "dimensions.h"
+#include "position.h"
 #include "entityOverrides.h"
 #include "json.hpp"
 using json = nlohmann::ordered_json;
@@ -10,6 +12,9 @@ struct levelData {
 		int nextEntityId;//pass from level to level
 		int number{};
 		std::string name;
+
+		dimensions mapSize;
+		position viewPort;
 
 		std::vector<int> tileIds;
 		std::vector<int> factoryIds;

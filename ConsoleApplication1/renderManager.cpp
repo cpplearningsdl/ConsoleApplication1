@@ -22,8 +22,7 @@ void renderManager::renderBackground() {
 }
 void renderManager::renderEntities(game& g) { 
 	 
-	const auto& renderables = g.getRenderables();
-	//right now entities animationmovement x,y offsets are not being added to getrenderinfo UPDATE IT
+	const auto& renderables = g.getRenderables(); 
 	//also need to add function for converting map position to x/y position as well
 	for (auto& e : renderables) {
 		const entityRenderInfo& i = e->getRenderInfo(); 

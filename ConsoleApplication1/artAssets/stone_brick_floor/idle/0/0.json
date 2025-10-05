@@ -1,0 +1,36 @@
+{
+  "entityId": 0,
+  "factoryId": 3,
+  "name": "stone_brick_floor",
+
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "animationManager": {
+    "entityName": "stone_brick_floor",
+    "animationName": "idle",
+    "chainAnimationName": "",
+    "frameCount": 1,
+    "currentIndex": 0,
+    "heldCount": 0,
+    "holdFor": 10,
+    "finished": false,
+    "loop": false,
+    "chainOverride": "",
+    "animationMovement": {
+      "type": "idle",
+      "x": 0,
+      "y": 0
+    }
+  },
+  "renderInfo": {
+    "pos": {
+      "x": 0,
+      "y": 0
+    },
+    "height": 128,
+    "width": 128,
+    "render": true
+  }
+}

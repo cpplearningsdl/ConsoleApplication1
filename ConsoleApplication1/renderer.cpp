@@ -99,10 +99,10 @@ void renderer::drawToNextFrame(SDL_Texture* t, float x, float y, int h, int w) {
 	SDL_RenderTexture(sdlRenderer, t, nullptr, &dst);
 }
 
-void renderer::presentFrame() {
-	SDL_SetRenderTarget(sdlRenderer, nullptr);
-	SDL_RenderTexture(sdlRenderer, nextFrame, nullptr, nullptr);
-	SDL_RenderPresent(sdlRenderer); 
+void renderer::presentFrame() { 
+		SDL_SetRenderTarget(sdlRenderer, nullptr);
+		SDL_RenderTexture(sdlRenderer, nextFrame, nullptr, nullptr);
+		SDL_RenderPresent(sdlRenderer); 
 }
 
 void renderer::drawScreen() {
