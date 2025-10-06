@@ -61,8 +61,9 @@ public:
 	void setHoldFor(int c) { holdFor = c; }
 	void setLoop(bool l) { loop = l; }
 	void setFinished(bool f) { finished = f; } 
-	const position getPos() { return position(movement->getX(), movement->getY()); }
-	SDL_Texture* getCurrentTexture() { return frameTextures[getCurrentIndex()]; }
+
+	const position getPos() const { return position(movement->getX(), movement->getY()); }
+	SDL_Texture* getCurrentTexture() const { return frameTextures[getCurrentIndex()]; }
 	const int getHeight() const { return height[getCurrentIndex()]; }
 	const int getWidth() const { return width[getCurrentIndex()]; }
 

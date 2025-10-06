@@ -11,17 +11,21 @@ game::game() {
 
 	entity& test = getEntityById(0);
 	test.getAnimationManager().loadAnimation("idle"); 
-	test.getAnimationManager().setMovement(movementTypeEnum::north, 0, 0, 250, 40);
+	test.getAnimationManager().setMovement(movementTypeEnum::idle, 0, 0, 0, 0);
 	test.updateRenderInfo();
 	test.setRender(true); 
 	test.getAnimationManager().setHoldFor(45);
 	
-	test.setPos({ -30, -10 });
+	test.setPos({ 150, 150 });
 	entity* rawPtr = entities.back().get();
 	addToRenderables(renderableEntitiesCache, rawPtr, view);
 
 	logManager::logThis("Spilling Guts:");
 	test.spill_guts();
+
+	view.moving = true;
+	view.targetPos = { 250, 250 };
+	view.speed = 1.5;
 }
 
 game::~game() {
@@ -41,6 +45,7 @@ void game::update(inputManager& input) {
 		handleMovement(*e);
 		e->updateRenderInfo();
 	} 
+	updateView();
 }
  
 void game::addEntityToGame(std::string name, ENTITYTYPEENUM type) {
@@ -87,4 +92,13 @@ entity& game::getEntityById(int id) {
 		}
 	}
 	throw std::runtime_error("entity with id " + std::to_string(id) + " not found.");
+}
+
+void game::updateView() {
+	if (view.moving) {
+		logManager::logThis("Camera view moving");
+		moveView(view);//this can return true(still moving) vs false (at dest)
+		pruneRenderables(renderableEntitiesCache, view);
+		pruneRenderables(renderableTilesCache, view);
+	}
 }

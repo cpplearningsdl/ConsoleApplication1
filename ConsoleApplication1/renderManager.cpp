@@ -21,12 +21,17 @@ void renderManager::renderBackground() {
 	renderer::getInstance().drawToNextFrame(tex, 0, 0, 600, 800);
 }
 void renderManager::renderEntities(game& g) { 
-	 
+	
+	const viewPort& view = g.getView();  
+	const float camX = view.viewPos.getX();
+	const float camY = view.viewPos.getY();
 	const auto& renderables = g.getRenderableEntities(); 
-	//also need to add function for converting map position to x/y position as well
+
 	for (auto& e : renderables) {
 		const entityRenderInfo& i = e->getRenderInfo(); 
-		renderer::getInstance().drawToNextFrame(i.tex, i.pos.getX(), i.pos.getY(), i.height, i.width);
+		const float screenX = i.pos.getX() - camX;
+		const float screenY = i.pos.getY() - camY;
+		renderer::getInstance().drawToNextFrame(i.tex, screenX, screenY, i.height, i.width);
 	}
 }
 

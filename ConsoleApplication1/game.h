@@ -18,6 +18,9 @@ public:
 	void addEntityToGame(std::string name, ENTITYTYPEENUM type);
 	void removeEntityFromGame(int id);
 
+	void updateView();
+	const viewPort& getView() const { return view; }
+
 private:
 	int nextId = 0;
 

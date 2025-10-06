@@ -51,29 +51,23 @@ public:
 
 	const position& getPos() const { return pos; }
 	position& getPos() { return pos; }
+	void setPos(position p) { pos = p; updateRenderInfo(); }
 
-	void setPos(position p) { pos = p; }
-
-	//const position getCombinedPos() {
-	//	logManager::logThis("pos: " + std::to_string(pos.getX()) + " " + std::to_string(pos.getY()));
-	//	position movementPos = animationHandler.getPos();
-	//	return { movementPos.getX() + pos.getX(), movementPos.getY() + pos.getY() };
-	//}
 	const position getCombinedPos() {
 		position movementPos = animationHandler.getPos();
-		position combinedPos{ movementPos.getX() + pos.getX(),
-							  movementPos.getY() + pos.getY() };
-
-		//logManager::logThis("pos: " + std::to_string(pos.getX()) + " " + std::to_string(pos.getY())		);
-
-		//logManager::logThis("combinedPos: " + std::to_string(combinedPos.getX()) + " " + std::to_string(combinedPos.getY()));
-
+		position combinedPos{ movementPos.getX() + pos.getX(), movementPos.getY() + pos.getY() }; 
+		return combinedPos;
+	}
+	const position getCombinedPos() const {
+		position movementPos = animationHandler.getPos();
+		position combinedPos{ movementPos.getX() + pos.getX(), movementPos.getY() + pos.getY() };
 		return combinedPos;
 	}
 
 	abilities& getAbilities();
 	const abilities& getAbilities() const; 
 	animationManager& getAnimationManager() { return animationHandler; }
+	const animationManager& getAnimationManager() const { return animationHandler; }
 
 	void updateRenderInfo();
 	static nlohmann::ordered_json to_Json(const entity& e);
