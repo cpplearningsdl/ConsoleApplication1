@@ -1,4 +1,4 @@
-#include "windowManager.h"
+	#include "windowManager.h"
 #include "windowSettings.h"
 #include "logManager.h"
 #include <SDL3/SDL_render.h>
@@ -35,6 +35,7 @@ bool windowManager::openWindow(const std::string& title, int width, int height, 
 			window = nullptr;
 			return false;
 		}
+ 
 	//	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
 		//0disabled 1enabled

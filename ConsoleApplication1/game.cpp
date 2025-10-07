@@ -23,9 +23,20 @@ game::game() {
 	logManager::logThis("Spilling Guts:");
 	test.spill_guts();
 
+	addEntityToGame("stone_brick_floor", TILE);
+	entity& floorTest = getEntityById(1);
+	floorTest.getAnimationManager().loadAnimation("idle");
+	floorTest.getAnimationManager().setMovement(movementTypeEnum::idle, 0, 0, 0, 0);
+	floorTest.updateRenderInfo();
+	floorTest.setRender(true);
+	floorTest.setPos({ 350, 350 });
+	rawPtr = tiles.back().get();
+	addToRenderables(renderableTilesCache, rawPtr, view);
+	floorTest.spill_guts();
+
 	view.moving = true;
-	view.targetPos = { 250, 250 };
-	view.speed = 1.5;
+	view.targetPos = { 150, 150 };
+	view.speed = .3;
 }
 
 game::~game() {
@@ -49,7 +60,7 @@ void game::update(inputManager& input) {
 }
  
 void game::addEntityToGame(std::string name, ENTITYTYPEENUM type) {
-	if (type = TILE) {//floor tiles
+	if (type == TILE) {//floor tiles
 		tiles.push_back(entityFactory::getInstance().create(name));
 		tiles.back()->setEntityId(nextId++); 
 	}

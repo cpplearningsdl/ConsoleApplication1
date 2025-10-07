@@ -44,8 +44,9 @@ int main(int argc, char* argv[]) {
 		return 1;
 	} 
 	renderer& renderer = renderer::getInstance();
-	renderer.init(600, 800);
- 
+	//renderer.init(600, 800);
+	//renderer.init(1280, 800);
+	renderer.init(gWindowWidth, gWindowHeight);
 
 	const int FPS = 60;
 	const int frameDelay = 1000 / FPS;

@@ -1,5 +1,6 @@
 #include "renderManager.h"
 #include "entityRenderInfo.h"
+#include "windowSettings.h"
 
 
 void renderManager::renderMainMenu(menuManager& m) {
@@ -18,27 +19,42 @@ void renderManager::renderMainMenu(menuManager& m) {
 
 void renderManager::renderBackground() {
 	SDL_Texture* tex = textureManager::getInstance().getFrame("background_idle_0");
-	renderer::getInstance().drawToNextFrame(tex, 0, 0, 600, 800);
+	//renderer::getInstance().drawToNextFrame(tex, 0, 0, 600, 800);
+	renderer::getInstance().drawToNextFrame(tex, 0, 0, logicalH, logicalW);
 }
-void renderManager::renderEntities(game& g) { 
-	
-	const viewPort& view = g.getView();  
-	const float camX = view.viewPos.getX();
-	const float camY = view.viewPos.getY();
-	const auto& renderables = g.getRenderableEntities(); 
+//void renderManager::renderEntities(game& g, std::vector<entity*>& cache) {
+//	
+//	const viewPort& view = g.getView();  
+//	const float camX = view.viewPos.getX();
+//	const float camY = view.viewPos.getY();
+//	const auto& renderables = g.getRenderableEntities(); 
+//
+//	for (auto& e : renderables) {
+//		const entityRenderInfo& i = e->getRenderInfo(); 
+//		const float screenX = i.pos.getX() - camX;
+//		const float screenY = i.pos.getY() - camY;
+//		renderer::getInstance().drawToNextFrame(i.tex, screenX, screenY, i.height, i.width);
+//	}
+//}
+void renderManager::renderEntities(game& g, const std::vector<entity*>& cache) {
 
-	for (auto& e : renderables) {
-		const entityRenderInfo& i = e->getRenderInfo(); 
+	const viewPort& view = g.getView();
+	const float camX = view.viewPos.getX();
+	const float camY = view.viewPos.getY(); 
+
+	for (auto& e : cache) {
+		const entityRenderInfo& i = e->getRenderInfo();
 		const float screenX = i.pos.getX() - camX;
 		const float screenY = i.pos.getY() - camY;
 		renderer::getInstance().drawToNextFrame(i.tex, screenX, screenY, i.height, i.width);
 	}
-}
+} 
 
 
 void renderManager::renderGame(game& g, menuManager& m) {
 	renderBackground();
-	renderEntities(g); 
+	renderEntities(g, g.getRenderableTiles());
+	renderEntities(g, g.getRenderableEntities());  
 	//renderGameMenu(g);
 	renderMainMenu(m);
 	renderer::getInstance().drawScreen();

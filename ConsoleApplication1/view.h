@@ -63,9 +63,7 @@ inline bool testInView(const viewPort& v, const position& p, const dimensions& s
 	float camRight = camLeft + v.screenSize.getW();
 	float camBottom = camTop + v.screenSize.getH();
 
-	logManager::logThis(
-		"Entity pos: " + std::to_string(p.getX()) + "," + std::to_string(p.getY()) +
-		" size: " + std::to_string(s.getW()) + "x" + std::to_string(s.getH()) +
+	logManager::logThis( 
 		" view: (" + std::to_string(v.viewPos.getX()) + "," + std::to_string(v.viewPos.getY()) +
 		") screen: " + std::to_string(v.screenSize.getW()) + "x" + std::to_string(v.screenSize.getH())
 	);

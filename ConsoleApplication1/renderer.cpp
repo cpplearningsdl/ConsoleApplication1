@@ -2,13 +2,17 @@
 #include "windowManager.h"
 #include "textureManager.h"
 #include "textureDataStruct.h"
-#include "windowSettings.h"
+#include "windowSettings.h" 
 #include "logManager.h"
 
 #define lm logManager
 
-const int logicalW = 800;
-const int logicalH = 600;
+//const int logicalW = 800;
+//const int logicalH = 600;
+//const int logicalW = 1280;
+//const int logicalH = 800;
+	//const int logicalW = 128 * 25;
+	//const int logicalH = 128 * 15;
 
 renderer::renderer() {}
 renderer::~renderer() { shutdown(); }
