@@ -1,12 +1,13 @@
 #pragma once
 #include "position.h"
 #include "dimensions.h"
+#include "windowSettings.h"
 
 struct viewPort {
 	position viewPos{ 0, 0 };                  // top-left of camera in world coordinates
 	dimensions mapSize{ 100, 100 };                // map dimensions in tiles
 	dimensions tileSize{ 128, 128 };               // size of each tile in pixels
-	dimensions screenSize{ 800, 600 };   // logical screen size (default 800x600)
+	dimensions screenSize{ logicalW, logicalH };   // logical screen size (default 800x600)
 
 	position targetPos{ 0,0 };
 	float speed = 0.0f;
@@ -62,12 +63,7 @@ inline bool testInView(const viewPort& v, const position& p, const dimensions& s
 	float camTop = v.viewPos.getY();
 	float camRight = camLeft + v.screenSize.getW();
 	float camBottom = camTop + v.screenSize.getH();
-
-	logManager::logThis( 
-		" view: (" + std::to_string(v.viewPos.getX()) + "," + std::to_string(v.viewPos.getY()) +
-		") screen: " + std::to_string(v.screenSize.getW()) + "x" + std::to_string(v.screenSize.getH())
-	);
-
+	 
 	// AABB overlap test
 	return !(right < camLeft ||
 		left > camRight ||

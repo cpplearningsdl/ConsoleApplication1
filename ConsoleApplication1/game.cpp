@@ -36,7 +36,7 @@ game::game() {
 
 	view.moving = true;
 	view.targetPos = { 150, 150 };
-	view.speed = .3;
+	view.speed = .7;
 }
 
 game::~game() {
@@ -106,8 +106,7 @@ entity& game::getEntityById(int id) {
 }
 
 void game::updateView() {
-	if (view.moving) {
-		logManager::logThis("Camera view moving");
+	if (view.moving) { 
 		moveView(view);//this can return true(still moving) vs false (at dest)
 		pruneRenderables(renderableEntitiesCache, view);
 		pruneRenderables(renderableTilesCache, view);
