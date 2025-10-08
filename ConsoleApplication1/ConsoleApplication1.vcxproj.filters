@@ -162,6 +162,9 @@
     <ClCompile Include="mainMenu.cpp">
       <Filter>Source Files\menu</Filter>
     </ClCompile>
+    <ClCompile Include="levelLoader.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logManager.h">
@@ -325,6 +328,9 @@
     </ClInclude>
     <ClInclude Include="entityTypeEnum.h">
       <Filter>Header Files\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="levelLoader.h">
+      <Filter>Source Files\game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

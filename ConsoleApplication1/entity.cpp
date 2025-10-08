@@ -78,6 +78,9 @@ void entity::from_Json(const nlohmann::ordered_json& j) {
 	if (j.contains("name")) {
 		setName(j.at("name").get<std::string>());
 	}
+	if (j.contains("type")) {
+		setType(j.at("type").get<ENTITYTYPEENUM>());
+	}
 	if (j.contains("entityId")) {
 		setEntityId(j.at("entityId").get<int>());
 	}
@@ -117,6 +120,7 @@ void entity::from_Json(const nlohmann::ordered_json& j) {
 nlohmann::ordered_json entity::to_Json(const entity& e) {
 	ordered_json j;
 	//json j;
+	j["type"] = e.getType();
 	j["entityId"] = e.getId();
 	j["factoryId"] = e.getFactoryId();
 	j["name"] = e.getName();

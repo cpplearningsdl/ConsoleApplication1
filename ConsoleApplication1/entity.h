@@ -6,6 +6,7 @@
 #include "position.h"
 #include "abilityFactory.h"
 #include "entityRenderInfo.h"
+#include "entityTypeEnum.h"
 #include "json.hpp"
 
 //should probably make a member of this and update it manually instead of polling every frame..
@@ -30,6 +31,9 @@ public:
 
 	std::string getName() const { return name; };
 	void setName(std::string newName) {	name = newName;	};
+	void setType(ENTITYTYPEENUM t) { type = t; };
+	const ENTITYTYPEENUM getType() const { return type; };
+	bool isType(ENTITYTYPEENUM t) const noexcept { return type == t; };
 	int getId() const { return entityId; }
 	void setEntityId(int newId) { entityId = newId; };
 	int getFactoryId() const { return factoryId; }
@@ -75,6 +79,7 @@ public:
 
 	void spill_guts();
 private:
+	ENTITYTYPEENUM type;
 	int entityId;
 	int factoryId;
 	position pos;

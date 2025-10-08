@@ -1,5 +1,6 @@
 #include "game.h"
 #include <iostream>
+#include "levelLoader.h"
 #include "entityIncludes.h"
 #include "movementHandler.h"
 #include "renderablesCacheHandler.h"
@@ -112,3 +113,9 @@ void game::updateView() {
 		pruneRenderables(renderableTilesCache, view);
 	}
 }
+
+void game::addToRenderablesCache(entity* e, ENTITYTYPEENUM t) { };
+void game::removeFromRenderablesCache(entity* e, ENTITYTYPEENUM t) { };
+void game::updateRenderablesCache(ENTITYTYPEENUM t) { };
+void game::fullBuildRenderablesCache(ENTITYTYPEENUM t) { };
+void game::buildAllRenderablesCache() { };

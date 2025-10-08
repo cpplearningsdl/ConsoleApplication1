@@ -15,6 +15,12 @@ public:
 	const std::vector<entity*>& getRenderableEntities() const { return renderableEntitiesCache; }
 	const std::vector<entity*>& getRenderableTiles() const { return renderableTilesCache; }
 
+	void addToRenderablesCache(entity* e, ENTITYTYPEENUM t);
+	void removeFromRenderablesCache(entity* e, ENTITYTYPEENUM t);
+	void updateRenderablesCache(ENTITYTYPEENUM t);
+	void fullBuildRenderablesCache(ENTITYTYPEENUM t);
+	void buildAllRenderablesCache();
+
 	void addEntityToGame(std::string name, ENTITYTYPEENUM type);
 	void removeEntityFromGame(int id);
 
@@ -29,5 +35,5 @@ private:
 	std::vector<entity*> renderableEntitiesCache; 
 	std::vector<std::unique_ptr<entity>> tiles;
 	std::vector<entity*> renderableTilesCache;
-
+	std::vector<entity*> floorMap;
 }; 
