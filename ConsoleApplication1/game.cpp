@@ -11,13 +11,13 @@
 game::game() {
 	// init map, entities, etc. 
 	logManager::logThis("started first game");  
-	addEntityToGame("Bone Thug", ENTITY); 
+	addEntityToGame(0, ENTITY); 
 	entity& test = getEntityById(0);  
 
 	logManager::logThis("Spilling Guts:");
 	test.spill_guts("SpillGutsTest");
 
-	addEntityToGame("stone_brick_floor", TILE);
+	addEntityToGame(2, TILE);
 	entity& floorTest = getEntityById(1); 
 	floorTest.spill_guts();
 
@@ -49,9 +49,9 @@ void game::update(inputManager& input) {
 void game::loadLevel(int l) {
 
 }
-void game::addEntityToGame(const std::string& name, ENTITYTYPEENUM type) {
+void game::addEntityToGame(int factoryId, ENTITYTYPEENUM type) {
 	if (type == TILE) { // floor tiles
-		tiles.push_back(entityFactory::getInstance().create(name));
+		tiles.push_back(entityFactory::getInstance().create(factoryId));
 		entity* e = tiles.back().get();
 		e->setEntityId(nextId++);
 
@@ -62,7 +62,7 @@ void game::addEntityToGame(const std::string& name, ENTITYTYPEENUM type) {
 		}
 	}
 	else { // entities/characters
-		entities.push_back(entityFactory::getInstance().create(name));
+		entities.push_back(entityFactory::getInstance().create(factoryId));
 		entity* e = entities.back().get();
 		e->setEntityId(nextId++);
 
@@ -74,13 +74,13 @@ void game::addEntityToGame(const std::string& name, ENTITYTYPEENUM type) {
 	}
 }
 
-void game::addEntityToGame(const std::string& name) {
+void game::addEntityToGame(int factoryId) {
 	auto& factory = entityFactory::getInstance();
-	ENTITYTYPEENUM type = entityFactory::getInstance().getType(name); 
+	ENTITYTYPEENUM type = entityFactory::getInstance().getType(factoryId);
 
 	if (type == TILE) {
 		// Create tile
-		tiles.push_back(factory.create(name));
+		tiles.push_back(factory.create(factoryId));
 		entity* e = tiles.back().get();
 		e->setEntityId(nextId++);
 
@@ -92,7 +92,7 @@ void game::addEntityToGame(const std::string& name) {
 	}
 	else {
 		// Create entity/character
-		entities.push_back(factory.create(name));
+		entities.push_back(factory.create(factoryId));
 		entity* e = entities.back().get();
 		e->setEntityId(nextId++);
 
@@ -161,6 +161,7 @@ void game::removeEntityFromGame(int id) {
 
 }
 
+//RUN TIME ID NOT FACTORY
 entity& game::getEntityById(int id) {
 	logManager::logThis("getting entity by id ", id);
 	for (auto& e : entities) { 

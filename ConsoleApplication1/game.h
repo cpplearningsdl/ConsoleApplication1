@@ -22,8 +22,8 @@ public:
 	void fullBuildRenderablesCache(ENTITYTYPEENUM t);
 	void buildAllRenderablesCache();
 
-	void addEntityToGame(const std::string& name, ENTITYTYPEENUM type);
-	void addEntityToGame(const std::string& name);
+	void addEntityToGame(int factoryId, ENTITYTYPEENUM type);
+	void addEntityToGame(int factoryId);
 	void addEntityToGameFromJson(const std::string& jsonFilePath);
 
 	void removeEntityFromGame(int id);

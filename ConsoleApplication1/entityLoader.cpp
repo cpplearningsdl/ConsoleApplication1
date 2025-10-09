@@ -56,7 +56,8 @@ namespace entityLoader {
 				}
 
 				// Register with factory
-				entityFactory::getInstance().registerEntity(filename, std::move(prototype));
+				int factoryId = prototype->getFactoryId();
+				entityFactory::getInstance().registerEntity(factoryId, std::move(prototype));
 				logManager::logThis("Registered entity: " + filename + "\n"); 
 			}
 		}

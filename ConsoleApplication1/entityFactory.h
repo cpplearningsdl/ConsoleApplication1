@@ -15,30 +15,35 @@ public:
 		return instance;
 	}
 
-	void registerEntity(const std::string& name, std::unique_ptr<entity> prototype) {
-		prototypes[name] = std::move(prototype);
+	void registerEntity(int id, std::unique_ptr<entity> prototype) {
+		prototypes[id] = std::move(prototype);
 	}
-	ENTITYTYPEENUM getType(const std::string& name) {
-		auto it = prototypes.find(name);
+
+	ENTITYTYPEENUM getType(int id) {
+		auto it = prototypes.find(id);
 		if (it != prototypes.end() && it->second) {
 			return it->second->getType();  
 		}
 		return MISSING; // default fallback if not found
 	}
-	std::unique_ptr<entity> create(const std::string& name) {
-		logManager::logThis("Trying to add entity to game: ", name);
-		auto it = prototypes.find(name);
+
+	std::unique_ptr<entity> create(int id) {
+		logManager::logThis("Trying to add entity to game: id ", id);
+		auto it = prototypes.find(id);
 		if (it != prototypes.end()) {
-			logManager::logThis("Added entity to game: ", name);
+			logManager::logThis("Added entity to game: id", id);
 			return std::make_unique<entity>(*it->second); // copy constructor
 
 		}
-		logManager::logThis("Couldn't find entity: ", name);
+		logManager::logThis("Couldn't find entity: id ", id);
 		return nullptr;
 	}
+
+
 	void loadDefaultEntities() { entityLoader::loadAllDefaultEntitiesFromDir("C:\\Users\\Keary\\source\\repos\\ConsoleApplication1-working\\ConsoleApplication1\\defaultEntities"); };
 private:
 	entityFactory() = default;
-	std::unordered_map<std::string, std::unique_ptr<entity>> prototypes;
+	//std::unordered_map<std::string, std::unique_ptr<entity>> prototypes;
+	std::unordered_map<int, std::unique_ptr<entity>> prototypes;
 };
  
