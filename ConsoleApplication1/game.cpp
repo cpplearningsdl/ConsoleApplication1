@@ -23,7 +23,7 @@ game::game() {
 
 	view.moving = true;
 	view.targetPos = { 150, 150 };
-	view.speed = 0.1;
+	view.speed = 0.4;
 }
 
 game::~game() {
@@ -76,7 +76,7 @@ void game::addEntityToGame(int factoryId, ENTITYTYPEENUM type) {
 
 void game::addEntityToGame(int factoryId) {
 	auto& factory = entityFactory::getInstance();
-	ENTITYTYPEENUM type = entityFactory::getInstance().getType(factoryId);
+	ENTITYTYPEENUM type = factory.getType(factoryId);
 
 	if (type == TILE) {
 		// Create tile
@@ -84,11 +84,14 @@ void game::addEntityToGame(int factoryId) {
 		entity* e = tiles.back().get();
 		e->setEntityId(nextId++);
 
+		position pos = toGridCoords(e->getPos(), this->view);
+		floorMap[gridToIndex(pos, this->view)] = e;
+
 		// Add to render cache if in view
 		if (testInView(this->view, e->getPos(),	{ e->getAnimationManager().getHeight(),  e->getAnimationManager().getWidth() })) {
 			renderableTilesCache.push_back(e);
 		}
-
+				
 	}
 	else {
 		// Create entity/character
@@ -187,7 +190,19 @@ void game::updateView() {
 	}
 }
 
-void game::addToRenderablesCache(entity* e, ENTITYTYPEENUM t) { };
+void game::addToRenderablesCache(entity* e, ENTITYTYPEENUM t) {
+	// Add to render cache if in view
+	if (t == TILE) {
+		if (testInView(this->view, e->getPos(), { e->getAnimationManager().getHeight(),  e->getAnimationManager().getWidth() })) {
+			renderableTilesCache.push_back(e);
+		}
+	}
+	else {
+		if (testInView(this->view, e->getPos(), { e->getAnimationManager().getHeight(),  e->getAnimationManager().getWidth() })) {
+			renderableEntitiesCache.push_back(e);
+		}
+	}
+};
 void game::removeFromRenderablesCache(entity* e, ENTITYTYPEENUM t) { };
 void game::updateRenderablesCache(ENTITYTYPEENUM t) { };
 void game::fullBuildRenderablesCache(ENTITYTYPEENUM t) { };

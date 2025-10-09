@@ -14,6 +14,11 @@ struct viewPort {
 	bool moving = false;
 };
 
+//grid x,y to array index
+inline int gridToIndex(position& p, const viewPort& v) noexcept {
+	return p.getY() * v.mapSize.getW() + p.getX();
+}
+
 // Convert from world coords to grid coords (tile index position)
 inline position toGridCoords(const position& p, const viewPort& v) {
 	return position{
