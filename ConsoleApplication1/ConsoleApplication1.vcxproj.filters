@@ -330,7 +330,7 @@
       <Filter>Header Files\entity</Filter>
     </ClInclude>
     <ClInclude Include="levelLoader.h">
-      <Filter>Source Files\game</Filter>
+      <Filter>Header Files\level</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 #include <vector> 
 #include "entityIncludes.h"
 #include "inputManager.h"
+#include "level.h"
 #include "view.h"
 
 class game {
@@ -21,8 +22,16 @@ public:
 	void fullBuildRenderablesCache(ENTITYTYPEENUM t);
 	void buildAllRenderablesCache();
 
-	void addEntityToGame(std::string name, ENTITYTYPEENUM type);
+	void addEntityToGame(const std::string& name, ENTITYTYPEENUM type);
+	void addEntityToGame(const std::string& name);
+	void addEntityToGameFromJson(const std::string& jsonFilePath);
+
 	void removeEntityFromGame(int id);
+
+	void loadLevel(int l);
+	void setLevelData(levelData&& d) noexcept { currentLevelData = std::move(d);}
+	levelData& getLevelData() noexcept { return currentLevelData; }
+	const levelData& getLevelData() const noexcept { return currentLevelData; }
 
 	void updateView();
 	const viewPort& getView() const { return view; }
@@ -30,6 +39,7 @@ public:
 private:
 	int nextId = 0;
 
+	levelData currentLevelData;
 	viewPort view;
 	std::vector<std::unique_ptr<entity>> entities;
 	std::vector<entity*> renderableEntitiesCache; 

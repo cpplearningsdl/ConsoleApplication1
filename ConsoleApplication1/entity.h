@@ -78,6 +78,7 @@ public:
 	void from_Json(const nlohmann::ordered_json& j);
 
 	void spill_guts();
+	void spill_guts(std::string s); 
 private:
 	ENTITYTYPEENUM type;
 	int entityId;

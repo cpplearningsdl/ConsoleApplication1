@@ -18,7 +18,13 @@ public:
 	void registerEntity(const std::string& name, std::unique_ptr<entity> prototype) {
 		prototypes[name] = std::move(prototype);
 	}
-
+	ENTITYTYPEENUM getType(const std::string& name) {
+		auto it = prototypes.find(name);
+		if (it != prototypes.end() && it->second) {
+			return it->second->getType();  
+		}
+		return MISSING; // default fallback if not found
+	}
 	std::unique_ptr<entity> create(const std::string& name) {
 		logManager::logThis("Trying to add entity to game: ", name);
 		auto it = prototypes.find(name);

@@ -21,6 +21,9 @@ animationManager::animationManager(const animationManager& other)
 	loop(other.loop),
 	chainOverride(other.chainOverride),
 	chainAnimationName(other.chainAnimationName),
+	frameTextures(other.frameTextures),
+	height(other.height),
+	width(other.width),
 	movement(other.movement ? other.movement->clone() : nullptr) // deep clone
 {}
 
@@ -36,6 +39,9 @@ animationManager& animationManager::operator=(const animationManager& other) {
 		loop = other.loop;
 		chainOverride = other.chainOverride;
 		chainAnimationName = other.chainAnimationName;
+		frameTextures = other.frameTextures;
+		height = other.height;
+		width = other.width;
 		movement = other.movement ? other.movement->clone() : nullptr;
 	}
 	return *this;
@@ -61,7 +67,7 @@ bool animationManager::loadAnimation(const std::string& baseName) {
 
 	frameTextures.clear();
 	frameTextures.reserve(data->totalFrames);
-
+	//load all frame sizes instead of using pointer to data so we can change size of entities without math every frame
 	for (int frame = 0; frame < data->totalFrames; ++frame) {
 		std::string key = entityName + "_" + baseName + "_" + std::to_string(frame);
 

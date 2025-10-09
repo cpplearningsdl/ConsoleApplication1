@@ -7,12 +7,14 @@ using ordered_json = nlohmann::ordered_json;
 entity::entity() {
 
 }
+//WHEN ADDING NEW MEMBERS TO ENTITY ADD TO THE CONSTRUCTORS IDIOT NOT JUST JSON
 entity::entity(const entity& other)
 	: animationHandler(other.animationHandler) // uses deep copy from animationManager
 {
 	entityId = other.entityId;
 	factoryId = other.factoryId;
 	name = other.name;
+	type = other.type;
 	stats = other.stats;
 	abilities = other.abilities; 
 	pos = other.pos;
@@ -27,6 +29,7 @@ entity& entity::operator=(const entity& other) {
 		entityId = other.entityId;
 		factoryId = other.factoryId;
 		name = other.name;
+		type = other.type;
 		stats = other.stats;
 		abilities = other.abilities;
 		pos = other.pos; 
@@ -79,7 +82,7 @@ void entity::from_Json(const nlohmann::ordered_json& j) {
 		setName(j.at("name").get<std::string>());
 	}
 	if (j.contains("type")) {
-		setType(j.at("type").get<ENTITYTYPEENUM>());
+		setType(entityTypeFromString(j.at("type").get<std::string>()));
 	}
 	if (j.contains("entityId")) {
 		setEntityId(j.at("entityId").get<int>());
@@ -120,7 +123,7 @@ void entity::from_Json(const nlohmann::ordered_json& j) {
 nlohmann::ordered_json entity::to_Json(const entity& e) {
 	ordered_json j;
 	//json j;
-	j["type"] = e.getType();
+	j["type"] = entityTypeToString(e.getType());
 	j["entityId"] = e.getId();
 	j["factoryId"] = e.getFactoryId();
 	j["name"] = e.getName();
@@ -139,6 +142,11 @@ nlohmann::ordered_json entity::to_Json(const entity& e) {
 	return j;
 }
 
+void entity::spill_guts(std::string s) {
+	nlohmann::ordered_json j = to_Json(*this);
+	logManager::logThis(s);
+	logManager::logThis("Entity JSON dump:\n" + j.dump(4));
+}
 void entity::spill_guts() {
 	nlohmann::ordered_json j = to_Json(*this);
 	logManager::logThis("Entity JSON dump:\n" + j.dump(4));
