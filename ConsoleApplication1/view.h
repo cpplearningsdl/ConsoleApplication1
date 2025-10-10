@@ -12,6 +12,16 @@ struct viewPort {
 	position targetPos{ 0,0 };
 	float speed = 0.0f;
 	bool moving = false;
+	bool rotating = false;          // true if the camera is currently orbiting
+	float angle = 1.0f;             // current angle of rotation (radians)
+	float radius = 256.0f;          // distance from target point for orbit
+	float angularSpeed = 0.03f;     // radians per update
+
+	float reduceRadius = 0.00005f;   // change per update
+	float maxRadius = 300.0f;    // maximum orbit radius
+	bool shrinking = true;
+
+	static constexpr float PI = 3.14159265358979323846f;
 };
 
 //grid x,y to array index
@@ -116,3 +126,60 @@ inline bool moveView(viewPort& v)
 	return true; // still moving toward target
 }
 
+inline void startRotation(viewPort& v, const position& center, float startRadius, float speedRadiansPerFrame) {
+	v.targetPos = center;
+	v.radius = startRadius;
+	v.angularSpeed = speedRadiansPerFrame;
+	v.rotating = true;
+}
+
+inline void stopRotation(viewPort& v) {
+	v.rotating = false;
+}
+
+inline void updateRotation(viewPort& v) {
+	if (!v.rotating) return;
+
+	// --- advance angle ---
+	v.angle += v.angularSpeed;
+	if (v.angle > 2 * v.PI) v.angle -= 2 * v.PI;
+	 
+	// --- update radius ---
+	if (v.shrinking) {
+		v.radius -= v.reduceRadius;
+		if (v.radius <= 0) {
+			v.radius = 0;
+			v.shrinking = false;
+		}
+	}
+	else {
+		v.radius += v.reduceRadius;
+		if (v.radius >= v.maxRadius) {
+			v.radius = v.maxRadius;
+			v.shrinking = true;
+		}
+	}
+
+	// --- orbit around target ---
+	float cosA = cosf(v.angle);
+	float sinA = sinf(v.angle);
+
+	float targetX = v.targetPos.getX() + cosA * v.radius;
+	float targetY = v.targetPos.getY() + sinA * v.radius;
+
+	// --- center camera on orbit position ---
+	float halfW = v.screenSize.getW() / 2.0f;
+	float halfH = v.screenSize.getH() / 2.0f;
+
+	v.viewPos.setX(targetX - halfW);
+	v.viewPos.setY(targetY - halfH);
+
+	//// --- clamp camera to map bounds ---
+	//float maxX = v.mapSize.getW() * v.tileSize.getW() - v.screenSize.getW();
+	//float maxY = v.mapSize.getH() * v.tileSize.getH() - v.screenSize.getH();
+
+	//if (v.viewPos.getX() < 0) v.viewPos.setX(0);
+	//if (v.viewPos.getY() < 0) v.viewPos.setY(0);
+	//if (v.viewPos.getX() > maxX) v.viewPos.setX(maxX);
+	//if (v.viewPos.getY() > maxY) v.viewPos.setY(maxY);
+}

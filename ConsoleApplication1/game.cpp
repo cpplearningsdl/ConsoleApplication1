@@ -15,9 +15,11 @@ game::game() {
 	logManager::logThis("started first game");  
 	addEntityToGame(0, ENTITY);   
 	addEntityToGame(2, TILE); 
-	view.moving = true;
-	view.targetPos = { 200, 200 };
-	view.speed = 0.2;
+	view.moving = false;
+	view.targetPos = { 50, 330 };
+	view.speed = 2.2;
+
+	startRotation(view, { 50, 330 }, 350, .0033);
 }
 
 game::~game() {
@@ -39,11 +41,11 @@ void game::update(inputManager& input) {
 		e->updateRenderInfo();
 	} 
 	updateView();
-	if (updateCount == 1000) {
-		//removeEntityFromGame(1);
-		view.targetPos = { 0, 0 };
-		logManager::logThis("test removal");
-	}
+	//if (updateCount == 1000) {
+	//	view.moving = true;
+	//	view.targetPos = { 0, 0 };
+	//	logManager::logThis("test removal");
+	//}
 }
  
 void game::loadLevel(int l) {
@@ -180,6 +182,9 @@ void game::updateView() {
 		renderableTilesCache.clear();
 		generateRenderablesCache(entities, renderableEntitiesCache, this->view);
 		generateTileRenderablesCache(floorMap, renderableTilesCache, this->view);
+	}
+	if (view.rotating) {
+		updateRotation(this->view);
 	}
 }
 
