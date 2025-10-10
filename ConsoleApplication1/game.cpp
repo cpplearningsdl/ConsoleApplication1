@@ -9,21 +9,15 @@
 #include "renderablesCacheHandler.h"
 
 game::game() {
+	view.mapSize.setSize(100, 100);
+	floorMap.resize(view.mapSize.getH() * view.mapSize.getW());
 	// init map, entities, etc. 
 	logManager::logThis("started first game");  
-	addEntityToGame(0, ENTITY); 
-	entity& test = getEntityById(0);  
-
-	logManager::logThis("Spilling Guts:");
-	test.spill_guts("SpillGutsTest");
-
-	addEntityToGame(2, TILE);
-	entity& floorTest = getEntityById(1); 
-	floorTest.spill_guts();
-
+	addEntityToGame(0, ENTITY);   
+	addEntityToGame(2, TILE); 
 	view.moving = true;
-	view.targetPos = { 150, 150 };
-	view.speed = 0.4;
+	view.targetPos = { 200, 2000 };
+	view.speed = 0.2;
 }
 
 game::~game() {
@@ -31,6 +25,7 @@ game::~game() {
 }
 
 void game::update(inputManager& input) {
+	updateCount++;
 	for (auto& e : tiles) {
 		//entity->update(); 
 		e->getAnimationManager().step();
@@ -44,84 +39,75 @@ void game::update(inputManager& input) {
 		e->updateRenderInfo();
 	} 
 	updateView();
+	if (updateCount == 1000) {
+		removeEntityFromGame(1);
+		logManager::logThis("test removal");
+	}
 }
  
 void game::loadLevel(int l) {
 
 }
+void game::addTileToFloorMap(entity* e) {
+	position pos = toGridCoords(e->getPos(), this->view);
+	int index = gridToIndex(pos, this->view);
+	if (index >= 0 && index < static_cast<int>(floorMap.size())) {
+		floorMap[index] = e;
+	}
+}
+
 void game::addEntityToGame(int factoryId, ENTITYTYPEENUM type) {
-	if (type == TILE) { // floor tiles
-		tiles.push_back(entityFactory::getInstance().create(factoryId));
-		entity* e = tiles.back().get();
-		e->setEntityId(nextId++);
-
-		// Check if in view, add to tile render cache
-		if (testInView(view, e->getPos(),
-			{ e->getAnimationManager().getHeight(), e->getAnimationManager().getWidth() })) {
-			renderableTilesCache.push_back(e);
-		}
+	auto& factory = entityFactory::getInstance();
+	entity* e = createEntity(factoryId, type, factory);
+	if (type == TILE) {
+		addTileToFloorMap(e);
 	}
-	else { // entities/characters
-		entities.push_back(entityFactory::getInstance().create(factoryId));
-		entity* e = entities.back().get();
-		e->setEntityId(nextId++);
-
-		// Check if in view, add to entity render cache
-		if (testInView(view, e->getPos(),
-			{ e->getAnimationManager().getHeight(), e->getAnimationManager().getWidth() })) {
-			renderableEntitiesCache.push_back(e);
-		}
-	}
+	logManager::logThis("Added entity to game: ", e->getName());
+	addToRenderablesCache(e, type);
 }
 
 void game::addEntityToGame(int factoryId) {
 	auto& factory = entityFactory::getInstance();
 	ENTITYTYPEENUM type = factory.getType(factoryId);
-
+	entity* e = createEntity(factoryId, type, factory);
 	if (type == TILE) {
-		// Create tile
-		tiles.push_back(factory.create(factoryId));
+		addTileToFloorMap(e);
+	}
+	logManager::logThis("Added entity to game: ", e->getName());
+	addToRenderablesCache(e, type); 
+}
+
+entity* game::createEntity(int factoryId, ENTITYTYPEENUM type, entityFactory& f) {
+	if (type == TILE) {
+		tiles.push_back(f.create(factoryId));
 		entity* e = tiles.back().get();
 		e->setEntityId(nextId++);
-
-		position pos = toGridCoords(e->getPos(), this->view);
-		floorMap[gridToIndex(pos, this->view)] = e;
-
-		// Add to render cache if in view
-		if (testInView(this->view, e->getPos(),	{ e->getAnimationManager().getHeight(),  e->getAnimationManager().getWidth() })) {
-			renderableTilesCache.push_back(e);
-		}
-				
+		return e;
 	}
-	else {
-		// Create entity/character
-		entities.push_back(factory.create(factoryId));
+	if (type == ENTITY) {
+		entities.push_back(f.create(factoryId));
 		entity* e = entities.back().get();
 		e->setEntityId(nextId++);
-
-		// Add to render cache if in view
-		if (testInView(this->view, e->getPos(),	{ e->getAnimationManager().getHeight(), e->getAnimationManager().getWidth() })) {
-			renderableEntitiesCache.push_back(e);
-		}
+		return e;
 	}
+	return NULL;
 }
 
 void game::addEntityToGameFromJson(const std::string& jsonFilePath) {
 	// Load JSON
 	std::ifstream file(jsonFilePath);
 	if (!file.is_open()) return;
-	nlohmann::json j;
-	file >> j;
 
-	// Determine type from JSON (default ENTITY)
+	nlohmann::ordered_json j;
+	file >> j;
+	 
 	ENTITYTYPEENUM type = ENTITY;
 	if (j.contains("type")) {
 		type = entityTypeFromString(j.at("type").get<std::string>());
 	}
 
-	// Temporary pointer for render cache check
 	entity* rawPtr = nullptr;
-
+	 
 	if (type == TILE) {
 		tiles.push_back(std::make_unique<entity>());
 		rawPtr = tiles.back().get();
@@ -130,38 +116,53 @@ void game::addEntityToGameFromJson(const std::string& jsonFilePath) {
 		entities.push_back(std::make_unique<entity>());
 		rawPtr = entities.back().get();
 	}
-
-	// Initialize from JSON
-	rawPtr->from_Json(j);
-
-	// Set unique ID
+	 
+	rawPtr->from_Json(j); 
 	rawPtr->setEntityId(nextId++);
-
-	// Add to render cache if in view
-	if (testInView(this->view, rawPtr->getPos(), { rawPtr->getAnimationManager().getHeight(), rawPtr->getAnimationManager().getWidth() })) {
-		if (type == TILE) renderableTilesCache.push_back(rawPtr);
-		else renderableEntitiesCache.push_back(rawPtr);
+	 
+	if (type == TILE) {
+		addTileToFloorMap(rawPtr);
 	}
+
+	addToRenderablesCache(rawPtr, type);
 }
 
 
 
+//void game::removeEntityFromGame(int id) {
+//	auto entityEntity = std::remove_if(entities.begin(), entities.end(),
+//		[id](const std::unique_ptr<entity>& e) { return e->getId() == id; });
+//	entities.erase(entityEntity, entities.end());
+//
+//	auto tileEntity = std::remove_if(tiles.begin(), tiles.end(),
+//		[id](const std::unique_ptr<entity>& e) { return e->getId() == id; });
+//	tiles.erase(tileEntity, tiles.end());
+//	 
+//	removeFromRenderables(renderableEntitiesCache, id);
+//	removeFromRenderables(renderableTilesCache, id);
+//
+//}
 void game::removeEntityFromGame(int id) {
-	auto entityEntity = std::remove_if(entities.begin(), entities.end(),
-		[id](const std::unique_ptr<entity>& e) { return e->getId() == id; });
-	entities.erase(entityEntity, entities.end());
+	auto removeFromContainer = [&](auto& container, ENTITYTYPEENUM type) {
+		auto it = std::find_if(container.begin(), container.end(), [id](const std::unique_ptr<entity>& e) { return e->getId() == id; });
 
-	auto tileEntity = std::remove_if(tiles.begin(), tiles.end(),
-		[id](const std::unique_ptr<entity>& e) { return e->getId() == id; });
-	tiles.erase(tileEntity, tiles.end());
+		if (it == container.end()) return false;
 
-	// Remove from cache
-	//auto pit = std::remove_if(renderableEntitiesCache.begin(), renderableEntitiesCache.end(),
-	//	[id](entity* e) { return e->getId() == id; });
-	//renderableEntitiesCache.erase(pit, renderableEntitiesCache.end());
-	removeFromRenderables(renderableEntitiesCache, id);
-	removeFromRenderables(renderableTilesCache, id);
+		entity* e = it->get();
+		removeFromRenderablesCache(e, type);
+		if (type == TILE) {
+			position pos = toGridCoords(e->getPos(), this->view);
+			int index = gridToIndex(pos, this->view);
+			if (index >= 0 && index < static_cast<int>(floorMap.size()) && floorMap[index] == e)
+				floorMap[index] = nullptr;
+		}
+		container.erase(it);
+		logManager::logThis("removed entity from game: ", e->getName());
+		return true;
+	};
 
+	if (removeFromContainer(entities, ENTITY)) return;
+	removeFromContainer(tiles, TILE);
 }
 
 //RUN TIME ID NOT FACTORY
@@ -185,8 +186,8 @@ entity& game::getEntityById(int id) {
 void game::updateView() {
 	if (view.moving) { 
 		moveView(view);//this can return true(still moving) vs false (at dest)
-		pruneRenderables(renderableEntitiesCache, view);
-		pruneRenderables(renderableTilesCache, view);
+		pruneRenderables(renderableEntitiesCache, view, ENTITY);
+		pruneRenderables(renderableTilesCache, view, TILE);
 	}
 }
 
@@ -195,15 +196,38 @@ void game::addToRenderablesCache(entity* e, ENTITYTYPEENUM t) {
 	if (t == TILE) {
 		if (testInView(this->view, e->getPos(), { e->getAnimationManager().getHeight(),  e->getAnimationManager().getWidth() })) {
 			renderableTilesCache.push_back(e);
+			logManager::logThis("Added entity to rendercache: ", e->getName());
 		}
 	}
 	else {
 		if (testInView(this->view, e->getPos(), { e->getAnimationManager().getHeight(),  e->getAnimationManager().getWidth() })) {
 			renderableEntitiesCache.push_back(e);
+			logManager::logThis("Added entity to rendercache: ", e->getName());
 		}
 	}
 };
-void game::removeFromRenderablesCache(entity* e, ENTITYTYPEENUM t) { };
+void game::removeFromRenderablesCache(entity* e, ENTITYTYPEENUM t) {
+	if (!e) return;
+
+	int id = e->getId();
+
+	switch (t) {
+	case ENTITY:
+		removeFromRenderables(renderableEntitiesCache, id);
+		break;
+
+	case TILE:
+		removeFromRenderables(renderableTilesCache, id);
+		break;
+
+	default:
+		// If unknown type, try both
+		removeFromRenderables(renderableEntitiesCache, id);
+		removeFromRenderables(renderableTilesCache, id);
+		break;
+	}
+}
+
 void game::updateRenderablesCache(ENTITYTYPEENUM t) { };
 void game::fullBuildRenderablesCache(ENTITYTYPEENUM t) { };
 void game::buildAllRenderablesCache() { };

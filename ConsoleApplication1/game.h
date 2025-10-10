@@ -25,7 +25,8 @@ public:
 	void addEntityToGame(int factoryId, ENTITYTYPEENUM type);
 	void addEntityToGame(int factoryId);
 	void addEntityToGameFromJson(const std::string& jsonFilePath);
-
+	entity* createEntity(int id, ENTITYTYPEENUM type, entityFactory& f);
+	void addTileToFloorMap(entity* e);
 	void removeEntityFromGame(int id);
 
 	void loadLevel(int l);
@@ -38,7 +39,7 @@ public:
 
 private:
 	int nextId = 0;
-
+	int updateCount = 0;
 	levelData currentLevelData;
 	viewPort view;
 	std::vector<std::unique_ptr<entity>> entities;

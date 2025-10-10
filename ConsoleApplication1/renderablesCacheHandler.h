@@ -34,22 +34,76 @@ inline void removeFromRenderables(std::vector<entity*>& cache, int id) {
 // Remove any entities that are outside the current view
 //H/W are in their own arrays in animation manager so thats why return by value
 //consider adding container of the size obj version
-inline void pruneRenderables(std::vector<entity*>& cache, const viewPort& v) {
-	auto it = std::remove_if(cache.begin(), cache.end(),
-		[&v](entity* e) {
-		const position& pos = e->getCombinedPos();
-		dimensions size(e->getAnimationManager().getWidth(),
-			e->getAnimationManager().getHeight());
+//inline void pruneRenderables(std::vector<entity*>& cache, const viewPort& v) {
+//	auto it = std::remove_if(cache.begin(), cache.end(),
+//		[&v](entity* e) {
+//		const position& pos = e->getCombinedPos();
+//		dimensions size(e->getAnimationManager().getWidth(),
+//			e->getAnimationManager().getHeight());
+//
+//		bool inView = testInView(v, pos, size);
+//		if (!inView) {
+//			logManager::logThis("Pruned entity: " + e->getAnimationManager().getEntityName());
+//		}
+//		return !inView; // remove if not in view
+//	});
+//
+//	cache.erase(it, cache.end());
+//}
+#include <algorithm> // for std::min / std::max
 
-		bool inView = testInView(v, pos, size);
-		if (!inView) {
-			logManager::logThis("Pruned entity: " + e->getAnimationManager().getEntityName());
-		}
-		return !inView; // remove if not in view
-	});
+#include <algorithm> // for std::min / std::max
 
-	cache.erase(it, cache.end());
+inline void pruneRenderables(std::vector<entity*>& cache, const viewPort& v, ENTITYTYPEENUM type)
+{
+	if (type == TILE) {
+		// Compute min/max tile indices visible in the viewport
+		int minX = std::max(0, static_cast<int>(v.viewPos.getX() / v.tileSize.getW()));
+		int maxX = std::min(v.mapSize.getW() - 1,
+			static_cast<int>((v.viewPos.getX() + v.screenSize.getW()) / v.tileSize.getW()));
+		int minY = std::max(0, static_cast<int>(v.viewPos.getY() / v.tileSize.getH()));
+		int maxY = std::min(v.mapSize.getH() - 1,
+			static_cast<int>((v.viewPos.getY() + v.screenSize.getH()) / v.tileSize.getH()));
+
+		auto it = std::remove_if(cache.begin(), cache.end(),
+			[&](entity* e) {
+			const position& pos = e->getCombinedPos();
+			int tileX = static_cast<int>(pos.getX() / v.tileSize.getW());
+			int tileY = static_cast<int>(pos.getY() / v.tileSize.getH());
+
+			bool inView = (tileX >= minX && tileX <= maxX && tileY >= minY && tileY <= maxY);
+
+			if (!inView) {
+				logManager::logThis("Pruned tile: " + e->getAnimationManager().getEntityName());
+			}
+
+			return !inView; // remove if not in view
+		});
+
+		cache.erase(it, cache.end());
+	}
+	else {
+		// Standard pruning for non-tile entities
+		auto it = std::remove_if(cache.begin(), cache.end(),
+			[&](entity* e) {
+			const position& pos = e->getCombinedPos();
+			dimensions size(e->getAnimationManager().getWidth(),
+				e->getAnimationManager().getHeight());
+
+			bool inView = testInView(v, pos, size);
+
+			if (!inView) {
+				logManager::logThis("Pruned entity: " + e->getAnimationManager().getEntityName());
+			}
+
+			return !inView; // remove if not in view
+		});
+
+		cache.erase(it, cache.end());
+	}
 }
+
+
 
 inline void generateRenderablesCache(const std::vector<std::unique_ptr<entity>>& entities, std::vector<entity*>& cache, const viewPort& v) {
 	cache.clear();

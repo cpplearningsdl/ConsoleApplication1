@@ -7,7 +7,7 @@ struct viewPort {
 	position viewPos{ 0, 0 };                  // top-left of camera in world coordinates
 	dimensions mapSize{ 100, 100 };                // map dimensions in tiles
 	dimensions tileSize{ 128, 128 };               // size of each tile in pixels
-	dimensions screenSize{ logicalW, logicalH };   // logical screen size (default 800x600)
+	dimensions screenSize{ logicalW, logicalH };   // logical screen size  
 
 	position targetPos{ 0,0 };
 	float speed = 0.0f;
