@@ -30,29 +30,8 @@ inline void removeFromRenderables(std::vector<entity*>& cache, int id) {
 	}); 
 	cache.erase(pit, cache.end());
 }
-
-// Remove any entities that are outside the current view
-//H/W are in their own arrays in animation manager so thats why return by value
-//consider adding container of the size obj version
-//inline void pruneRenderables(std::vector<entity*>& cache, const viewPort& v) {
-//	auto it = std::remove_if(cache.begin(), cache.end(),
-//		[&v](entity* e) {
-//		const position& pos = e->getCombinedPos();
-//		dimensions size(e->getAnimationManager().getWidth(),
-//			e->getAnimationManager().getHeight());
-//
-//		bool inView = testInView(v, pos, size);
-//		if (!inView) {
-//			logManager::logThis("Pruned entity: " + e->getAnimationManager().getEntityName());
-//		}
-//		return !inView; // remove if not in view
-//	});
-//
-//	cache.erase(it, cache.end());
-//}
-#include <algorithm> // for std::min / std::max
-
-#include <algorithm> // for std::min / std::max
+ 
+  
 
 inline void pruneRenderables(std::vector<entity*>& cache, const viewPort& v, ENTITYTYPEENUM type)
 {

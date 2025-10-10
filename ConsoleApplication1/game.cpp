@@ -40,12 +40,7 @@ void game::update(inputManager& input) {
 		handleMovement(*e);
 		e->updateRenderInfo();
 	} 
-	updateView();
-	//if (updateCount == 1000) {
-	//	view.moving = true;
-	//	view.targetPos = { 0, 0 };
-	//	logManager::logThis("test removal");
-	//}
+	updateView(); 
 }
  
 void game::loadLevel(int l) {
@@ -172,14 +167,10 @@ entity& game::getEntityById(int id) {
 	throw std::runtime_error("entity with id " + std::to_string(id) + " not found.");
 }
 
-void game::updateView() {
-	//this is stupid, dont prune, clear and rebuild using the entity vector for entities and floormap for tiles
+void game::updateView() { 
 	if (view.moving) { 
-		moveView(view);//this can return true(still moving) vs false (at dest)
-		//pruneRenderables(renderableEntitiesCache, view, ENTITY);
-		//pruneRenderables(renderableTilesCache, view, TILE);
-		renderableEntitiesCache.clear();
-		renderableTilesCache.clear();
+		moveView(view); 
+
 		generateRenderablesCache(entities, renderableEntitiesCache, this->view);
 		generateTileRenderablesCache(floorMap, renderableTilesCache, this->view);
 	}
