@@ -16,7 +16,7 @@ game::game() {
 	addEntityToGame(0, ENTITY);   
 	addEntityToGame(2, TILE); 
 	view.moving = true;
-	view.targetPos = { 200, 2000 };
+	view.targetPos = { 200, 200 };
 	view.speed = 0.2;
 }
 
@@ -40,7 +40,8 @@ void game::update(inputManager& input) {
 	} 
 	updateView();
 	if (updateCount == 1000) {
-		removeEntityFromGame(1);
+		//removeEntityFromGame(1);
+		view.targetPos = { 0, 0 };
 		logManager::logThis("test removal");
 	}
 }
@@ -127,21 +128,7 @@ void game::addEntityToGameFromJson(const std::string& jsonFilePath) {
 	addToRenderablesCache(rawPtr, type);
 }
 
-
-
-//void game::removeEntityFromGame(int id) {
-//	auto entityEntity = std::remove_if(entities.begin(), entities.end(),
-//		[id](const std::unique_ptr<entity>& e) { return e->getId() == id; });
-//	entities.erase(entityEntity, entities.end());
-//
-//	auto tileEntity = std::remove_if(tiles.begin(), tiles.end(),
-//		[id](const std::unique_ptr<entity>& e) { return e->getId() == id; });
-//	tiles.erase(tileEntity, tiles.end());
-//	 
-//	removeFromRenderables(renderableEntitiesCache, id);
-//	removeFromRenderables(renderableTilesCache, id);
-//
-//}
+ 
 void game::removeEntityFromGame(int id) {
 	auto removeFromContainer = [&](auto& container, ENTITYTYPEENUM type) {
 		auto it = std::find_if(container.begin(), container.end(), [id](const std::unique_ptr<entity>& e) { return e->getId() == id; });
@@ -184,10 +171,15 @@ entity& game::getEntityById(int id) {
 }
 
 void game::updateView() {
+	//this is stupid, dont prune, clear and rebuild using the entity vector for entities and floormap for tiles
 	if (view.moving) { 
 		moveView(view);//this can return true(still moving) vs false (at dest)
-		pruneRenderables(renderableEntitiesCache, view, ENTITY);
-		pruneRenderables(renderableTilesCache, view, TILE);
+		//pruneRenderables(renderableEntitiesCache, view, ENTITY);
+		//pruneRenderables(renderableTilesCache, view, TILE);
+		renderableEntitiesCache.clear();
+		renderableTilesCache.clear();
+		generateRenderablesCache(entities, renderableEntitiesCache, this->view);
+		generateTileRenderablesCache(floorMap, renderableTilesCache, this->view);
 	}
 }
 

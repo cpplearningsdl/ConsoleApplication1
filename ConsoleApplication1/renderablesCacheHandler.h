@@ -122,20 +122,20 @@ inline void generateRenderablesCache(const std::vector<std::unique_ptr<entity>>&
 	}
 }
 //use 1d array for lookups on floor tiles instead of testing every floor
-inline void generateTileRenderablesCache( const std::vector<entity*>& tileMap, std::vector<entity*>& cache, const viewPort& v, int mapWidth, int mapHeight){
+inline void generateTileRenderablesCache( const std::vector<entity*>& tileMap, std::vector<entity*>& cache, const viewPort& v){
 	cache.clear();
 
 	int startCol = std::max(0, static_cast<int>(v.viewPos.getX() / v.tileSize.getW()) - 1);
 	int startRow = std::max(0, static_cast<int>(v.viewPos.getY() / v.tileSize.getH()) - 1);
 
-	int endCol = std::min(mapWidth - 1, static_cast<int>((v.viewPos.getX() + v.screenSize.getW()) / v.tileSize.getW()) + 1);
-	int endRow = std::min(mapHeight - 1, static_cast<int>((v.viewPos.getY() + v.screenSize.getH()) / v.tileSize.getH()) + 1);
+	int endCol = std::min(v.mapSize.getW() - 1, static_cast<int>((v.viewPos.getX() + v.screenSize.getW()) / v.tileSize.getW()) + 1);
+	int endRow = std::min(v.mapSize.getH() - 1, static_cast<int>((v.viewPos.getY() + v.screenSize.getH()) / v.tileSize.getH()) + 1);
 
 	for (int row = startRow; row <= endRow; ++row)
 	{
 		for (int col = startCol; col <= endCol; ++col)
 		{
-			int index = row * mapWidth + col;
+			int index = row * v.mapSize.getW() + col;
 			entity* tile = tileMap[index];
 			if (tile)
 				cache.push_back(tile);
