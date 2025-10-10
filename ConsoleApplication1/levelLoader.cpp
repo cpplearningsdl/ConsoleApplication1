@@ -10,7 +10,10 @@
 
 void loadLevel(game& g) {
 	levelData lvl = loadLevelFile(1);
-	g.setLevelData(std::move(lvl)); 
+	//g.setLevelData(std::move(lvl)); 
+	g.setLevelData(loadLevelFile(1));
+	g.getViewNonConst().viewPos = lvl.state.viewPos;
+
 }
 levelData loadLevelFile(int levelNumber) {
 	char* appData = nullptr;

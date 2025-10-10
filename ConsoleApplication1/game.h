@@ -30,12 +30,15 @@ public:
 	void removeEntityFromGame(int id);
 
 	void loadLevel(int l);
-	void setLevelData(levelData&& d) noexcept { currentLevelData = std::move(d);}
+	//void setLevelData(levelData&& d) noexcept { currentLevelData = std::move(d);}
+	void setLevelData(levelData d) { currentLevelData = d; }
 	levelData& getLevelData() noexcept { return currentLevelData; }
 	const levelData& getLevelData() const noexcept { return currentLevelData; }
+	
 
 	void updateView();
 	const viewPort& getView() const { return view; }
+	viewPort& getViewNonConst() { return view; }
 
 private:
 	int nextId = 0;

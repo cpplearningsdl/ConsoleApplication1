@@ -57,22 +57,18 @@ void game::addTileToFloorMap(entity* e) {
 void game::addEntityToGame(int factoryId, ENTITYTYPEENUM type) {
 	auto& factory = entityFactory::getInstance();
 	entity* e = createEntity(factoryId, type, factory);
-	if (type == TILE) {
-		addTileToFloorMap(e);
-	}
-	logManager::logThis("Added entity to game: ", e->getName());
+	if (type == TILE) {	addTileToFloorMap(e);}
 	addToRenderablesCache(e, type);
+	logManager::logThis("Added entity to game: ", e->getName());
 }
 
 void game::addEntityToGame(int factoryId) {
 	auto& factory = entityFactory::getInstance();
 	ENTITYTYPEENUM type = factory.getType(factoryId);
 	entity* e = createEntity(factoryId, type, factory);
-	if (type == TILE) {
-		addTileToFloorMap(e);
-	}
-	logManager::logThis("Added entity to game: ", e->getName());
+	if (type == TILE) {	addTileToFloorMap(e); } 
 	addToRenderablesCache(e, type); 
+	logManager::logThis("Added entity to game: ", e->getName());
 }
 
 entity* game::createEntity(int factoryId, ENTITYTYPEENUM type, entityFactory& f) {
