@@ -34,11 +34,12 @@ public:
 	void loadAnimation(std::string s) { animationHandler.loadAnimation(s); }
 	void setRender(bool b) { render = b; } 
 	const position& getPos() const { return pos; }
+	void setPos(position p) { pos = p; }
 	const dimensions& getSize() const { return size; }
 	const entityRenderInfo& getEntityRenderInfo() const { return renderInfo; } 
 	bool wasClicked() { return butData.clicked; }
 	void setClicked(bool b) { butData.clicked = b; }
-	buttonsActionData getButData() { return butData; }
+	buttonsActionData& getButData() { return butData; }
 
 	void update(inputManager& input) {	
 		handleInput(input);

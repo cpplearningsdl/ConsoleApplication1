@@ -13,6 +13,10 @@ public:
 	void update(inputManager& input);
 	entity&  getEntityById(int id);
 	std::vector<std::unique_ptr<entity>>& getEntities() { return entities; } 
+	std::vector<std::unique_ptr<entity>>& getTiles() { return tiles; }
+	std::vector<entity*>& getFloorMap() { return floorMap; }
+	void resizeFloorMap(int s) { floorMap.resize(s); }
+
 	const std::vector<entity*>& getRenderableEntities() const { return renderableEntitiesCache; }
 	const std::vector<entity*>& getRenderableTiles() const { return renderableTilesCache; }
 
@@ -21,6 +25,8 @@ public:
 	void updateRenderablesCache(ENTITYTYPEENUM t);
 	void fullBuildRenderablesCache(ENTITYTYPEENUM t);
 	void buildAllRenderablesCache();
+
+
 
 	void addEntityToGame(int factoryId, ENTITYTYPEENUM type);
 	void addEntityToGame(int factoryId);

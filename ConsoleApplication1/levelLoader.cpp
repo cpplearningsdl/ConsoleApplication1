@@ -10,9 +10,11 @@
 
 void loadLevel(game& g) {
 	levelData lvl = loadLevelFile(1);
+	g.resizeFloorMap(lvl.state.mapSize.getH() * lvl.state.mapSize.getW());
 	//g.setLevelData(std::move(lvl)); 
 	g.setLevelData(loadLevelFile(1));
 	g.getViewNonConst().viewPos = lvl.state.viewPos;
+	loadEntities(g, lvl);
 
 }
 levelData loadLevelFile(int levelNumber) {
@@ -50,7 +52,38 @@ levelData loadLevelFile(int levelNumber) {
 	return lvl;
 }
 
-void loadEntities(game& g) {
+void loadEntities(game& g, levelData& lvl) {
+	int index = 0;
+	for (auto& id : lvl.state.entityIds) {
+		g.addEntityToGame(id); 
+		g.getEntities().back()->setPos(lvl.state.entityPositions[index]);
+		index++;
+	} 
+}
+//void loadTiles(game& g, levelData& lvl) { 
+//	for (auto& id : lvl.state.tileIds) {
+//		g.addEntityToGame(id);
+//		entity* e = g.getTiles().back().get();
+//		g.addTileToFloorMap(e);
+//	}
+//}
+void loadTiles(game& g, levelData& lvl) {
+	const int tileSize = 128; 
+	int mapW = g.getView().mapSize.getW();
+	int mapH = g.getView().mapSize.getH();
 
+	float x = 0;
+	float y = 0;
 
+	for (auto& id : lvl.state.tileIds) {
+		g.addEntityToGame(id);
+		entity* e = g.getTiles().back().get(); 
+		e->setPos({ x, y }); 
+		x += tileSize;
+		if (x >= mapW * tileSize) {
+			x = 0;
+			y += tileSize;
+		} 
+		g.addTileToFloorMap(e);
+	}
 }

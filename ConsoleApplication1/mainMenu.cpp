@@ -10,13 +10,18 @@ mainMenu::mainMenu() {
 
 void mainMenu::init() {
 	loadJson(); 
-	pos.setPosition((static_cast<int>(gWindowWidth) -1274)/2, (static_cast<int>(gWindowHeight) -785)/2);
+	pos.setPosition((static_cast<float>(logicalW) -1274)/2, (static_cast<float>(logicalH) -785)/2);
+	loadButtons(); 
 	updateRenderInfo(); 
 	show();
 }
  
 void mainMenu::loadButtons() {
-  
+	//THIS MENU LOADED BY JSON BUT SETTING POS HERE UNTIL DEFINITIVE LOGICALSIZE..
+	dimensions p = buttons.back().getSize();
+	position n = { (static_cast<float>(logicalW) - static_cast<float>(p.getW())) / 2.0f,(static_cast<float>(logicalH) - static_cast<float>(p.getH())) / 3.0f };
+	logManager::logThis("ButtonArraySize: ", buttons.size());
+	buttons.back().setPos(n);
 }
 void mainMenu::updateRenderInfo() {
 	updateEntityRenderInfo(renderInfo, animationHandler.getCurrentTexture(), pos, animationHandler.getHeight(), animationHandler.getWidth(), getRender());

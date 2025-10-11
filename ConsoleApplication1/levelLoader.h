@@ -11,4 +11,5 @@ void loadLevel(game& g);
 
 levelData loadLevelFile(int levelNumber);
 
-void loadEntities(game& g);
+void loadEntities(game& g, levelData& lvl);
+void loadTiles(game& g, levelData& lvl);
