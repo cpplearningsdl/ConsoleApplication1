@@ -3,7 +3,7 @@
 
 class dimensions {
 
-private:
+private://UPDATE TO FLOAT
 	int width, height;
 public:
 	dimensions(int nw, int nh) : width(nw), height(nh) {}
@@ -14,6 +14,8 @@ public:
 	void setH(int nh) { height = nh; }
 	int getW() const { return width; }
 	int getH() const { return height; }
+	float getWf() const { return static_cast<float>(width); }
+	float getHf() const { return static_cast<float>(height); }
 
 	friend void to_json(nlohmann::ordered_json& j, const dimensions& size);
 	friend void from_json(const nlohmann::ordered_json& j, dimensions& size);

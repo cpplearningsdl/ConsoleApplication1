@@ -7,7 +7,7 @@
 
 class game;
 
-void loadLevel(game& g);
+void loadLevel(game& g, int l);
 
 levelData loadLevelFile(int levelNumber);
 

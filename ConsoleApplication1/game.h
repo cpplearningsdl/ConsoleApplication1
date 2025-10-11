@@ -35,7 +35,7 @@ public:
 	void addTileToFloorMap(entity* e);
 	void removeEntityFromGame(int id);
 
-	void loadLevel(int l);
+	void loadALevel(int l);
 	//void setLevelData(levelData&& d) noexcept { currentLevelData = std::move(d);}
 	void setLevelData(levelData d) { currentLevelData = d; }
 	levelData& getLevelData() noexcept { return currentLevelData; }

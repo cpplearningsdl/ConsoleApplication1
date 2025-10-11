@@ -8,14 +8,20 @@
 #include "logManager.h"
 #include "json.hpp"
 
-void loadLevel(game& g) {
-	levelData lvl = loadLevelFile(1);
-	g.resizeFloorMap(lvl.state.mapSize.getH() * lvl.state.mapSize.getW());
-	//g.setLevelData(std::move(lvl)); 
-	g.setLevelData(loadLevelFile(1));
+void loadLevel(game& g, int l) {
+	logManager::logThis("Loading Level");
+	levelData lvl = loadLevelFile(l);
+	logManager::logThis("Resizing Floor Map");
+	g.resizeFloorMap(lvl.state.mapSize.getH() * lvl.state.mapSize.getW()); 
+	logManager::logThis("Setting View pos.");
 	g.getViewNonConst().viewPos = lvl.state.viewPos;
+	logManager::logThis("Loading Entities");
 	loadEntities(g, lvl);
-
+	logManager::logThis("Loading Tiles");
+	loadTiles(g, lvl);
+	logManager::logThis("Setting currentLevelData");
+	g.setLevelData(lvl);
+	logManager::logThis("Finished loading level.");
 }
 levelData loadLevelFile(int levelNumber) {
 	char* appData = nullptr;
@@ -25,6 +31,7 @@ levelData loadLevelFile(int levelNumber) {
 	errno_t err = _dupenv_s(&appData, &len, "APPDATA");
 	if (err != 0 || appData == nullptr) {
 		throw std::runtime_error("APPDATA environment variable not found.");
+		logManager::logThis("APPDATA environment variable not found.");
 	}
 
 	std::filesystem::path basePath = appData;
@@ -37,9 +44,12 @@ levelData loadLevelFile(int levelNumber) {
 
 	std::filesystem::path filePath = basePath / (std::to_string(levelNumber) + ".json");
 
+	logManager::logThis("Trying to open level file path: " + filePath.string());
 	std::ifstream file(filePath);
 	if (!file.is_open()) {
 		throw std::runtime_error("Failed to open level file: " + filePath.string());
+
+		logManager::logThis("Failed to open level file path: " + filePath.string());
 	}
 
 	nlohmann::ordered_json j;
@@ -55,18 +65,12 @@ levelData loadLevelFile(int levelNumber) {
 void loadEntities(game& g, levelData& lvl) {
 	int index = 0;
 	for (auto& id : lvl.state.entityIds) {
-		g.addEntityToGame(id); 
+		g.addEntityToGame(id, ENTITY); 
 		g.getEntities().back()->setPos(lvl.state.entityPositions[index]);
+		g.addToRenderablesCache(g.getEntities().back().get(), ENTITY);
 		index++;
 	} 
-}
-//void loadTiles(game& g, levelData& lvl) { 
-//	for (auto& id : lvl.state.tileIds) {
-//		g.addEntityToGame(id);
-//		entity* e = g.getTiles().back().get();
-//		g.addTileToFloorMap(e);
-//	}
-//}
+} 
 void loadTiles(game& g, levelData& lvl) {
 	const int tileSize = 128; 
 	int mapW = g.getView().mapSize.getW();
@@ -76,7 +80,7 @@ void loadTiles(game& g, levelData& lvl) {
 	float y = 0;
 
 	for (auto& id : lvl.state.tileIds) {
-		g.addEntityToGame(id);
+		g.addEntityToGame(id, TILE);
 		entity* e = g.getTiles().back().get(); 
 		e->setPos({ x, y }); 
 		x += tileSize;
@@ -85,5 +89,6 @@ void loadTiles(game& g, levelData& lvl) {
 			y += tileSize;
 		} 
 		g.addTileToFloorMap(e);
+		g.addToRenderablesCache(e, TILE);
 	}
 }

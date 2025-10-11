@@ -8,18 +8,25 @@
 #include "movementHandler.h"
 #include "renderablesCacheHandler.h"
 
+//game::game() {
+//	view.mapSize.setSize(100, 100);
+//	floorMap.resize(view.mapSize.getH() * view.mapSize.getW());
+//	// init map, entities, etc. 
+//	logManager::logThis("started first game");  
+//	addEntityToGame(0, ENTITY);   
+//	addEntityToGame(2, TILE); 
+//	view.moving = false;
+//	view.targetPos = { 50, 330 };
+//	view.speed = 2.2;
+//
+//	startRotation(view, { 50, 330 }, 350, .0033);
+//}
 game::game() {
-	view.mapSize.setSize(100, 100);
-	floorMap.resize(view.mapSize.getH() * view.mapSize.getW());
-	// init map, entities, etc. 
-	logManager::logThis("started first game");  
-	addEntityToGame(0, ENTITY);   
-	addEntityToGame(2, TILE); 
-	view.moving = false;
-	view.targetPos = { 50, 330 };
-	view.speed = 2.2;
-
-	startRotation(view, { 50, 330 }, 350, .0033);
+	loadALevel(1);
+	view.moving = true;
+	view.targetPos = { 128 * 100, 128 * 100 };
+	view.speed = 10;
+	//startRotation(view, { 50, 330 }, 350, .0033);
 }
 
 game::~game() {
@@ -43,8 +50,8 @@ void game::update(inputManager& input) {
 	updateView(); 
 }
  
-void game::loadLevel(int l) {
-
+void game::loadALevel(int l) {
+	loadLevel(*this, l);
 }
 void game::addTileToFloorMap(entity* e) {
 	position pos = toGridCoords(e->getPos(), this->view);
@@ -58,8 +65,8 @@ void game::addEntityToGame(int factoryId, ENTITYTYPEENUM type) {
 	auto& factory = entityFactory::getInstance();
 	entity* e = createEntity(factoryId, type, factory);
 	if (type == TILE) {	addTileToFloorMap(e);}
-	addToRenderablesCache(e, type);
-	logManager::logThis("Added entity to game: ", e->getName());
+	//addToRenderablesCache(e, type); POS NOT SET BY LOADER BEFORE THIS
+	//logManager::logThis("Added entity to game: ", e->getName());
 }
 
 void game::addEntityToGame(int factoryId) {
@@ -67,7 +74,7 @@ void game::addEntityToGame(int factoryId) {
 	ENTITYTYPEENUM type = factory.getType(factoryId);
 	entity* e = createEntity(factoryId, type, factory);
 	if (type == TILE) {	addTileToFloorMap(e); } 
-	addToRenderablesCache(e, type); 
+	//addToRenderablesCache(e, type); POS NOT SET BY LOADER BEFORE THIS
 	logManager::logThis("Added entity to game: ", e->getName());
 }
 
@@ -180,13 +187,13 @@ void game::addToRenderablesCache(entity* e, ENTITYTYPEENUM t) {
 	if (t == TILE) {
 		if (testInView(this->view, e->getPos(), { e->getAnimationManager().getHeight(),  e->getAnimationManager().getWidth() })) {
 			renderableTilesCache.push_back(e);
-			logManager::logThis("Added entity to rendercache: ", e->getName());
+			//logManager::logThis("Added entity to rendercache: ", e->getName());
 		}
 	}
 	else {
 		if (testInView(this->view, e->getPos(), { e->getAnimationManager().getHeight(),  e->getAnimationManager().getWidth() })) {
 			renderableEntitiesCache.push_back(e);
-			logManager::logThis("Added entity to rendercache: ", e->getName());
+			//logManager::logThis("Added entity to rendercache: ", e->getName());
 		}
 	}
 };

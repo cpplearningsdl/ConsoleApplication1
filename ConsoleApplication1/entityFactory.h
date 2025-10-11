@@ -28,10 +28,10 @@ public:
 	}
 
 	std::unique_ptr<entity> create(int id) {
-		logManager::logThis("Trying to add entity to game: id ", id);
+		//logManager::logThis("Trying to add entity to game: id ", id);
 		auto it = prototypes.find(id);
 		if (it != prototypes.end()) {
-			logManager::logThis("Added entity to game: id", id);
+			//logManager::logThis("Added entity to game: id", id);
 			return std::make_unique<entity>(*it->second); // copy constructor
 
 		}
