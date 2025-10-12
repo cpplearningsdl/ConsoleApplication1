@@ -1,0 +1,105 @@
+{
+  "type": "ENTITY",
+  "entityId": 0,
+  "factoryId": 4,
+  "name": "Red Leader",
+  "stats": {
+    "HP": {
+      "current": 40,
+      "min": 0,
+      "base": 40,
+      "clamped": true
+    },
+    "MP": {
+      "current": 50,
+      "min": 0,
+      "base": 50,
+      "clamped": true
+    },
+    "DEFENSE": {
+      "current": 5,
+      "min": 0,
+      "base": 5,
+      "clamped": false
+    }
+  },
+  "position": {
+    "x": 1280,
+    "y": 1280
+  },
+  "abilities": [
+    {
+      "name": "heal",
+      "type": "BATTLEONLY",
+      "stats": {
+        "LEVEL": {
+          "current": 1,
+          "min": 0,
+          "base": 1,
+          "clamped": false
+        },
+        "EXPERIENCE": {
+          "current": 0,
+          "min": 0,
+          "base": 0,
+          "clamped": false
+        },
+        "EXPERIENCENEEDED": {
+          "current": 10,
+          "min": 0,
+          "base": 10,
+          "clamped": false
+        },
+        "MP": {
+          "current": 20,
+          "min": 0,
+          "base": 20,
+          "clamped": true
+        },
+        "ATTACK": {
+          "current": 5,
+          "min": 0,
+          "base": 5,
+          "clamped": false
+        },
+        "TIMESUSED": {
+          "current": 0,
+          "min": 0,
+          "base": 0,
+          "clamped": false
+        }
+      },
+      "usesLeft": {
+        "current": 5,
+        "max": 5,
+        "locked": false
+      }
+    }
+  ],
+  "animationManager": {
+    "entityName": "Red Leader",
+    "animationName": "idle",
+    "chainAnimationName": "",
+    "frameCount": 2,
+    "currentIndex": 0,
+    "heldCount": 0,
+    "holdFor": 10,
+    "finished": false,
+    "loop": false,
+    "chainOverride": "",
+    "animationMovement": {
+      "type": "idle",
+      "x": 0,
+      "y": 0
+    }
+  },
+  "renderInfo": {
+    "pos": {
+      "x": 1280,
+      "y": 1280
+    },
+    "height": 128,
+    "width": 128,
+    "render": true
+  }
+}

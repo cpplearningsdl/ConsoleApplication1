@@ -84,6 +84,7 @@ inline bool testInView(const viewPort& v, const position& p, const dimensions& s
 }
 
 inline void setViewTarget(viewPort& v, const position& dest, float speed) {
+	v.rotating = false;
 	v.targetPos = dest;
 	v.speed = speed;
 	v.moving = true;
@@ -91,39 +92,54 @@ inline void setViewTarget(viewPort& v, const position& dest, float speed) {
 
 inline bool moveView(viewPort& v)
 {
-	if (!v.moving) return false; // already at target
+	if (!v.moving) return false;
 
-	float dx = v.targetPos.getX() - v.viewPos.getX();
-	float dy = v.targetPos.getY() - v.viewPos.getY();
+	const float halfW = v.screenSize.getW() / 2.0f;
+	const float halfH = v.screenSize.getH() / 2.0f;
 
-	float distSq = dx * dx + dy * dy;
-	float step = v.speed;
+	// current center of camera in world coords
+	const float centerX = v.viewPos.getX() + halfW;
+	const float centerY = v.viewPos.getY() + halfH;
 
+	// vector from center to target (target is world-space point we want centered)
+	const float dx = v.targetPos.getX() - centerX;
+	const float dy = v.targetPos.getY() - centerY;
+
+	const float distSq = dx * dx + dy * dy;
+	const float step = v.speed;
+
+	// if center is within one step of the target, snap center to target
 	if (distSq <= step * step)
 	{
-		v.viewPos = v.targetPos;
+		v.viewPos.setX(v.targetPos.getX() - halfW);
+		v.viewPos.setY(v.targetPos.getY() - halfH);
 		v.moving = false;
 		return false; // reached target, no more movement
 	}
-	else
-	{
-		float len = std::sqrt(distSq);
-		v.viewPos.setX(v.viewPos.getX() + (dx / len) * step);
-		v.viewPos.setY(v.viewPos.getY() + (dy / len) * step);
-	}
-	//clamp to map 
-	float maxX = v.mapSize.getW() * v.tileSize.getW() - v.screenSize.getW();
-	float maxY = v.mapSize.getH() * v.tileSize.getH() - v.screenSize.getH();
 
-	if (v.viewPos.getX() < 0) v.viewPos.setX(0);
-	if (v.viewPos.getY() < 0) v.viewPos.setY(0);
-	if (v.viewPos.getX() > maxX) v.viewPos.setX(maxX);
-	if (v.viewPos.getY() > maxY) v.viewPos.setY(maxY);
+	// otherwise move the camera center toward the target by 'step'
+	const float len = std::sqrt(distSq);
+	const float moveX = (dx / len) * step;
+	const float moveY = (dy / len) * step;
 
-	return true; // still moving toward target
+	v.viewPos.setX(v.viewPos.getX() + moveX);
+	v.viewPos.setY(v.viewPos.getY() + moveY);
+
+	//// clamp top-left to map bounds (so viewPos stays valid)
+	//const float maxX = v.mapSize.getW() * v.tileSize.getW() - v.screenSize.getW();
+	//const float maxY = v.mapSize.getH() * v.tileSize.getH() - v.screenSize.getH();
+
+	//if (v.viewPos.getX() < 0) v.viewPos.setX(0);
+	//if (v.viewPos.getY() < 0) v.viewPos.setY(0);
+	//if (v.viewPos.getX() > maxX) v.viewPos.setX(maxX);
+	//if (v.viewPos.getY() > maxY) v.viewPos.setY(maxY);
+
+	return true; // still moving
 }
 
+
 inline void startRotation(viewPort& v, const position& center, float startRadius, float speedRadiansPerFrame) {
+	v.moving = false;
 	v.targetPos = center;
 	v.radius = startRadius;
 	v.angularSpeed = speedRadiansPerFrame;

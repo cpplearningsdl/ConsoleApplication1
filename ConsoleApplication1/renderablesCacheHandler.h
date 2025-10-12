@@ -102,14 +102,15 @@ inline void generateRenderablesCache(const std::vector<std::unique_ptr<entity>>&
 }
 //use 1d array for lookups on floor tiles instead of testing every floor
 inline void generateTileRenderablesCache( const std::vector<entity*>& tileMap, std::vector<entity*>& cache, const viewPort& v){
-	cache.clear();
+	cache.clear(); 
 
 	int startCol = std::max(0, static_cast<int>(v.viewPos.getX() / v.tileSize.getW()) - 1);
 	int startRow = std::max(0, static_cast<int>(v.viewPos.getY() / v.tileSize.getH()) - 1);
 
 	int endCol = std::min(v.mapSize.getW() - 1, static_cast<int>((v.viewPos.getX() + v.screenSize.getW()) / v.tileSize.getW()) + 1);
 	int endRow = std::min(v.mapSize.getH() - 1, static_cast<int>((v.viewPos.getY() + v.screenSize.getH()) / v.tileSize.getH()) + 1);
-
+ 
+	//logManager::logThis("generateTileRenderablesCache view indices: ["+ std::to_string(startCol) + "][" + std::to_string(startRow) + "]-["+ std::to_string(endCol) + "][" + std::to_string(endRow) + "]");
 	for (int row = startRow; row <= endRow; ++row)
 	{
 		for (int col = startCol; col <= endCol; ++col)

@@ -8,25 +8,10 @@
 #include "movementHandler.h"
 #include "renderablesCacheHandler.h"
 
-//game::game() {
-//	view.mapSize.setSize(100, 100);
-//	floorMap.resize(view.mapSize.getH() * view.mapSize.getW());
-//	// init map, entities, etc. 
-//	logManager::logThis("started first game");  
-//	addEntityToGame(0, ENTITY);   
-//	addEntityToGame(2, TILE); 
-//	view.moving = false;
-//	view.targetPos = { 50, 330 };
-//	view.speed = 2.2;
-//
-//	startRotation(view, { 50, 330 }, 350, .0033);
-//}
+ 
 game::game() {
 	loadALevel(1);
-	view.moving = true;
-	view.targetPos = { 128 * 100, 128 * 100 };
-	view.speed = 10;
-	//startRotation(view, { 50, 330 }, 350, .0033);
+	startRotation(view, { 64, 64 }, 128, .033);
 }
 
 game::~game() {
@@ -46,7 +31,14 @@ void game::update(inputManager& input) {
 		e->getAnimationManager().step();
 		handleMovement(*e);
 		e->updateRenderInfo();
-	} 
+	}  
+
+	if (updateCount == 300) {
+		setViewTarget(this->view, { 256 + 64, 256 + 64 }, 2.71);
+	}
+	if (updateCount == 500) {
+		startRotation(view, { view.targetPos.getX(), view.targetPos.getY()}, 128, -.033);
+	}
 	updateView(); 
 }
  
@@ -64,7 +56,7 @@ void game::addTileToFloorMap(entity* e) {
 void game::addEntityToGame(int factoryId, ENTITYTYPEENUM type) {
 	auto& factory = entityFactory::getInstance();
 	entity* e = createEntity(factoryId, type, factory);
-	if (type == TILE) {	addTileToFloorMap(e);}
+	//if (type == TILE) {	addTileToFloorMap(e);}
 	//addToRenderablesCache(e, type); POS NOT SET BY LOADER BEFORE THIS
 	//logManager::logThis("Added entity to game: ", e->getName());
 }
