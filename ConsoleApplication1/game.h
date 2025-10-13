@@ -11,6 +11,7 @@ public:
 	~game();
 
 	void update(inputManager& input);
+	void updateEntities(std::vector<std::unique_ptr<entity>>& entitiesVector);
 	entity&  getEntityById(int id);
 	std::vector<std::unique_ptr<entity>>& getEntities() { return entities; } 
 	std::vector<std::unique_ptr<entity>>& getTiles() { return tiles; }
@@ -49,6 +50,7 @@ public:
 private:
 	int nextId = 0;
 	int updateCount = 0;
+	bool blockMenus = false;
 	levelData currentLevelData;
 	viewPort view;
 	std::vector<std::unique_ptr<entity>> entities;

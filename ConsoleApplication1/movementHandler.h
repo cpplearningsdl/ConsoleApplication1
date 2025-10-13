@@ -16,6 +16,7 @@ inline void handleMovement(entity& e) {
 			else {
 				e.setMoving(false);
 				e.setBlockMenus(false);
+				e.setUnblockMenu(true);
 				eam.loadAnimation("idle");
 				eam.setMovement(movementTypeEnum::idle, 0, 0, 0, eam.getFrameCount());
 			}

@@ -20,28 +20,21 @@ game::~game() {
 
 void game::update(inputManager& input) {
 	updateCount++;
-	for (auto& e : tiles) {
-		//entity->update(); 
-		e->getAnimationManager().step();
-		handleMovement(*e);
-		e->updateRenderInfo();
-	}
-	for (auto& e : entities) {
-		//entity->update(); 
-		e->getAnimationManager().step();
-		handleMovement(*e);
-		e->updateRenderInfo();
-	}  
 
-	if (updateCount == 300) {
-		setViewTarget(this->view, { 256 + 64, 256 + 64 }, 2.71);
-	}
-	if (updateCount == 500) {
-		startRotation(view, { view.targetPos.getX(), view.targetPos.getY()}, 1, 228, -.033, false, .3);
-	}
+	updateEntities(tiles);
+	updateEntities(entities);
+ 
 	updateView(); 
 }
- 
+
+void game::updateEntities(std::vector<std::unique_ptr<entity>>& entitiesVector) {
+	for (auto& e : entitiesVector) {
+		e->getAnimationManager().step();
+		handleMovement(*e);
+		e->updateRenderInfo();
+	}
+}
+
 void game::loadALevel(int l) {
 	loadLevel(*this, l);
 }

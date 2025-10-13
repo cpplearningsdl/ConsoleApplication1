@@ -49,6 +49,8 @@ public:
 
 	const bool blockingMenus() const { return blockMenus; }
 	void setBlockMenus(bool b) { blockMenus = b; }
+	const bool unblockMenu() const { return unblockMenus; };
+	void setUnblockMenu(bool b) { unblockMenus = b; }
 
 	const statsContainer& getStats() const { return stats; }
 	statsContainer& getStats() { return stats; }
@@ -86,6 +88,7 @@ private:
 	position pos;
 	bool render;
 	bool blockMenus;
+	bool unblockMenus;
 	bool isMoving;
 
 	movementPath path;
