@@ -15,6 +15,10 @@ struct viewPort {
 	bool rotating = false;          // true if the camera is currently orbiting
 	float angle = 1.0f;             // current angle of rotation (radians)
 	float radius = 256.0f;          // distance from target point for orbit
+	float targetRadius = 0.0f;
+	float radiusStep = 0.0f;
+	bool increaseRadius = false;
+	bool oscilate = false;
 	float angularSpeed = 0.03f;     // radians per update
 
   
@@ -138,12 +142,16 @@ inline bool moveView(viewPort& v)
 }
 
 
-inline void startRotation(viewPort& v, const position& center, float startRadius, float speedRadiansPerFrame) {
+inline void startRotation(viewPort& v, const position& center, float startRadius, float targetRad, float speedRadiansPerFrame, bool osc, float rSpeed) {
 	v.moving = false;
 	v.targetPos = center;
 	v.radius = startRadius;
+	v.targetRadius = targetRad;
+	v.radiusStep = rSpeed;
+	v.oscilate = osc;
 	v.angularSpeed = speedRadiansPerFrame;
 	v.rotating = true;
+	v.increaseRadius = true;
 }
 
 inline void stopRotation(viewPort& v) {
@@ -153,6 +161,22 @@ inline void stopRotation(viewPort& v) {
 inline void updateRotation(viewPort& v) {
 	if (!v.rotating) return;
 
+	if (v.increaseRadius)
+	{
+		v.radius += v.radiusStep;
+		if (v.radius >= v.targetRadius)
+		{
+			v.radius = v.targetRadius;
+			v.increaseRadius = false; // stop increasing (or flip if you want oscillation)
+		}
+	}
+	else
+	{
+		if (v.oscilate) {
+			v.radius -= v.radiusStep;
+			if (v.radius <= 0) { v.increaseRadius = true; }
+		}
+	}
 	// --- advance angle ---
 	v.angle += v.angularSpeed;
 	if (v.angle > 2 * v.PI) v.angle -= 2 * v.PI;

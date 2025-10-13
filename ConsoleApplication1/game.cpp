@@ -11,7 +11,7 @@
  
 game::game() {
 	loadALevel(1);
-	startRotation(view, { 64, 64 }, 128, .033);
+	startRotation(view, { 64, 64 }, 1,128, .033, false, .3);
 }
 
 game::~game() {
@@ -37,7 +37,7 @@ void game::update(inputManager& input) {
 		setViewTarget(this->view, { 256 + 64, 256 + 64 }, 2.71);
 	}
 	if (updateCount == 500) {
-		startRotation(view, { view.targetPos.getX(), view.targetPos.getY()}, 128, -.033);
+		startRotation(view, { view.targetPos.getX(), view.targetPos.getY()}, 1, 228, -.033, false, .3);
 	}
 	updateView(); 
 }
