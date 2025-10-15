@@ -90,8 +90,8 @@ bool animationManager::loadAnimation(const std::string& baseName) {
 	return true;
 }
 
-void animationManager::setMovement(movementTypeEnum type, float startX, float startY, float distance, int frames) {
-	movement = animationMovementFactory::createMovement(type, startX, startY, distance, frames);
+void animationManager::setMovement(movementTypeEnum type, float startX, float startY, float distance, int frames, float destinationX, float destinationY) {
+	movement = animationMovementFactory::createMovement(type, startX, startY, distance, frames, destinationX, destinationY);
 }
  
 void animationManager::step() {

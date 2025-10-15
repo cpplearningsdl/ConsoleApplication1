@@ -7,8 +7,7 @@ class northMovement : public animationMovement {
 private:  
 	float deltaY;
 	int totalFrames;
-	int currentFrame;
-
+	int currentFrame; 
 public:
 	northMovement(float startX, float startY, float distance, int frames);
 	northMovement(const northMovement& other);
@@ -17,9 +16,7 @@ public:
 
 	void step() override; 
 	bool isFinished() const override;
-	 
-	std::unique_ptr<animationMovement> clone() const override;
-	
-
+	movementTypeEnum getMovementType() const override { return movementTypeEnum::north; }
+	std::unique_ptr<animationMovement> clone() const override; 
 };
 

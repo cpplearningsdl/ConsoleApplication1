@@ -29,7 +29,7 @@ public:
 	void step(); 
 	void reset();
 	 
-	void setMovement(movementTypeEnum type, float startX, float startY, float distance, int frames);
+	void setMovement(movementTypeEnum type, float startX, float startY, float distance, int frames, float destinationX = 0.0f, float destinationY = 0.0f);
 	void setMovement(std::unique_ptr<animationMovement> mvt) {	movement = std::move(mvt);	} 
 
 	// Override the chain animation (die after damage instead of go back to idle, for example)

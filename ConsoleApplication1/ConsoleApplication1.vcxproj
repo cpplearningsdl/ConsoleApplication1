@@ -195,6 +195,7 @@
     <ClCompile Include="levelLoader.cpp" />
     <ClCompile Include="textureDataStruct.cpp" />
     <ClCompile Include="textureManager.cpp" />
+    <ClCompile Include="vectorToMovement.cpp" />
     <ClCompile Include="windowManager.cpp" />
     <ClCompile Include="windowSettings.cpp" />
   </ItemGroup>
@@ -254,6 +255,7 @@
     <ClInclude Include="textureManager.h" />
     <ClInclude Include="turnContext.h" />
     <ClInclude Include="uses.h" />
+    <ClInclude Include="vectorToMovement.h" />
     <ClInclude Include="view.h" />
     <ClInclude Include="windowManager.h" />
     <ClInclude Include="windowSettings.h" />

@@ -1,3 +1,4 @@
+#pragma once
 #include "northMovement.h"
 
 northMovement::northMovement(float startX, float startY, float distance, int frames)
@@ -31,6 +32,7 @@ std::unique_ptr<animationMovement> northMovement::clone() const {
 	return std::make_unique<northMovement>(*this);
 }
 void northMovement::loadFromJson(const nlohmann::ordered_json& j) {
+
 	setX(j.value("x", 0.0f));
 	setY(j.value("y", 0.0f));
 	deltaY = j.value("deltaY", 0.0f);

@@ -4,8 +4,9 @@
 //#include "southMovement.h"
 //#include "eastMovement.h"
 //#include "westMovement.h"
+#include "vectorToMovement.h"
 
-std::unique_ptr<animationMovement> animationMovementFactory::createMovement(movementTypeEnum type, float startX, float startY, float distance, int frames) {
+std::unique_ptr<animationMovement> animationMovementFactory::createMovement(movementTypeEnum type, float startX, float startY, float distance, int frames, float destinationX, float destinationY) {
 	switch (type) {
 	case movementTypeEnum::north:
 		return std::make_unique<northMovement>(startX, startY, distance, frames);
@@ -17,6 +18,8 @@ std::unique_ptr<animationMovement> animationMovementFactory::createMovement(move
 	//	return std::make_unique<eastMovement>(startX, startY, distance, frames);
 	//case movementDirectionEnum::west:
 	//	return std::make_unique<westMovement>(startX, startY, distance, frames);
+	case movementTypeEnum::vectorTo:
+		return std::make_unique<vectorToMovement>(startX, startY, destinationX, destinationY, frames);
 	default:
 		return nullptr;
 	}
@@ -32,7 +35,10 @@ std::unique_ptr<animationMovement> animationMovementFactory::createFromJson(cons
 	} else
 	if (type == "idle") {
 		ptr = std::make_unique<idleMovement>(0, 0);
-	}
+	}else
+		if (type == "vectorTo") {//start x, start y, destX, destY, frames
+			ptr = std::make_unique<vectorToMovement>(0, 0, 0, 0, 1);
+		}
 
 	if (ptr) {
 		ptr->loadFromJson(j); // overwrite with real state

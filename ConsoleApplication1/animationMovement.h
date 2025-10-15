@@ -4,6 +4,7 @@
 #include <memory>
 class animationMovement {
 private:
+
 	float x;
 	float y;
 
@@ -16,10 +17,11 @@ public:
 
 	virtual void step() = 0; 
 	virtual bool isFinished() const = 0;
+	virtual movementTypeEnum getMovementType() const = 0;
 
 	float getX() const { return x;	}
 	float getY() const { return y;	}
 	void setX(float nx) { x = nx; }
 	void setY(float ny) { y = ny; }
-
+	
 };

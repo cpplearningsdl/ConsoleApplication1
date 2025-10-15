@@ -17,5 +17,6 @@ public:
 	  
 	void step() override {};
 	bool isFinished() const override { return true; };
+	movementTypeEnum getMovementType() const override { return movementTypeEnum::idle; }
 };
 
