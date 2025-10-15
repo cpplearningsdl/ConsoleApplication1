@@ -323,14 +323,23 @@
     <ClInclude Include="renderablesCacheHandler.h">
       <Filter>Source Files\game</Filter>
     </ClInclude>
-    <ClInclude Include="entityTypeEnum.h">
-      <Filter>Header Files\entity</Filter>
-    </ClInclude>
     <ClInclude Include="levelLoader.h">
       <Filter>Header Files\level</Filter>
     </ClInclude>
     <ClInclude Include="view.h">
       <Filter>Header Files\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="turnContext.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="gamePhaseEnum.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="entityTypeEnum.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="characterTypeEnum.h">
+      <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

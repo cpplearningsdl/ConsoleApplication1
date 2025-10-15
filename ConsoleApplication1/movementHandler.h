@@ -7,13 +7,13 @@ inline void handleMovement(entity& e) {
 	animationManager& eam = e.getAnimationManager();
 
 	if (e.moving())	{
-		if (eam.isFinished()) {
+		if (eam.isFinished()) {//this is checking if the animation is finished not if the movement is finished, but i believe the movement length is set to how many frames the animation is... test
 			movementPath& p = e.getPath();
 			if (p.turns.size() > 0) {
-				eam.setMovement(getNextDirection(p), 0, 0, 128, 10);
+				eam.setMovement(getNextDirection(p), 0, 0, 128, 10);//128 is wrong for non full square movement
 				logManager::logThis("HM");
 			}
-			else {
+			else {//finished path
 				e.setMoving(false);
 				e.setBlockMenus(false);
 				e.setUnblockMenu(true);

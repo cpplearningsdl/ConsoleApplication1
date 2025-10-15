@@ -95,7 +95,7 @@ void animationManager::setMovement(movementTypeEnum type, float startX, float st
 }
  
 void animationManager::step() {
-	if (finished) return; 
+	if (finished) return; //might be problematic if movement not finished but animation is?
 	// Hold frame for N steps
 	if (heldCount < holdFor) {
 		heldCount++;

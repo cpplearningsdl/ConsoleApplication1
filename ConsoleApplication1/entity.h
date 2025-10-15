@@ -7,6 +7,7 @@
 #include "abilityFactory.h"
 #include "entityRenderInfo.h"
 #include "entityTypeEnum.h"
+#include "characterTypeEnum.h"
 #include "json.hpp"
 
 //should probably make a member of this and update it manually instead of polling every frame..
@@ -31,6 +32,8 @@ public:
 
 	std::string getName() const { return name; };
 	void setName(std::string newName) {	name = newName;	};
+	void setCharacterType(CHARACTERTYPEENUM t) { charType = t;}
+	const CHARACTERTYPEENUM getCharacterType() const { return charType; }
 	void setType(ENTITYTYPEENUM t) { type = t; };
 	const ENTITYTYPEENUM getType() const { return type; };
 	bool isType(ENTITYTYPEENUM t) const noexcept { return type == t; };
@@ -83,6 +86,7 @@ public:
 	void spill_guts(std::string s); 
 private:
 	ENTITYTYPEENUM type;
+	CHARACTERTYPEENUM charType;
 	int entityId;
 	int factoryId;
 	position pos;
