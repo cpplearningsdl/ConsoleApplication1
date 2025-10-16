@@ -11,14 +11,19 @@
 void loadLevel(game& g, int l) {
 	logManager::logThis("Loading Level");
 	levelData lvl = loadLevelFile(l);
+
 	logManager::logThis("Resizing Floor Map");
 	g.resizeFloorMap(lvl.state.mapSize.getH() * lvl.state.mapSize.getW()); 
+	
 	logManager::logThis("Setting currentLevelData");
 	g.setLevelData(lvl); 
+	
 	logManager::logThis("Setting View pos.");
 	g.getViewNonConst().viewPos = lvl.state.viewPos;
+	
 	logManager::logThis("Loading Entities");
 	loadEntities(g, lvl);
+	
 	logManager::logThis("Loading Tiles");
 	loadTiles(g, lvl);
 

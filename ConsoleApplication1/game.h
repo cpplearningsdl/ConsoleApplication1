@@ -58,4 +58,5 @@ private:
 	std::vector<std::unique_ptr<entity>> tiles;
 	std::vector<entity*> renderableTilesCache;
 	std::vector<entity*> floorMap;
+	//std::vector<int> turnOrder;//Id's, have to keep track of their ID when saving then update to new runtime ID after loading save!!
 }; 

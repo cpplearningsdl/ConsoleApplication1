@@ -16,6 +16,7 @@ struct levelData {
 		dimensions mapSize;
 		position viewPos;
 
+		std::vector<int> turnOrder;
 		std::vector<int> tileIds;
 		std::vector<int> entityIds;
 		std::vector<position>entityPositions;

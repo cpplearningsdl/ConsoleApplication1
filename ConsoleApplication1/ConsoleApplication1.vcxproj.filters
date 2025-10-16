@@ -347,5 +347,8 @@
     <ClInclude Include="animationMovement.h">
       <Filter>Header Files\entity\movement\movements</Filter>
     </ClInclude>
+    <ClInclude Include="statSorter.h">
+      <Filter>Header Files\entity\stats</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

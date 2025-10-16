@@ -21,8 +21,8 @@ game::~game() {
 void game::update(inputManager& input) {
 	updateCount++;
 
-	updateEntities(tiles);
-	updateEntities(entities);
+	//updateEntities(tiles);
+	//updateEntities(entities);
  
 	updateView(); 
 }

@@ -251,6 +251,7 @@
     <ClInclude Include="statClass.h" />
     <ClInclude Include="statEnum.h" />
     <ClInclude Include="statsContainer.h" />
+    <ClInclude Include="statSorter.h" />
     <ClInclude Include="textureDataStruct.h" />
     <ClInclude Include="textureManager.h" />
     <ClInclude Include="turnContext.h" />
