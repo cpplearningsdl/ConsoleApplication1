@@ -2,6 +2,8 @@
 #include <vector> 
 #include "entityIncludes.h"
 #include "inputManager.h"
+#include "entityManager.h"
+#include "renderCacheManager.h"
 #include "level.h"
 #include "view.h"
 
@@ -12,30 +14,8 @@ public:
 
 	void update(inputManager& input);
 	void updateEntities(std::vector<std::unique_ptr<entity>>& entitiesVector);
-	entity&  getEntityById(int id);
-	std::vector<std::unique_ptr<entity>>& getEntities() { return entities; } 
-	std::vector<std::unique_ptr<entity>>& getTiles() { return tiles; }
-	std::vector<entity*>& getFloorMap() { return floorMap; }
-	void resizeFloorMap(int s) { floorMap.resize(s); }
-
-	const std::vector<entity*>& getRenderableEntities() const { return renderableEntitiesCache; }
-	const std::vector<entity*>& getRenderableTiles() const { return renderableTilesCache; }
-
-	void addToRenderablesCache(entity* e, ENTITYTYPEENUM t);
-	void removeFromRenderablesCache(entity* e, ENTITYTYPEENUM t);
-	void updateRenderablesCache(ENTITYTYPEENUM t);
-	void fullBuildRenderablesCache(ENTITYTYPEENUM t);
-	void buildAllRenderablesCache();
-
-
-
-	void addEntityToGame(int factoryId, ENTITYTYPEENUM type);
-	void addEntityToGame(int factoryId);
-	void addEntityToGameFromJson(const std::string& jsonFilePath);
-	entity* createEntity(int id, ENTITYTYPEENUM type, entityFactory& f);
-	void addTileToFloorMap(entity* e);
-	void removeEntityFromGame(int id);
-
+	 
+	  
 	void loadALevel(int l);
 	//void setLevelData(levelData&& d) noexcept { currentLevelData = std::move(d);}
 	void setLevelData(levelData d) { currentLevelData = d; }
@@ -47,16 +27,15 @@ public:
 	const viewPort& getView() const { return view; }
 	viewPort& getViewNonConst() { return view; }
 
-private:
-	int nextId = 0;
+	entityManager& getEntityHandler() { return entityHandler; }
+	renderCacheManager& getRenderCacheManager() { return renderCacheHandler; }
+private: 
 	int updateCount = 0;
 	bool blockMenus = false;
 	levelData currentLevelData;
 	viewPort view;
-	std::vector<std::unique_ptr<entity>> entities;
-	std::vector<entity*> renderableEntitiesCache; 
-	std::vector<std::unique_ptr<entity>> tiles;
-	std::vector<entity*> renderableTilesCache;
-	std::vector<entity*> floorMap;
+	 
+	entityManager entityHandler;
+	renderCacheManager renderCacheHandler;
 	//std::vector<int> turnOrder;//Id's, have to keep track of their ID when saving then update to new runtime ID after loading save!!
 }; 

@@ -13,7 +13,7 @@ void loadLevel(game& g, int l) {
 	levelData lvl = loadLevelFile(l);
 
 	logManager::logThis("Resizing Floor Map");
-	g.resizeFloorMap(lvl.state.mapSize.getH() * lvl.state.mapSize.getW()); 
+	g.getEntityHandler().resizeFloorMap(lvl.state.mapSize.getH() * lvl.state.mapSize.getW()); 
 	
 	logManager::logThis("Setting currentLevelData");
 	g.setLevelData(lvl); 
@@ -69,15 +69,19 @@ levelData loadLevelFile(int levelNumber) {
 }
 
 void loadEntities(game& g, levelData& lvl) {
+	entityManager& entities = g.getEntityHandler();
+	const viewPort view = g.getView();
 	int index = 0;
 	for (auto& id : lvl.state.entityIds) {
-		g.addEntityToGame(id, ENTITY); 
-		g.getEntities().back()->setPos(lvl.state.entityPositions[index]);
-		g.addToRenderablesCache(g.getEntities().back().get(), ENTITY);
+		entities.createEntity(id, ENTITY, view);
+		entities.getEntities().back()->setPos(lvl.state.entityPositions[index]);
+		g.getRenderCacheManager().addToRenderablesCache(entities.getEntities().back().get(), view);
 		index++;
 	} 
 } 
 void loadTiles(game& g, levelData& lvl) {
+	entityManager& entities = g.getEntityHandler();
+	const viewPort& view = g.getView();
 	const int tileSize = 128; 
 	int mapW = lvl.state.mapSize.getW();
 	int mapH = lvl.state.mapSize.getH();
@@ -86,15 +90,15 @@ void loadTiles(game& g, levelData& lvl) {
 	float y = 0;
 
 	for (auto& id : lvl.state.tileIds) {
-		g.addEntityToGame(id, TILE);
-		entity* e = g.getTiles().back().get(); 
+		entities.createEntity(id, TILE, view);
+		entity* e = entities.getTiles().back().get(); 
 		e->setPos({ x, y }); 
 		x += tileSize;
 		if (x >= mapW * tileSize) {
 			x = 0;
 			y += tileSize;
 		} 
-		g.addTileToFloorMap(e);
-		g.addToRenderablesCache(e, TILE);
+		entities.addTileToFloorMap(e, view);
+		g.getRenderCacheManager().addToRenderablesCache(e, view);
 	}
 }

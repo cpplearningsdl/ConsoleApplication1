@@ -2,6 +2,7 @@
 #include "position.h"
 #include "dimensions.h"
 #include "windowSettings.h"
+#include "entity.h"
 
 struct viewPort {
 	position viewPos{ 0, 0 };                  // top-left of camera in world coordinates
