@@ -18,6 +18,7 @@ entity::entity(const entity& other)
 	stats = other.stats;
 	abilities = other.abilities; 
 	pos = other.pos;
+	alive = other.alive;
 	animationHandler.setEntityName(name);
 	render = other.render;
 	renderInfo = other.renderInfo;
@@ -30,9 +31,11 @@ entity& entity::operator=(const entity& other) {
 		factoryId = other.factoryId;
 		name = other.name;
 		type = other.type;
+		charType = other.charType;
 		stats = other.stats;
 		abilities = other.abilities;
 		pos = other.pos; 
+		alive = other.alive;
 		animationHandler.setEntityName(name);
 		render = other.render;
 		renderInfo = other.renderInfo;
@@ -84,6 +87,9 @@ void entity::from_Json(const nlohmann::ordered_json& j) {
 	if (j.contains("type")) {
 		setType(entityTypeFromString(j.at("type").get<std::string>()));
 	}
+	if (j.contains("charType")) {
+		setCharacterType(stringToCharacterTypeEnum(j.at("charType")));
+	}
 	if (j.contains("entityId")) {
 		setEntityId(j.at("entityId").get<int>());
 	}
@@ -116,6 +122,9 @@ void entity::from_Json(const nlohmann::ordered_json& j) {
 	if (j.contains("position")) { 
 		from_json(j.at("position"), pos);
 	}
+	if (j.contains("alive")) {
+		from_json(j.at("alive"), alive);
+	}
 	 
 	nlohmann::ordered_json dumper = to_Json(*this);
 	//logManager::logThis("New Entity Dump \n", dumper.dump(4));
@@ -124,11 +133,13 @@ nlohmann::ordered_json entity::to_Json(const entity& e) {
 	ordered_json j;
 	//json j;
 	j["type"] = entityTypeToString(e.getType());
+	j["charType"] = characterTypeEnumToString(e.getCharacterType());
 	j["entityId"] = e.getId();
 	j["factoryId"] = e.getFactoryId();
 	j["name"] = e.getName();
 	j["stats"] = e.getStats();
 	j["position"] = e.getPos();
+	j["alive"] = e.isAlive();
 	nlohmann::ordered_json abilitiesArray = nlohmann::ordered_json::array();
 	for (const auto& abPtr : e.getAbilities().getAll()) {
 		if (abPtr) {

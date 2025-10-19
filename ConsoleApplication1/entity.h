@@ -33,15 +33,18 @@ public:
 	std::string getName() const { return name; };
 	void setName(std::string newName) {	name = newName;	};
 	void setCharacterType(CHARACTERTYPEENUM t) { charType = t;}
-	const CHARACTERTYPEENUM getCharacterType() const { return charType; }
+	const CHARACTERTYPEENUM getCharacterType() const { return charType; };
 	void setType(ENTITYTYPEENUM t) { type = t; };
 	const ENTITYTYPEENUM getType() const { return type; };
 	bool isType(ENTITYTYPEENUM t) const noexcept { return type == t; };
-	int getId() const { return entityId; }
+	int getId() const { return entityId; };
 	void setEntityId(int newId) { entityId = newId; };
-	int getFactoryId() const { return factoryId; }
+	int getFactoryId() const { return factoryId; };
 	void setFactoryId(int newId) { factoryId = newId; };
-	void setRender(bool s) { render = s; renderInfo.render = s; }
+	void setRender(bool s) { render = s; renderInfo.render = s; };
+	void setAlive(bool a) { alive = a; };
+	const bool isAlive() const { return alive; };
+	void kill(bool k) { alive = false; };
 
 	const bool&  getRender() const { return render; }
 	
@@ -90,6 +93,7 @@ private:
 	int entityId;
 	int factoryId;
 	position pos;
+	bool alive;
 	bool render;
 	bool blockMenus;
 	bool unblockMenus;
