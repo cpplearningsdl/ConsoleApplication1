@@ -1,5 +1,6 @@
 #pragma once
 #include <string>  
+#include "interactability.h"
 #include "animationManager.h"
 #include "abilities.h"
 #include "statsContainer.h"
@@ -90,6 +91,7 @@ public:
 private:
 	ENTITYTYPEENUM type;
 	CHARACTERTYPEENUM charType;
+	std::string name;
 	int entityId;
 	int factoryId;
 	position pos;
@@ -99,11 +101,11 @@ private:
 	bool unblockMenus;
 	bool isMoving;
 
-	movementPath path;
-
-	std::string name;
+	movementPath path; 
+	InteractFlags interactions;
 	statsContainer stats;
 	abilities abilities; 
+	
 	
 	animationManager animationHandler;
 	entityRenderInfo renderInfo;

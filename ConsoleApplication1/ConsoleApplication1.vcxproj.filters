@@ -362,5 +362,8 @@
     <ClInclude Include="renderCacheManager.h">
       <Filter>Header Files\rendering</Filter>
     </ClInclude>
+    <ClInclude Include="interactability.h">
+      <Filter>Header Files\entity</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
