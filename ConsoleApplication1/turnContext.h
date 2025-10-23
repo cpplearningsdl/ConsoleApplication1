@@ -1,5 +1,6 @@
 #pragma once
 #include "entity.h"
+#include "GameEvent.h"
 #include "gamePhaseEnum.h"
 #include "characterTypeEnum.h"
 #include <vector>
@@ -17,6 +18,7 @@ struct turnContext {
 	bool battleAllowed = true;         // true if you can initiate battle right now (not mid-move)
 	bool turnFinished = false;         // when both actor and actions are done
 
+	std::vector<gameEvent> events;
 	// Optional bookkeeping
 	gamePhase originPhase = gamePhase::DECISION;  
 };

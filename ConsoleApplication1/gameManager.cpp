@@ -1,8 +1,7 @@
 #include "gameManager.h"
 #include "game.h" 
 #include "abilityFactory.h"
-#include "abilityFileLoader.h" 
-#include "entityIncludes.h"
+#include "abilityFileLoader.h"  
 #include "renderer.h"
 #include "renderManager.h"
 #include "inputManager.h"
@@ -14,7 +13,7 @@ gameManager& gameManager::getInstance() {
 }
 
 void gameManager::newGame() {
-	setState(gameStateEnum::PLAYING);
+	setState(gameManagerStateEnum::PLAYING);
 	currentGame = std::make_unique<game>();
 }
 
@@ -34,7 +33,7 @@ void gameManager::processGame() {
 		//pause menu, in game
 		processMenu(input); 
 		if (currentGame) {
-			if (getState() == gameStateEnum::PLAYING) {
+			if (getState() == gameManagerStateEnum::PLAYING) {
 				currentGame->update(input);
 			} 
 		}
@@ -48,19 +47,19 @@ void gameManager::render() {
 }
 
 void gameManager::processMenu(inputManager& input) {
-	if (getState() == gameStateEnum::PLAYING) {
+	if (getState() == gameManagerStateEnum::PLAYING) {
 		if (input.wasKeyReleased(SDL_SCANCODE_ESCAPE)) {
-			setState(gameStateEnum::PAUSED); 
+			setState(gameManagerStateEnum::PAUSED); 
 			thePauseMenu.openMenu(std::make_unique<pauseMenu>());
 		}
-	} else if (getState() == gameStateEnum::PAUSED) { 
+	} else if (getState() == gameManagerStateEnum::PAUSED) { 
 		thePauseMenu.update(input);
 		if (input.wasKeyReleased(SDL_SCANCODE_ESCAPE)) {
-			setState(gameStateEnum::PLAYING);
+			setState(gameManagerStateEnum::PLAYING);
 			thePauseMenu.closeTopMenu();
 		}
 		 else if (thePauseMenu.getMenus().empty()) {
-			setState(gameStateEnum::PLAYING);
+			setState(gameManagerStateEnum::PLAYING);
 		}
 	}
  }

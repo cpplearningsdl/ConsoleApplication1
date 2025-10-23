@@ -7,7 +7,7 @@
 #include "inputManager.h"
 #include "abilityFactory.h"
 #include "abilityFileLoader.h" 
-#include "gameStateEnum.h"
+#include "gameManagerStateEnum.h"
 
 
 class gameManager {
@@ -19,8 +19,8 @@ public:
 	void loadDefaultAssets();
 	void processGame(); 
 	void processMenu(inputManager& input);
-	void setState(gameStateEnum nState) { state = nState; }
-	gameStateEnum getState() { return state; }
+	void setState(gameManagerStateEnum nState) { state = nState; }
+	gameManagerStateEnum getState() { return state; }
 	menuManager& getPauseMenu() { return thePauseMenu; }
 	void init() { theStartMenu.openMenu(std::make_unique<mainMenu>()); }
 	void render(); 
@@ -35,7 +35,7 @@ private:
 	renderManager renderHandler;
 	menuManager thePauseMenu;
 	menuManager theStartMenu; 
-	gameStateEnum state;
+	gameManagerStateEnum state;
 
 };
  

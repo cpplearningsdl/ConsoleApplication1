@@ -76,6 +76,18 @@
     <Filter Include="Header Files\level">
       <UniqueIdentifier>{bd3a3566-51f9-464e-980e-7021f46edd80}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\game\event">
+      <UniqueIdentifier>{25bedb7d-1f85-49f3-ad12-e3ae0a64ef87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\event\events">
+      <UniqueIdentifier>{8e195a44-1f70-4bd2-84f2-5d5c5dfaa328}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\event\events\movement">
+      <UniqueIdentifier>{a014454f-f68f-4d6b-a5e2-483b450305a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\event\events\battle">
+      <UniqueIdentifier>{3f3a6248-fb7d-4687-aebd-970d218f3b5d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp">
@@ -174,6 +186,9 @@
     <ClCompile Include="renderCacheManager.cpp">
       <Filter>Source Files\rendering</Filter>
     </ClCompile>
+    <ClCompile Include="movementManager.cpp">
+      <Filter>Source Files\entity\movement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logManager.h">
@@ -269,9 +284,6 @@
     <ClInclude Include="fileManager.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
-    <ClInclude Include="gameStateEnum.h">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
     <ClInclude Include="gameManager.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
@@ -308,9 +320,6 @@
     <ClInclude Include="decisionContext.h">
       <Filter>Header Files\decisions</Filter>
     </ClInclude>
-    <ClInclude Include="movementHandler.h">
-      <Filter>Header Files\entity\movement</Filter>
-    </ClInclude>
     <ClInclude Include="level.h">
       <Filter>Header Files\level</Filter>
     </ClInclude>
@@ -325,9 +334,6 @@
     </ClInclude>
     <ClInclude Include="entity.h">
       <Filter>Header Files\entity</Filter>
-    </ClInclude>
-    <ClInclude Include="renderablesCacheHandler.h">
-      <Filter>Source Files\game</Filter>
     </ClInclude>
     <ClInclude Include="levelLoader.h">
       <Filter>Header Files\level</Filter>
@@ -364,6 +370,39 @@
     </ClInclude>
     <ClInclude Include="interactability.h">
       <Filter>Header Files\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="renderablesCacheHandler.h">
+      <Filter>Source Files\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="gameManagerStateEnum.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="event.h">
+      <Filter>Header Files\game\event\events</Filter>
+    </ClInclude>
+    <ClInclude Include="movementPropsalEvent.h">
+      <Filter>Header Files\game\event\events\movement</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEvent.h">
+      <Filter>Header Files\game\event\events</Filter>
+    </ClInclude>
+    <ClInclude Include="entityDied.h">
+      <Filter>Header Files\game\event\events\battle</Filter>
+    </ClInclude>
+    <ClInclude Include="enteredTileEvent.h">
+      <Filter>Header Files\game\event\events\movement</Filter>
+    </ClInclude>
+    <ClInclude Include="finishedMovementEvent.h">
+      <Filter>Header Files\game\event\events\movement</Filter>
+    </ClInclude>
+    <ClInclude Include="finishedPathEvent.h">
+      <Filter>Header Files\game\event\events\movement</Filter>
+    </ClInclude>
+    <ClInclude Include="eventSystem.h">
+      <Filter>Header Files\game\event\events</Filter>
+    </ClInclude>
+    <ClInclude Include="movementManager.h">
+      <Filter>Header Files\entity\movement</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
