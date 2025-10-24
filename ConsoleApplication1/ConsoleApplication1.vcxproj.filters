@@ -404,5 +404,11 @@
     <ClInclude Include="movementManager.h">
       <Filter>Header Files\entity\movement</Filter>
     </ClInclude>
+    <ClInclude Include="overLoaded.h">
+      <Filter>Header Files\game\event</Filter>
+    </ClInclude>
+    <ClInclude Include="updateRenderInfoEvent.h">
+      <Filter>Header Files\game\event\events</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

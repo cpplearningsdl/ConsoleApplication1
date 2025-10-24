@@ -2,6 +2,8 @@
 #include <vector>
 #include "entityTypeEnum.h"
 #include "view.h"
+#include "turnContext.h"
+#include "GameEvent.h"
 
 class entity; 
 
@@ -20,6 +22,8 @@ public:
 	void generateEntityRenderablesCache(const viewPort& v, std::vector<std::unique_ptr<entity>>& entities);
 	void generateTileRenderablesCache(const viewPort& v, std::vector<entity*>& floorMap);
 	void pruneRenderables(std::vector<entity*>& cache, const viewPort& v, ENTITYTYPEENUM type);
+
+	void handleEvent(turnContext& ctx, const gameEvent& event);
 private:
 	std::vector<entity*> renderableEntityCache;
 	std::vector<entity*> renderableTileCache;

@@ -4,7 +4,7 @@
 #include "levelLoader.h"
 #include "entityIncludes.h"
 #include "entityTypeEnum.h"
-#include "movementHandler.h" 
+#include "movementManager.h" 
 #include "renderCacheManager.h"
 
  
@@ -20,18 +20,15 @@ game::~game() {
 void game::update(inputManager& input) {
 	updateCount++;
 	updateEntities(entityHandler.getEntities());
-	updateEntities(entityHandler.getTiles());
-	//updateEntities(tiles);
-	//updateEntities(entities);
- 
+	updateEntities(entityHandler.getTiles()); 
 	updateView(); 
 }
 
 void game::updateEntities(std::vector<std::unique_ptr<entity>>& entitiesVector) {
 	for (auto& e : entitiesVector) {
 		e->getAnimationManager().step();
-		handleMovement(*e);
-		e->updateRenderInfo();
+		movementManager.handleMovement(turnCtx, e.get());
+		e->updateRenderInfo();//put this into an event, test if in view
 	}
 }
 

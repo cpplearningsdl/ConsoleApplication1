@@ -1,7 +1,8 @@
 #pragma once
 #include "movementManager.h"
+#include "overLoaded.h"
 
- void movementManager::handleMovement(turnContext& ctx) {
+ void movementManager::handleMovement(turnContext& ctx, entity* e) {
 	//animationManager& eam = e.getAnimationManager();
 
 	//if (e.moving()) {
@@ -23,3 +24,21 @@
 	//	}
 	//}
 }
+
+ void movementManager::handleEvent(turnContext& ctx, const gameEvent& event) {
+		 std::visit(overloaded{
+		[&](const movementProposedEvent& e) {
+			 // Approve or modify the move
+			 if (true) {
+				 true;
+			 }
+				else {
+						// could push interrupt event here
+					}
+				},
+			[&](const enteredTileEvent&) {}, // irrelevant
+			[&](const entityDiedEvent&) {}, // irrelevant
+			[](auto&) {}
+				}, event);
+
+ }

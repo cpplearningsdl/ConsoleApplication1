@@ -255,6 +255,7 @@
     <ClInclude Include="gameManager.h" />
     <ClInclude Include="inputManager.h" />
     <ClInclude Include="logManager.h" />
+    <ClInclude Include="overLoaded.h" />
     <ClInclude Include="path.h" />
     <ClInclude Include="pauseMenu.h" />
     <ClInclude Include="position.h" />
@@ -269,6 +270,7 @@
     <ClInclude Include="textureDataStruct.h" />
     <ClInclude Include="textureManager.h" />
     <ClInclude Include="turnContext.h" />
+    <ClInclude Include="updateRenderInfoEvent.h" />
     <ClInclude Include="uses.h" />
     <ClInclude Include="vectorToMovement.h" />
     <ClInclude Include="view.h" />

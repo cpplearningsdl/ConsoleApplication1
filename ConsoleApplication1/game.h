@@ -4,6 +4,7 @@
 #include "inputManager.h"
 #include "entityManager.h"
 #include "renderCacheManager.h"
+#include "movementManager.h"
 #include "level.h"
 #include "view.h"
 
@@ -37,5 +38,8 @@ private:
 	 
 	entityManager entityHandler;
 	renderCacheManager renderCacheHandler;
+	movementManager movementManager;
+
+	turnContext turnCtx;
 	//std::vector<int> turnOrder;//Id's, have to keep track of their ID when saving then update to new runtime ID after loading save!!
 }; 
