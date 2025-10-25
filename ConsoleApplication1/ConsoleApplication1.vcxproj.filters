@@ -371,9 +371,6 @@
     <ClInclude Include="interactability.h">
       <Filter>Header Files\entity</Filter>
     </ClInclude>
-    <ClInclude Include="renderablesCacheHandler.h">
-      <Filter>Source Files\rendering</Filter>
-    </ClInclude>
     <ClInclude Include="gameManagerStateEnum.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>

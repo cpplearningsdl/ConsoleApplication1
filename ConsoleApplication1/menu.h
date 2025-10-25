@@ -41,6 +41,7 @@ public:
 
 	void requestClose() { pendingClose = true; }
 
+	const animationManager& getAnimationManager() const { return animationHandler; }
 	const entityRenderInfo & getEntityRenderInfo() const { return renderInfo; }
 	const std::vector<buttonObj>& getButtons() const { return buttons; }
 	  

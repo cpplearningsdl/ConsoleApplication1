@@ -4,9 +4,12 @@
 
 
 void renderManager::renderMainMenu(menuManager& m) {
+
 	for (const auto& menu : m.getMenus()) {
+		
 		if (!menu->isVisible()) continue;
-		 
+		const animationManager& anim = menu->getAnimationManager();
+
 		const entityRenderInfo& menuInfo = menu->getEntityRenderInfo();
 		renderer::getInstance().drawToNextFrame( menuInfo.tex, menuInfo.pos.getX(), menuInfo.pos.getY(), menuInfo.height, menuInfo.width ); 
 		 
@@ -27,12 +30,16 @@ void renderManager::renderEntities(game& g, const std::vector<entity*>& cache) {
 	const viewPort& view = g.getView();
 	const float camX = view.viewPos.getX();
 	const float camY = view.viewPos.getY(); 
+	  float screenX = 0;
+	  float screenY = 0;
+	for (auto& e : cache) { 
+		animationManager& a = e->getAnimationManager();
+		const position pos = e->getCombinedPos();
 
-	for (auto& e : cache) {
-		const entityRenderInfo& i = e->getRenderInfo();
-		const float screenX = i.pos.getX() - camX;
-		const float screenY = i.pos.getY() - camY;
-		renderer::getInstance().drawToNextFrame(i.tex, screenX, screenY, i.height, i.width);
+		screenX = pos.getX() - camX;
+		screenY = pos.getY() - camY;
+		//		renderer::getInstance().drawToNextFrame(i.tex, screenX, screenY, i.height, i.width);
+		renderer::getInstance().drawToNextFrame(a.getCurrentTexture(), screenX, screenY, a.getHeight(), a.getWidth());
 	}
 } 
 

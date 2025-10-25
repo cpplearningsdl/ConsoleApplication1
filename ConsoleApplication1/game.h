@@ -15,7 +15,7 @@ public:
 
 	void update(inputManager& input);
 	void updateEntities(std::vector<std::unique_ptr<entity>>& entitiesVector);
-	 
+	void newTurn();
 	  
 	void loadALevel(int l);
 	//void setLevelData(levelData&& d) noexcept { currentLevelData = std::move(d);}

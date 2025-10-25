@@ -1,12 +1,11 @@
-#pragma once
-#include "entity.h"
+#pragma once 
 #include "GameEvent.h"
 #include "gamePhaseEnum.h"
 #include "characterTypeEnum.h"
 #include <vector>
 #include "json.hpp"
 
-
+class entity;
 
 struct turnContext {
 	entity* activeCharacter = nullptr;     // who is currently selected / moving (single mover)
@@ -20,9 +19,21 @@ struct turnContext {
 
 	std::vector<gameEvent> events;
 	// Optional bookkeeping
+	gamePhase phase = gamePhase::STARTTURN;
 	gamePhase originPhase = gamePhase::DECISION;  
 };
-
+inline void clearCtx(turnContext& ctx) {
+	ctx.activeCharacter = nullptr;
+	ctx.activeCharacterId = -1;
+	ctx.actorType = CHARACTERTYPEENUM::PLAYER;
+	ctx.moveDistanceRemaining = 0;
+	ctx.actionsRemaining = 0;
+	ctx.battleAllowed = true;
+	ctx.turnFinished = false;
+	ctx.events.clear();
+	ctx.phase = gamePhase::STARTTURN;
+	ctx.originPhase = gamePhase::DECISION;
+}
 inline void to_Json(nlohmann::ordered_json& j, const turnContext& t) {
 	j = nlohmann::ordered_json{
 		{ "activeCharacterId", t.activeCharacterId },

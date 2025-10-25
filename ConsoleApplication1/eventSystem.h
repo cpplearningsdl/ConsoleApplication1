@@ -9,7 +9,7 @@
 inline void processEvents(turnContext& ctx,	movementManager& move, renderCacheManager& renderCache){
 	for (auto& ev : ctx.events) {
 		move.handleEvent(ctx, ev); 
-		renderCache.handleEvent(ev, ctx);
+		renderCache.handleEvent(ctx, ev);
 	}
 
 	// move any deferred events into next frame if needed

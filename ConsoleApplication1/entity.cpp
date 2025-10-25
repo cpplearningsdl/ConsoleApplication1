@@ -65,10 +65,7 @@ void entity::update() {
 	//	animationHandler.step();  
 	//}
 	//updateRenderInfo();
-} 
-void entity::updateRenderInfo() {
-	updateEntityRenderInfo(renderInfo, animationHandler.getCurrentTexture(), getCombinedPos(), animationHandler.getHeight(), animationHandler.getWidth(), getRender());
-}
+}  
 abilities& entity::getAbilities() {
 	return abilities;
 }
@@ -77,7 +74,17 @@ const abilities& entity::getAbilities() const {
 	return abilities;
 }
 
-const entityRenderInfo& entity::getRenderInfo() const {
+void entity::updateRenderInfo() {
+	position p = getCombinedPos();
+	renderInfo.height = animationHandler.getHeight();
+	renderInfo.width = animationHandler.getWidth();
+	renderInfo.pos.setX(p.getX());
+	renderInfo.pos.setY(p.getY());
+	renderInfo.render = render;
+	renderInfo.tex = animationHandler.getCurrentTexture();
+}
+const entityRenderInfo entity::getRenderInfo() {
+	updateRenderInfo();
 	 return renderInfo; 
 } 
 void entity::from_Json(const nlohmann::ordered_json& j) {

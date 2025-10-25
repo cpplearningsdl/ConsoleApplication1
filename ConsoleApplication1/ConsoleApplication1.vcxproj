@@ -259,7 +259,6 @@
     <ClInclude Include="path.h" />
     <ClInclude Include="pauseMenu.h" />
     <ClInclude Include="position.h" />
-    <ClInclude Include="renderablesCacheHandler.h" />
     <ClInclude Include="renderCacheManager.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="renderManager.h" />

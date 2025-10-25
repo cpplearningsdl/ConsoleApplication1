@@ -17,18 +17,30 @@ game::~game() {
 	// cleanup
 }
 
+//void game::update(inputManager& input) {
+//	updateCount++;
+//	updateEntities(entityHandler.getEntities());
+//	updateEntities(entityHandler.getTiles());
+//	updateView();
+//}
 void game::update(inputManager& input) {
 	updateCount++;
-	updateEntities(entityHandler.getEntities());
-	updateEntities(entityHandler.getTiles()); 
-	updateView(); 
-}
+	switch (turnCtx.phase)
+	{
+		case gamePhase::STARTTURN: newTurn();
+			break;
 
+	}
+	updateView();
+}
+void game::newTurn() {
+	clearCtx(turnCtx);
+
+}
 void game::updateEntities(std::vector<std::unique_ptr<entity>>& entitiesVector) {
 	for (auto& e : entitiesVector) {
 		e->getAnimationManager().step();
-		movementManager.handleMovement(turnCtx, e.get());
-		e->updateRenderInfo();//put this into an event, test if in view
+		movementManager.handleMovement(turnCtx, e.get()); 
 	}
 }
 
