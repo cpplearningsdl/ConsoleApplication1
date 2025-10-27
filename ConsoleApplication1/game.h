@@ -5,6 +5,7 @@
 #include "entityManager.h"
 #include "renderCacheManager.h"
 #include "movementManager.h"
+#include "turnManager.h"
 #include "level.h"
 #include "view.h"
 
@@ -15,8 +16,7 @@ public:
 
 	void update(inputManager& input);
 	void updateEntities(std::vector<std::unique_ptr<entity>>& entitiesVector);
-	void newTurn();
-	  
+ 
 	void loadALevel(int l);
 	//void setLevelData(levelData&& d) noexcept { currentLevelData = std::move(d);}
 	void setLevelData(levelData d) { currentLevelData = d; }
@@ -30,6 +30,8 @@ public:
 
 	entityManager& getEntityHandler() { return entityHandler; }
 	renderCacheManager& getRenderCacheManager() { return renderCacheHandler; }
+
+	turnManager& getTurnManager() { return turnManager; }
 private: 
 	int updateCount = 0;
 	bool blockMenus = false;
@@ -40,6 +42,6 @@ private:
 	renderCacheManager renderCacheHandler;
 	movementManager movementManager;
 
-	turnContext turnCtx;
+	turnManager turnManager;
 	//std::vector<int> turnOrder;//Id's, have to keep track of their ID when saving then update to new runtime ID after loading save!!
 }; 

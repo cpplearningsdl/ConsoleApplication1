@@ -2,9 +2,10 @@
 #include "json.hpp"
 
 enum class gamePhase {
-	STARTTURN,
+	NEWGAME,
 	DECISION,
 	MENU,
+	ANIMATION,
 	MOVEMENT,
 	BATTLE,
 	CUTSCENE,
@@ -14,9 +15,10 @@ enum class gamePhase {
 
 inline std::string gamePhaseEnumToString(gamePhase p) {
 	switch (p) {
-		case gamePhase::STARTTURN: return "STARTTURN";
+		case gamePhase::NEWGAME: return "NEWGAME";
 		case gamePhase::DECISION: return "DECISION";
 		case gamePhase::MENU: return "MENU";
+		case gamePhase::ANIMATION: return "ANIMATION";
 		case gamePhase::MOVEMENT: return "MOVEMENT";
 		case gamePhase::BATTLE: return "BATTLE";
 		case gamePhase::CUTSCENE: return "CUTSCENE";
@@ -26,9 +28,10 @@ inline std::string gamePhaseEnumToString(gamePhase p) {
 }
 
 inline gamePhase stringToGamePhaseEnum(std::string p) {
-	if (p == "STARTTURN") { return gamePhase::STARTTURN; }
+	if (p == "NEWGAME") { return gamePhase::NEWGAME; }
 	if (p == "DECISION") { return gamePhase::DECISION; }
 	if (p == "MENU") { return gamePhase::MENU; }
+	if (p == "ANIMATION") { return gamePhase::ANIMATION; }
 	if (p == "MOVEMENT") { return gamePhase::MOVEMENT; }
 	if (p == "BATTLE") { return gamePhase::BATTLE; }
 	if (p == "CUTSCENE") { return gamePhase::CUTSCENE; }

@@ -198,6 +198,7 @@
     <ClCompile Include="levelLoader.cpp" />
     <ClCompile Include="textureDataStruct.cpp" />
     <ClCompile Include="textureManager.cpp" />
+    <ClCompile Include="turnManager.cpp" />
     <ClCompile Include="vectorToMovement.cpp" />
     <ClCompile Include="windowManager.cpp" />
     <ClCompile Include="windowSettings.cpp" />
@@ -248,6 +249,7 @@
     <ClInclude Include="entityFactory.h" />
     <ClInclude Include="entityIncludes.h" />
     <ClInclude Include="entityLoader.h" />
+    <ClInclude Include="turnEvents.h" />
     <ClInclude Include="northMovement.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="fileManager.h" />
@@ -269,6 +271,7 @@
     <ClInclude Include="textureDataStruct.h" />
     <ClInclude Include="textureManager.h" />
     <ClInclude Include="turnContext.h" />
+    <ClInclude Include="turnManager.h" />
     <ClInclude Include="updateRenderInfoEvent.h" />
     <ClInclude Include="uses.h" />
     <ClInclude Include="vectorToMovement.h" />

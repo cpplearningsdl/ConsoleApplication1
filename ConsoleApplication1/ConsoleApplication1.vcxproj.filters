@@ -88,15 +88,30 @@
     <Filter Include="Header Files\game\event\events\battle">
       <UniqueIdentifier>{3f3a6248-fb7d-4687-aebd-970d218f3b5d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\game\turn">
+      <UniqueIdentifier>{4bb1c779-907c-4c2f-89c4-3ec7c80b1f07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\gameManager">
+      <UniqueIdentifier>{4f12f631-3b9d-4b3f-b4cd-1c91ffdb4260}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game\turn">
+      <UniqueIdentifier>{55264484-cab2-4df1-ad4c-69409ff681e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game\gameManager">
+      <UniqueIdentifier>{03d578de-b93d-4f96-b8fc-5873f03be8c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\input">
+      <UniqueIdentifier>{0793dbb4-0888-417c-8646-a848f11abec8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\input">
+      <UniqueIdentifier>{9d90c6fb-ccf3-4f02-88f8-2e0f49d7046b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\event\turn">
+      <UniqueIdentifier>{4bbc7f53-8782-42f9-98b6-3c8922cbfb7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="inputManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="fileManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="logManager.cpp">
@@ -139,9 +154,6 @@
       <Filter>Source Files\rendering</Filter>
     </ClCompile>
     <ClCompile Include="game.cpp">
-      <Filter>Source Files\game</Filter>
-    </ClCompile>
-    <ClCompile Include="gameManager.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
     <ClCompile Include="pauseMenu.cpp">
@@ -189,12 +201,21 @@
     <ClCompile Include="movementManager.cpp">
       <Filter>Source Files\entity\movement</Filter>
     </ClCompile>
+    <ClCompile Include="turnManager.cpp">
+      <Filter>Source Files\game\turn</Filter>
+    </ClCompile>
+    <ClCompile Include="gameManager.cpp">
+      <Filter>Source Files\game\gameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="fileManager.cpp">
+      <Filter>Source Files\game\gameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="inputManager.cpp">
+      <Filter>Source Files\input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="inputManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="abilities.h">
@@ -278,15 +299,6 @@
     <ClInclude Include="entityRenderInfo.h">
       <Filter>Header Files\entity\animation</Filter>
     </ClInclude>
-    <ClInclude Include="game.h">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="fileManager.h">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="gameManager.h">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
     <ClInclude Include="aNotes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -341,16 +353,7 @@
     <ClInclude Include="view.h">
       <Filter>Header Files\rendering</Filter>
     </ClInclude>
-    <ClInclude Include="turnContext.h">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
     <ClInclude Include="gamePhaseEnum.h">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="entityTypeEnum.h">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="characterTypeEnum.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
     <ClInclude Include="vectorToMovement.h">
@@ -370,9 +373,6 @@
     </ClInclude>
     <ClInclude Include="interactability.h">
       <Filter>Header Files\entity</Filter>
-    </ClInclude>
-    <ClInclude Include="gameManagerStateEnum.h">
-      <Filter>Header Files\game</Filter>
     </ClInclude>
     <ClInclude Include="event.h">
       <Filter>Header Files\game\event\events</Filter>
@@ -406,6 +406,36 @@
     </ClInclude>
     <ClInclude Include="updateRenderInfoEvent.h">
       <Filter>Header Files\game\event\events</Filter>
+    </ClInclude>
+    <ClInclude Include="turnContext.h">
+      <Filter>Header Files\game\turn</Filter>
+    </ClInclude>
+    <ClInclude Include="turnManager.h">
+      <Filter>Header Files\game\turn</Filter>
+    </ClInclude>
+    <ClInclude Include="entityTypeEnum.h">
+      <Filter>Header Files\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="characterTypeEnum.h">
+      <Filter>Header Files\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="gameManager.h">
+      <Filter>Header Files\game\gameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="fileManager.h">
+      <Filter>Header Files\game\gameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="gameManagerStateEnum.h">
+      <Filter>Header Files\game\gameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="inputManager.h">
+      <Filter>Header Files\input</Filter>
+    </ClInclude>
+    <ClInclude Include="turnEvents.h">
+      <Filter>Header Files\game\event\turn</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

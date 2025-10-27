@@ -25,22 +25,28 @@ game::~game() {
 //}
 void game::update(inputManager& input) {
 	updateCount++;
-	switch (turnCtx.phase)
+	gamePhase phase = turnManager.getTurnCtx().phase;
+	switch (phase)
 	{
-		case gamePhase::STARTTURN: newTurn();
+		case gamePhase::NEWGAME: ;
 			break;
+		case gamePhase::DECISION: 
 
+			updateEntities(entityHandler.getEntities());
+			break;
+		case gamePhase::ANIMATION:
+			break;
+		case gamePhase::MOVEMENT:
+
+			break;
 	}
 	updateView();
 }
-void game::newTurn() {
-	clearCtx(turnCtx);
-
-}
+ 
 void game::updateEntities(std::vector<std::unique_ptr<entity>>& entitiesVector) {
 	for (auto& e : entitiesVector) {
 		e->getAnimationManager().step();
-		movementManager.handleMovement(turnCtx, e.get()); 
+		movementManager.handleMovement(turnManager.getTurnCtx(), e.get()); 
 	}
 }
 

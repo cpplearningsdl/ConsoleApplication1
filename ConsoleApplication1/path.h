@@ -7,7 +7,7 @@
 
 struct movementPath
 {
-	std::vector<movementTypeEnum> turns;
+	std::vector<movementTypeEnum> turns;//probably remove this entirely
 	std::vector<position>wayPoints;
 	position startPos;
 	position destination; 

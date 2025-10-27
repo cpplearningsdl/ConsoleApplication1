@@ -6,12 +6,13 @@ using json = nlohmann::ordered_json;
 
 enum class InteractFlags : uint32_t {
 	None = 0,
-	Hover = 1 << 0,
-	Click = 1 << 1,
-	Attack = 1 << 2,
-	Ability = 1 << 3,
-	Talk = 1 << 4,
-	Shop = 1 << 5
+	tick = 1 << 0,
+	Hover = 1 << 1,
+	Click = 1 << 2,
+	Attack = 1 << 3,
+	Ability = 1 << 4,
+	Talk = 1 << 5,
+	Shop = 1 << 6
 };
 
 // --- bitwise ops ---
@@ -41,6 +42,7 @@ inline bool canInteract(InteractFlags flags, InteractFlags flag) {
 
 inline void to_json(json& j, const InteractFlags& flags) {
 	j = json::object();
+	j["tick"] = canInteract(flags, InteractFlags::tick);
 	j["hover"] = canInteract(flags, InteractFlags::Hover);
 	j["click"] = canInteract(flags, InteractFlags::Click);
 	j["attack"] = canInteract(flags, InteractFlags::Attack);
@@ -51,6 +53,7 @@ inline void to_json(json& j, const InteractFlags& flags) {
 
 inline void from_json(const json& j, InteractFlags& flags) {
 	flags = InteractFlags::None;
+	setInteraction(flags, InteractFlags::tick, j.value("tick", false));
 	setInteraction(flags, InteractFlags::Hover, j.value("hover", false));
 	setInteraction(flags, InteractFlags::Click, j.value("click", false));
 	setInteraction(flags, InteractFlags::Attack, j.value("attack", false));

@@ -2,6 +2,7 @@
 // eventSystem.h
 #pragma once
 #include "turnContext.h"
+#include "turnManager.h"
 #include "movementManager.h"
 //#include "battleManager.h"
 #include "renderCacheManager.h"

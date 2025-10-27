@@ -19,7 +19,7 @@ struct turnContext {
 
 	std::vector<gameEvent> events;
 	// Optional bookkeeping
-	gamePhase phase = gamePhase::STARTTURN;
+	gamePhase phase = gamePhase::DECISION;
 	gamePhase originPhase = gamePhase::DECISION;  
 };
 inline void clearCtx(turnContext& ctx) {
@@ -31,7 +31,7 @@ inline void clearCtx(turnContext& ctx) {
 	ctx.battleAllowed = true;
 	ctx.turnFinished = false;
 	ctx.events.clear();
-	ctx.phase = gamePhase::STARTTURN;
+	ctx.phase = gamePhase::DECISION;
 	ctx.originPhase = gamePhase::DECISION;
 }
 inline void to_Json(nlohmann::ordered_json& j, const turnContext& t) {
