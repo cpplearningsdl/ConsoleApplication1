@@ -39,9 +39,7 @@ bool vectorToMovement::isFinished() const {
 	return currentFrame >= totalFrames;
 }
 
-std::unique_ptr<animationMovement> vectorToMovement::clone() const {
-	return std::make_unique<vectorToMovement>(*this);
-}
+ 
 
 void vectorToMovement::loadFromJson(const nlohmann::ordered_json& j) {
 	
@@ -56,8 +54,7 @@ void vectorToMovement::loadFromJson(const nlohmann::ordered_json& j) {
 }
 
 void vectorToMovement::to_json(nlohmann::ordered_json& j) const {
-	j = {
-		{"type", movementTypeEnumToString(movementTypeEnum::vectorTo)},
+	j = { 
 		{"x", getX()},
 		{"y", getY()},
 		{"destX", destX},

@@ -22,15 +22,15 @@ public:
 	animationManager(animationManager&&) noexcept = default;
 	animationManager& operator=(animationManager&&) noexcept = default;
 	 
-	const animationMovement* getMovement() const { return movement.get(); }
+	const animationMovement* getAnimationMovement() const { return animationMovement.get(); }
 
 	bool loadAnimation(const std::string& baseName);
 	 
 	void step(); 
 	void reset();
 	 
-	void setMovement(movementTypeEnum type, float startX, float startY, float distance, int frames, float destinationX = 0.0f, float destinationY = 0.0f);
-	void setMovement(std::unique_ptr<animationMovement> mvt) {	movement = std::move(mvt);	} 
+	void setAnimationMovement(movementTypeEnum type, float startX, float startY, float distance, int frames, float destinationX = 0.0f, float destinationY = 0.0f);
+	void setAnimationMovement(std::unique_ptr<animationMovement> mvt) { animationMovement = std::move(mvt);	}
 
 	// Override the chain animation (die after damage instead of go back to idle, for example)
 	void setChainOverride(const std::string& nextAnim); 
@@ -62,7 +62,8 @@ public:
 	void setLoop(bool l) { loop = l; }
 	void setFinished(bool f) { finished = f; } 
 
-	const position getPos() const { return position(movement->getX(), movement->getY()); }
+	//NOT REAL POS ANIMATION DOESNT COUNT TOWARD X AND Y!!
+	const position getPos() const { return position(animationMovement->getX(), animationMovement->getY()); }
 	SDL_Texture* getCurrentTexture() const { return frameTextures[getCurrentIndex()]; }
 	const int getHeight() const { return height[getCurrentIndex()]; }
 	const int getWidth() const { return width[getCurrentIndex()]; }
@@ -84,7 +85,7 @@ private:
 	bool finished; 
 	std::string chainAnimationName;
 	std::string chainOverride; 
-	std::unique_ptr<animationMovement> movement;
+	std::unique_ptr<animationMovement> animationMovement;
 };
 
 void to_json(nlohmann::ordered_json& j, const animationManager& m);

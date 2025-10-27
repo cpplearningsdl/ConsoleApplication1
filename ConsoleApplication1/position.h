@@ -26,7 +26,7 @@ inline void to_json(nlohmann::ordered_json& j, const position& pos) {
 	};
 }
 inline void from_json(const nlohmann::ordered_json& j, position& pos) {
-	double xd = j.value("x", 0.0);
-	double yd = j.value("y", 0.0);
-	pos.setPosition(static_cast<float>(xd), static_cast<float>(yd));
+	float xd = j.value("x", 0.0f);
+	float yd = j.value("y", 0.0f);
+	pos.setPosition(xd, yd);
 }

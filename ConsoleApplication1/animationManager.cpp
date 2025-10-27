@@ -7,7 +7,7 @@
 
 animationManager::animationManager()
 	:animationName("idle"), frameCount(0), currentIndex(0), heldCount(0), holdFor(0), finished(false), loop(true) {
-	setMovement(movementTypeEnum::idle, 0, 0, 0, 1);
+	setAnimationMovement(movementTypeEnum::idle, 0, 0, 0, 1);
 }
 
 animationManager::animationManager(const animationManager& other)
@@ -24,7 +24,7 @@ animationManager::animationManager(const animationManager& other)
 	frameTextures(other.frameTextures),
 	height(other.height),
 	width(other.width),
-	movement(other.movement ? other.movement->clone() : nullptr) // deep clone
+	animationMovement(other.animationMovement ? other.animationMovement->clone() : nullptr) // deep clone
 {}
 
 animationManager& animationManager::operator=(const animationManager& other) {
@@ -42,7 +42,7 @@ animationManager& animationManager::operator=(const animationManager& other) {
 		frameTextures = other.frameTextures;
 		height = other.height;
 		width = other.width;
-		movement = other.movement ? other.movement->clone() : nullptr;
+		animationMovement = other.animationMovement ? other.animationMovement->clone() : nullptr;
 	}
 	return *this;
 }
@@ -85,13 +85,13 @@ bool animationManager::loadAnimation(const std::string& baseName) {
 
 	//this system is stupid. need lookups for movement for each animation or something. 
 	if (baseName == "idle") {
-		setMovement(animationMovementFactory::createMovement(movementTypeEnum::idle, 0, 0, 0, frameCount));
+		setAnimationMovement(animationMovementFactory::createMovement(movementTypeEnum::idle, 0, 0, 0, frameCount));
 	} 
 	return true;
 }
 
-void animationManager::setMovement(movementTypeEnum type, float startX, float startY, float distance, int frames, float destinationX, float destinationY) {
-	movement = animationMovementFactory::createMovement(type, startX, startY, distance, frames, destinationX, destinationY);
+void animationManager::setAnimationMovement(movementTypeEnum type, float startX, float startY, float distance, int frames, float destinationX, float destinationY) {
+	animationMovement = animationMovementFactory::createMovement(type, startX, startY, distance, frames, destinationX, destinationY);
 }
  
 void animationManager::step() {
@@ -106,8 +106,8 @@ void animationManager::step() {
 	currentIndex++;
 
 	//advance animation movement
-	if (movement && !movement->isFinished()) {
-		movement->step();
+	if (animationMovement && !animationMovement->isFinished()) {
+		animationMovement->step();
 	}
 
 	if (currentIndex >= getFrameCount()) {
@@ -198,9 +198,9 @@ void to_json(nlohmann::ordered_json& j, const animationManager& m) {
 		{"chainOverride", m.getChainOverride()}
 	};
 
-	if (m.getMovement()) {
+	if (m.getAnimationMovement()) {
 		nlohmann::ordered_json moveJson;
-		m.getMovement()->to_json(moveJson);
+		m.getAnimationMovement()->to_json(moveJson);
 		j["animationMovement"] = std::move(moveJson);
 	}
 }
@@ -243,7 +243,7 @@ void from_json(const nlohmann::ordered_json& j,animationManager& m) {
 		auto movePtr = animationMovementFactory::createFromJson(jm);
 
 		if (movePtr) {
-			m.setMovement(std::move(movePtr));
+			m.setAnimationMovement(std::move(movePtr));
 		}
 	}
 	m.loadAnimation(m.getAnimationName());

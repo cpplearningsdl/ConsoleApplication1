@@ -18,13 +18,13 @@ northMovement::northMovement(const northMovement& other)
 }
 
 
-	void northMovement::step() {
-		if (currentFrame < totalFrames) {
-			setY(getY() - deltaY); 
-			currentFrame++;
-			logManager::logThis("Y: ", getY());
-		}
+void northMovement::step() {
+	if (currentFrame < totalFrames) {
+		setY(getY() - deltaY); 
+		currentFrame++;
+		logManager::logThis("Y: " + std::to_string(getY()));
 	}
+}
  
 bool northMovement::isFinished() const { return currentFrame >= totalFrames; }
 

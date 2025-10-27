@@ -2,6 +2,7 @@
 #include <string>  
 #include "interactability.h"
 #include "animationManager.h"
+#include "movement.h"
 #include "abilities.h"
 #include "statsContainer.h"
 #include "position.h"
@@ -77,6 +78,11 @@ public:
 		position combinedPos{ movementPos.getX() + pos.getX(), movementPos.getY() + pos.getY() };
 		return combinedPos;
 	}
+	movement& getMovement() { return movement; };
+	const movement& getMovementConst()const { return movement; };
+
+	InteractFlags& getInteractions() { return interactions; };
+	const InteractFlags& getInteractionsConst() const { return interactions; };
 
 	abilities& getAbilities();
 	const abilities& getAbilities() const; 
@@ -101,6 +107,7 @@ private:
 	bool unblockMenus;
 	bool isMoving;
 
+	movement movement;
 	movementPath path; 
 	InteractFlags interactions;
 	statsContainer stats;

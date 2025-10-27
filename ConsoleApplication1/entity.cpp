@@ -18,6 +18,7 @@ entity::entity(const entity& other)
 	stats = other.stats;
 	abilities = other.abilities; 
 	pos = other.pos;
+	interactions = other.interactions;
 	alive = other.alive;
 	animationHandler.setEntityName(name);
 	render = other.render;
@@ -35,6 +36,7 @@ entity& entity::operator=(const entity& other) {
 		stats = other.stats;
 		abilities = other.abilities;
 		pos = other.pos; 
+		interactions = other.interactions;
 		alive = other.alive;
 		animationHandler.setEntityName(name);
 		render = other.render;
@@ -73,7 +75,7 @@ abilities& entity::getAbilities() {
 const abilities& entity::getAbilities() const {
 	return abilities;
 }
-
+//GET RID OF THIS!!
 void entity::updateRenderInfo() {
 	position p = getCombinedPos();
 	renderInfo.height = animationHandler.getHeight();
@@ -102,6 +104,9 @@ void entity::from_Json(const nlohmann::ordered_json& j) {
 	}
 	if (j.contains("factoryId")) {
 		setFactoryId(j.at("factoryId").get<int>());
+	}
+	if (j.contains("interactions")) {
+		interactions = j.at("interactions").get<InteractFlags>();
 	}
 	if (j.contains("stats")) {
 		//stats = j.at("stats").get<statsContainer>();
@@ -144,6 +149,7 @@ nlohmann::ordered_json entity::to_Json(const entity& e) {
 	j["entityId"] = e.getId();
 	j["factoryId"] = e.getFactoryId();
 	j["name"] = e.getName();
+	j["interactions"] = e.getInteractionsConst();
 	j["stats"] = e.getStats();
 	j["position"] = e.getPos();
 	j["alive"] = e.isAlive();
