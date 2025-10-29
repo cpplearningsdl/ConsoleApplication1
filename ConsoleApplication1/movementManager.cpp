@@ -1,8 +1,9 @@
 #pragma once
 #include "movementManager.h"
 #include "overLoaded.h"
+#include "entity.h"
 
- void movementManager::handleMovement(turnContext& ctx, entity* e) {
+// void movementManager::handleMovement(turnContext& ctx, entity* e) {
 	//animationManager& eam = e.getAnimationManager();
 
 	//if (e.moving()) {
@@ -23,7 +24,30 @@
 	//		}
 	//	}
 	//}
-}
+//}
+
+void movementManager::handleMovement(turnContext&, entity* e) {
+	if (e->moving()) {
+		//finished to current waypoint
+		if (e->getMovement().isFinished()) {
+			movementPath& p = e->getPath();
+			popWayPoint(p);
+			//finished path
+			if (pathFinished(p)) {
+				e->moving = false;
+				e->getMovement().clear(); 
+			}
+			//continue path
+			else { 
+				e->getMovement().setDest(getNextWaypoint(p));
+			}
+		}
+		//continue to waypoint
+		else {
+			e->getMovement().step();
+		}
+	}
+ }
 
  void movementManager::handleEvent(turnContext& ctx, const gameEvent& event) {
 		 std::visit(overloaded{

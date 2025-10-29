@@ -15,6 +15,7 @@ entity::entity(const entity& other)
 	factoryId = other.factoryId;
 	name = other.name;
 	type = other.type;
+	charType = other.charType;
 	stats = other.stats;
 	abilities = other.abilities; 
 	pos = other.pos;

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <memory> 
 #include "levelLoader.h"
+#include "eventSystem.h"
 #include "entityIncludes.h"
 #include "entityTypeEnum.h"
 #include "movementManager.h" 
@@ -46,7 +47,8 @@ void game::update(inputManager& input) {
 void game::updateEntities(std::vector<std::unique_ptr<entity>>& entitiesVector) {
 	for (auto& e : entitiesVector) {
 		e->getAnimationManager().step();
-		movementManager.handleMovement(turnManager.getTurnCtx(), e.get()); 
+		movementManager.handleMovement(turnManager.getTurnCtx(), e.get());
+		processEvents(turnManager.getTurnCtx(), movementManager, renderCacheHandler);
 	}
 }
 

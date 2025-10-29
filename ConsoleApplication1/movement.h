@@ -7,8 +7,8 @@
 class movement {
 public:
 	struct movementData {
-		position pos;      // current position
-		position dest;     // destination
+		position pos = { -1,-1 };      // current position
+		position dest = { -1,-1 };     // destination
 		position delta;    // per-step movement vector
 		float speed{ 1.0f };
 	};
@@ -26,7 +26,9 @@ public:
 	movement(const position& start, const position& target, float moveSpeed) {
 		init(start, target, moveSpeed);
 	}
-
+	void clear() {
+		init({ 0,0 }, { 0,0 }, 1.0f);
+	}
 	void init(const position& start, const position& target, float moveSpeed) {
 		data.pos = start;
 		data.dest = target;
