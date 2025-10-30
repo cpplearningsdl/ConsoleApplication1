@@ -10,6 +10,7 @@
 inline void processEvents(turnContext& ctx,	movementManager& move, renderCacheManager& renderCache){
 	for (auto& ev : ctx.events) {
 		move.handleEvent(ctx, ev); 
+		//battle.handleEvent(ctx,ev);
 		renderCache.handleEvent(ctx, ev);
 	}
 

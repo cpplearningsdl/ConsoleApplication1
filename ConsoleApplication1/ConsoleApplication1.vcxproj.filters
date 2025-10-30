@@ -94,9 +94,6 @@
     <Filter Include="Source Files\input">
       <UniqueIdentifier>{9d90c6fb-ccf3-4f02-88f8-2e0f49d7046b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\game\event\turn">
-      <UniqueIdentifier>{4bbc7f53-8782-42f9-98b6-3c8922cbfb7c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\entity\animation\animationMovement">
       <UniqueIdentifier>{88b4d553-f3b4-4a7e-965d-64f0c505866c}</UniqueIdentifier>
     </Filter>
@@ -111,6 +108,9 @@
     </Filter>
     <Filter Include="Source Files\entity\animation\movement\movements">
       <UniqueIdentifier>{2f456567-9386-484d-b8c8-b688f99ca5ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\entity\movement">
+      <UniqueIdentifier>{ade412eb-8964-47b9-9c9e-bb602edce708}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -198,9 +198,6 @@
     <ClCompile Include="renderCacheManager.cpp">
       <Filter>Source Files\rendering</Filter>
     </ClCompile>
-    <ClCompile Include="movementManager.cpp">
-      <Filter>Source Files\entity\animation\movement</Filter>
-    </ClCompile>
     <ClCompile Include="turnManager.cpp">
       <Filter>Source Files\game\turn</Filter>
     </ClCompile>
@@ -212,6 +209,9 @@
     </ClCompile>
     <ClCompile Include="inputManager.cpp">
       <Filter>Source Files\input</Filter>
+    </ClCompile>
+    <ClCompile Include="movementManager.cpp">
+      <Filter>Source Files\entity\movement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -422,9 +422,6 @@
     <ClInclude Include="inputManager.h">
       <Filter>Header Files\input</Filter>
     </ClInclude>
-    <ClInclude Include="turnEvents.h">
-      <Filter>Header Files\game\event\turn</Filter>
-    </ClInclude>
     <ClInclude Include="movementManager.h">
       <Filter>Header Files\entity\movement</Filter>
     </ClInclude>
@@ -436,6 +433,12 @@
     </ClInclude>
     <ClInclude Include="movement.h">
       <Filter>Header Files\entity\movement</Filter>
+    </ClInclude>
+    <ClInclude Include="movementEvents.h">
+      <Filter>Header Files\game\event\events\movement</Filter>
+    </ClInclude>
+    <ClInclude Include="turnEvents.h">
+      <Filter>Header Files\game\turn</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

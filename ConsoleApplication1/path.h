@@ -11,6 +11,8 @@ struct movementPath
 	position startPos;
 	position destination; 
 
+	movementPath(std::vector<position> points, position start, position dest) :
+		wayPoints(points), startPos(start), destination(dest) {};
 };
 
 inline void addToWayPoints(movementPath& p, position pos) {
@@ -24,8 +26,14 @@ inline float getNextDestinationY(movementPath& p) {
 	float nY = p.wayPoints.back().getY();
 	return nY;
 }
+
 inline position getNextWaypoint(movementPath& p) { return { getNextDestinationX(p), getNextDestinationY(p) }; }
-inline void popWayPoint(movementPath& p) { p.wayPoints.pop_back(); }
+
+inline void popWayPoint(movementPath& p) {
+	if (p.wayPoints.size() > 0) {
+		p.wayPoints.pop_back();
+	}
+}
 
  
 inline bool pathFinished(movementPath& p) { return p.wayPoints.size() == 0; }

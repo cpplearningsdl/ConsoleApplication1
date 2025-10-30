@@ -26,7 +26,7 @@
 	//}
 //}
 
-void movementManager::handleMovement(turnContext&, entity* e) {
+void movementManager::handleMovement(turnContext& ctx, entity* e) {
 	if (e->moving()) {
 		//finished to current waypoint
 		if (e->getMovement().isFinished()) {
@@ -34,8 +34,9 @@ void movementManager::handleMovement(turnContext&, entity* e) {
 			popWayPoint(p);
 			//finished path
 			if (pathFinished(p)) {
-				e->moving = false;
+				e->setMoving(false);
 				e->getMovement().clear(); 
+				ctx.events.emplace_back(finishedPathEvent(e, e->getId()));
 			}
 			//continue path
 			else { 

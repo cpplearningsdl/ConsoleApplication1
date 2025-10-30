@@ -12,18 +12,22 @@
 game::game() {
 	loadALevel(1);
 	startRotation(view, { 64, 64 }, 1,128.0f, 0.033f, false, 0.3f);
+	auto& ents = entityHandler.getEntities();
+	ents.back()->setMoving(true);
+	turnManager.getTurnCtx().events.emplace_back(
+		movementProposedEvent{
+			ents.back().get(),
+			ents.back()->getId(),
+			movementPath({ {10,10}, {20,20}, {50,50} }, {0,0}, {100,100}),
+			true
+		}
+	);
 }
 
 game::~game() {
 	// cleanup
 }
-
-//void game::update(inputManager& input) {
-//	updateCount++;
-//	updateEntities(entityHandler.getEntities());
-//	updateEntities(entityHandler.getTiles());
-//	updateView();
-//}
+ 
 void game::update(inputManager& input) {
 	updateCount++;
 	gamePhase phase = turnManager.getTurnCtx().phase;

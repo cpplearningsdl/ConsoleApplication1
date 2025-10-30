@@ -4,10 +4,8 @@
 //turn 
 #include "turnEvents.h"
 //movement
-#include "movementPropsalEvent.h"
-#include "enteredTileEvent.h"
-#include "finishedMovementEvent.h"
-#include "finishedPathEvent.h"
+#include "movementEvents.h"
+#include "enteredTileEvent.h" 
 #include "entityDied.h"
 
 
