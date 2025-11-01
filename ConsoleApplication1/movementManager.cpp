@@ -50,7 +50,7 @@ void movementManager::handleMovement(turnContext& ctx, entity* e) {
 	}
  }
 
- void movementManager::handleEvent(turnContext& ctx, const gameEvent& event) {
+ void movementManager::processEvent(turnContext& ctx, const gameEvent& event) {
 		 std::visit(overloaded{
 		[&](const movementProposedEvent& e) {
 			 // Approve or modify the move
@@ -65,5 +65,23 @@ void movementManager::handleMovement(turnContext& ctx, entity* e) {
 			[&](const entityDiedEvent&) {}, // irrelevant
 			[](auto&) {}
 				}, event);
+
+ }
+
+ void movementManager::executeEvent(turnContext& ctx, const gameEvent& event) {
+	 std::visit(overloaded{
+	[&](const movementProposedEvent& e) {
+		 // Approve or modify the move
+		 if (true) {
+			 true;
+		 }
+			else {
+			 // could push interrupt event here
+		 }
+	 },
+ [&](const enteredTileEvent&) {}, // irrelevant
+ [&](const entityDiedEvent&) {}, // irrelevant
+ [](auto&) {}
+		 }, event);
 
  }

@@ -7,14 +7,18 @@
 //#include "battleManager.h"
 #include "renderCacheManager.h"
 
-inline void processEvents(turnContext& ctx,	movementManager& move, renderCacheManager& renderCache){
+inline void handleEvents(turnContext& ctx, movementManager& move, renderCacheManager& renderCache) {
 	for (auto& ev : ctx.events) {
-		move.handleEvent(ctx, ev); 
+		move.processEvent(ctx, ev);
 		//battle.handleEvent(ctx,ev);
-		renderCache.handleEvent(ctx, ev);
+		renderCache.processEvent(ctx, ev);
 	}
 
-	// move any deferred events into next frame if needed
+	for (auto& ev : ctx.events) {
+		move.executeEvent(ctx, ev);
+		//battle.handleEvent(ctx, ev);
+		renderCache.executeEvent(ctx, ev);
+	}
 	ctx.events.clear();
-	//ctx.events.swap(ctx.nextEvents);
 }
+ 

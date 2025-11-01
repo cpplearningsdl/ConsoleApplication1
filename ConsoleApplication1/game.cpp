@@ -52,7 +52,7 @@ void game::updateEntities(std::vector<std::unique_ptr<entity>>& entitiesVector) 
 	for (auto& e : entitiesVector) {
 		e->getAnimationManager().step();
 		movementManager.handleMovement(turnManager.getTurnCtx(), e.get());
-		processEvents(turnManager.getTurnCtx(), movementManager, renderCacheHandler);
+		handleEvents(turnManager.getTurnCtx(), movementManager, renderCacheHandler);
 	}
 }
 
