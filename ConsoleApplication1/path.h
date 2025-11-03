@@ -11,6 +11,7 @@ struct movementPath
 	position startPos;
 	position destination; 
 
+	movementPath() = default;
 	movementPath(std::vector<position> points, position start, position dest) :
 		wayPoints(points), startPos(start), destination(dest) {};
 };
@@ -19,12 +20,10 @@ inline void addToWayPoints(movementPath& p, position pos) {
 	p.wayPoints.push_back(pos);
 }
 inline float getNextDestinationX(movementPath&p) {
-	float nX = p.wayPoints.back().getX(); 
-	return nX;
+	return p.wayPoints.back().getX(); 
 }
 inline float getNextDestinationY(movementPath& p) {
-	float nY = p.wayPoints.back().getY();
-	return nY;
+	return p.wayPoints.back().getY(); 
 }
 
 inline position getNextWaypoint(movementPath& p) { return { getNextDestinationX(p), getNextDestinationY(p) }; }

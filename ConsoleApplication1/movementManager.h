@@ -10,6 +10,6 @@ private:
 
 public:
 	void handleMovement(turnContext& ctx, entity* e);
-	void processEvent(turnContext& ctx, const gameEvent& event);
-	void executeEvent(turnContext& ctx, const gameEvent& event);
+	void processEvent(turnContext& ctx, const gameEvent& ev);
+	void executeEvent(turnContext& ctx, const gameEvent& ev);
 };
