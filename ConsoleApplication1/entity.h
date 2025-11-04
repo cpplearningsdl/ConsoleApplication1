@@ -4,8 +4,7 @@
 #include "animationManager.h"
 #include "movement.h"
 #include "abilities.h"
-#include "statsContainer.h"
-#include "position.h"
+#include "statsContainer.h" 
 #include "abilityFactory.h"
 #include "entityRenderInfo.h"
 #include "entityTypeEnum.h"
@@ -63,20 +62,13 @@ public:
 
 	const statsContainer& getStats() const { return stats; }
 	statsContainer& getStats() { return stats; }
+ 
 
-	const position& getPos() const { return pos; }
-	position& getPos() { return pos; }
-	void setPos(position p) { pos = p;}
-
-	const position getCombinedPos() {
-		position movementPos = animationHandler.getPos();
-		position combinedPos{ movementPos.getX() + pos.getX(), movementPos.getY() + pos.getY() }; 
-		return combinedPos;
+	const position getCombinedPos() { 
+		return { animationHandler.getPos().getX() + movement.getX(), animationHandler.getPos().getY() + movement.getY() }; 
 	}
 	const position getCombinedPos() const {
-		position movementPos = animationHandler.getPos();
-		position combinedPos{ movementPos.getX() + pos.getX(), movementPos.getY() + pos.getY() };
-		return combinedPos;
+		return { animationHandler.getPos().getX() + movement.getX(), animationHandler.getPos().getY() + movement.getY() };
 	}
 	movement& getMovement() { return movement; };
 	const movement& getMovementConst()const { return movement; };
@@ -99,8 +91,7 @@ private:
 	CHARACTERTYPEENUM charType;
 	std::string name;
 	int entityId;
-	int factoryId;
-	position pos;
+	int factoryId; 
 	bool alive;
 	bool render;
 	bool blockMenus;

@@ -11,14 +11,14 @@
  
 game::game() {
 	loadALevel(1);
-	startRotation(view, { 64, 64 }, 1,128.0f, 0.033f, false, 0.3f);
+	//startRotation(view, { 64, 64 }, 1,128.0f, 0.033f, false, 0.3f);
 	auto& ents = entityHandler.getEntities();
 	ents.back()->setMoving(true);
 	turnManager.getTurnCtx().events.emplace_back(
 		movementProposedEvent{
 			ents.back().get(),
 			ents.back()->getId(),
-			movementPath({ {10,10}, {20,20}, {50,50} }, {0,0}, {100,100}),
+			movementPath({ {200,300},{150,50}, {20,120}, {10,50}  }, {0,0}, {100,100}),
 			true
 		}
 	);

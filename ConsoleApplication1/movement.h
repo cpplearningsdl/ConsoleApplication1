@@ -112,10 +112,8 @@ inline void to_json(nlohmann::ordered_json& j, const movement& move) {
 }
 
 inline void from_json(const nlohmann::ordered_json& j, movement& move) {
-	const auto& obj = j.at("movement");
-
-	obj.at("pos").get_to(move.data.pos);
-	obj.at("dest").get_to(move.data.dest);
-	obj.at("delta").get_to(move.data.delta);
-	move.data.speed = obj.value("speed", 1.0f);
+	j.at("pos").get_to(move.data.pos);
+	j.at("dest").get_to(move.data.dest);
+	j.at("delta").get_to(move.data.delta);
+	move.data.speed = j.value("speed", 1.0f);
 }

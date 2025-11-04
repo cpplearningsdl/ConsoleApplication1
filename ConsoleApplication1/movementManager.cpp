@@ -34,13 +34,12 @@ void movementManager::handleMovement(turnContext& ctx, entity* e) {
 			popWayPoint(p);
 			//finished path
 			if (pathFinished(p)) {
-				e->setMoving(false);
-				e->getMovement().clear(); 
+				e->setMoving(false); 
 				ctx.events.emplace_back(finishedPathEvent(e, e->getId()));
 			}
 			//continue path
 			else { 
-				e->getMovement().setDest(getNextWaypoint(p));
+				e->getMovement().init(e->getMovement().getPos(), getNextWaypoint(e->getPath()), e->getMovement().getSpeed());
 			}
 		}
 		//continue to waypoint
@@ -74,13 +73,14 @@ void movementManager::handleMovement(turnContext& ctx, entity* e) {
 		 // Approve or modify the move
 		 if (e.accepted) { 
 			 e.mover->setMoving(true);
-			 e.mover->getPath()= movementPath(e.newPath);
-			 e.mover->getMovement().setDest(getNextWaypoint(e.mover->getPath()));
+			 e.mover->getPath()= movementPath(e.newPath); 
+			 e.mover->getMovement().init(e.mover->getMovement().getPos(), getNextWaypoint(e.mover->getPath()), 0.2f);
 		 }
 			else {
 			 // could push interrupt event here
 		 }
 	 },
+ [&](const finishedPathEvent&) {},
  [&](const enteredTileEvent&) {}, // irrelevant
  [&](const entityDiedEvent&) {}, // irrelevant
  [](auto&) {}

@@ -17,8 +17,7 @@ entity::entity(const entity& other)
 	type = other.type;
 	charType = other.charType;
 	stats = other.stats;
-	abilities = other.abilities; 
-	pos = other.pos;
+	abilities = other.abilities;  
 	interactions = other.interactions;
 	alive = other.alive;
 	animationHandler.setEntityName(name);
@@ -35,8 +34,7 @@ entity& entity::operator=(const entity& other) {
 		type = other.type;
 		charType = other.charType;
 		stats = other.stats;
-		abilities = other.abilities;
-		pos = other.pos; 
+		abilities = other.abilities; 
 		interactions = other.interactions;
 		alive = other.alive;
 		animationHandler.setEntityName(name);
@@ -109,6 +107,9 @@ void entity::from_Json(const nlohmann::ordered_json& j) {
 	if (j.contains("interactions")) {
 		interactions = j.at("interactions").get<InteractFlags>();
 	}
+	if (j.contains("movement")) {
+		from_json(j.at("movement"), movement);
+	}
 	if (j.contains("stats")) {
 		//stats = j.at("stats").get<statsContainer>();
 		from_json(j.at("stats"), stats);
@@ -131,10 +132,7 @@ void entity::from_Json(const nlohmann::ordered_json& j) {
 	}
 	if (j.contains("renderInfo")) {
 		from_json(j.at("renderInfo"), renderInfo);
-	} 
-	if (j.contains("position")) { 
-		from_json(j.at("position"), pos);
-	}
+	}  
 	if (j.contains("alive")) {
 		from_json(j.at("alive"), alive);
 	}
@@ -151,8 +149,8 @@ nlohmann::ordered_json entity::to_Json(const entity& e) {
 	j["factoryId"] = e.getFactoryId();
 	j["name"] = e.getName();
 	j["interactions"] = e.getInteractionsConst();
-	j["stats"] = e.getStats();
-	j["position"] = e.getPos();
+	j["movement"] = e.getMovementConst();
+	j["stats"] = e.getStats(); 
 	j["alive"] = e.isAlive();
 	nlohmann::ordered_json abilitiesArray = nlohmann::ordered_json::array();
 	for (const auto& abPtr : e.getAbilities().getAll()) {

@@ -74,7 +74,7 @@ void loadEntities(game& g, levelData& lvl) {
 	int index = 0;
 	for (auto& id : lvl.state.entityIds) {
 		entities.createEntity(id, ENTITY, view);
-		entities.getEntities().back()->setPos(lvl.state.entityPositions[index]);
+		entities.getEntities().back()->getMovement().setPos(lvl.state.entityPositions[index]);
 		g.getRenderCacheManager().addToRenderablesCache(entities.getEntities().back().get(), view);
 		index++;
 	} 
@@ -92,7 +92,7 @@ void loadTiles(game& g, levelData& lvl) {
 	for (auto& id : lvl.state.tileIds) {
 		entities.createEntity(id, TILE, view);
 		entity* e = entities.getTiles().back().get(); 
-		e->setPos({ x, y }); 
+		e->getMovement().setPos({ x, y }); 
 		x += tileSize;
 		if (x >= mapW * tileSize) {
 			x = 0;

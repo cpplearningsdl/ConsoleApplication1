@@ -28,7 +28,7 @@ entity* entityManager::createEntity(int factoryId, ENTITYTYPEENUM type, const vi
 }
 
 void entityManager::addTileToFloorMap(entity* e, const viewPort& v) {
-	position pos = toGridCoords(e->getPos(), v);
+	position pos = toGridCoords(e->getMovement().getPos(), v);
 	int index = gridToIndex(pos, v);
 	if (index >= 0 && index < static_cast<int>(floorMap.size())) {
 		floorMap[index] = e;
@@ -85,7 +85,7 @@ void entityManager::removeEntityFromGame(int id, viewPort& v) {
 		entity* e = itTile->get();
 
 		// Update floorMap
-		position pos = toGridCoords(e->getPos(), v);
+		position pos = toGridCoords(e->getMovement().getPos(), v);
 		int index = gridToIndex(pos, v);
 		if (index >= 0 && index < static_cast<int>(floorMap.size()) && floorMap[index] == e) {
 			floorMap[index] = nullptr;

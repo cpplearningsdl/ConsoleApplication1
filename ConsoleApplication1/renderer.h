@@ -10,11 +10,11 @@ public:
 	bool init(int width, int height);
 	void shutdown();
 
-	void clearNextFrame(); // Clears the off-screen frame
-	void drawToNextFrame(SDL_Texture* t, float x, float y, int h, int w); // Draws a texture
-	void presentFrame(); // Copies next frame to screen
+	void clearNextFrame(); 
+	void drawToNextFrame(SDL_Texture* t, float x, float y, int h, int w); 
+	void presentFrame();  
 
-	void drawScreen(); // Clears nextFrame and presents it to screen (convenience)
+	void drawScreen(); 
 
 	SDL_Renderer* getSDLRenderer();
 
