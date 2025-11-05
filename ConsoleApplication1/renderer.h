@@ -1,7 +1,8 @@
 #pragma once
-
+#include <unordered_map>
 #include <string>
 #include <SDL3/SDL.h>
+#include <SDL3_ttf/SDL_ttf.h>
 
 class renderer {
 public:
@@ -15,6 +16,10 @@ public:
 	void presentFrame();  
 
 	void drawScreen(); 
+	bool loadFont(const std::string& fontId, const std::string& fontPath, float ptsize);
+	void unloadFont(const std::string& fontId);
+	SDL_Texture* createTextTexture(const std::string& text, const std::string& fontId, SDL_Color color);
+	void drawText(const std::string& text, const std::string& fontId, SDL_Color color, float x, float y);
 
 	SDL_Renderer* getSDLRenderer();
 
@@ -24,7 +29,7 @@ private:
 
 	renderer(const renderer&) = delete;
 	renderer& operator=(const renderer&) = delete;
-
+	std::unordered_map<std::string, TTF_Font*> myFonts; 
 	SDL_Renderer* sdlRenderer = nullptr;
 	SDL_Texture* nextFrame = nullptr;
 

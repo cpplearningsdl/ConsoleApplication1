@@ -91,13 +91,16 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\SDL2Libraries\SDL3-devel-3.2.18-VC\SDL3-3.2.18\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SDL2Libraries\SDL3_image-devel-3.2.4-VC\SDL3_image-3.2.4\include;C:\SDL2Libraries\SDL3-devel-3.2.18-VC\SDL3-3.2.18\include;C:\Users\Keary\source\repos\ConsoleApplication1-working\ConsoleApplication1\include;C:\SDL2Libraries\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\SDL2Libraries\SDL3-devel-3.2.18-VC\SDL3-3.2.18\lib\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\SDL2Libraries\SDL3_image-devel-3.2.4-VC\SDL3_image-3.2.4\lib\x64;C:\SDL2Libraries\SDL3-devel-3.2.18-VC\SDL3-3.2.18\lib\x64;C:\SDL2Libraries\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL3_ttf.lib,
+SDL3.lib,
+SDL3main.lib,SDL3_image.lib
+;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -109,14 +112,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Keary\source\repos\ConsoleApplication1\ConsoleApplication1\include;C:\SDL2Libraries\SDL3-devel-3.2.18-VC\SDL3-3.2.18\include;C:\SDL2Libraries\SDL3_image-devel-3.2.4-VC\SDL3_image-3.2.4\include;C:\Users\Keary\source\repos\ConsoleApplication1\ConsoleApplication1\abilityFiles</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SDL2Libraries\SDL3_image-devel-3.2.4-VC\SDL3_image-3.2.4\include;C:\SDL2Libraries\SDL3-devel-3.2.18-VC\SDL3-3.2.18\include;C:\Users\Keary\source\repos\ConsoleApplication1-working\ConsoleApplication1\include;C:\SDL2Libraries\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\SDL2Libraries\SDL3-devel-3.2.18-VC\SDL3-3.2.18\lib\x64;C:\SDL2Libraries\SDL3_image-devel-3.2.4-VC\SDL3_image-3.2.4\lib\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL3_image.lib;SDL3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\SDL2Libraries\SDL3_image-devel-3.2.4-VC\SDL3_image-3.2.4\lib\x64;C:\SDL2Libraries\SDL3-devel-3.2.18-VC\SDL3-3.2.18\lib\x64;C:\SDL2Libraries\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL3.lib;SDL3_image.lib;SDL3_ttf.lib
+;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y "C:\SDL2Libraries\SDL3-devel-3.2.18-VC\SDL3-3.2.18\lib\x64\SDL3.dll" "$(OutDir)"</Command>
@@ -133,12 +137,18 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\SDL2Libraries\SDL3_image-devel-3.2.4-VC\SDL3_image-3.2.4\include;C:\SDL2Libraries\SDL3-devel-3.2.18-VC\SDL3-3.2.18\include;C:\Users\Keary\source\repos\ConsoleApplication1-working\ConsoleApplication1\include;C:\SDL2Libraries\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\SDL2Libraries\SDL3_image-devel-3.2.4-VC\SDL3_image-3.2.4\lib\x64;C:\SDL2Libraries\SDL3-devel-3.2.18-VC\SDL3-3.2.18\lib\x64;C:\SDL2Libraries\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL3_ttf.lib,
+SDL3.lib,
+SDL3main.lib,SDL3_image.lib
+;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -152,7 +162,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Keary\source\repos\ConsoleApplication1\ConsoleApplication1\include;C:\SDL2Libraries\SDL3-devel-3.2.18-VC\SDL3-3.2.18\include;C:\SDL2Libraries\SDL3_image-devel-3.2.4-VC\SDL3_image-3.2.4\include;C:\Users\Keary\source\repos\ConsoleApplication1\ConsoleApplication1\abilityFiles</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SDL2Libraries\SDL3_image-devel-3.2.4-VC\SDL3_image-3.2.4\include;C:\SDL2Libraries\SDL3-devel-3.2.18-VC\SDL3-3.2.18\include;C:\Users\Keary\source\repos\ConsoleApplication1-working\ConsoleApplication1\include;C:\SDL2Libraries\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -160,8 +170,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\SDL2Libraries\SDL3-devel-3.2.18-VC\SDL3-3.2.18\lib\x64;C:\SDL2Libraries\SDL3_image-devel-3.2.4-VC\SDL3_image-3.2.4\lib\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL3_image.lib;SDL3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\SDL2Libraries\SDL3_image-devel-3.2.4-VC\SDL3_image-3.2.4\lib\x64;C:\SDL2Libraries\SDL3-devel-3.2.18-VC\SDL3-3.2.18\lib\x64;C:\SDL2Libraries\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL3.lib;SDL3_image.lib;SDL3_ttf.lib
+;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y "C:\SDL2Libraries\SDL3-devel-3.2.18-VC\SDL3-3.2.18\lib\x64\SDL3.dll" "$(OutDir)"</Command>

@@ -2,6 +2,7 @@
 #include <string>
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
+#include <SDL3_ttf/SDL_ttf.h>
 #include "gameManager.h"
 #include "windowManager.h"
 #include "windowSettings.h"
@@ -29,7 +30,8 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 	logManager::logThis("SDL launched successfully.");
-	 
+
+
 	windowManager& windowManager = windowManager::initWindowManager();
 
 	if (!windowManager.openWindow(windowTitle, gWindowWidth, gWindowHeight)) { 
