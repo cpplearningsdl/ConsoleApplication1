@@ -39,5 +39,5 @@ std::string logManager::getFormattedTimeNow() {
 template<typename T>
 inline void spillGuts(const T& obj) {
 	nlohmann::ordered_json j = obj;
-	lm::logThis("Spilling Guts: \n", j.dump(4));
+	logManager::logThis("Spilling Guts: \n", j.dump(4));
 }

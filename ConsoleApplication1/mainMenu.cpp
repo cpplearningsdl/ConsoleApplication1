@@ -27,7 +27,7 @@ void mainMenu::updateRenderInfo() {
 	updateEntityRenderInfo(renderInfo, animationHandler.getCurrentTexture(), pos, animationHandler.getHeight(), animationHandler.getWidth(), getRender());
 }
 void mainMenu::loadJson() {
-	std::string fileName = "C:\\Users\\Keary\\source\\repos\\ConsoleApplication1-working\\ConsoleApplication1\\menuJsons\\start_menu.json";
+	std::string fileName = "C:\\Users\\spyse\\source\\repos\\cpplearningsdl\\ConsoleApplication1\\ConsoleApplication1\\menuJsons\\start_menu.json";
 	std::ifstream file(fileName);
 	if (!file.is_open()) {
 		logManager::logThis("Couldn't open start menu .json");

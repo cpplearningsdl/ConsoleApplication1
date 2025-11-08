@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+
 enum ENTITYTYPEENUM : int { 
 	MISSING,
 	TILE,

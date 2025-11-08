@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	textureManager& textureManager = textureManager::getInstance();
-	std::string artAssetDirectory = "C:\\Users\\Keary\\source\\repos\\ConsoleApplication1-working\\ConsoleApplication1\\artAssets";
+	std::string artAssetDirectory = "C:\\Users\\spyse\\source\\repos\\cpplearningsdl\\ConsoleApplication1\\ConsoleApplication1\\artAssets";
 	if (!textureManager.loadAllTextures(artAssetDirectory, windowManager.getRenderer())) {
 		logManager::logThis("Failed to load art succesfully.");
 		return 1;

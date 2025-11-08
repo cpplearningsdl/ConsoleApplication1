@@ -23,7 +23,7 @@ public:
 	}
 	 
 	void loadDefaultAbilities() {
-		std::string path = R"(C:\Users\Keary\source\repos\ConsoleApplication1-working\ConsoleApplication1\abilityFiles)";
+		std::string path = R"(C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\abilityFiles)";
 		abilityFileLoader::loadAllAbilitiesFromDir(path); 
 	};
 

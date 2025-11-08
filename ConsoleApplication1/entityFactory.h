@@ -40,7 +40,7 @@ public:
 	}
 
 
-	void loadDefaultEntities() { entityLoader::loadAllDefaultEntitiesFromDir("C:\\Users\\Keary\\source\\repos\\ConsoleApplication1-working\\ConsoleApplication1\\defaultEntities"); };
+	void loadDefaultEntities() { entityLoader::loadAllDefaultEntitiesFromDir("C:\\Users\\spyse\\source\\repos\\cpplearningsdl\\ConsoleApplication1\\ConsoleApplication1\\defaultEntities"); };
 private:
 	entityFactory() = default;
 	//std::unordered_map<std::string, std::unique_ptr<entity>> prototypes;

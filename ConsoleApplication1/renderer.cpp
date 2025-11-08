@@ -5,6 +5,8 @@
 #include "windowSettings.h" 
 #include "logManager.h"
 #include <SDL3_ttf/SDL_ttf.h>
+#include <iostream>
+#include <windows.h>
 #define lm logManager
   
 renderer::renderer() {}
@@ -37,8 +39,10 @@ bool renderer::init(int width, int height) {
 	nextFrame = SDL_CreateTexture(sdlRenderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, logicalW, logicalH);
 	//SDL_SetTextureBlendMode(nextFrame, SDL_BLENDMODE_BLEND);
 	//SDL_SetRenderDrawBlendMode(sdlRenderer, SDL_BLENDMODE_BLEND);
-	if (TTF_Init() != 0) {
-		logManager::logThis("TTF_Init Failed to initialize.");
+ 
+	if (TTF_Init() != 1) {
+		logManager::logThis("TTF_Init Failed to initialize.", SDL_GetError());
+		std::cerr << "TTF_Init failed: " << SDL_TTF_GetError() << std::endl; 
 		return false;
 	}
 	logManager::logThis("TTF_Init launched successfully.");
