@@ -41,8 +41,7 @@ bool renderer::init(int width, int height) {
 	//SDL_SetRenderDrawBlendMode(sdlRenderer, SDL_BLENDMODE_BLEND);
  
 	if (TTF_Init() != 1) {
-		logManager::logThis("TTF_Init Failed to initialize.", SDL_GetError());
-		std::cerr << "TTF_Init failed: " << SDL_TTF_GetError() << std::endl; 
+		logManager::logThis("TTF_Init Failed to initialize.", SDL_GetError()); 
 		return false;
 	}
 	logManager::logThis("TTF_Init launched successfully.");

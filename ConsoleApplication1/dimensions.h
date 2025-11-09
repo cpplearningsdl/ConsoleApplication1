@@ -15,7 +15,7 @@ public:
 	int getW() const { return width; }
 	int getH() const { return height; }
 	float getWf() const { return static_cast<float>(width); }
-	float getHf() const { return static_cast<float>(height); }
+	float getHf() const { return static_cast<float>(height); } 
 
 	friend void to_json(nlohmann::ordered_json& j, const dimensions& size);
 	friend void from_json(const nlohmann::ordered_json& j, dimensions& size);

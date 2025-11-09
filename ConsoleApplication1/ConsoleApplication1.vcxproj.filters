@@ -112,6 +112,9 @@
     <Filter Include="Source Files\entity\movement">
       <UniqueIdentifier>{ade412eb-8964-47b9-9c9e-bb602edce708}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\text">
+      <UniqueIdentifier>{cb2252bb-5dd9-48b0-a0d0-90159852f4bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp">
@@ -439,6 +442,12 @@
     </ClInclude>
     <ClInclude Include="turnEvents.h">
       <Filter>Header Files\game\turn</Filter>
+    </ClInclude>
+    <ClInclude Include="textDB.h">
+      <Filter>Header Files\text</Filter>
+    </ClInclude>
+    <ClInclude Include="label.h">
+      <Filter>Header Files\text</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
