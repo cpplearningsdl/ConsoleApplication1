@@ -48,12 +48,7 @@ bool renderer::init(int width, int height) {
 	return nextFrame != nullptr;
 }
  
-void renderer::shutdown() { 
-	for (auto &p : myFonts) {
-		if (p.second) TTF_CloseFont(p.second);
-	}
-	myFonts.clear();
-
+void renderer::shutdown() {  
 	if (nextFrame) {
 		SDL_DestroyTexture(nextFrame);
 		nextFrame = nullptr;
@@ -68,32 +63,7 @@ void renderer::shutdown() {
 	TTF_Quit();
 	SDL_Quit();
 }
-bool renderer::loadFont(const std::string& fontId, const std::string& fontPath, float ptsize) {
-	// If already loaded with same id, close it first
-	auto it = myFonts.find(fontId);
-	if (it != myFonts.end() && it->second) {
-		TTF_CloseFont(it->second);
-		it->second = nullptr;
-	}
-
-	// TTF_OpenFont signature in SDL3_ttf: TTF_Font* TTF_OpenFont(const char* file, float ptsize);
-	TTF_Font* f = TTF_OpenFont(fontPath.c_str(), ptsize);
-	if (!f) { 
-		return false;
-	}
-
-	myFonts[fontId] = f;
-	return true;
-}
-void renderer::unloadFont(const std::string& fontId) {
-	auto it = myFonts.find(fontId);
-	if (it != myFonts.end()) {
-		if (it->second) {
-			TTF_CloseFont(it->second);
-		}
-		myFonts.erase(it);
-	}
-}
+ 
 void renderer::clearNextFrame() {
 	SDL_SetRenderTarget(sdlRenderer, nextFrame);
 	SDL_SetRenderDrawColor(sdlRenderer, 0, 0, 0, 0);
@@ -110,10 +80,7 @@ SDL_Texture* renderer::createTextTexture(const std::string& text, const std::str
 	}
 
 	TTF_Font* font = it->second;
-
-	// TTF_RenderText_Blended signature (SDL3_ttf wiki):
-	// SDL_Surface * TTF_RenderText_Blended(TTF_Font *font, const char *text, size_t length, SDL_Color fg);
-	// Passing length = 0 means null-terminated.
+	 
 	SDL_Surface* surf = TTF_RenderText_Blended(font, text.c_str(), 0, color);
 	if (!surf) {
 		lm::logThis("render text blended error.");

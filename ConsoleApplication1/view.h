@@ -5,12 +5,12 @@
 #include "entity.h"
 
 struct viewPort {
-	position viewPos{ 0, 0 };                  // top-left of camera in world coordinates
-	dimensions mapSize{ 100, 100 };                // map dimensions in tiles
-	dimensions tileSize{ 128, 128 };               // size of each tile in pixels
-	dimensions screenSize{ logicalW, logicalH };   // logical screen size  
+	position viewPos{ 0.0f, 0.0f };                  // top-left of camera in world coordinates
+	dimensions mapSize{ 100.0f, 100.0f };                // map dimensions in tiles
+	dimensions tileSize{ 128.0f, 128.0f };               // size of each tile in pixels
+	dimensions screenSize{ static_cast<float>(logicalW), static_cast<float>(logicalH) };   // logical screen size  
 
-	position targetPos{ 0,0 };
+	position targetPos{ 0.0f, 0.0f };
 	float speed = 0.0f;
 	bool moving = false;
 	bool rotating = false;          // true if the camera is currently orbiting
@@ -26,12 +26,9 @@ struct viewPort {
 	static constexpr float PI = 3.14159265358979323846f;
 };
 
-//grid x,y to array index
-//inline int gridToIndex(position& p, const viewPort& v) noexcept {
-//	return p.getY() * v.mapSize.getW() + p.getX();
-//}
+//grid x,y to array index 
 inline int gridToIndex(position& p, const viewPort& v) noexcept {
-	return static_cast<int>(p.getY()) * v.mapSize.getW() + static_cast<int>(p.getX());
+	return static_cast<int>(p.getY() * v.mapSize.getW() + p.getX());
 }
 
 // Convert from world coords to grid coords (tile index position)
@@ -42,8 +39,8 @@ inline int gridToIndex(position& p, const viewPort& v) noexcept {
 //	};
 //}
 inline position toGridCoords(const position& p, const viewPort& v) {
-	int gx = static_cast<int>(p.getX() / static_cast<float>(v.tileSize.getW()));
-	int gy = static_cast<int>(p.getY() / static_cast<float>(v.tileSize.getH()));
+	int gx = static_cast<int>(p.getX() / v.tileSize.getW());
+	int gy = static_cast<int>(p.getY() / v.tileSize.getH());
 	return position(static_cast<float>(gx), static_cast<float>(gy));
 }
 
@@ -55,8 +52,8 @@ inline position toGridCoords(const position& p, const viewPort& v) {
 //	};
 //}
 inline position toWorldCoords(const position& gridPos, const viewPort& v) {
-	float wx = static_cast<float>(gridPos.getX()) * v.tileSize.getW();
-	float wy = static_cast<float>(gridPos.getY()) * v.tileSize.getH();
+	float wx = gridPos.getX() * v.tileSize.getW();
+	float wy = gridPos.getY() * v.tileSize.getH();
 	return position{ wx, wy };
 }
 
@@ -76,8 +73,8 @@ inline position toGridCoords(const entity& e, const dimensions& tileSize) {
 	float cx = e.getCombinedPos().getX() + (e.getAnimationManager().getWidth() / 2.0f);
 	float cy = e.getCombinedPos().getY() + (e.getAnimationManager().getHeight() / 2.0f);
 
-	int gx = static_cast<int>(cx / static_cast<float>(tileSize.getW()));
-	int gy = static_cast<int>(cy / static_cast<float>(tileSize.getH()));
+	int gx = static_cast<int>(cx / tileSize.getW());
+	int gy = static_cast<int>(cy / tileSize.getH());
 
 	return position(static_cast<float>(gx), static_cast<float>(gy)); 
 }
@@ -89,8 +86,8 @@ inline position toGridCoords(const entity& e, const dimensions& tileSize) {
 //	return position(wx, wy);
 //}
 inline position fromGridCoords(const position& gridPos, const dimensions& tileSize) {
-	float wx = static_cast<float>(gridPos.getX()) * tileSize.getW();
-	float wy = static_cast<float>(gridPos.getY()) * tileSize.getH(); 
+	float wx = gridPos.getX() * tileSize.getW();
+	float wy = gridPos.getY() * tileSize.getH(); 
 	return position(wx, wy);
 }
 

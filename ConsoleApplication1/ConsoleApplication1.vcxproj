@@ -190,11 +190,13 @@ SDL3main.lib,SDL3_image.lib
     <ClCompile Include="animationMovement.cpp" />
     <ClCompile Include="animationMovementFactory.cpp" />
     <ClCompile Include="ConsoleApplication1.cpp" />
+    <ClCompile Include="dialogueManager.cpp" />
     <ClCompile Include="dimensions.h" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="entityLoader.cpp" />
     <ClCompile Include="entityManager.cpp" />
     <ClCompile Include="fileManager.cpp" />
+    <ClCompile Include="fontManager.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameManager.cpp" />
     <ClCompile Include="idleMovement.cpp" />
@@ -222,12 +224,15 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="ability.h" />
     <ClInclude Include="abilityFactory.h" />
     <ClInclude Include="abilityFileLoader.h" />
+    <ClInclude Include="activeDialogue.h" />
     <ClInclude Include="aNotes.h" />
     <ClInclude Include="buttonData.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="buttonEnums.h" />
     <ClInclude Include="characterTypeEnum.h" />
     <ClInclude Include="defaultButtonSettings.h" />
+    <ClInclude Include="dialogueManager.h" />
+    <ClInclude Include="dialogueNode.h" />
     <ClInclude Include="enteredTileEvent.h" />
     <ClInclude Include="entityDied.h" />
     <ClInclude Include="entityManager.h" />
@@ -235,6 +240,7 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="eventSystem.h" />
     <ClInclude Include="finishedMovementEvent.h" />
     <ClInclude Include="finishedPathEvent.h" />
+    <ClInclude Include="fontManager.h" />
     <ClInclude Include="GameEvent.h" />
     <ClInclude Include="gamePhaseEnum.h" />
     <ClInclude Include="interactability.h" />
@@ -265,6 +271,7 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="entityFactory.h" />
     <ClInclude Include="entityIncludes.h" />
     <ClInclude Include="entityLoader.h" />
+    <ClInclude Include="stringDB.h" />
     <ClInclude Include="textDB.h" />
     <ClInclude Include="turnEvents.h" />
     <ClInclude Include="northMovement.h" />

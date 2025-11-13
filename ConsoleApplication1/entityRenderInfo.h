@@ -7,12 +7,12 @@
 struct entityRenderInfo { 
 	SDL_Texture* tex;
 	position pos;
-	int height;
-	int width;
+	float height;
+	float width;
 	bool render;  
 };
 
-inline void updateEntityRenderInfo(entityRenderInfo& eri, SDL_Texture* t, const position& pos, int h, int w, bool visible) { 
+inline void updateEntityRenderInfo(entityRenderInfo& eri, SDL_Texture* t, const position& pos, float h, float w, bool visible) {
 	eri.tex = t;
 	eri.pos = pos;
 	eri.height = h;
@@ -36,10 +36,10 @@ inline void from_json(const nlohmann::ordered_json& j, entityRenderInfo& s) {
 		j.at("pos").get_to(s.pos);  
 	}
 	if (j.contains("height")) {
-		s.height = j.at("height").get<int>();
+		s.height = j.at("height").get<float>();
 	}
 	if (j.contains("width")) {
-		s.width = j.at("width").get<int>();
+		s.width = j.at("width").get<float>();
 	}
 	if (j.contains("render")) {
 		s.render = j.at("render").get<bool>();

@@ -4,18 +4,16 @@
 class dimensions {
 
 private://UPDATE TO FLOAT
-	int width, height;
+	float width, height;
 public:
-	dimensions(int nw, int nh) : width(nw), height(nh) {}
+	dimensions(float nw, float nh) : width(nw), height(nh) {}
 	dimensions() : width(0), height(0) {}
 
-	void setSize(int nw, int nh) { width = nw, height = nh; }
-	void setW(int nw) { width = nw; }
-	void setH(int nh) { height = nh; }
-	int getW() const { return width; }
-	int getH() const { return height; }
-	float getWf() const { return static_cast<float>(width); }
-	float getHf() const { return static_cast<float>(height); } 
+	void setSize(float nw, float nh) { width = nw, height = nh; }
+	void setW(float nw) { width = nw; }
+	void setH(float nh) { height = nh; }
+	float getW() const { return width; }
+	float getH() const { return height; } 
 
 	friend void to_json(nlohmann::ordered_json& j, const dimensions& size);
 	friend void from_json(const nlohmann::ordered_json& j, dimensions& size);
@@ -28,5 +26,5 @@ inline void to_json(nlohmann::ordered_json& j, const dimensions& size) {
 	};
 }
 inline void from_json(const nlohmann::ordered_json& j, dimensions& size) {
-	size.setSize(j.value("width", 0), j.value("height", 0));
+	size.setSize(j.value("width", 0.0f), j.value("height", 0.0f));
 }

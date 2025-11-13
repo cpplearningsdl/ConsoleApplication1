@@ -65,15 +65,15 @@ public:
 	//NOT REAL POS ANIMATION DOESNT COUNT TOWARD X AND Y!!
 	const position getPos() const { return position(animationMovement->getX(), animationMovement->getY()); }
 	SDL_Texture* getCurrentTexture() const { return frameTextures[getCurrentIndex()]; }
-	const int getHeight() const { return height[getCurrentIndex()]; }
-	const int getWidth() const { return width[getCurrentIndex()]; }
+	const float getHeight() const { return height[getCurrentIndex()]; }
+	const float getWidth() const { return width[getCurrentIndex()]; }
 
 	friend void to_json(nlohmann::ordered_json& j, const animationManager& m);
 	friend void from_json(const nlohmann::ordered_json& j, animationManager& m);
 private: 
 	std::vector<SDL_Texture*> frameTextures;
-	std::vector<int> height;
-	std::vector<int> width;
+	std::vector<float> height;
+	std::vector<float> width;
 
 	std::string animationName;
 	std::string entityName;

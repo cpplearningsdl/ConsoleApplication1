@@ -115,6 +115,21 @@
     <Filter Include="Header Files\text">
       <UniqueIdentifier>{cb2252bb-5dd9-48b0-a0d0-90159852f4bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\text\dialogue">
+      <UniqueIdentifier>{9ac66f00-796d-4f99-a817-0d919b5b98e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\text">
+      <UniqueIdentifier>{33efbf65-9a5c-438e-8f10-f104467f0864}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\text\dialogue">
+      <UniqueIdentifier>{7cda9f3a-a984-40ff-b2ab-694f8c7f1801}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\text\font">
+      <UniqueIdentifier>{4a8a99aa-0fd9-4194-8ddb-762ee4eecd5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\text\font">
+      <UniqueIdentifier>{dccde7fe-9a82-428f-81da-f1565387d6b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp">
@@ -215,6 +230,12 @@
     </ClCompile>
     <ClCompile Include="movementManager.cpp">
       <Filter>Source Files\entity\movement</Filter>
+    </ClCompile>
+    <ClCompile Include="dialogueManager.cpp">
+      <Filter>Source Files\text\dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="fontManager.cpp">
+      <Filter>Source Files\text\font</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -448,6 +469,21 @@
     </ClInclude>
     <ClInclude Include="label.h">
       <Filter>Header Files\text</Filter>
+    </ClInclude>
+    <ClInclude Include="stringDB.h">
+      <Filter>Header Files\text</Filter>
+    </ClInclude>
+    <ClInclude Include="dialogueNode.h">
+      <Filter>Header Files\text\dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="activeDialogue.h">
+      <Filter>Header Files\text\dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="dialogueManager.h">
+      <Filter>Header Files\text\dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="fontManager.h">
+      <Filter>Header Files\text\font</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

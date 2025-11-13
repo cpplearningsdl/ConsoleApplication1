@@ -15,9 +15,7 @@ public:
 	void drawToNextFrame(SDL_Texture* t, float x, float y, int h, int w); 
 	void presentFrame();  
 
-	void drawScreen(); 
-	bool loadFont(const std::string& fontId, const std::string& fontPath, float ptsize);
-	void unloadFont(const std::string& fontId);
+	void drawScreen();
 	SDL_Texture* createTextTexture(const std::string& text, const std::string& fontId, SDL_Color color);
 	void drawText(const std::string& text, const std::string& fontId, SDL_Color color, float x, float y);
 

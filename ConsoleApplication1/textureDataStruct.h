@@ -8,10 +8,10 @@ struct textureDataStruct {
 	int frameNumber = 0;
 	int totalFrames = 0;
 
-	int width = 0;
-	int height = 0;
-	int hitBoxWidth = 0;
-	int hitBoxHeight = 0;
+	float width = 0;
+	float height = 0;
+	float hitBoxWidth = 0;
+	float hitBoxHeight = 0;
 	 
 	int xOffset = 0;
 	int yOffset = 0;
@@ -35,29 +35,15 @@ inline void to_json(nlohmann::ordered_json& j, const textureDataStruct& t) {
 		{"chainAnimation", t.chainAnimation}
 	};
 }
-
-//inline void from_json(const nlohmann::ordered_json& j, textureDataStruct& t) {
-//	j.at("key").get_to(t.key);
-//	j.at("animationName").get_to(t.animationName);
-//	j.at("frameNumber").get_to(t.frameNumber);
-//	j.at("totalFrames").get_to(t.totalFrames);
-//	j.at("width").get_to(t.width);
-//	j.at("height").get_to(t.height);
-//	j.at("hitBoxWidth").get_to(t.hitBoxWidth);
-//	j.at("hitBoxHeight").get_to(t.hitBoxHeight);
-//	j.at("xOffset").get_to(t.xOffset);
-//	j.at("yOffset").get_to(t.yOffset);
-//	j.at("loop").get_to(t.loop);
-//	j.at("chainAnimation").get_to(t.chainAnimation);
-//}
+ 
 
 inline void from_json(const nlohmann::ordered_json& j, textureDataStruct& t) {
 	t.key = j.value("key", "MISSING KEY");
 	t.animationName = j.value("animationName", "MISSING ANIMATION NAME");
-	t.width = j.value("width", 0);
-	t.height = j.value("height", 0);
-	t.hitBoxWidth = j.value("hitBoxWidth", 0);
-	t.hitBoxHeight = j.value("hitBoxHeight", 0);
+	t.width = j.value("width", 0.0f);
+	t.height = j.value("height", 0.0f);
+	t.hitBoxWidth = j.value("hitBoxWidth", 0.0f);
+	t.hitBoxHeight = j.value("hitBoxHeight", 0.0f);
 	t.frameNumber = j.value("frameNumber", 0);
 	t.totalFrames = j.value("totalFrames", 0);
 	t.xOffset = j.value("xOffset", 0);

@@ -13,7 +13,7 @@ void loadLevel(game& g, int l) {
 	levelData lvl = loadLevelFile(l);
 
 	logManager::logThis("Resizing Floor Map");
-	g.getEntityHandler().resizeFloorMap(lvl.state.mapSize.getH() * lvl.state.mapSize.getW()); 
+	g.getEntityHandler().resizeFloorMap(static_cast<int>(lvl.state.mapSize.getH() * lvl.state.mapSize.getW())); 
 	
 	logManager::logThis("Setting currentLevelData");
 	g.setLevelData(lvl); 
@@ -83,8 +83,8 @@ void loadTiles(game& g, levelData& lvl) {
 	entityManager& entities = g.getEntityHandler();
 	const viewPort& view = g.getView();
 	const int tileSize = 128; 
-	int mapW = lvl.state.mapSize.getW();
-	int mapH = lvl.state.mapSize.getH();
+	int mapW = static_cast<int>(lvl.state.mapSize.getW());
+	int mapH = static_cast<int>(lvl.state.mapSize.getH());
 	 
 	float x = 0;
 	float y = 0;

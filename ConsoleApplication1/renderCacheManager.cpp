@@ -85,11 +85,9 @@ void renderCacheManager::pruneRenderables(std::vector<entity*>& cache, const vie
 	if (type == TILE) {
 		// Compute min/max tile indices visible in the viewport
 		int minX = std::max(0, static_cast<int>(v.viewPos.getX() / v.tileSize.getW()));
-		int maxX = std::min(v.mapSize.getW() - 1,
-			static_cast<int>((v.viewPos.getX() + v.screenSize.getW()) / v.tileSize.getW()));
+		int maxX = std::min(static_cast<int>(v.mapSize.getW() - 1),	static_cast<int>(((v.viewPos.getX() + v.screenSize.getW()) / v.tileSize.getW())));
 		int minY = std::max(0, static_cast<int>(v.viewPos.getY() / v.tileSize.getH()));
-		int maxY = std::min(v.mapSize.getH() - 1,
-			static_cast<int>((v.viewPos.getY() + v.screenSize.getH()) / v.tileSize.getH()));
+		int maxY = std::min(static_cast<int>(v.mapSize.getH() - 1),	static_cast<int>(((v.viewPos.getY() + v.screenSize.getH()) / v.tileSize.getH())));
 
 		auto it = std::remove_if(cache.begin(), cache.end(), [&](entity* e) {
 
@@ -104,7 +102,7 @@ void renderCacheManager::pruneRenderables(std::vector<entity*>& cache, const vie
 			}
 
 			return !inView; // remove if not in view
-		});
+			});
 
 		cache.erase(it, cache.end());
 	}
@@ -151,21 +149,24 @@ void renderCacheManager::generateEntityRenderablesCache(const viewPort& v, std::
 void renderCacheManager::generateTileRenderablesCache(const viewPort& v, std::vector<entity*>& tileMap) {
 	renderableTileCache.clear();
 
-	int startCol = std::max(0, static_cast<int>(v.viewPos.getX() / v.tileSize.getW()) - 1);
-	int startRow = std::max(0, static_cast<int>(v.viewPos.getY() / v.tileSize.getH()) - 1);
+	// Compute start indices: do math in float first, then cast to int
+	int startCol = std::max(0, static_cast<int>((v.viewPos.getX() / v.tileSize.getW()) - 1.0f));
+	int startRow = std::max(0, static_cast<int>((v.viewPos.getY() / v.tileSize.getH()) - 1.0f));
 
-	int endCol = std::min(v.mapSize.getW() - 1, static_cast<int>((v.viewPos.getX() + v.screenSize.getW()) / v.tileSize.getW()) + 1);
-	int endRow = std::min(v.mapSize.getH() - 1, static_cast<int>((v.viewPos.getY() + v.screenSize.getH()) / v.tileSize.getH()) + 1);
+	// Compute end indices: float math first, cast after addition
+	int endCol = std::min(static_cast<int>(v.mapSize.getW() - 1),
+		static_cast<int>(((v.viewPos.getX() + v.screenSize.getW()) / v.tileSize.getW()) + 1.0f));
+	int endRow = std::min(static_cast<int>(v.mapSize.getH() - 1),
+		static_cast<int>(((v.viewPos.getY() + v.screenSize.getH()) / v.tileSize.getH()) + 1.0f));
 
-	//logManager::logThis("generateTileRenderablesCache view indices: ["+ std::to_string(startCol) + "][" + std::to_string(startRow) + "]-["+ std::to_string(endCol) + "][" + std::to_string(endRow) + "]");
-	for (int row = startRow; row <= endRow; ++row)
-	{
-		for (int col = startCol; col <= endCol; ++col)
-		{
-			int index = row * v.mapSize.getW() + col;
+	// Loop over the tiles in the viewport
+	for (int row = startRow; row <= endRow; ++row) {
+		for (int col = startCol; col <= endCol; ++col) {
+			int index = row * static_cast<int>(v.mapSize.getW()) + col;
 			entity* tile = tileMap[index];
 			if (tile)
 				renderableTileCache.push_back(tile);
 		}
 	}
+	logManager::logThis("generated tile cache");
 }
