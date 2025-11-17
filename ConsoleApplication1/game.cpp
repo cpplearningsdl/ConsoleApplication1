@@ -6,11 +6,14 @@
 #include "entityIncludes.h"
 #include "entityTypeEnum.h"
 #include "movementManager.h" 
+#include "dialogueManager.h"
 #include "renderCacheManager.h"
 
  
 game::game() {
 	loadALevel(1);
+	dialogueManager.setStringDatabase(1);
+	dialogueManager.setDialogueNodesDatabase(1);
 	//startRotation(view, { 64, 64 }, 1,128.0f, 0.033f, false, 0.3f);
 	auto& ents = entityHandler.getEntities();
 	ents.back()->setMoving(true);
@@ -43,6 +46,7 @@ void game::update(inputManager& input) {
 			break;
 		case gamePhase::MOVEMENT:
 
+		case gamePhase::DIALOGUE:
 			break;
 	}
 	updateView();
@@ -52,7 +56,7 @@ void game::updateEntities(std::vector<std::unique_ptr<entity>>& entitiesVector) 
 	for (auto& e : entitiesVector) {
 		e->getAnimationManager().step();
 		movementManager.handleMovement(turnManager.getTurnCtx(), e.get());
-		handleEvents(turnManager.getTurnCtx(), movementManager, renderCacheHandler);
+		handleEvents(turnManager.getTurnCtx(), movementManager, renderCacheHandler, dialogueManager);
 	}
 }
 

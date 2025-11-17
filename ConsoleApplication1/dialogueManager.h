@@ -4,21 +4,25 @@
 #include "activeDialogue.h"
 #include "textDB.h"
 #include "renderer.h" 
+#include "turnContext.h"
 
 class dialogueManager {
-public:
-    static dialogueManager& getInstance();
+public: 
+    dialogueManager();
+    ~dialogueManager();
 
-    void loadDialogue(const std::vector<dialogueNode>& nodes);
-    void setStringDatabase(textDatabase* db);
+    void setDialogueNodesDatabase(int dbId);
+    void setStringDatabase(int dbId);
     activeDialogue* startDialogue(int id);
     void advanceDialogue(activeDialogue& dlg);
 
     const std::vector<activeDialogue>& getActiveDialogues() const { return activeDialogues; }
 
-private:
-    dialogueManager() = default;
+    void processEvent(turnContext& ctx, const gameEvent& event);
+    void executeEvent(turnContext& ctx, const gameEvent& event);
+
+private: 
     std::unordered_map<int, dialogueNode> dialogueNodes;
     std::vector<activeDialogue> activeDialogues;
-    textDatabase* textDB = nullptr;
+    textDatabase textDB;
 };

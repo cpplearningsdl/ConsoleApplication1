@@ -16,6 +16,9 @@ struct textDatabase {
         auto it = entries.find(id);
         return it != entries.end() ? it->second : empty;
     }
+    void clear() {
+        entries.clear();
+    }
 };
 inline void to_json(json& j, const textDatabase& db) {
     j = db.entries;  

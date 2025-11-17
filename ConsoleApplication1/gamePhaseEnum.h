@@ -9,6 +9,7 @@ enum class gamePhase {
 	MOVEMENT,
 	BATTLE,
 	CUTSCENE,
+	DIALOGUE,
 	OTHER,
 	MISSING
 }; 
@@ -22,6 +23,7 @@ inline std::string gamePhaseEnumToString(gamePhase p) {
 		case gamePhase::MOVEMENT: return "MOVEMENT";
 		case gamePhase::BATTLE: return "BATTLE";
 		case gamePhase::CUTSCENE: return "CUTSCENE";
+		case gamePhase::DIALOGUE: return "DIALOGUE";
 		case gamePhase::OTHER: return "OTHER";
 		case gamePhase::MISSING: return "MISSING";
 	} 	
@@ -35,6 +37,7 @@ inline gamePhase stringToGamePhaseEnum(std::string p) {
 	if (p == "MOVEMENT") { return gamePhase::MOVEMENT; }
 	if (p == "BATTLE") { return gamePhase::BATTLE; }
 	if (p == "CUTSCENE") { return gamePhase::CUTSCENE; }
+	if (p == "DIALOGUE") { return gamePhase::DIALOGUE; }
 	if (p == "OTHER") { return gamePhase::OTHER; }
 	return gamePhase::MISSING;
 }
