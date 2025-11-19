@@ -105,15 +105,15 @@ void renderer::drawText(const std::string& text, const std::string& fontId, SDL_
 	SDL_DestroyTexture(tex);
 }
 
-void renderer::drawToNextFrame(SDL_Texture* t, float x, float y, int h, int w) {
+void renderer::drawToNextFrame(SDL_Texture* t, float x, float y, float h, float w) {
 	 
 	SDL_SetRenderTarget(sdlRenderer, nextFrame);
 
 	SDL_FRect dst;
 	dst.x = (x);
 	dst.y = (y);
-	dst.w = static_cast<float>(w);
-	dst.h = static_cast<float>(h);
+	dst.w = w;
+	dst.h = h;
 
 	SDL_RenderTexture(sdlRenderer, t, nullptr, &dst);
 }

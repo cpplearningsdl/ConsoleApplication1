@@ -12,7 +12,7 @@ public:
 	void shutdown();
 
 	void clearNextFrame(); 
-	void drawToNextFrame(SDL_Texture* t, float x, float y, int h, int w); 
+	void drawToNextFrame(SDL_Texture* t, float x, float y, float h, float w);
 	void presentFrame();  
 
 	void drawScreen();

@@ -33,6 +33,7 @@ public:
 	renderCacheManager& getRenderCacheManager() { return renderCacheHandler; }
 
 	turnManager& getTurnManager() { return turnManager; }
+	dialogueManager& getDialogueManager() { return dialogueManager; }
 private: 
 	int updateCount = 0;
 	bool blockMenus = false;

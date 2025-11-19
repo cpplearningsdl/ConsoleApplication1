@@ -15,5 +15,6 @@ public:
 	void renderMainMenu(menuManager& m);
 	void renderBackground();
 	void renderEntities(game& g, const std::vector<entity*>& cache); 
+	void renderDialogue(dialogueManager& dlg);
 };
 

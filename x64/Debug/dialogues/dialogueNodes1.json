@@ -3,7 +3,7 @@
     "id": 1,
     "speakerId": "npc_blacksmith",
     "textId": "dlg.intro.1",
-    "bubbleTextureKey": "speechBubble_default",
+    "bubbleTextureKey": "textBubble_idle_0",
     "nextId": 2,
     "choices": []
   },
@@ -11,7 +11,7 @@
     "id": 2,
     "speakerId": "npc_blacksmith",
     "textId": "dlg.intro.1",
-    "bubbleTextureKey": "speechBubble_default",
+    "bubbleTextureKey": "textBubble_idle_0",
     "choices": []
   }
 ]

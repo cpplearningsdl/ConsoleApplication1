@@ -8,8 +8,8 @@
 
 struct label {
     std::string id; 
-    std::string text; 
-    std::string fontName;
+    std::string text = "How did you get me\n to say this?";
+    std::string fontName = "Sagewold-Regular";
     SDL_Color color = { 255,255,255,255 };
     position pos = { 0.0f, 0.0f };
     float scale = 1.0f;

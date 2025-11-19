@@ -22,7 +22,7 @@ void renderManager::renderMainMenu(menuManager& m) {
 
 void renderManager::renderBackground() {
 	SDL_Texture* tex = textureManager::getInstance().getFrame("background_idle_0"); 
-	renderer::getInstance().drawToNextFrame(tex, 0, 0, logicalH, logicalW);
+	renderer::getInstance().drawToNextFrame(tex, 0, 0, static_cast<float>(logicalH), static_cast<float>(logicalW));
 }
  
 void renderManager::renderEntities(game& g, const std::vector<entity*>& cache) {
@@ -43,12 +43,21 @@ void renderManager::renderEntities(game& g, const std::vector<entity*>& cache) {
 	}
 } 
 
+void renderManager::renderDialogue(dialogueManager& dlg) {
+	activeDialogue aDlg = dlg.getActiveDialogues().back();
+	 
+	renderer::getInstance().drawToNextFrame(textureManager::getInstance().getFrame("textBubble_idle_0"), aDlg.bubbleRect.x, aDlg.bubbleRect.y, aDlg.bubbleRect.h, aDlg.bubbleRect.w);
+
+	renderer::getInstance().drawToNextFrame(aDlg.textLabel.texture, aDlg.textLabel.pos.getX(), aDlg.textLabel.pos.getY(), aDlg.textLabel.h, aDlg.textLabel.w);
+
+}
 
 void renderManager::renderGame(game& g, menuManager& m) {
 	renderCacheManager& cache = g.getRenderCacheManager();
 	renderBackground();
 	renderEntities(g, cache.getRenderableTiles());
 	renderEntities(g, cache.getRenderableEntities());
+	renderDialogue(g.getDialogueManager());
 	//renderGameMenu(g);
 	renderMainMenu(m);
 	renderer::getInstance().drawScreen();

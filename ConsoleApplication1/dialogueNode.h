@@ -8,7 +8,7 @@ struct dialogueNode {
     int id;
     std::string speakerId; 
     std::string textId; 
-    std::string bubbleTextureKey; 
+    std::string bubbleTextureKey = "textBubble_idle_0";
     int nextId = -1;
     std::vector<int> choices; 
 
