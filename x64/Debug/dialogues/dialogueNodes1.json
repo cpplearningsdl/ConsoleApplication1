@@ -1,17 +1,25 @@
 [
   {
     "id": 1,
-    "speakerId": "npc_blacksmith",
+    "speakerId": "npc_001",
     "textId": "dlg.intro.1",
     "bubbleTextureKey": "textBubble_idle_0",
-    "nextId": 2,
-    "choices": []
-  },
-  {
-    "id": 2,
-    "speakerId": "npc_blacksmith",
-    "textId": "dlg.intro.1",
-    "bubbleTextureKey": "textBubble_idle_0",
-    "choices": []
+    "nextId": -1,
+    "choices": [],
+    "speakerFontId": "Sagewold-Regular",
+    "textFontId": "Sagewold-Regular",
+    "speakerFontColor": {
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "textFontColor": {
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    }
   }
 ]
+

@@ -68,6 +68,6 @@ void gameManager::processMenu(inputManager& input) {
  
 void gameManager::loadDefaultAssets() {
 	abilityFactory::getInstance().loadDefaultAbilities();
-	entityFactory::getInstance().loadDefaultEntities(); 
-	fontManager::getInstance().loadFont("Sagewold-Regular", "C:\\Users\\spyse\\source\\repos\\cpplearningsdl\\ConsoleApplication1\\ConsoleApplication1\\fonts\\Sagewold_Font_1_0\\TrueType (.ttf)\\Sagewold-Regular.ttf",1);
+	entityFactory::getInstance().loadDefaultEntities();
+	fontManager::getInstance().loadDefaultFonts();
 }

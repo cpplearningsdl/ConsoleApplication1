@@ -10,6 +10,7 @@ public:
         return instance;
     }
 
+    void loadDefaultFonts();
     bool loadFont(const std::string& key, const std::string& path, int size);
     TTF_Font* getFont(const std::string& key);
 

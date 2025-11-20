@@ -100,13 +100,13 @@ activeDialogue* dialogueManager::startDialogue(int id) {
     dlg.bubbleRect = { 100.0f, 100.0f, 300.0f, 150.0f }; 
 
     // Speaker label
-    dlg.speakerLabel.color = { 255, 255, 0, 255 };
+    dlg.speakerLabel.color = dlg.speakerLabel.color;
     dlg.speakerLabel.pos = { dlg.bubbleRect.x + 10.0f, dlg.bubbleRect.y + 10.0f };
     dlg.speakerLabel.text = textDB.get(node.speakerId); 
     dlg.speakerLabel.updateTexture(dlg.speakerLabel.text); 
 
     // Text label
-    dlg.textLabel.color = { 255, 255, 255, 255 };
+    dlg.textLabel.color = dlg.textLabel.color;
     dlg.textLabel.pos = { dlg.bubbleRect.x + 10.0f, dlg.bubbleRect.y + 40.0f };
     dlg.textLabel.text = textDB.get(node.textId);
     dlg.textLabel.updateTexture(dlg.textLabel.text); 

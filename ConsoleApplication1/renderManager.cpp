@@ -49,7 +49,7 @@ void renderManager::renderDialogue(dialogueManager& dlg) {
 	renderer::getInstance().drawToNextFrame(textureManager::getInstance().getFrame("textBubble_idle_0"), aDlg.bubbleRect.x, aDlg.bubbleRect.y, aDlg.bubbleRect.h, aDlg.bubbleRect.w);
 
 	renderer::getInstance().drawToNextFrame(aDlg.textLabel.texture, aDlg.textLabel.pos.getX(), aDlg.textLabel.pos.getY(), aDlg.textLabel.h, aDlg.textLabel.w);
-
+ 
 }
 
 void renderManager::renderGame(game& g, menuManager& m) {

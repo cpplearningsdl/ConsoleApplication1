@@ -1,6 +1,7 @@
 #include "renderer.h"
 #include "windowManager.h"
 #include "textureManager.h"
+#include "fontManager.h"
 #include "textureDataStruct.h"
 #include "windowSettings.h" 
 #include "logManager.h"
@@ -73,22 +74,17 @@ void renderer::clearNextFrame() {
 SDL_Texture* renderer::createTextTexture(const std::string& text, const std::string& fontId, SDL_Color color) {
 	if (!sdlRenderer) return nullptr;
 
-	auto it = myFonts.find(fontId);
-	if (it == myFonts.end() || it->second == nullptr) {
-		lm::logThis("create text texture error, font not loaded; id: ", fontId);
-		return nullptr;
-	}
+	TTF_Font* font = fontManager::getInstance().getFont(fontId);
+	if (!font) return nullptr;
 
-	TTF_Font* font = it->second;
-	 
-	SDL_Surface* surf = TTF_RenderText_Blended(font, text.c_str(), 0, color);
+	SDL_Surface* surf = TTF_RenderText_Blended(font, text.c_str(), text.length(), color);
 	if (!surf) {
-		lm::logThis("render text blended error.");
+		lm::logThis("TTF_RenderText_Blended error:", SDL_GetError());
 		return nullptr;
 	}
 
 	SDL_Texture* tex = SDL_CreateTextureFromSurface(sdlRenderer, surf);
-	SDL_DestroySurface(surf); // SDL3: destroy surface
+	SDL_DestroySurface(surf);
 	if (!tex) {
 		lm::logThis("SDL_CreateTextureFromSurface failed: ", SDL_GetError());
 	}
@@ -97,13 +93,17 @@ SDL_Texture* renderer::createTextTexture(const std::string& text, const std::str
 void renderer::drawText(const std::string& text, const std::string& fontId, SDL_Color color, float x, float y) {
 	SDL_Texture* tex = createTextTexture(text, fontId, color);
 	if (!tex) return;
-
+		
 	float w = 0, h = 0;
-	SDL_GetTextureSize(tex, &w, &h); // SDL3: fills ints w/h
+	SDL_GetTextureSize(tex, &w, &h);
 	SDL_FRect dst{ x, y, w, h };
+
+	SDL_SetRenderTarget(sdlRenderer, nextFrame);
 	SDL_RenderTexture(sdlRenderer, tex, nullptr, &dst);
+
 	SDL_DestroyTexture(tex);
 }
+
 
 void renderer::drawToNextFrame(SDL_Texture* t, float x, float y, float h, float w) {
 	 

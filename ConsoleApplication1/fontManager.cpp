@@ -10,8 +10,17 @@ bool fontManager::loadFont(const std::string& key, const std::string& path, int 
         logManager::logThis("Failed to open font: " + key + " \n path: ");
         return false;
     }
-    fonts[key] = font;
+    fonts[key] = font; 
     return true;
+}
+void fontManager::loadDefaultFonts() {
+    std::string path = "C:\\Users\\spyse\\source\\repos\\cpplearningsdl\\ConsoleApplication1\\ConsoleApplication1\\fonts\\Sagewold_Font_1_0\\TrueType (.ttf)\\Sagewold-Regular.ttf";
+    std::string fontName = "Sagewold-Regular";
+    int size = 30;
+
+    loadFont(fontName, path, size);
+    loadFont(fontName + "_small", path, size / 2);
+    loadFont(fontName + "_large", path, size * 2);
 }
 
 TTF_Font* fontManager::getFont(const std::string& key) {
