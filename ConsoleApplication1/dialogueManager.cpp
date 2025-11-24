@@ -3,6 +3,7 @@
 #include <fstream>
 #include "logManager.h"
 #include "dialogueManager.h"
+#include "dialogeEventHelperFunctions.h"
 #include "textureManager.h"
 #include "overLoaded.h"
 #include "json.hpp"
@@ -16,18 +17,23 @@ dialogueManager::~dialogueManager() {
     activeDialogues.clear();
     textDB.clear();
 }
-void dialogueManager::processEvent(turnContext& ctx, const gameEvent& event) {
+
+void dialogueManager::processEvent(turnContext& ctx, gameEvent& event) {
     std::visit(overloaded{
-        [&](const enteredTileEvent&) {}, // check renderable
-        [&](const entityDiedEvent&) {}, // probably leaving dead entities on map
+        [&](enteredTileEvent&) {}, // check start dialogue
+        [&](entityDiedEvent&) {}, 
+        [&](dialogueProposalEvent&) {},
+        [&](startDialogueEvent&) {},
         [](auto&) {}
         }, event);
 
 }
-void dialogueManager::executeEvent(turnContext& ctx, const gameEvent& event) {
+void dialogueManager::executeEvent(turnContext& ctx, gameEvent& event) {
     std::visit(overloaded{
-        [&](const enteredTileEvent&) {}, // check renderable
-        [&](const entityDiedEvent&) {}, // probably leaving dead entities on map
+        [&](enteredTileEvent& e) {}, // check renderable
+        [&](entityDiedEvent& e) {},
+        [&](dialogueProposalEvent& e) {dialogueProposal(ctx, e); },
+        [&](startDialogueEvent& e) {},
         [](auto&) {}
         }, event);
 
@@ -87,7 +93,8 @@ void dialogueManager::setStringDatabase(int dbId) {
     textDB = db.get<textDatabase>();
 }
 
-
+ 
+ 
 activeDialogue* dialogueManager::startDialogue(int id) {
     auto it = dialogueNodes.find(id);
     if (it == dialogueNodes.end())
@@ -97,20 +104,23 @@ activeDialogue* dialogueManager::startDialogue(int id) {
     activeDialogue dlg;
     dlg.nodeId = id;
     dlg.bubbleTexture = textureManager::getInstance().getFrame(node.bubbleTextureKey);
-    dlg.bubbleRect = { 100.0f, 100.0f, 300.0f, 150.0f }; 
+    float w, h;
+    SDL_GetTextureSize(dlg.bubbleTexture, &w, &h);
+    dlg.textBubbleSize.setSize(w, h);
 
     // Speaker label
     dlg.speakerLabel.color = dlg.speakerLabel.color;
-    dlg.speakerLabel.pos = { dlg.bubbleRect.x + 10.0f, dlg.bubbleRect.y + 10.0f };
+    dlg.speakerLabel.posOffset = {10.0f, 10.0f };
     dlg.speakerLabel.text = textDB.get(node.speakerId); 
     dlg.speakerLabel.updateTexture(dlg.speakerLabel.text); 
 
     // Text label
     dlg.textLabel.color = dlg.textLabel.color;
-    dlg.textLabel.pos = { dlg.bubbleRect.x + 10.0f, dlg.bubbleRect.y + 40.0f };
+    dlg.textLabel.posOffset = {10.0f, 40.0f };
     dlg.textLabel.text = textDB.get(node.textId);
-    dlg.textLabel.updateTexture(dlg.textLabel.text); 
+    dlg.textLabel.updateTexture(dlg.textLabel.text);
 
+    
     activeDialogues.push_back(std::move(dlg));
     return &activeDialogues.back();
 }

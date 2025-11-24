@@ -3,6 +3,7 @@
 #include "gamePhaseEnum.h"
 #include "characterTypeEnum.h"
 #include <vector>
+#include <deque>
 #include "json.hpp"
 
 class entity;
@@ -17,7 +18,7 @@ struct turnContext {
 	bool battleAllowed = true;         // true if you can initiate battle right now (not mid-move)
 	bool turnFinished = false;         // when both actor and actions are done
 
-	std::vector<gameEvent> events;
+	std::deque<gameEvent> events;
 	// Optional bookkeeping
 	gamePhase phase = gamePhase::DECISION;
 	gamePhase originPhase = gamePhase::DECISION;  

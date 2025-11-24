@@ -67,9 +67,9 @@ inline void from_json(const json& j, dialogueNode& n) {
 
     if (j.contains("choices") && j["choices"].is_array())
         n.choices = j["choices"].get<std::vector<int>>();
-    else
+    else {
         n.choices.clear();
-
+    }
     n.speakerFontId = j.value("speakerFontId", std::string("Sagewold-Regular"));
     n.textFontId = j.value("textFontId", std::string("Sagewold-Regular"));
 

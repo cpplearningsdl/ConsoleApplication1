@@ -231,6 +231,8 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="buttonEnums.h" />
     <ClInclude Include="characterTypeEnum.h" />
     <ClInclude Include="defaultButtonSettings.h" />
+    <ClInclude Include="dialogeEventHelperFunctions.h" />
+    <ClInclude Include="dialogueEvents.h" />
     <ClInclude Include="dialogueManager.h" />
     <ClInclude Include="dialogueNode.h" />
     <ClInclude Include="enteredTileEvent.h" />

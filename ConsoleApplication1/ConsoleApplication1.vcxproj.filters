@@ -130,6 +130,9 @@
     <Filter Include="Source Files\text\font">
       <UniqueIdentifier>{dccde7fe-9a82-428f-81da-f1565387d6b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\game\event\events\dialogue">
+      <UniqueIdentifier>{ffef5201-07e2-41ff-8ac8-d743066202d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp">
@@ -484,6 +487,12 @@
     </ClInclude>
     <ClInclude Include="fontManager.h">
       <Filter>Header Files\text\font</Filter>
+    </ClInclude>
+    <ClInclude Include="dialogueEvents.h">
+      <Filter>Header Files\game\event\events\dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="dialogeEventHelperFunctions.h">
+      <Filter>Header Files\text\dialogue</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

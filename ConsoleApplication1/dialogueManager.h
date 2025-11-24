@@ -18,8 +18,8 @@ public:
 
     const std::vector<activeDialogue>& getActiveDialogues() const { return activeDialogues; }
 
-    void processEvent(turnContext& ctx, const gameEvent& event);
-    void executeEvent(turnContext& ctx, const gameEvent& event);
+    void processEvent(turnContext& ctx, gameEvent& event);
+    void executeEvent(turnContext& ctx, gameEvent& event);
 
 private: 
     std::unordered_map<int, dialogueNode> dialogueNodes;
