@@ -11,20 +11,16 @@ renderCacheManager::~renderCacheManager() {
 
 }
 
-void renderCacheManager::processEvent(turnContext& ctx, const gameEvent& event) {
-		std::visit(overloaded{
-			[&](const enteredTileEvent&) {}, // check renderable
-			[&](const entityDiedEvent&) {}, // probably leaving dead entities on map
-			[](auto&) {}
-		}, event);
+void renderCacheManager::processEvent(turnContext& ctx, baseEvent* event) { 
+			//enteredTileEvent&) {}, // check renderable
+			//entityDiedEvent&) {}, // probably leaving dead entities on map
+			
 
 }
-void renderCacheManager::executeEvent(turnContext& ctx, const gameEvent& event) {
-	std::visit(overloaded{
-		[&](const enteredTileEvent&) {}, // check renderable
-		[&](const entityDiedEvent&) {}, // probably leaving dead entities on map
-		[](auto&) {}
-		}, event);
+void renderCacheManager::executeEvent(turnContext& ctx, baseEvent* event) {
+		//const enteredTileEvent&) {}, // check renderable
+		//entityDiedEvent&) {}, // probably leaving dead entities on map
+
 
 }
 void renderCacheManager::addToRenderablesCache(entity* e, const viewPort& view) {

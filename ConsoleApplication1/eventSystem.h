@@ -5,22 +5,26 @@
 //#include "battleManager.h"
 #include "dialogueManager.h"
 #include "renderCacheManager.h"
+#include "event.h"
 
 inline void handleEvents(turnContext& ctx, movementManager& move, renderCacheManager& renderCache, dialogueManager& dialogue) {
-	while (!ctx.events.empty())
-	{
-		gameEvent ev = ctx.events.front(); 
-		ctx.events.pop_front(); 
+    while (!ctx.events.empty())
+    {
+        // get pointer to the event at the front
+        std::unique_ptr<baseEvent> ev = std::move(ctx.events.front());
+        ctx.events.pop_front();
 
-		move.processEvent(ctx, ev);
-		dialogue.processEvent(ctx, ev);
-		//battle.handleEvent(ctx,ev);
-		renderCache.processEvent(ctx, ev);
+        // process phase
+        move.processEvent(ctx, ev.get());
+        dialogue.processEvent(ctx, ev.get());
+        // battle.processEvent(ctx, ev.get());
+        renderCache.processEvent(ctx, ev.get());
 
-		move.executeEvent(ctx, ev);
-		dialogue.executeEvent(ctx, ev);
-		//battle.handleEvent(ctx, ev);
-		renderCache.executeEvent(ctx, ev); 
-	}
+        // execute phase
+        move.executeEvent(ctx, ev.get());
+        dialogue.executeEvent(ctx, ev.get());
+        // battle.executeEvent(ctx, ev.get());
+        renderCache.executeEvent(ctx, ev.get());
+    }
 }
  

@@ -235,15 +235,11 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="dialogueEvents.h" />
     <ClInclude Include="dialogueManager.h" />
     <ClInclude Include="dialogueNode.h" />
-    <ClInclude Include="enteredTileEvent.h" />
     <ClInclude Include="entityDied.h" />
     <ClInclude Include="entityManager.h" />
     <ClInclude Include="event.h" />
     <ClInclude Include="eventSystem.h" />
-    <ClInclude Include="finishedMovementEvent.h" />
-    <ClInclude Include="finishedPathEvent.h" />
     <ClInclude Include="fontManager.h" />
-    <ClInclude Include="GameEvent.h" />
     <ClInclude Include="gamePhaseEnum.h" />
     <ClInclude Include="interactability.h" />
     <ClInclude Include="label.h" />
@@ -262,7 +258,6 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="idleMovement.h" />
     <ClInclude Include="movementEvents.h" />
     <ClInclude Include="movementManager.h" />
-    <ClInclude Include="movementPropsalEvent.h" />
     <ClInclude Include="movementTypeEnum.h" />
     <ClInclude Include="heal.h" />
     <ClInclude Include="abilityIncludes.h" />

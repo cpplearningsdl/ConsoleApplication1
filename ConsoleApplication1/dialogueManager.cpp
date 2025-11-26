@@ -3,9 +3,10 @@
 #include <fstream>
 #include "logManager.h"
 #include "dialogueManager.h"
+#include "dialogueEvents.h"
 #include "dialogeEventHelperFunctions.h"
-#include "textureManager.h"
-#include "overLoaded.h"
+#include "event.h"
+#include "textureManager.h" 
 #include "json.hpp"
 #include "turnContext.h"
 
@@ -18,25 +19,35 @@ dialogueManager::~dialogueManager() {
     textDB.clear();
 }
 
-void dialogueManager::processEvent(turnContext& ctx, gameEvent& event) {
-    std::visit(overloaded{
-        [&](enteredTileEvent&) {}, // check start dialogue
-        [&](entityDiedEvent&) {}, 
-        [&](dialogueProposalEvent&) {},
-        [&](startDialogueEvent&) {},
-        [](auto&) {}
-        }, event);
+void dialogueManager::processEvent(turnContext& ctx, baseEvent* ev) {
+
+    switch (ev->type) {
+    case eventType::dialogueProposal: {
+ 
+        break;
+    }
+    case eventType::startDialogue: {
+        auto* e = static_cast<startDialogueEvent*>(ev); 
+        break;
+    }
+    default:
+        break;
+    }
 
 }
-void dialogueManager::executeEvent(turnContext& ctx, gameEvent& event) {
-    std::visit(overloaded{
-        [&](enteredTileEvent& e) {}, // check renderable
-        [&](entityDiedEvent& e) {},
-        [&](dialogueProposalEvent& e) {dialogueProposal(ctx, e); },
-        [&](startDialogueEvent& e) {},
-        [](auto&) {}
-        }, event);
-
+void dialogueManager::executeEvent(turnContext& ctx, baseEvent* event) {
+    switch (event->type) {
+    case eventType::dialogueProposal: {
+        dialogueProposal(ctx, event);
+        break;
+    }
+    case eventType::startDialogue: {
+ 
+        break;
+    }
+    default:
+        break;
+    }
 }
 
 void dialogueManager::setDialogueNodesDatabase(int dbId) {

@@ -7,17 +7,21 @@ class entity;
  
 
 struct dialogueProposalEvent : baseEvent {
-	int  dialogueNode; 
+    int  dialogueNode;
+    bool accepted;
 
-	bool accepted = true;
-	dialogueProposalEvent(
-		int dlgNode) 
-		: dialogueNode(dlgNode){
-	};
-
+    dialogueProposalEvent(int d, bool a)
+        : baseEvent{ eventType::dialogueProposal },
+        dialogueNode(d),
+        accepted(a)
+    {
+    }
 };
 
 struct startDialogueEvent : baseEvent {
 	int dialogueNode;
-	startDialogueEvent(int dlgNode) : dialogueNode(dlgNode) {};
+    startDialogueEvent(int d)
+        : baseEvent{ eventType::startDialogue },
+        dialogueNode(d)
+        {}
 };

@@ -395,23 +395,8 @@
     <ClInclude Include="event.h">
       <Filter>Header Files\game\event\events</Filter>
     </ClInclude>
-    <ClInclude Include="movementPropsalEvent.h">
-      <Filter>Header Files\game\event\events\movement</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEvent.h">
-      <Filter>Header Files\game\event\events</Filter>
-    </ClInclude>
     <ClInclude Include="entityDied.h">
       <Filter>Header Files\game\event\events\battle</Filter>
-    </ClInclude>
-    <ClInclude Include="enteredTileEvent.h">
-      <Filter>Header Files\game\event\events\movement</Filter>
-    </ClInclude>
-    <ClInclude Include="finishedMovementEvent.h">
-      <Filter>Header Files\game\event\events\movement</Filter>
-    </ClInclude>
-    <ClInclude Include="finishedPathEvent.h">
-      <Filter>Header Files\game\event\events\movement</Filter>
     </ClInclude>
     <ClInclude Include="eventSystem.h">
       <Filter>Header Files\game\event\events</Filter>

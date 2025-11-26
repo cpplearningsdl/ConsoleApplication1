@@ -1,5 +1,5 @@
 #pragma once 
-#include "GameEvent.h"
+#include "event.h"
 #include "gamePhaseEnum.h"
 #include "characterTypeEnum.h"
 #include <vector>
@@ -7,7 +7,7 @@
 #include "json.hpp"
 
 class entity;
-
+//ADD TYPE TO JSON!!!!!!
 struct turnContext {
 	entity* activeCharacter = nullptr;     // who is currently selected / moving (single mover)
 	int activeCharacterId = -1;
@@ -18,11 +18,17 @@ struct turnContext {
 	bool battleAllowed = true;         // true if you can initiate battle right now (not mid-move)
 	bool turnFinished = false;         // when both actor and actions are done
 
-	std::deque<gameEvent> events;
+	std::deque<std::unique_ptr<baseEvent>> events;
 	// Optional bookkeeping
 	gamePhase phase = gamePhase::DECISION;
 	gamePhase originPhase = gamePhase::DECISION;  
+
+	template<typename T, typename... Args>
+	void emitEvent(Args&&... args) {
+		events.push_back(std::make_unique<T>(std::forward<Args>(args)...));
+	}
 };
+
 inline void clearCtx(turnContext& ctx) {
 	ctx.activeCharacter = nullptr;
 	ctx.activeCharacterId = -1;

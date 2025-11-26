@@ -1,6 +1,7 @@
 #pragma once
 #include "logManager.h"
 #include "turnContext.h"
+#include "event.h"
 
 class entity;
 
@@ -10,6 +11,7 @@ private:
 
 public:
 	void handleMovement(turnContext& ctx, entity* e);
-	void processEvent(turnContext& ctx, const gameEvent& ev);
-	void executeEvent(turnContext& ctx, const gameEvent& ev);
+	void handleMovementProposedEvent(baseEvent* ev);
+	void processEvent(turnContext& ctx, baseEvent* ev);
+	void executeEvent(turnContext& ctx, baseEvent* ev);
 };

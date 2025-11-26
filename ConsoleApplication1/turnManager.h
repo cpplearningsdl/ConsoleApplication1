@@ -10,7 +10,7 @@ public:
 
 	turnContext& getTurnCtx() { return turnCtx; }
 	void newTurn();
-	void handleEvent(const gameEvent& event);
+	void handleEvent(  baseEvent* event);
 private:
 	turnContext turnCtx;
 };

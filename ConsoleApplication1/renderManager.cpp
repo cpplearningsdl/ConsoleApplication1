@@ -44,6 +44,8 @@ void renderManager::renderEntities(game& g, const std::vector<entity*>& cache) {
 } 
 
 void renderManager::renderDialogue(dialogueManager& dlg) {
+	if (dlg.getActiveDialogues().empty()) { return; }
+
 	activeDialogue aDlg = dlg.getActiveDialogues().back();
 	 
 	renderer::getInstance().drawToNextFrame(textureManager::getInstance().getFrame("textBubble_idle_0"), aDlg.textBubblePos.getX(), aDlg.textBubblePos.getY(), aDlg.textBubbleSize.getH(), aDlg.textBubbleSize.getW());

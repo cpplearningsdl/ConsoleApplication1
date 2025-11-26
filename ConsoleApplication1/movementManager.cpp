@@ -1,8 +1,8 @@
 #pragma once
-#include "movementManager.h"
-#include "overLoaded.h"
+#include "movementManager.h" 
 #include "entity.h"
-
+#include "event.h"
+#include "movementEvents.h"
  
 
 void movementManager::handleMovement(turnContext& ctx, entity* e) {
@@ -13,8 +13,8 @@ void movementManager::handleMovement(turnContext& ctx, entity* e) {
 			popWayPoint(p);
 			//finished path
 			if (pathFinished(p)) {
-				e->setMoving(false); 
-				ctx.events.emplace_back(finishedPathEvent(e, e->getId()));
+				e->setMoving(false);  
+				ctx.events.emplace_back(std::make_unique<finishedPathEvent>(e, e->getId(), p.destination));
 			}
 			//continue path
 			else { 
@@ -28,41 +28,34 @@ void movementManager::handleMovement(turnContext& ctx, entity* e) {
 	}
  }
 
- void movementManager::processEvent(turnContext& ctx, const gameEvent& ev) {
-		 std::visit(overloaded{
-		[&](const movementProposedEvent& e) {
-			 // Approve or modify the move
-			 if (true) {
-				 true;
-			 }
-				else {
-						// could push interrupt event here
-					}
-				},
-			[&](const enteredTileEvent&) {}, // irrelevant
-			[&](const entityDiedEvent&) {}, // irrelevant
-			[](auto&) {}
-				}, ev);
+ void movementManager::processEvent(turnContext& ctx, baseEvent* ev) {
+ 
 
  }
 
- void movementManager::executeEvent(turnContext& ctx, const gameEvent& ev) {
-	 std::visit(overloaded{
-	[&](const movementProposedEvent& e) {
-		 // Approve or modify the move
-		 if (e.accepted) { 
-			 e.mover->setMoving(true);
-			 e.mover->getPath()= movementPath(e.newPath); 
-			 e.mover->getMovement().init(e.mover->getMovement().getPos(), getNextWaypoint(e.mover->getPath()), 0.2f);
-		 }
-			else {
-			 // could push interrupt event here
-		 }
-	 },
- [&](const finishedPathEvent&) {},
- [&](const enteredTileEvent&) {}, // irrelevant
- [&](const entityDiedEvent&) {}, // irrelevant
- [](auto&) {}
-		 }, ev);
+ void movementManager::executeEvent(turnContext& ctx, baseEvent* ev) {
 
+	 switch (ev->type) {
+	 case eventType::movementProposed: {
+		 handleMovementProposedEvent(ev);
+		 break;
+	 } 
+	 case eventType::finishedPath: {
+
+		 break;
+	 }
+	 default:
+		 break;
+	 } 
+
+ }
+
+ void movementManager::handleMovementProposedEvent(baseEvent* ev) {
+
+	 auto* e = dynamic_cast<movementProposedEvent*>(ev);
+	 if (e->accepted) {
+		 e->mover->setMoving(true);
+		 e->mover->getPath() = movementPath(e->newPath);
+		 e->mover->getMovement().init(e->mover->getMovement().getPos(), getNextWaypoint(e->mover->getPath()), 0.2f);
+	 }  
  }
