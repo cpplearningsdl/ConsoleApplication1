@@ -14,17 +14,15 @@ inline void handleEvents(turnContext& ctx, movementManager& move, renderCacheMan
         std::unique_ptr<baseEvent> ev = std::move(ctx.events.front());
         ctx.events.pop_front();
 
-        // process phase
-        move.processEvent(ctx, ev.get());
-        dialogue.processEvent(ctx, ev.get());
-        // battle.processEvent(ctx, ev.get());
-        renderCache.processEvent(ctx, ev.get());
+  
+        ev->process(ctx, move);
+        ev->process(ctx, dialogue);
+       //e->process(ctx, renderCache);
 
         // execute phase
-        move.executeEvent(ctx, ev.get());
-        dialogue.executeEvent(ctx, ev.get());
-        // battle.executeEvent(ctx, ev.get());
-        renderCache.executeEvent(ctx, ev.get());
+        ev->execute(ctx, move);
+        ev->execute(ctx, dialogue);
+       //v->execute(ctx, renderCache);
     }
 }
  

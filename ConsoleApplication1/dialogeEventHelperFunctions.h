@@ -5,9 +5,8 @@
 #include "event.h"
 #include "dialogueEvents.h"
 
-void dialogueProposal(turnContext& ctx, baseEvent* ev) {
-	auto* e = dynamic_cast<dialogueProposalEvent*>(ev); 
-	if (e->accepted) { 
-		ctx.emitEvent<startDialogueEvent>(e->dialogueNode);
+void dialogueProposal(turnContext& ctx, dialogueProposalEvent& ev) { 
+	if (ev.accepted) { 
+		ctx.emitEvent<startDialogueEvent>(ev.dialogueNode);
 	}
 }

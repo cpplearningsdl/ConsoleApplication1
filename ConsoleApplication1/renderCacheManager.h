@@ -23,8 +23,7 @@ public:
 	void generateTileRenderablesCache(const viewPort& v, std::vector<entity*>& floorMap);
 	void pruneRenderables(std::vector<entity*>& cache, const viewPort& v, ENTITYTYPEENUM type);
 
-	void processEvent(turnContext& ctx, baseEvent* event);
-	void executeEvent(turnContext& ctx, baseEvent* event);
+
 private:
 	std::vector<entity*> renderableEntityCache;
 	std::vector<entity*> renderableTileCache;

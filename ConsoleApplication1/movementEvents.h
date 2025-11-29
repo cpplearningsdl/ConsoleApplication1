@@ -4,6 +4,8 @@
 
 
 class entity;
+class movementManager;
+class dialogueManager;
 
 struct movementProposedEvent : baseEvent {
     entity* mover;
@@ -11,32 +13,28 @@ struct movementProposedEvent : baseEvent {
     movementPath newPath;
     bool accepted;
 
-    movementProposedEvent(
-        entity* e,
-        int id,
-        movementPath nPath,
-        bool b
-    )
-        : baseEvent(eventType::movementProposed)   // REQUIRED
-        , mover(e)
-        , entityId(id)
-        , newPath(nPath)
-        , accepted(b)
-    {
+    movementProposedEvent(entity* m, int id, movementPath path, bool a)
+        : mover(m), entityId(id), newPath(std::move(path)), accepted(a) {
     }
+     
+    void process(turnContext& ctx, movementManager& move) override;
+    void execute(turnContext& ctx, movementManager& move) override;
+     
 };
+
 struct finishedMovementEvent : baseEvent {
     entity* ent;
     int entityId;
     position pos;
 
     finishedMovementEvent(entity* e, int id, position p)
-        : baseEvent(eventType::finishedMovement)   // REQUIRED
-        , ent(e)
+        : ent(e)
         , entityId(id)
         , pos(p)
     {
-    }
+    } 
+    void process(turnContext& ctx, movementManager& move) override;
+    void execute(turnContext& ctx, movementManager& move) override; 
 };
 
 struct finishedPathEvent : baseEvent {
@@ -44,10 +42,11 @@ struct finishedPathEvent : baseEvent {
 	int entityId; 
 	position pos;
 	finishedPathEvent(entity* e, int id, position p)
-		: baseEvent(eventType::finishedPath)   // <-- THIS IS REQUIRED
-		, ent(e)
+		: ent(e)
 		, entityId(id)
 		, pos(p)
 	{
-	}
+	} 
+    void process(turnContext& ctx, movementManager& move) override;
+    void execute(turnContext& ctx, movementManager& move) override; 
 };

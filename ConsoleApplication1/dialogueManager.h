@@ -3,8 +3,10 @@
 #include "dialogueNode.h"
 #include "activeDialogue.h"
 #include "textDB.h"
-#include "renderer.h" 
-#include "turnContext.h"
+#include "renderer.h"  
+#include "dialogueEvents.h"
+
+struct turnContext;
 
 class dialogueManager {
 public: 
@@ -17,9 +19,13 @@ public:
     void advanceDialogue(activeDialogue& dlg);
 
     const std::vector<activeDialogue>& getActiveDialogues() const { return activeDialogues; }
+ 
 
-    void processEvent(turnContext& ctx, baseEvent* ev);
-    void executeEvent(turnContext& ctx, baseEvent* ev);
+
+    void processDialogueProposal(turnContext& ctx, dialogueProposalEvent& ev);
+    void executeDialogueProposal(turnContext& ctx, dialogueProposalEvent& ev);
+    void processStartDialogue(turnContext& ctx, startDialogueEvent& ev);
+    void executeStartDialogue(turnContext& ctx, startDialogueEvent& ev);
 
 private: 
     std::unordered_map<int, dialogueNode> dialogueNodes;

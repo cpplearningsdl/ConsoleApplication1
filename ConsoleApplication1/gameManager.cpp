@@ -15,7 +15,7 @@ gameManager& gameManager::getInstance() {
 
 void gameManager::newGame() {
 	setState(gameManagerStateEnum::PLAYING);
-	currentGame = std::make_unique<game>();
+	currentGame = std::make_unique<game>(); 
 }
 
 void gameManager::endGame() {

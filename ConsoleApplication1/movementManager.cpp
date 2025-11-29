@@ -28,34 +28,35 @@ void movementManager::handleMovement(turnContext& ctx, entity* e) {
 	}
  }
 
- void movementManager::processEvent(turnContext& ctx, baseEvent* ev) {
+void movementManager::processMovementProposed(turnContext& ctx, movementProposedEvent& ev) {
  
+}
 
- }
+void movementManager::executeMovementProposed(turnContext& ctx, movementProposedEvent& ev) {
+	handleMovementProposedEvent(ev);
+}
 
- void movementManager::executeEvent(turnContext& ctx, baseEvent* ev) {
 
-	 switch (ev->type) {
-	 case eventType::movementProposed: {
-		 handleMovementProposedEvent(ev);
-		 break;
-	 } 
-	 case eventType::finishedPath: {
+void movementManager::processFinishedMovement(turnContext& ctx, finishedMovementEvent& ev) {
 
-		 break;
-	 }
-	 default:
-		 break;
-	 } 
+}
+void movementManager::executFinishedMovement(turnContext& ctx, finishedMovementEvent& ev) {
 
- }
+}
 
- void movementManager::handleMovementProposedEvent(baseEvent* ev) {
+void movementManager::processFinishedPath(turnContext& ctx, finishedPathEvent& ev) {
 
-	 auto* e = dynamic_cast<movementProposedEvent*>(ev);
-	 if (e->accepted) {
-		 e->mover->setMoving(true);
-		 e->mover->getPath() = movementPath(e->newPath);
-		 e->mover->getMovement().init(e->mover->getMovement().getPos(), getNextWaypoint(e->mover->getPath()), 0.2f);
-	 }  
+}
+
+void movementManager::executeFinishedPath(turnContext& ctx, finishedPathEvent& ev) {
+
+}
+
+ void movementManager::handleMovementProposedEvent(movementProposedEvent& ev) {
+	 if (ev.accepted)
+	 {
+		 ev.mover->setMoving(true);
+		 ev.mover->getPath() = movementPath(ev.newPath);
+		 ev.mover->getMovement().init(ev.mover->getMovement().getPos(), getNextWaypoint(ev.mover->getPath()), 0.2f);
+	  } 
  }

@@ -1,5 +1,4 @@
 #pragma once
-#include "overLoaded.h"
 #include "renderCacheManager.h"
 #include "view.h"
 #include "entity.h"
@@ -11,18 +10,7 @@ renderCacheManager::~renderCacheManager() {
 
 }
 
-void renderCacheManager::processEvent(turnContext& ctx, baseEvent* event) { 
-			//enteredTileEvent&) {}, // check renderable
-			//entityDiedEvent&) {}, // probably leaving dead entities on map
-			
 
-}
-void renderCacheManager::executeEvent(turnContext& ctx, baseEvent* event) {
-		//const enteredTileEvent&) {}, // check renderable
-		//entityDiedEvent&) {}, // probably leaving dead entities on map
-
-
-}
 void renderCacheManager::addToRenderablesCache(entity* e, const viewPort& view) {
 	ENTITYTYPEENUM t = e->getType();
 	if (t == TILE) {

@@ -5,6 +5,7 @@
 #include "dialogueManager.h"
 #include "dialogueEvents.h"
 #include "dialogeEventHelperFunctions.h"
+#include "movementEvents.h"
 #include "event.h"
 #include "textureManager.h" 
 #include "json.hpp"
@@ -19,36 +20,8 @@ dialogueManager::~dialogueManager() {
     textDB.clear();
 }
 
-void dialogueManager::processEvent(turnContext& ctx, baseEvent* ev) {
 
-    switch (ev->type) {
-    case eventType::dialogueProposal: {
  
-        break;
-    }
-    case eventType::startDialogue: {
-        auto* e = static_cast<startDialogueEvent*>(ev); 
-        break;
-    }
-    default:
-        break;
-    }
-
-}
-void dialogueManager::executeEvent(turnContext& ctx, baseEvent* event) {
-    switch (event->type) {
-    case eventType::dialogueProposal: {
-        dialogueProposal(ctx, event);
-        break;
-    }
-    case eventType::startDialogue: {
- 
-        break;
-    }
-    default:
-        break;
-    }
-}
 
 void dialogueManager::setDialogueNodesDatabase(int dbId) {
     namespace fs = std::filesystem;
@@ -104,7 +77,23 @@ void dialogueManager::setStringDatabase(int dbId) {
     textDB = db.get<textDatabase>();
 }
 
- 
+
+void dialogueManager::processDialogueProposal(turnContext& ctx, dialogueProposalEvent& ev) {
+    dialogueProposal(ctx, ev);
+}
+void dialogueManager::executeDialogueProposal(turnContext& ctx, dialogueProposalEvent& ev) {
+    // react to movement proposal (e.g., cancel dialog, set flags)
+}
+
+
+
+void dialogueManager::processStartDialogue(turnContext& ctx, startDialogueEvent& ev) {
+
+}
+
+void dialogueManager::executeStartDialogue(turnContext& ctx, startDialogueEvent& ev) {
+
+}
  
 activeDialogue* dialogueManager::startDialogue(int id) {
     auto it = dialogueNodes.find(id);

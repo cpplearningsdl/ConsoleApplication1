@@ -17,7 +17,7 @@ game::game() {
 	loadALevel(1);
 	dialogueManager.setStringDatabase(1);
 	dialogueManager.setDialogueNodesDatabase(1);
-	//dialogueManager.startDialogue(1);
+	dialogueManager.startDialogue(1);
 	turnManager.getTurnCtx().emitEvent<dialogueProposalEvent>(1, true); 
 	//startRotation(view, { 64, 64 }, 1,128.0f, 0.033f, false, 0.3f);
 	auto& ents = entityHandler.getEntities();

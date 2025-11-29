@@ -7,6 +7,8 @@
 #include "json.hpp"
 
 class entity;
+struct baseEvent;
+
 //ADD TYPE TO JSON!!!!!!
 struct turnContext {
 	entity* activeCharacter = nullptr;     // who is currently selected / moving (single mover)

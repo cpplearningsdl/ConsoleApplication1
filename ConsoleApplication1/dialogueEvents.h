@@ -4,24 +4,31 @@
 
 
 class entity;
- 
+class movementManager;
+class dialogueManager;
 
 struct dialogueProposalEvent : baseEvent {
     int  dialogueNode;
     bool accepted;
 
     dialogueProposalEvent(int d, bool a)
-        : baseEvent{ eventType::dialogueProposal },
+        : baseEvent{ },
         dialogueNode(d),
         accepted(a)
     {
     }
+
+    void process(turnContext& ctx, dialogueManager& dia) override;
+    void execute(turnContext& ctx, dialogueManager& dia) override;
 };
 
 struct startDialogueEvent : baseEvent {
 	int dialogueNode;
     startDialogueEvent(int d)
-        : baseEvent{ eventType::startDialogue },
+        : baseEvent{ },
         dialogueNode(d)
         {}
+
+    void process(turnContext& ctx, dialogueManager& dia) override;
+    void execute(turnContext& ctx, dialogueManager& dia) override;
 };
