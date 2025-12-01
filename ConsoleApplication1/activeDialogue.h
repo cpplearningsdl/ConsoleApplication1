@@ -6,6 +6,7 @@
 
 struct activeDialogue {
     int nodeId = -1;
+    int entityId = -1;
     label speakerLabel;
     label textLabel;
     SDL_Texture* bubbleTexture = nullptr;

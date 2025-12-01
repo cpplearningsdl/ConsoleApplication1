@@ -15,7 +15,7 @@ struct turnContext {
 	int activeCharacterId = -1;
 	CHARACTERTYPEENUM actorType = CHARACTERTYPEENUM::PLAYER;
 
-	int moveDistanceRemaining = 0;       // movement budget for this turn (tiles)
+	int moveDistanceRemaining = 0; 
 	int actionsRemaining = 1;
 	bool battleAllowed = true;         // true if you can initiate battle right now (not mid-move)
 	bool turnFinished = false;         // when both actor and actions are done

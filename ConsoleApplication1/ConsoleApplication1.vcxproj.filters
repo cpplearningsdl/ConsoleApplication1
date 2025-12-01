@@ -246,12 +246,6 @@
     <ClCompile Include="fontManager.cpp">
       <Filter>Source Files\text\font</Filter>
     </ClCompile>
-    <ClCompile Include="movementEvents.cpp">
-      <Filter>Source Files\game\events</Filter>
-    </ClCompile>
-    <ClCompile Include="dialogueEvents.cpp">
-      <Filter>Source Files\game\events\dialogue</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logManager.h">

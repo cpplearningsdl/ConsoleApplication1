@@ -15,14 +15,12 @@ inline void handleEvents(turnContext& ctx, movementManager& move, renderCacheMan
         ctx.events.pop_front();
 
   
-        ev->process(ctx, move);
-        ev->process(ctx, dialogue);
-       //e->process(ctx, renderCache);
+        ev->dispatch(move, dialogue, renderCache, ctx);
 
-        // execute phase
-        ev->execute(ctx, move);
-        ev->execute(ctx, dialogue);
-       //v->execute(ctx, renderCache);
+        if (ev->phase == eventPhase::PROCESS && ev->convertToExecuteAfterProcessing) {
+            ev->phase = eventPhase::EXECUTE;
+            ctx.events.emplace_front(std::move(ev));
+        }
     }
 }
  

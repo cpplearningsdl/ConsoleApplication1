@@ -78,21 +78,27 @@ void dialogueManager::setStringDatabase(int dbId) {
 }
 
 
-void dialogueManager::processDialogueProposal(turnContext& ctx, dialogueProposalEvent& ev) {
-    dialogueProposal(ctx, ev);
-}
-void dialogueManager::executeDialogueProposal(turnContext& ctx, dialogueProposalEvent& ev) {
-    // react to movement proposal (e.g., cancel dialog, set flags)
+void dialogueManager::processDialogueProposalEvent(turnContext& ctx, dialogueProposalEvent& e, eventPhase phase) {
+    dialogueProposal(ctx, e);
 }
 
-
-
-void dialogueManager::processStartDialogue(turnContext& ctx, startDialogueEvent& ev) {
-
+void dialogueManager::processStartDialogueEvent(turnContext& ctx, startDialogueEvent& e, eventPhase phase) {
+ 
 }
 
-void dialogueManager::executeStartDialogue(turnContext& ctx, startDialogueEvent& ev) {
+void dialogueManager::processMovedThisFrameEvent(turnContext& ctx, movedThisFrameEvent& e, eventPhase phase) {
+    if (!activeDialogues.empty()) {
+        for (auto& d : activeDialogues) {
+            auto it = dialogueNodes.find(d.nodeId);
+            if (it == dialogueNodes.end()) continue;
 
+            const auto& node = it->second;
+            if (node.entityId != e.entityId) continue;
+            d.textBubblePos = e.pos;
+ 
+        }
+    }
+    else { return; }
 }
  
 activeDialogue* dialogueManager::startDialogue(int id) {
@@ -103,24 +109,25 @@ activeDialogue* dialogueManager::startDialogue(int id) {
     const auto& node = it->second;
     activeDialogue dlg;
     dlg.nodeId = id;
+    dlg.entityId = node.entityId;
     dlg.bubbleTexture = textureManager::getInstance().getFrame(node.bubbleTextureKey);
     float w, h;
     SDL_GetTextureSize(dlg.bubbleTexture, &w, &h);
     dlg.textBubbleSize.setSize(w, h);
 
     // Speaker label
-    dlg.speakerLabel.color = dlg.speakerLabel.color;
+    dlg.speakerLabel.color = node.speakerFontColor;
     dlg.speakerLabel.posOffset = {10.0f, 10.0f };
     dlg.speakerLabel.text = textDB.get(node.speakerId); 
     dlg.speakerLabel.updateTexture(dlg.speakerLabel.text); 
 
     // Text label
-    dlg.textLabel.color = dlg.textLabel.color;
+    dlg.textLabel.color = node.textFontColor;
     dlg.textLabel.posOffset = {10.0f, 40.0f };
     dlg.textLabel.text = textDB.get(node.textId);
     dlg.textLabel.updateTexture(dlg.textLabel.text);
 
-    
+    //EMIT AN EVENT TO SET THE TEXT BUBBLE POS TO THE ENTITY POS
     activeDialogues.push_back(std::move(dlg));
     return &activeDialogues.back();
 }

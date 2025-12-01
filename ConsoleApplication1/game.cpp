@@ -26,7 +26,7 @@ game::game() {
 		std::make_unique<movementProposedEvent>(
 			ents.back().get(),
 			ents.back()->getId(),
-			movementPath({ {200,300},{150,50}, {20,120}, {10,50} }, { 0,0 }, { 100,100 }),
+			movementPath({ {1300,900},{150,50}, {20,120}, {0,0} }, { 0,0 }, { 1300,900 }),
 			true
 		)
 	); 
@@ -54,12 +54,13 @@ void game::update(inputManager& input) {
 		case gamePhase::DIALOGUE:
 			break;
 	}
-	updateView();
+	updateView();//THIS MIGHT NEED TO BE CALLED FIRST
 }
  
 void game::updateEntities(std::vector<std::unique_ptr<entity>>& entitiesVector) {
 	for (auto& e : entitiesVector) {
 		e->getAnimationManager().step();
+		//pass view to handleEvents??
 		movementManager.handleMovement(turnManager.getTurnCtx(), e.get());
 		handleEvents(turnManager.getTurnCtx(), movementManager, renderCacheHandler, dialogueManager);
 	}

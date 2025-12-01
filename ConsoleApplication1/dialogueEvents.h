@@ -1,34 +1,33 @@
 #pragma once
 #include "event.h"
 #include "path.h"
-
+#include "dialogueManager.h"
 
 class entity;
 class movementManager;
 class dialogueManager;
+class renderManager;
 
+//EMIT AN EVENT TO SET THE TEXT BUBBLE POS TO THE ENTITY POS//REMOVE THIS COMMENT FROM DIALOGUEMANAGER.CPP TOO
+
+ //DIALOGUE PROPOSAL EVENT
 struct dialogueProposalEvent : baseEvent {
-    int  dialogueNode;
-    bool accepted;
+    int dialogueNode; 
 
-    dialogueProposalEvent(int d, bool a)
-        : baseEvent{ },
-        dialogueNode(d),
-        accepted(a)
-    {
+    dialogueProposalEvent(int node, bool approval) : dialogueNode(node) {}
+
+    void dispatch(movementManager& m, dialogueManager& d, renderCacheManager& r, turnContext& ctx) override { 
+        d.processDialogueProposalEvent(ctx, *this, phase);   // dialogue sees it 
     }
-
-    void process(turnContext& ctx, dialogueManager& dia) override;
-    void execute(turnContext& ctx, dialogueManager& dia) override;
 };
 
+//START DIALOGUE EVENT
 struct startDialogueEvent : baseEvent {
-	int dialogueNode;
-    startDialogueEvent(int d)
-        : baseEvent{ },
-        dialogueNode(d)
-        {}
+    int dialogueNode; 
 
-    void process(turnContext& ctx, dialogueManager& dia) override;
-    void execute(turnContext& ctx, dialogueManager& dia) override;
-};
+    startDialogueEvent(int node, bool approval) : dialogueNode(node) {}
+
+    void dispatch(movementManager& m, dialogueManager& d, renderCacheManager& r, turnContext& ctx) override {
+        d.processStartDialogueEvent(ctx, *this, phase);   // dialogue sees it 
+    }
+}; 

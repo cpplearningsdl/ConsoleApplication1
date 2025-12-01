@@ -1,6 +1,7 @@
 #pragma once
 #include "movementManager.h" 
 #include "entity.h"
+#include "turnContext.h"
 #include "event.h"
 #include "movementEvents.h"
  
@@ -25,33 +26,22 @@ void movementManager::handleMovement(turnContext& ctx, entity* e) {
 		else {
 			e->getMovement().step();
 		}
+		ctx.emitEvent<movedThisFrameEvent>( e, e->getId(), e->getMovement().getPos());
 	}
  }
 
-void movementManager::processMovementProposed(turnContext& ctx, movementProposedEvent& ev) {
+
+void movementManager::processMovementProposedEvent(turnContext& ctx, movementProposedEvent& ev, eventPhase p) {
+	handleMovementProposedEvent(ev);
+}
+void movementManager::processFinishedMovementEvent(turnContext& ctx, finishedMovementEvent& ev, eventPhase p) {
+ 
+}
+void movementManager::processFinishedPathEvent(turnContext& ctx, finishedPathEvent& ev, eventPhase p) {
  
 }
 
-void movementManager::executeMovementProposed(turnContext& ctx, movementProposedEvent& ev) {
-	handleMovementProposedEvent(ev);
-}
-
-
-void movementManager::processFinishedMovement(turnContext& ctx, finishedMovementEvent& ev) {
-
-}
-void movementManager::executFinishedMovement(turnContext& ctx, finishedMovementEvent& ev) {
-
-}
-
-void movementManager::processFinishedPath(turnContext& ctx, finishedPathEvent& ev) {
-
-}
-
-void movementManager::executeFinishedPath(turnContext& ctx, finishedPathEvent& ev) {
-
-}
-
+  
  void movementManager::handleMovementProposedEvent(movementProposedEvent& ev) {
 	 if (ev.accepted)
 	 {

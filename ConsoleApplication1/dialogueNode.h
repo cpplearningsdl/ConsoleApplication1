@@ -7,6 +7,7 @@ using json = nlohmann::ordered_json;
  
 struct dialogueNode {
     int id = -1;
+    int entityId = -1;
     std::string speakerId; 
     std::string textId; 
     std::string bubbleTextureKey = "textBubble_idle_0";
@@ -37,6 +38,7 @@ inline void from_json(const json& j, SDL_Color& c) {
 inline void to_json(json& j, const dialogueNode& n) {
     j = json{
         {"id", n.id},
+        {"entityId", n.entityId},
         {"speakerId", n.speakerId},
         {"textId", n.textId},
         {"bubbleTextureKey", n.bubbleTextureKey},
@@ -60,6 +62,7 @@ inline void to_json(json& j, const dialogueNode& n) {
 }
 inline void from_json(const json& j, dialogueNode& n) {
     n.id = j.value("id", -1);
+    n.entityId = j.value("entityId", -1);
     n.speakerId = j.value("speakerId", std::string(""));
     n.textId = j.value("textId", std::string(""));
     n.bubbleTextureKey = j.value("bubbleTextureKey", std::string("textBubble_idle_0"));

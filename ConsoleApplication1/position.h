@@ -13,7 +13,7 @@ public:
 	void setX(float nx) { x = nx; }
 	void setY(float ny) { y = ny; }
 	float getX() const {return x; }
-	float getY() const { return y; }
+	float getY() const { return y; } 
 
 	friend void to_json(nlohmann::ordered_json& j, const position& pos);
 	friend void from_json(const nlohmann::ordered_json& j, position& pos);

@@ -9,16 +9,16 @@ class movementManager;
 class dialogueManager;
 class renderCacheManager;
 
+enum class eventPhase {
+    PROCESS,
+    EXECUTE
+};
+
 struct baseEvent {
+    eventPhase phase = eventPhase::PROCESS;
+    bool convertToExecuteAfterProcessing = true;
     virtual ~baseEvent() = default;
 
-    // Each system gets process/execute hooks. Events override what they need.
-    virtual void process(turnContext& ctx, movementManager& move) {}
-    virtual void execute(turnContext& ctx, movementManager& move) {}
-
-    virtual void process(turnContext& ctx, dialogueManager& dialogue) {}
-    virtual void execute(turnContext& ctx, dialogueManager& dialogue) {}
-
-    virtual void process(turnContext&, renderCacheManager&) {}
-    virtual void execute(turnContext&, renderCacheManager&) {}
+    // Every event type will override this
+    virtual void dispatch(class movementManager&, class dialogueManager&, class renderCacheManager&, turnContext&) = 0;
 };

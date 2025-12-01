@@ -6,7 +6,5 @@
 #include "dialogueEvents.h"
 
 void dialogueProposal(turnContext& ctx, dialogueProposalEvent& ev) { 
-	if (ev.accepted) { 
-		ctx.emitEvent<startDialogueEvent>(ev.dialogueNode);
-	}
+ 
 }

@@ -190,7 +190,6 @@ SDL3main.lib,SDL3_image.lib
     <ClCompile Include="animationMovement.cpp" />
     <ClCompile Include="animationMovementFactory.cpp" />
     <ClCompile Include="ConsoleApplication1.cpp" />
-    <ClCompile Include="dialogueEvents.cpp" />
     <ClCompile Include="dialogueManager.cpp" />
     <ClCompile Include="dimensions.h" />
     <ClCompile Include="entity.cpp" />
@@ -207,7 +206,6 @@ SDL3main.lib,SDL3_image.lib
     <ClCompile Include="logManager.cpp" />
     <ClCompile Include="mainMenu.cpp" />
     <ClCompile Include="menu.cpp" />
-    <ClCompile Include="movementEvents.cpp" />
     <ClCompile Include="movementManager.cpp" />
     <ClCompile Include="northMovement.cpp" />
     <ClCompile Include="pauseMenu.cpp" />

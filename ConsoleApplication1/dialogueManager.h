@@ -4,8 +4,11 @@
 #include "activeDialogue.h"
 #include "textDB.h"
 #include "renderer.h"  
-#include "dialogueEvents.h"
-
+#include "event.h"
+ 
+struct movedThisFrameEvent;
+struct dialogueProposalEvent;
+struct startDialogueEvent;
 struct turnContext;
 
 class dialogueManager {
@@ -19,14 +22,11 @@ public:
     void advanceDialogue(activeDialogue& dlg);
 
     const std::vector<activeDialogue>& getActiveDialogues() const { return activeDialogues; }
- 
+  
 
-
-    void processDialogueProposal(turnContext& ctx, dialogueProposalEvent& ev);
-    void executeDialogueProposal(turnContext& ctx, dialogueProposalEvent& ev);
-    void processStartDialogue(turnContext& ctx, startDialogueEvent& ev);
-    void executeStartDialogue(turnContext& ctx, startDialogueEvent& ev);
-
+    void processDialogueProposalEvent(turnContext& ctx, dialogueProposalEvent& e, eventPhase phase);
+    void processStartDialogueEvent(turnContext& ctx, startDialogueEvent& e, eventPhase phase);
+    void processMovedThisFrameEvent(turnContext& ctx, movedThisFrameEvent& e, eventPhase phase);
 private: 
     std::unordered_map<int, dialogueNode> dialogueNodes;
     std::vector<activeDialogue> activeDialogues;

@@ -5,7 +5,6 @@ C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplicatio
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\animationMovement.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\animationMovement.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\animationMovementFactory.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\animationMovementFactory.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\ConsoleApplication1.obj
-C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\dialogueEvents.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\dialogueEvents.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\dialogueManager.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\dialogueManager.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\dimensions.h;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\dimensions.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\entity.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\entity.obj
@@ -22,7 +21,6 @@ C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplicatio
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\logManager.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\logManager.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\mainMenu.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\mainMenu.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\menu.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\menu.obj
-C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\movementEvents.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\movementEvents.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\movementManager.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\movementManager.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\northMovement.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\northMovement.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\pauseMenu.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\pauseMenu.obj
