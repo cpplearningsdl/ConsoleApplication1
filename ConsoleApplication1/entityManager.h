@@ -3,7 +3,11 @@
 #include "entity.h"
 #include "entityFactory.h"
 #include "entityTypeEnum.h"
+#include "event.h"
 #include "view.h"
+
+struct turnContext;
+struct startDialogueEvent; 
 
 class entityManager {
 	public: 
@@ -21,6 +25,9 @@ class entityManager {
 		std::vector<entity*>& getFloorMap() { return floorMap; }
 		void resizeFloorMap(int s) { floorMap.resize(s); }
 
+
+		 
+		void processStartDialogueEvent(turnContext& ctx, startDialogueEvent& e, eventPhase phase);
 	private:
 		std::vector<std::unique_ptr<entity>> entities;
 		std::vector<std::unique_ptr<entity>> tiles;

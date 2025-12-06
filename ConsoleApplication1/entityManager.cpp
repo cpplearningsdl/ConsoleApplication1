@@ -1,6 +1,9 @@
 #pragma once
 #include <fstream> 
 #include "entityManager.h"
+#include "dialogueEvents.h"
+#include "movementEvents.h"
+#include "turnContext.h"
 #include "view.h"
 
 entityManager::entityManager() {
@@ -110,4 +113,9 @@ entity& entityManager::getEntityById(int id) {
 		}
 	}
 	throw std::runtime_error("entity with id " + std::to_string(id) + " not found.");
+}
+
+ 
+void entityManager::processStartDialogueEvent(turnContext& ctx, startDialogueEvent& e, eventPhase phase) {
+	e.entityPos = getEntityById(e.entityId).getCombinedPos();
 }

@@ -8,6 +8,7 @@
  
 struct movedThisFrameEvent;
 struct dialogueProposalEvent;
+struct setUpDialogueBubbleEvent;
 struct startDialogueEvent;
 struct turnContext;
 
@@ -19,12 +20,14 @@ public:
     void setDialogueNodesDatabase(int dbId);
     void setStringDatabase(int dbId);
     activeDialogue* startDialogue(int id);
+
     void advanceDialogue(activeDialogue& dlg);
 
     const std::vector<activeDialogue>& getActiveDialogues() const { return activeDialogues; }
   
 
     void processDialogueProposalEvent(turnContext& ctx, dialogueProposalEvent& e, eventPhase phase);
+    void processSetUpDialogueBubbleEvent(turnContext& ctx, setUpDialogueBubbleEvent& e, eventPhase phase);
     void processStartDialogueEvent(turnContext& ctx, startDialogueEvent& e, eventPhase phase);
     void processMovedThisFrameEvent(turnContext& ctx, movedThisFrameEvent& e, eventPhase phase);
 private: 

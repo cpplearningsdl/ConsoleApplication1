@@ -8,6 +8,7 @@ class entity;
 class movementManager;
 class dialogueManager;
 class renderCacheManager;
+class entityManager;
 
 enum class eventPhase {
     PROCESS,
@@ -17,8 +18,18 @@ enum class eventPhase {
 struct baseEvent {
     eventPhase phase = eventPhase::PROCESS;
     bool convertToExecuteAfterProcessing = true;
+    std::string eventName = "";
+
     virtual ~baseEvent() = default;
 
     // Every event type will override this
-    virtual void dispatch(class movementManager&, class dialogueManager&, class renderCacheManager&, turnContext&) = 0;
+    virtual void dispatch(class movementManager&, class entityManager&, class dialogueManager&, class renderCacheManager&, turnContext&) = 0;
+
+    std::string eventPhaseToString() {
+        if (phase == eventPhase::PROCESS) {
+            return "PROCESS";
+        }
+        return "EXECUTE";
+    }
 };
+

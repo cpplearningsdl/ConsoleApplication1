@@ -1,7 +1,10 @@
 #pragma once 
+#include <string>
+#include "logManager.h"
 #include "event.h"
 #include "gamePhaseEnum.h"
 #include "characterTypeEnum.h"
+#include "position.h"
 #include <vector>
 #include <deque>
 #include "json.hpp"
@@ -11,6 +14,8 @@ struct baseEvent;
 
 //ADD TYPE TO JSON!!!!!!
 struct turnContext {
+	std::string eventLog;
+	position cameraViewPos = { 0.0f, 0.0f };
 	entity* activeCharacter = nullptr;     // who is currently selected / moving (single mover)
 	int activeCharacterId = -1;
 	CHARACTERTYPEENUM actorType = CHARACTERTYPEENUM::PLAYER;
@@ -45,17 +50,22 @@ inline void clearCtx(turnContext& ctx) {
 }
 inline void to_Json(nlohmann::ordered_json& j, const turnContext& t) {
 	j = nlohmann::ordered_json{
+		{"cameraViewPosX", t.cameraViewPos.getX()},
+		{"cameraViewPosY", t.cameraViewPos.getY()},
 		{ "activeCharacterId", t.activeCharacterId },
 		{ "actorType", characterTypeEnumToString(t.actorType) },
 		{ "moveDistanceRemaining", t.moveDistanceRemaining },
 		{ "actionsRemaining", t.actionsRemaining },
 		{ "battleAllowed", t.battleAllowed },
 		{ "turnFinished", t.turnFinished },
-		{ "originPhase", gamePhaseEnumToString(t.originPhase) }
+		{ "originPhase", gamePhaseEnumToString(t.originPhase) },
+		{ "phase", gamePhaseEnumToString(t.originPhase) }
 	}; 
 }
 
 inline void from_Json(const nlohmann::ordered_json& j, turnContext& t) {
+	t.cameraViewPos.setX(j.value("cameraViewPosX", 0.0f));
+	t.cameraViewPos.setY(j.value("cameraViewPosY", 0.0f));
 	t.activeCharacterId = j.value("activeCharacterId", -1);
 	t.actorType = stringToCharacterTypeEnum(j.value("actorType", ""));
 	t.moveDistanceRemaining = j.value("moveDistanceRemaining", 0);
@@ -63,5 +73,6 @@ inline void from_Json(const nlohmann::ordered_json& j, turnContext& t) {
 	t.battleAllowed = j.value("battleAllowed", true);
 	t.turnFinished = j.value("turnFinished", false);
 	t.originPhase = stringToGamePhaseEnum(j.value("originPhase", ""));
+	t.phase = stringToGamePhaseEnum(j.value("phase", ""));
 	t.activeCharacter = nullptr; // will be resolved at runtime using activeCharacterId
 }

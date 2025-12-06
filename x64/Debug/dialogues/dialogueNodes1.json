@@ -4,7 +4,7 @@
     "entityId": 1,
     "speakerId": "npc_001",
     "textId": "dlg.intro.1",
-    "bubbleTextureKey": "textBubble_idle_0",
+    "bubbleTextureKeyBase": "textBubble", 
     "nextId": -1,
     "choices": [],
     "speakerFontId": "Sagewold-Regular",

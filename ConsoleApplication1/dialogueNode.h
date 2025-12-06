@@ -10,7 +10,7 @@ struct dialogueNode {
     int entityId = -1;
     std::string speakerId; 
     std::string textId; 
-    std::string bubbleTextureKey = "textBubble_idle_0";
+    std::string bubbleTextureKeyBase = "textBubble";
     int nextId = -1;
     std::vector<int> choices; 
 
@@ -41,7 +41,7 @@ inline void to_json(json& j, const dialogueNode& n) {
         {"entityId", n.entityId},
         {"speakerId", n.speakerId},
         {"textId", n.textId},
-        {"bubbleTextureKey", n.bubbleTextureKey},
+        {"bubbleTextureKeyBase", n.bubbleTextureKeyBase},
         {"nextId", n.nextId},
         {"choices", n.choices},
         {"speakerFontId", n.speakerFontId},
@@ -65,7 +65,7 @@ inline void from_json(const json& j, dialogueNode& n) {
     n.entityId = j.value("entityId", -1);
     n.speakerId = j.value("speakerId", std::string(""));
     n.textId = j.value("textId", std::string(""));
-    n.bubbleTextureKey = j.value("bubbleTextureKey", std::string("textBubble_idle_0"));
+    n.bubbleTextureKeyBase = j.value("bubbleTextureKeyBase", std::string("textBubble"));
     n.nextId = j.value("nextId", -1);
 
     if (j.contains("choices") && j["choices"].is_array())

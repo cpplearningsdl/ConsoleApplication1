@@ -1,9 +1,10 @@
 #pragma once
 #include "event.h"
 #include "path.h"
-#include "dialogueManager.h"
+#include "dialogueManager.h" 
 
 class entity;
+class entityManager;
 class movementManager;
 class dialogueManager;
 class renderManager;
@@ -14,9 +15,12 @@ class renderManager;
 struct dialogueProposalEvent : baseEvent {
     int dialogueNode; 
 
-    dialogueProposalEvent(int node, bool approval) : dialogueNode(node) {}
 
-    void dispatch(movementManager& m, dialogueManager& d, renderCacheManager& r, turnContext& ctx) override { 
+    dialogueProposalEvent(int node) : dialogueNode(node)  {
+        eventName = "dialogueProposalEvent"; 
+    }
+
+    void dispatch(movementManager& m, entityManager& entity, dialogueManager& d, renderCacheManager& r, turnContext& ctx) override {
         d.processDialogueProposalEvent(ctx, *this, phase);   // dialogue sees it 
     }
 };
@@ -24,10 +28,26 @@ struct dialogueProposalEvent : baseEvent {
 //START DIALOGUE EVENT
 struct startDialogueEvent : baseEvent {
     int dialogueNode; 
-
-    startDialogueEvent(int node, bool approval) : dialogueNode(node) {}
-
-    void dispatch(movementManager& m, dialogueManager& d, renderCacheManager& r, turnContext& ctx) override {
-        d.processStartDialogueEvent(ctx, *this, phase);   // dialogue sees it 
+    int entityId = -1;
+    position entityPos = { -100.0f, -100.0f };
+    startDialogueEvent(int node) : dialogueNode(node) {
+        eventName = "startDialogueEvent"; 
     }
-}; 
+
+    void dispatch(movementManager& m, entityManager& entity, dialogueManager& d, renderCacheManager& r, turnContext& ctx) override {
+        d.processStartDialogueEvent(ctx, *this, phase); 
+    }
+};
+
+struct setUpDialogueBubbleEvent : baseEvent {
+    int entityId; 
+    position entityPos = { -100.0f, -100.0f };
+
+    setUpDialogueBubbleEvent(int id) : entityId(id) {
+        eventName = "setupDialogueBubbleEvent"; 
+    }
+
+    void dispatch(movementManager& m, entityManager& entity, dialogueManager& d, renderCacheManager& r, turnContext& ctx) override {
+        d.processSetUpDialogueBubbleEvent(ctx, *this, phase);
+    }
+};

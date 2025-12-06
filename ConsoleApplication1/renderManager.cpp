@@ -47,7 +47,7 @@ void renderManager::renderDialogue(game& g, dialogueManager& dlg) {
 
 	activeDialogue aDlg = dlg.getActiveDialogues().back();
 	position bubblePos = getTextBubbleScreenPos(aDlg.textBubblePos, g.getView().viewPos, logicalW, logicalH, 128.0f, 15.0f);
-	rendRef.drawToNextFrame(textureManager::getInstance().getFrame("textBubble_idle_0"), bubblePos.getX(), bubblePos.getY(), aDlg.textBubbleSize.getH(), aDlg.textBubbleSize.getW());
+	rendRef.drawToNextFrame(textureManager::getInstance().getFrame(aDlg.bubbleTextureKey), bubblePos.getX(), bubblePos.getY(), aDlg.textBubbleSize.getH(), aDlg.textBubbleSize.getW());
 
 	rendRef.drawToNextFrame(aDlg.textLabel.texture, bubblePos.getX() + aDlg.textLabel.posOffset.getX(), bubblePos.getY() + aDlg.textLabel.posOffset.getY(), aDlg.textLabel.h, aDlg.textLabel.w);
  

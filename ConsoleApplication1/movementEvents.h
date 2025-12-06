@@ -8,6 +8,7 @@
 class entity;
 class movementManager;
 class dialogueManager;
+class entityManager;
 class renderManager;
 
 struct movementProposedEvent : baseEvent {
@@ -19,10 +20,11 @@ struct movementProposedEvent : baseEvent {
     movementProposedEvent(entity* m, int id, movementPath path, bool a)
         : mover(m), entityId(id), newPath(std::move(path)), accepted(a)
     {
+        eventName = "MovementProposedEvent";
         phase = eventPhase::PROCESS;
     }
 
-    void dispatch(movementManager& move, dialogueManager& dialogue, renderCacheManager& renderCache, turnContext& ctx) override
+    void dispatch(movementManager& move, entityManager& entities, dialogueManager& dialogue, renderCacheManager& renderCache, turnContext& ctx) override
     {
         move.processMovementProposedEvent(ctx, *this, phase); 
     }
@@ -37,10 +39,11 @@ struct finishedMovementEvent : baseEvent {
     finishedMovementEvent(entity* e, int id, position p)
         : ent(e), entityId(id), pos(p)
     {
+        eventName = "finishedMovementEvent";
         phase = eventPhase::PROCESS;
     }
 
-    void dispatch(movementManager& move, dialogueManager& dialogue, renderCacheManager& renderCache, turnContext& ctx) override
+    void dispatch(movementManager& move, entityManager& entities, dialogueManager& dialogue, renderCacheManager& renderCache, turnContext& ctx) override
     {
         move.processFinishedMovementEvent(ctx, *this, phase);
        // renderCache.onFinishedMovement(ctx, *this, phase);
@@ -56,10 +59,11 @@ struct finishedPathEvent : baseEvent {
     finishedPathEvent(entity* e, int id, position p)
         : ent(e), entityId(id), pos(p)
     {
+        eventName = "finishedPathEvent";
         phase = eventPhase::PROCESS;
     }
 
-    void dispatch(movementManager& move, dialogueManager& dialogue, renderCacheManager& renderCache, turnContext& ctx) override
+    void dispatch(movementManager& move, entityManager& entities, dialogueManager& dialogue, renderCacheManager& renderCache, turnContext& ctx) override
     {
         move.processFinishedPathEvent(ctx, *this, phase); 
     }
@@ -73,10 +77,11 @@ struct movedThisFrameEvent : baseEvent {
     movedThisFrameEvent(entity* e, int i, position p)
         :ent(e), entityId(i), pos(p)
     {
+        eventName = "movedThisFrameEvent";
         phase = eventPhase::EXECUTE;
     }
 
-    void dispatch(movementManager& move, dialogueManager& dialogue, renderCacheManager& renderCache, turnContext& ctx) override
+    void dispatch(movementManager& move, entityManager& entities, dialogueManager& dialogue, renderCacheManager& renderCache, turnContext& ctx) override
     {
         dialogue.processMovedThisFrameEvent(ctx, *this, phase);
     }
