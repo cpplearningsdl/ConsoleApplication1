@@ -32,7 +32,12 @@ void movementManager::handleMovement(turnContext& ctx, entity* e) {
 
 
 void movementManager::processMovementProposedEvent(turnContext& ctx, movementProposedEvent& ev, eventPhase p) {
-	handleMovementProposedEvent(ev);
+	if (ev.phase == eventPhase::PROCESS) {
+		return;
+	}else {
+		if (ev.accepted == false) { return; }
+		handleMovementProposedEvent(ev);
+	}
 }
 void movementManager::processFinishedMovementEvent(turnContext& ctx, finishedMovementEvent& ev, eventPhase p) {
  
@@ -41,7 +46,9 @@ void movementManager::processFinishedPathEvent(turnContext& ctx, finishedPathEve
  
 }
 
-  
+void movementManager::processMovedThisFrameEvent(turnContext& ctx, movedThisFrameEvent& ev, eventPhase p) {
+
+}
  void movementManager::handleMovementProposedEvent(movementProposedEvent& ev) {
 	 if (ev.accepted)
 	 {

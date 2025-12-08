@@ -97,8 +97,7 @@ void dialogueManager::processStartDialogueEvent(turnContext& ctx, startDialogueE
         }
     }
 }
-
- 
+ //UPDATE THE TEXTURE KEY FOR ORIENTATION BASED ON QUADRANT
 void dialogueManager::processMovedThisFrameEvent(turnContext& ctx, movedThisFrameEvent& e, eventPhase phase) {
     if (!activeDialogues.empty()) {
         for (auto& d : activeDialogues) {
@@ -120,11 +119,11 @@ void dialogueManager::processSetUpDialogueBubbleEvent(turnContext& ctx, setUpDia
             if (d.entityId == e.entityId) {
                 float w, h;
                 screenQuadrant quad = getScreenQuadrant(e.entityPos, ctx.cameraViewPos, logicalW, logicalH);
-                d.textBubblePos = getTextBubbleScreenPos(e.entityPos, ctx.cameraViewPos, logicalW, logicalH, quad);
                 d.bubbleTextureKey = d.bubbleTextureKeyBase + getOrientedBubblesTextureKeySuffix(quad);
                 d.bubbleTexture = textureManager::getInstance().getFrame(d.bubbleTextureKey);
                 SDL_GetTextureSize(d.bubbleTexture, &w, &h);
                 d.textBubbleSize.setSize(w, h);
+                d.textBubblePos = getTextBubbleScreenPos(e.entityPos, ctx.cameraViewPos, logicalW, logicalH, quad, d.textBubbleSize);
                 d.speakerLabel.updateTexture(d.speakerLabel.text);
                 d.textLabel.updateTexture(d.textLabel.text);
                 break;

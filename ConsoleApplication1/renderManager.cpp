@@ -1,6 +1,8 @@
 #include "renderManager.h"
 #include "entityRenderInfo.h"
 #include "windowSettings.h"
+#include "position.h"
+#include "dimensions.h"
 
 
 void renderManager::renderMainMenu(menuManager& m) {
@@ -44,12 +46,11 @@ void renderManager::renderEntities(game& g, const std::vector<entity*>& cache) {
 
 void renderManager::renderDialogue(game& g, dialogueManager& dlg) {
 	if (dlg.getActiveDialogues().empty()) { return; }
+	//GETWIDTHFROMBUBBLE TO PASS TO GETTEXTBUBBLESCREENPOS
+	activeDialogue aDlg = dlg.getActiveDialogues().back(); 
+	rendRef.drawToNextFrame(textureManager::getInstance().getFrame(aDlg.bubbleTextureKey), aDlg.textBubblePos.getX(), aDlg.textBubblePos.getY(), aDlg.textBubbleSize.getH(), aDlg.textBubbleSize.getW());
 
-	activeDialogue aDlg = dlg.getActiveDialogues().back();
-	position bubblePos = getTextBubbleScreenPos(aDlg.textBubblePos, g.getView().viewPos, logicalW, logicalH, 128.0f, 15.0f);
-	rendRef.drawToNextFrame(textureManager::getInstance().getFrame(aDlg.bubbleTextureKey), bubblePos.getX(), bubblePos.getY(), aDlg.textBubbleSize.getH(), aDlg.textBubbleSize.getW());
-
-	rendRef.drawToNextFrame(aDlg.textLabel.texture, bubblePos.getX() + aDlg.textLabel.posOffset.getX(), bubblePos.getY() + aDlg.textLabel.posOffset.getY(), aDlg.textLabel.h, aDlg.textLabel.w);
+	rendRef.drawToNextFrame(aDlg.textLabel.texture, aDlg.textBubblePos.getX() + aDlg.textLabel.posOffset.getX(), aDlg.textBubblePos.getY() + aDlg.textLabel.posOffset.getY(), aDlg.textLabel.h, aDlg.textLabel.w);
  
 }
 
@@ -64,35 +65,3 @@ void renderManager::renderGame(game& g, menuManager& m) {
 	rendRef.drawScreen();
 } 
 
-
-position renderManager::getTextBubbleScreenPos(const position& worldPos, const position& cameraPos,	int screenWidth, int screenHeight, float portraitSize, float buffer){
-	// Convert entity world ? screen
-	float screenX = worldPos.getX() - cameraPos.getX();
-	float screenY = worldPos.getY() - cameraPos.getY();
-
-	// Determine quadrants relative to screen center
-	bool left = (screenX < screenWidth * 0.5f);
-	bool top = (screenY < screenHeight * 0.5f);
-
-	// Base offsets
-	//NEED TO ACCOUNT FOR BUBBLE SIZE!!!!
-	float horiz = portraitSize + buffer;
-	float vert = portraitSize + buffer;
-
-	// Compute final bubble screen position
-	position bubblePos = { screenX, screenY };
-
-	// Horizontal
-	if (left)
-		bubblePos.setX(bubblePos.getX() + horiz);
-	else
-		bubblePos.setX(bubblePos.getX() - horiz);
-
-	// Vertical
-	if (top)
-		bubblePos.setY(bubblePos.getY() + (vert * 0.5f));
-	else
-		bubblePos.setY(bubblePos.getY() - (vert * 0.5f));
-
-	return bubblePos;
-}

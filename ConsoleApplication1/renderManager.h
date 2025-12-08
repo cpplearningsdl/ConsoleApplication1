@@ -8,6 +8,7 @@
 #include "textureManager.h"
 
 class position;
+class dimensions;
 
 class renderManager
 {
@@ -20,7 +21,5 @@ public:
 	void renderBackground();
 	void renderEntities(game& g, const std::vector<entity*>& cache); 
 	void renderDialogue(game& g, dialogueManager& dlg);
-	position getTextBubbleScreenPos(const position& worldPos, const position& cameraPos, int screenWidth, int screenHeight, float portraitSize, float buffer);
-	 
 };
 

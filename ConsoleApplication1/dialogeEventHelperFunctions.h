@@ -55,36 +55,35 @@ std::string getOrientedBubblesTextureKeySuffix(screenQuadrant q) {
 
 }
  
-position getTextBubbleScreenPos(const position& worldPos, const position& cameraPos, float portraitSize, float buffer, screenQuadrant quad) {
+position getTextBubbleScreenPos(const position& worldPos, const position& cameraPos, const float portraitSize, const float buffer, screenQuadrant quad, const dimensions& size) {
     float screenX = worldPos.getX() - cameraPos.getX();
     float screenY = worldPos.getY() - cameraPos.getY();
-      
-    // Adjust this if bubbleSize is known later
-    float horiz = portraitSize + buffer;
-    float vert = portraitSize + buffer;
+
+    float bubbleW = size.getW();
+    float bubbleH = size.getH();
 
     position bubblePos = { screenX, screenY };
 
     switch (quad)
     {
     case screenQuadrant::TOP_LEFT:
-        bubblePos.setX(screenX + horiz);
-        bubblePos.setY(screenY + vert * 0.5f);
+        // Bubble RIGHT of portrait
+        bubblePos.setX(screenX + portraitSize + buffer);
         break;
 
     case screenQuadrant::TOP_RIGHT:
-        bubblePos.setX(screenX - horiz);
-        bubblePos.setY(screenY + vert * 0.5f);
+        // Bubble LEFT of bubble width
+        bubblePos.setX(screenX - bubbleW - buffer);
         break;
 
     case screenQuadrant::BOTTOM_LEFT:
-        bubblePos.setX(screenX + horiz);
-        bubblePos.setY(screenY - vert * 0.5f);
+        // Bubble RIGHT of portrait
+        bubblePos.setX(screenX + portraitSize + buffer);
         break;
 
     case screenQuadrant::BOTTOM_RIGHT:
-        bubblePos.setX(screenX - horiz);
-        bubblePos.setY(screenY - vert * 0.5f);
+        // Bubble LEFT of bubble width
+        bubblePos.setX(screenX - bubbleW - buffer);
         break;
     }
 
@@ -95,11 +94,12 @@ position getTextBubbleScreenPos(const position& worldPos, const position& camera
  void setUpDialogueBubble(position entityPos, position cameraPos, activeDialogue& d){
      float w, h;
      screenQuadrant quad = getScreenQuadrant(entityPos, cameraPos, logicalW, logicalH);
-     d.textBubblePos = getTextBubbleScreenPos(entityPos, cameraPos, logicalW, logicalH, quad);
      d.bubbleTextureKey = d.bubbleTextureKeyBase + getOrientedBubblesTextureKeySuffix(quad);
      d.bubbleTexture = textureManager::getInstance().getFrame(d.bubbleTextureKey);
      SDL_GetTextureSize(d.bubbleTexture, &w, &h);
      d.textBubbleSize.setSize(w, h);
+     dimensions size = dimensions(w, h);
+     d.textBubblePos = getTextBubbleScreenPos(entityPos, cameraPos, 128, 5, quad, size);
      d.speakerLabel.updateTexture(d.speakerLabel.text);
      d.textLabel.updateTexture(d.textLabel.text);
 }

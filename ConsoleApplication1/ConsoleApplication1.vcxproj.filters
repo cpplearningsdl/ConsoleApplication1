@@ -139,6 +139,9 @@
     <Filter Include="Source Files\game\events\dialogue">
       <UniqueIdentifier>{87b4c862-95a0-4854-a130-ac9becde8a16}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\game\events\movement">
+      <UniqueIdentifier>{e3038577-08de-486a-8a0e-1ec4cb6e7115}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp">
@@ -245,6 +248,12 @@
     </ClCompile>
     <ClCompile Include="fontManager.cpp">
       <Filter>Source Files\text\font</Filter>
+    </ClCompile>
+    <ClCompile Include="dialogueEvents.cpp">
+      <Filter>Source Files\game\events\dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="movementEvents.cpp">
+      <Filter>Source Files\game\events\movement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

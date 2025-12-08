@@ -117,5 +117,7 @@ entity& entityManager::getEntityById(int id) {
 
  
 void entityManager::processStartDialogueEvent(turnContext& ctx, startDialogueEvent& e, eventPhase phase) {
-	e.entityPos = getEntityById(e.entityId).getCombinedPos();
+	if (phase == eventPhase::PROCESS) {
+		e.entityPos = getEntityById(e.entityId).getCombinedPos();
+	}
 }

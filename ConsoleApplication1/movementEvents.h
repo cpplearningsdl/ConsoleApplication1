@@ -1,8 +1,6 @@
 #pragma once
 #include "event.h"
-#include "path.h"
-#include "movementManager.h"
-#include "dialogueManager.h"
+#include "path.h" 
 
 
 class entity;
@@ -24,10 +22,7 @@ struct movementProposedEvent : baseEvent {
         phase = eventPhase::PROCESS;
     }
 
-    void dispatch(movementManager& move, entityManager& entities, dialogueManager& dialogue, renderCacheManager& renderCache, turnContext& ctx) override
-    {
-        move.processMovementProposedEvent(ctx, *this, phase); 
-    }
+    void dispatch(movementManager& move, entityManager& entities, dialogueManager& dialogue, renderCacheManager& renderCache, turnContext& ctx) override;
 };
 
 
@@ -43,11 +38,7 @@ struct finishedMovementEvent : baseEvent {
         phase = eventPhase::PROCESS;
     }
 
-    void dispatch(movementManager& move, entityManager& entities, dialogueManager& dialogue, renderCacheManager& renderCache, turnContext& ctx) override
-    {
-        move.processFinishedMovementEvent(ctx, *this, phase);
-       // renderCache.onFinishedMovement(ctx, *this, phase);
-    }
+    void dispatch(movementManager& move, entityManager& entities, dialogueManager& dialogue, renderCacheManager& renderCache, turnContext& ctx) override;
 };
 
 
@@ -63,10 +54,7 @@ struct finishedPathEvent : baseEvent {
         phase = eventPhase::PROCESS;
     }
 
-    void dispatch(movementManager& move, entityManager& entities, dialogueManager& dialogue, renderCacheManager& renderCache, turnContext& ctx) override
-    {
-        move.processFinishedPathEvent(ctx, *this, phase); 
-    }
+    void dispatch(movementManager& move, entityManager& entities, dialogueManager& dialogue, renderCacheManager& renderCache, turnContext& ctx) override;
 };
 
 struct movedThisFrameEvent : baseEvent {
@@ -81,9 +69,6 @@ struct movedThisFrameEvent : baseEvent {
         phase = eventPhase::EXECUTE;
     }
 
-    void dispatch(movementManager& move, entityManager& entities, dialogueManager& dialogue, renderCacheManager& renderCache, turnContext& ctx) override
-    {
-        dialogue.processMovedThisFrameEvent(ctx, *this, phase);
-    }
+    void dispatch(movementManager& move, entityManager& entities, dialogueManager& dialogue, renderCacheManager& renderCache, turnContext& ctx) override;
 
 };

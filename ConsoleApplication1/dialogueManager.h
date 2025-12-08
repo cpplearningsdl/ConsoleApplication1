@@ -12,6 +12,7 @@ struct setUpDialogueBubbleEvent;
 struct startDialogueEvent;
 struct turnContext;
 
+//ADD MOVEMENT EVENT TO UPDATE BUBBLE ORIENTATION
 class dialogueManager {
 public: 
     dialogueManager();

@@ -1,7 +1,6 @@
 #pragma once
 #include "event.h"
-#include "path.h"
-#include "dialogueManager.h" 
+#include "path.h" 
 
 class entity;
 class entityManager;
@@ -20,9 +19,7 @@ struct dialogueProposalEvent : baseEvent {
         eventName = "dialogueProposalEvent"; 
     }
 
-    void dispatch(movementManager& m, entityManager& entity, dialogueManager& d, renderCacheManager& r, turnContext& ctx) override {
-        d.processDialogueProposalEvent(ctx, *this, phase);   // dialogue sees it 
-    }
+    void dispatch(movementManager& m, entityManager& entity, dialogueManager& d, renderCacheManager& r, turnContext& ctx) override;
 };
 
 //START DIALOGUE EVENT
@@ -34,9 +31,7 @@ struct startDialogueEvent : baseEvent {
         eventName = "startDialogueEvent"; 
     }
 
-    void dispatch(movementManager& m, entityManager& entity, dialogueManager& d, renderCacheManager& r, turnContext& ctx) override {
-        d.processStartDialogueEvent(ctx, *this, phase); 
-    }
+    void dispatch(movementManager& m, entityManager& entity, dialogueManager& d, renderCacheManager& r, turnContext& ctx) override; 
 };
 
 struct setUpDialogueBubbleEvent : baseEvent {
@@ -47,7 +42,5 @@ struct setUpDialogueBubbleEvent : baseEvent {
         eventName = "setupDialogueBubbleEvent"; 
     }
 
-    void dispatch(movementManager& m, entityManager& entity, dialogueManager& d, renderCacheManager& r, turnContext& ctx) override {
-        d.processSetUpDialogueBubbleEvent(ctx, *this, phase);
-    }
+    void dispatch(movementManager& m, entityManager& entity, dialogueManager& d, renderCacheManager& r, turnContext& ctx) override;
 };
