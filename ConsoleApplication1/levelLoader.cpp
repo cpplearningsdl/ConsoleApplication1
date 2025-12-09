@@ -88,7 +88,7 @@ void loadTiles(game& g, levelData& lvl) {
 	 
 	float x = 0;
 	float y = 0;
-
+	int count = 0;
 	for (auto& id : lvl.state.tileIds) {
 		entities.createEntity(id, TILE, view);
 		entity* e = entities.getTiles().back().get(); 
@@ -100,5 +100,9 @@ void loadTiles(game& g, levelData& lvl) {
 		} 
 		entities.addTileToFloorMap(e, view);
 		g.getRenderCacheManager().addToRenderablesCache(e, view);
+		count++;
+		if (count == 11) {
+			int t = 0;
+		}
 	}
 }

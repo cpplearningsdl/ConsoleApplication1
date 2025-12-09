@@ -31,43 +31,21 @@ inline int gridToIndex(position& p, const viewPort& v) noexcept {
 	return static_cast<int>(p.getY() * v.mapSize.getW() + p.getX());
 }
 
-// Convert from world coords to grid coords (tile index position)
-//inline position toGridCoords(const position& p, const viewPort& v) {
-//	return position{
-//		p.getX() / v.tileSize.getW(),
-//		p.getY() / v.tileSize.getH()
-//	};
-//}
+// Convert from world coords to grid coords (tile index position) 
 inline position toGridCoords(const position& p, const viewPort& v) {
 	int gx = static_cast<int>(p.getX() / v.tileSize.getW());
 	int gy = static_cast<int>(p.getY() / v.tileSize.getH());
 	return position(static_cast<float>(gx), static_cast<float>(gy));
 }
 
- //Convert from grid coords back to world coords (top-left pixel of that tile)
-//inline position toWorldCoords(const position& gridPos, const viewPort& v) {
-//	return position{
-//		gridPos.getX() * v.tileSize.getW(),
-//		gridPos.getY() * v.tileSize.getH()
-//	};
-//}
+ //Convert from grid coords back to world coords (top-left pixel of that tile) 
 inline position toWorldCoords(const position& gridPos, const viewPort& v) {
 	float wx = gridPos.getX() * v.tileSize.getW();
 	float wy = gridPos.getY() * v.tileSize.getH();
 	return position{ wx, wy };
 }
 
-// Convert world position -> grid coords (use center of entity)
-//inline position toGridCoords(const entity& e, const dimensions& tileSize) {
-//	// use combined pos + half of current frame size
-//	float cx = e.getCombinedPos().getX() + (e.getAnimationManager().getWidth() / 2.0f);
-//	float cy = e.getCombinedPos().getY() + (e.getAnimationManager().getHeight() / 2.0f);
-//
-//	int gx = static_cast<int>(cx / tileSize.getW());
-//	int gy = static_cast<int>(cy / tileSize.getH());
-//
-//	return position(gx, gy);
-//}
+// Convert world position -> grid coords (use center of entity) 
 inline position toGridCoords(const entity& e, const dimensions& tileSize) {
 	// use combined pos + half of current frame size
 	float cx = e.getCombinedPos().getX() + (e.getAnimationManager().getWidth() / 2.0f);
@@ -78,13 +56,7 @@ inline position toGridCoords(const entity& e, const dimensions& tileSize) {
 
 	return position(static_cast<float>(gx), static_cast<float>(gy)); 
 }
-// Convert grid coords -> world pos (center of tile in world coords)
-//inline position fromGridCoords(const position& gridPos, const dimensions& tileSize) {
-//	float wx = (gridPos.getX() * tileSize.getW()) + tileSize.getW() / 2.0f;
-//	float wy = (gridPos.getY() * tileSize.getH()) + tileSize.getH() / 2.0f;
-//
-//	return position(wx, wy);
-//}
+// Convert grid coords -> world pos (center of tile in world coords) 
 inline position fromGridCoords(const position& gridPos, const dimensions& tileSize) {
 	float wx = gridPos.getX() * tileSize.getW();
 	float wy = gridPos.getY() * tileSize.getH(); 
@@ -153,16 +125,7 @@ inline bool moveView(viewPort& v)
 
 	v.viewPos.setX(v.viewPos.getX() + moveX);
 	v.viewPos.setY(v.viewPos.getY() + moveY);
-
-	//// clamp top-left to map bounds (so viewPos stays valid)
-	//const float maxX = v.mapSize.getW() * v.tileSize.getW() - v.screenSize.getW();
-	//const float maxY = v.mapSize.getH() * v.tileSize.getH() - v.screenSize.getH();
-
-	//if (v.viewPos.getX() < 0) v.viewPos.setX(0);
-	//if (v.viewPos.getY() < 0) v.viewPos.setY(0);
-	//if (v.viewPos.getX() > maxX) v.viewPos.setX(maxX);
-	//if (v.viewPos.getY() > maxY) v.viewPos.setY(maxY);
-
+	 
 	return true; // still moving
 }
 

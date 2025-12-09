@@ -106,7 +106,7 @@ void dialogueManager::processMovedThisFrameEvent(turnContext& ctx, movedThisFram
 
             const auto& node = it->second;
             if (node.entityId != e.entityId) continue;
-            d.textBubblePos = e.pos;
+            setUpDialogueBubble(e.pos, ctx.cameraViewPos, d);
  
         }
     }

@@ -17,7 +17,7 @@ entity* entityManager::createEntity(int factoryId, ENTITYTYPEENUM type, const vi
 	if (type == TILE) {
 		tiles.push_back(f.create(factoryId));
 		entity* e = tiles.back().get();
-		addTileToFloorMap(e, v);
+		//addTileToFloorMap(e, v);
 		e->setEntityId(nextId++);
 		return e;
 	}

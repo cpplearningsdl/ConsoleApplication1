@@ -23,4 +23,5 @@ void finishedPathEvent::dispatch(movementManager& m, entityManager& entity, dial
 void movedThisFrameEvent::dispatch(movementManager& m, entityManager& entity, dialogueManager& d, renderCacheManager& r, turnContext& ctx)
 {
     m.processMovedThisFrameEvent(ctx, *this, phase);
+    d.processMovedThisFrameEvent(ctx, *this, phase);
 }

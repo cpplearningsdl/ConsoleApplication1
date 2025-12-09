@@ -10,7 +10,7 @@ public:
 		position pos = { -1,-1 };      // current position
 		position dest = { -1,-1 };     // destination
 		position delta;    // per-step movement vector
-		float speed{ 1.0f };
+		float speed{ 2.0f };
 	};
 
 private:

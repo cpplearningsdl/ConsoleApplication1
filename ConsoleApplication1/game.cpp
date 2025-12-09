@@ -16,20 +16,20 @@
 game::game() {
 	loadALevel(1);
 	dialogueManager.setStringDatabase(1);
-	dialogueManager.setDialogueNodesDatabase(1);
-	//dialogueManager.startDialogue(1);
+	dialogueManager.setDialogueNodesDatabase(1); 
 	turnManager.getTurnCtx().emitEvent<dialogueProposalEvent>(1); 
-	//startRotation(view, { 64, 64 }, 1,128.0f, 0.033f, false, 0.3f);
-	//auto& ents = entityHandler.getEntities();
-	//ents.back()->setMoving(true);
-	//turnManager.getTurnCtx().events.emplace_back(
-	//	std::make_unique<movementProposedEvent>(
-	//		ents.back().get(),
-	//		ents.back()->getId(),
-	//		movementPath({ {1300,900},{150,50}, {20,120}, {0,0} }, { 0,0 }, { 1300,900 }),
-	//		true
-	//	)
-	//); 
+	//startRotation(view, { 564, 564 }, 1,128.0f, 0.033f, false, 0.3f);
+	setViewTarget(view, { 500,500 }, .4);
+	auto& ents = entityHandler.getEntities();
+	ents.back()->setMoving(true);
+	turnManager.getTurnCtx().events.emplace_back(
+		std::make_unique<movementProposedEvent>(
+			ents.back().get(),
+			ents.back()->getId(),
+			movementPath({ {1700,900},{150,50}, {20,120}, {0,0} }, { 0,0 }, { 1700,900 }),
+			true
+		)
+	); 
 }
 
 game::~game() {
@@ -59,8 +59,7 @@ void game::update(inputManager& input) {
  
 void game::updateEntities(std::vector<std::unique_ptr<entity>>& entitiesVector) {
 	for (auto& e : entitiesVector) {
-		e->getAnimationManager().step();
-		//pass view to handleEvents??
+		e->getAnimationManager().step(); 
 		movementManager.handleMovement(turnManager.getTurnCtx(), e.get());
 		handleEvents(turnManager.getTurnCtx(), entityHandler, movementManager, renderCacheHandler, dialogueManager);
 	}

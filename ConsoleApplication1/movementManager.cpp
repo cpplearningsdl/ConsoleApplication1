@@ -54,6 +54,6 @@ void movementManager::processMovedThisFrameEvent(turnContext& ctx, movedThisFram
 	 {
 		 ev.mover->setMoving(true);
 		 ev.mover->getPath() = movementPath(ev.newPath);
-		 ev.mover->getMovement().init(ev.mover->getMovement().getPos(), getNextWaypoint(ev.mover->getPath()), 0.2f);
+		 ev.mover->getMovement().init(ev.mover->getMovement().getPos(), getNextWaypoint(ev.mover->getPath()), 0.6f);
 	  } 
  }
