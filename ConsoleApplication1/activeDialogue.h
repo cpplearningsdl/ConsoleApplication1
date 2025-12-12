@@ -7,7 +7,10 @@
 
 struct activeDialogue {
     int nodeId = -1;
+    int nextNodeId = -1;
     int entityId = -1;
+    bool advanceOnClick = true;
+    int tickCount = 6000;
     label speakerLabel;
     label textLabel;
     std::string bubbleTextureKey = "";

@@ -12,6 +12,8 @@ struct dialogueNode {
     std::string textId; 
     std::string bubbleTextureKeyBase = "textBubble";
     int nextId = -1;
+    bool advanceOnClick = true;
+    int tickCount = 6000;
     std::vector<int> choices; 
 
     std::string speakerFontId = "Sagewold-Regular";
@@ -43,6 +45,8 @@ inline void to_json(json& j, const dialogueNode& n) {
         {"textId", n.textId},
         {"bubbleTextureKeyBase", n.bubbleTextureKeyBase},
         {"nextId", n.nextId},
+        {"advanceOnClick", n.advanceOnClick},
+        {"tickCount", n.tickCount},
         {"choices", n.choices},
         {"speakerFontId", n.speakerFontId},
         {"textFontId", n.textFontId},
@@ -67,6 +71,8 @@ inline void from_json(const json& j, dialogueNode& n) {
     n.textId = j.value("textId", std::string(""));
     n.bubbleTextureKeyBase = j.value("bubbleTextureKeyBase", std::string("textBubble"));
     n.nextId = j.value("nextId", -1);
+    n.advanceOnClick = j.value("advanceOnClick", false);
+    n.tickCount = j.value("tickCount", -1);
 
     if (j.contains("choices") && j["choices"].is_array())
         n.choices = j["choices"].get<std::vector<int>>();

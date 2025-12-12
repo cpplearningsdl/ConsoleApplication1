@@ -38,9 +38,11 @@ bool renderer::init(int width, int height) {
 	SDL_SetRenderLogicalPresentation(sdlRenderer, logicalW, logicalH, SDL_LOGICAL_PRESENTATION_LETTERBOX);
 	 
 	nextFrame = SDL_CreateTexture(sdlRenderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, logicalW, logicalH);
-	//SDL_SetTextureBlendMode(nextFrame, SDL_BLENDMODE_BLEND);
-	//SDL_SetRenderDrawBlendMode(sdlRenderer, SDL_BLENDMODE_BLEND);
- 
+	lightMask = SDL_CreateTexture(sdlRenderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, logicalW, logicalH);
+	SDL_SetTextureBlendMode(lightMask, SDL_BLENDMODE_MOD);
+	radialLightTexture = textureManager::getInstance().getFrame("light_gradiant_idle_0");
+	SDL_SetTextureBlendMode(radialLightTexture, SDL_BLENDMODE_ADD);
+
 	if (TTF_Init() != 1) {
 		logManager::logThis("TTF_Init Failed to initialize.", SDL_GetError()); 
 		return false;

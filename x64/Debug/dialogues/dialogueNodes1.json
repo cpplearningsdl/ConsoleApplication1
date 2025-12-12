@@ -4,8 +4,35 @@
     "entityId": 1,
     "speakerId": "npc_001",
     "textId": "dlg.intro.1",
-    "bubbleTextureKeyBase": "textBubble", 
+    "bubbleTextureKeyBase": "textBubble",
+    "nextId": 2,
+    "advanceOnClick": true,
+    "tickCount":  6000,
+    "choices": [],
+    "speakerFontId": "Sagewold-Regular",
+    "textFontId": "Sagewold-Regular",
+    "speakerFontColor": {
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "textFontColor": {
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    }
+  },
+  {
+    "id": 2,
+    "entityId": 1,
+    "speakerId": "npc_001",
+    "textId": "dlg.intro.2",
+    "bubbleTextureKeyBase": "textBubble",
     "nextId": -1,
+    "advanceOnClick": false,
+    "tickCount": 3000,
     "choices": [],
     "speakerFontId": "Sagewold-Regular",
     "textFontId": "Sagewold-Regular",

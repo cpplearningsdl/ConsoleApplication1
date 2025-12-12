@@ -19,7 +19,7 @@ game::game() {
 	dialogueManager.setDialogueNodesDatabase(1); 
 	turnManager.getTurnCtx().emitEvent<dialogueProposalEvent>(1); 
 	//startRotation(view, { 564, 564 }, 1,128.0f, 0.033f, false, 0.3f);
-	setViewTarget(view, { 500,500 }, .4);
+	//setViewTarget(view, { 500,500 }, .4);
 	auto& ents = entityHandler.getEntities();
 	ents.back()->setMoving(true);
 	turnManager.getTurnCtx().events.emplace_back(
@@ -46,6 +46,8 @@ void game::update(inputManager& input) {
 		case gamePhase::DECISION: 
 
 			updateEntities(entityHandler.getEntities());
+			dialogueManager.handleInput(input);
+			dialogueManager.tickDialogue();
 			break;
 		case gamePhase::ANIMATION:
 			break;
@@ -56,7 +58,10 @@ void game::update(inputManager& input) {
 	}
 	updateView();//THIS MIGHT NEED TO BE CALLED FIRST
 }
- 
+
+void game::updateDialogue(inputManager& input) {
+
+}
 void game::updateEntities(std::vector<std::unique_ptr<entity>>& entitiesVector) {
 	for (auto& e : entitiesVector) {
 		e->getAnimationManager().step(); 

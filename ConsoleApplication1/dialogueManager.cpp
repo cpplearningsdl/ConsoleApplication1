@@ -10,6 +10,7 @@
 #include "textureManager.h" 
 #include "json.hpp"
 #include "turnContext.h"
+#include "inputManager.h"
 #include "windowSettings.h"
 
 dialogueManager::dialogueManager() {
@@ -22,7 +23,15 @@ dialogueManager::~dialogueManager() {
 }
 
 
- 
+int dialogueManager::findDialogueIndexByNodeId(int nodeId) const
+{
+    for (int i = 0; i < static_cast<int>(activeDialogues.size()); i++) {
+        if (activeDialogues[i].nodeId == nodeId) {
+            return i;
+        }
+    }
+    return -1;
+}
 
 void dialogueManager::setDialogueNodesDatabase(int dbId) {
     namespace fs = std::filesystem;
@@ -109,8 +118,7 @@ void dialogueManager::processMovedThisFrameEvent(turnContext& ctx, movedThisFram
             setUpDialogueBubble(e.pos, ctx.cameraViewPos, d);
  
         }
-    }
-    else { return; }
+    } 
 }
 
 void dialogueManager::processSetUpDialogueBubbleEvent(turnContext& ctx, setUpDialogueBubbleEvent& e, eventPhase phase) {
@@ -140,8 +148,11 @@ activeDialogue* dialogueManager::startDialogue(int id) {
 
     const auto& node = it->second;
     activeDialogue dlg;
-    dlg.nodeId = id;
     dlg.entityId = node.entityId;
+    dlg.nodeId = id;
+    dlg.nextNodeId = node.nextId;
+    dlg.advanceOnClick = node.advanceOnClick;
+    dlg.tickCount = node.tickCount;
      
     dlg.bubbleTextureKeyBase = node.bubbleTextureKeyBase;
     dlg.bubbleTextureKey = "textBubble_fromLeft_0";
@@ -164,15 +175,42 @@ activeDialogue* dialogueManager::startDialogue(int id) {
 }
 
 
-void dialogueManager::advanceDialogue(activeDialogue& dlg) {
-    auto it = dialogueNodes.find(dlg.nodeId);
-    if (it == dialogueNodes.end()) return;
-
-    int nextId = it->second.nextId;
-    if (nextId == -1) {
+bool dialogueManager::advanceDialogue(activeDialogue& dlg) {
+    int activeDialogueId = dlg.nodeId;
+    if (dlg.nextNodeId == -1) {
         dlg.visible = false;
-        return;
+        activeDialogues.erase(activeDialogues.begin() + findDialogueIndexByNodeId(activeDialogueId));
+        return false;
     }
 
-    dlg = *startDialogue(nextId); 
+    startDialogue(dlg.nextNodeId); 
+
+    activeDialogues.erase(activeDialogues.begin() + findDialogueIndexByNodeId(activeDialogueId));
+    return true;
+}
+
+void dialogueManager::handleInput(inputManager& input) {
+    if (!input.wasMouseReleased() || activeDialogues.empty())
+    {
+        return;
+    }
+     
+    activeDialogue& dlg = activeDialogues.front();
+    if (dlg.advanceOnClick) {
+        advanceDialogue(dlg);
+    } 
+}
+
+void dialogueManager::tickDialogue() {
+    if (activeDialogues.empty()) {
+        return;
+    }
+    for (auto& aDlg : activeDialogues) {
+        if (!aDlg.advanceOnClick) {
+            aDlg.tickCount--;
+            if (aDlg.tickCount <= 0) {
+                advanceDialogue(aDlg); 
+            } 
+        }
+    }
 }

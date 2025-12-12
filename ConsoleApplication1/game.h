@@ -24,7 +24,7 @@ public:
 	levelData& getLevelData() noexcept { return currentLevelData; }
 	const levelData& getLevelData() const noexcept { return currentLevelData; }
 	
-
+	void updateDialogue(inputManager& input);
 	void updateView();
 	const viewPort& getView() const { return view; }
 	viewPort& getViewNonConst() { return view; }

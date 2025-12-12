@@ -6,6 +6,7 @@
 #include "renderer.h"  
 #include "event.h"
  
+class inputManager;
 struct movedThisFrameEvent;
 struct dialogueProposalEvent;
 struct setUpDialogueBubbleEvent;
@@ -18,11 +19,15 @@ public:
     dialogueManager();
     ~dialogueManager();
 
+   int findDialogueIndexByNodeId(int nodeId) const;
+
     void setDialogueNodesDatabase(int dbId);
     void setStringDatabase(int dbId);
     activeDialogue* startDialogue(int id);
 
-    void advanceDialogue(activeDialogue& dlg);
+    void tickDialogue();
+    bool advanceDialogue(activeDialogue& dlg);
+    void handleInput(inputManager& input);
 
     const std::vector<activeDialogue>& getActiveDialogues() const { return activeDialogues; }
   

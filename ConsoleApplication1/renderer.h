@@ -30,7 +30,8 @@ private:
 	std::unordered_map<std::string, TTF_Font*> myFonts; 
 	SDL_Renderer* sdlRenderer = nullptr;
 	SDL_Texture* nextFrame = nullptr;
-
+	SDL_Texture* lightMask = nullptr;
+	SDL_Texture* radialLightTexture = nullptr;
 	int screenWidth = 0;
 	int screenHeight = 0;
 };
