@@ -17,6 +17,7 @@ private:
 	textureManager& textureManagerRef = { textureManager::getInstance() };
 public:
 	void renderGame(game& g, menuManager& m);
+	void renderLights(game& g);
 	void renderMainMenu(menuManager& m);
 	void renderBackground();
 	void renderEntities(game& g, const std::vector<entity*>& cache); 

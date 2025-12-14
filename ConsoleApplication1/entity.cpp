@@ -161,16 +161,16 @@ nlohmann::ordered_json entity::to_Json(const entity& e) {
 	j["abilities"] = abilitiesArray; 
 	j["animationManager"] = e.animationHandler;
 	j["renderInfo"] = e.renderInfo; 
-	logManager::logThis("Entity JSON dump:\n" + j.dump(4));
+	//logManager::logThis("Entity JSON dump:\n" + j.dump(4));
 	return j;
 }
 
 void entity::spill_guts(std::string s) {
 	nlohmann::ordered_json j = to_Json(*this);
 	logManager::logThis(s);
-	logManager::logThis("Entity JSON dump:\n" + j.dump(4));
+	//logManager::logThis("Entity JSON dump:\n" + j.dump(4));
 }
 void entity::spill_guts() {
 	nlohmann::ordered_json j = to_Json(*this);
-	logManager::logThis("Entity JSON dump:\n" + j.dump(4));
+	//logManager::logThis("Entity JSON dump:\n" + j.dump(4));
 }

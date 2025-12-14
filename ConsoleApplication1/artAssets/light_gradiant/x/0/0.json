@@ -1,0 +1,14 @@
+{
+  "key": "light_gradiant_idle_0",
+  "animationName": "idle",
+  "frameNumber": 0,
+  "totalFrames": 1,
+  "width": 512,
+  "height": 512,
+  "hitBoxWidth": 0,
+  "hitBoxHeight": 0,
+  "xOffset": 0,
+  "yOffset": 0,
+  "loop": false,
+  "chainAnimation": "none"
+}

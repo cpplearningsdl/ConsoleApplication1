@@ -17,7 +17,7 @@ public:
 	void newGame();
 	void endGame();
 	void loadDefaultAssets();
-	void processGame(); 
+	void processGame(float deltaTime); 
 	void processMenu(inputManager& input);
 	void setState(gameManagerStateEnum nState) { state = nState; }
 	gameManagerStateEnum getState() { return state; }

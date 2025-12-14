@@ -22,7 +22,7 @@ void gameManager::endGame() {
 	currentGame.reset();  
 }
  
-void gameManager::processGame() {
+void gameManager::processGame(float deltatime) {
 	inputManager& input = inputManager::getInstance();
 	//start menu(when starting game)CLICKING NEW GAME DOESNT START NEW GAME, JUST CLOSES MENU FOR NOW
 	if (theStartMenu.hasOpenWindow()) {
@@ -35,7 +35,7 @@ void gameManager::processGame() {
 		processMenu(input); 
 		if (currentGame) {
 			if (getState() == gameManagerStateEnum::PLAYING) {
-				currentGame->update(input);
+				currentGame->update(input, deltatime);
 			} 
 		}
 		render();

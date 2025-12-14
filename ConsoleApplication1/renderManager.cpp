@@ -3,6 +3,7 @@
 #include "windowSettings.h"
 #include "position.h"
 #include "dimensions.h"
+#include "light.h"
 
 
 void renderManager::renderMainMenu(menuManager& m) {
@@ -54,12 +55,24 @@ void renderManager::renderDialogue(game& g, dialogueManager& dlg) {
  
 }
 
+void renderManager::renderLights(game& g) {
+	for (auto& L : g.getLightManager().getLights()) {
+		// adjust for camera
+		float screenX = L.pos.getX() - g.getView().viewPos.getX();
+		float screenY = L.pos.getY() - g.getView().viewPos.getY();
+		rendRef.drawLight(screenX, screenY, L.radius, L.color, L.intensity);
+	}
+}
+
 void renderManager::renderGame(game& g, menuManager& m) {
-	renderCacheManager& cache = g.getRenderCacheManager();
+	renderCacheManager& cache = g.getRenderCacheManager(); 
 	renderBackground();
 	renderEntities(g, cache.getRenderableTiles());
 	renderEntities(g, cache.getRenderableEntities());
+	rendRef.drawAmbientDarkness(180);
+	renderLights(g);
 	renderDialogue(g, g.getDialogueManager());
+	
 	//renderGameMenu(g);
 	renderMainMenu(m);
 	rendRef.drawScreen();

@@ -1,6 +1,7 @@
 #pragma once
 #include <vector> 
 #include "entityIncludes.h"
+#include "lightManager.h"
 #include "inputManager.h"
 #include "entityManager.h"
 #include "dialogueManager.h"
@@ -15,7 +16,7 @@ public:
 	game();
 	~game();
 
-	void update(inputManager& input);
+	void update(inputManager& input, float deltaTime);
 	void updateEntities(std::vector<std::unique_ptr<entity>>& entitiesVector);
  
 	void loadALevel(int l);
@@ -34,6 +35,8 @@ public:
 
 	turnManager& getTurnManager() { return turnManager; }
 	dialogueManager& getDialogueManager() { return dialogueManager; }
+
+	lightManager& getLightManager() { return lightManager; }
 private: 
 	int updateCount = 0;
 	bool blockMenus = false;
@@ -44,6 +47,7 @@ private:
 	renderCacheManager renderCacheHandler;
 	movementManager movementManager;
 	dialogueManager dialogueManager;
+	lightManager lightManager;
 	turnManager turnManager;
 	//std::vector<int> turnOrder;//Id's, have to keep track of their ID when saving then update to new runtime ID after loading save!!
 }; 

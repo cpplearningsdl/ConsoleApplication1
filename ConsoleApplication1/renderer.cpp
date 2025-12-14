@@ -37,10 +37,8 @@ bool renderer::init(int width, int height) {
 	 
 	SDL_SetRenderLogicalPresentation(sdlRenderer, logicalW, logicalH, SDL_LOGICAL_PRESENTATION_LETTERBOX);
 	 
-	nextFrame = SDL_CreateTexture(sdlRenderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, logicalW, logicalH);
-	lightMask = SDL_CreateTexture(sdlRenderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, logicalW, logicalH);
-	SDL_SetTextureBlendMode(lightMask, SDL_BLENDMODE_MOD);
-	radialLightTexture = textureManager::getInstance().getFrame("light_gradiant_idle_0");
+	nextFrame = SDL_CreateTexture(sdlRenderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, logicalW, logicalH); 
+	radialLightTexture = textureManager::getInstance().getFrame("light_gradiant_circle_gauss_0");
 	SDL_SetTextureBlendMode(radialLightTexture, SDL_BLENDMODE_ADD);
 
 	if (TTF_Init() != 1) {
@@ -120,9 +118,35 @@ void renderer::drawToNextFrame(SDL_Texture* t, float x, float y, float h, float 
 	SDL_RenderTexture(sdlRenderer, t, nullptr, &dst);
 }
 
+
+void renderer::drawAmbientDarkness(Uint8 alpha) {
+	SDL_SetRenderTarget(sdlRenderer, nextFrame);
+	SDL_SetRenderDrawBlendMode(sdlRenderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(sdlRenderer, 0, 0, 0, alpha);
+
+	SDL_FRect full{ 0, 0, (float)logicalW, (float)logicalH };
+	SDL_RenderFillRect(sdlRenderer, &full);
+}
+
+
+void renderer::drawLight(float x, float y, float radius, SDL_Color color, float intensity){
+	SDL_SetRenderTarget(sdlRenderer, nextFrame); 
+	SDL_SetTextureColorMod(radialLightTexture, color.r, color.g, color.b);
+	SDL_SetTextureAlphaMod(radialLightTexture, (Uint8)(255 * intensity));
+
+	SDL_FRect dst{
+		x - radius,
+		y - radius,
+		radius * 2,
+		radius * 2
+	};
+
+	SDL_RenderTexture(sdlRenderer, radialLightTexture, nullptr, &dst);
+}
+
 void renderer::presentFrame() { 
 		SDL_SetRenderTarget(sdlRenderer, nullptr);
-		SDL_RenderTexture(sdlRenderer, nextFrame, nullptr, nullptr);
+		SDL_RenderTexture(sdlRenderer, nextFrame, nullptr, nullptr); 
 		SDL_RenderPresent(sdlRenderer); 
 }
 

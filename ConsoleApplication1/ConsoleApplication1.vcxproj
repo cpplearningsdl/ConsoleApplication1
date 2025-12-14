@@ -204,6 +204,7 @@ SDL3main.lib,SDL3_image.lib
     <ClCompile Include="inputManager.cpp" />
     <ClCompile Include="inventory.cpp" />
     <ClCompile Include="item.cpp" />
+    <ClCompile Include="lightManager.cpp" />
     <ClCompile Include="logManager.cpp" />
     <ClCompile Include="mainMenu.cpp" />
     <ClCompile Include="menu.cpp" />
@@ -254,6 +255,8 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="inventory.h" />
     <ClInclude Include="item.h" />
     <ClInclude Include="level.h" />
+    <ClInclude Include="light.h" />
+    <ClInclude Include="lightManager.h" />
     <ClInclude Include="mainMenu.h" />
     <ClInclude Include="menuManager.h" />
     <ClInclude Include="menu.h" />

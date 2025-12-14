@@ -11,6 +11,8 @@
 #include "movementManager.h" 
 #include "dialogueManager.h"
 #include "renderCacheManager.h"
+//fordebug
+#include "light.h"
 
  
 game::game() {
@@ -30,13 +32,17 @@ game::game() {
 			true
 		)
 	); 
+	lightManager.addLight({ 64, 64 }, 110, 0.3f, { 177, 200, 150, 255 });
+	auto& lite = lightManager.getLights().back();
+	lite.enableRadiusPulse(13.0f, 0.7f); 
+	lite.enableIntensityPulse(3.0f, 0.3f);
 }
 
 game::~game() {
 	// cleanup
 }
  
-void game::update(inputManager& input) {
+void game::update(inputManager& input, float deltaTime) {
 	updateCount++;
 	gamePhase phase = turnManager.getTurnCtx().phase;
 	switch (phase)
@@ -48,6 +54,7 @@ void game::update(inputManager& input) {
 			updateEntities(entityHandler.getEntities());
 			dialogueManager.handleInput(input);
 			dialogueManager.tickDialogue();
+			lightManager.update(deltaTime);
 			break;
 		case gamePhase::ANIMATION:
 			break;

@@ -142,6 +142,12 @@
     <Filter Include="Source Files\game\events\movement">
       <UniqueIdentifier>{e3038577-08de-486a-8a0e-1ec4cb6e7115}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\rendering\lighting">
+      <UniqueIdentifier>{66c0c198-1f78-40a4-b7af-de688fb39b05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\rendering\lighting">
+      <UniqueIdentifier>{229cc4ae-f838-41f3-9d30-7e397cb29fd4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp">
@@ -254,6 +260,9 @@
     </ClCompile>
     <ClCompile Include="movementEvents.cpp">
       <Filter>Source Files\game\events\movement</Filter>
+    </ClCompile>
+    <ClCompile Include="lightManager.cpp">
+      <Filter>Source Files\rendering\lighting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -493,6 +502,12 @@
     </ClInclude>
     <ClInclude Include="dialogeEventHelperFunctions.h">
       <Filter>Header Files\text\dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="light.h">
+      <Filter>Header Files\rendering\lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="lightManager.h">
+      <Filter>Header Files\rendering\lighting</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

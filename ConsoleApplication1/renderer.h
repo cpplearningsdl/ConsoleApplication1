@@ -15,7 +15,10 @@ public:
 	void drawToNextFrame(SDL_Texture* t, float x, float y, float h, float w);
 	void presentFrame();  
 
-	void drawScreen();
+	void drawScreen(); 
+	void drawLight(float x, float y, float radius, SDL_Color color, float intensity);
+	void drawAmbientDarkness(Uint8 alpha);
+
 	SDL_Texture* createTextTexture(const std::string& text, const std::string& fontId, SDL_Color color);
 	void drawText(const std::string& text, const std::string& fontId, SDL_Color color, float x, float y);
 
@@ -29,8 +32,7 @@ private:
 	renderer& operator=(const renderer&) = delete;
 	std::unordered_map<std::string, TTF_Font*> myFonts; 
 	SDL_Renderer* sdlRenderer = nullptr;
-	SDL_Texture* nextFrame = nullptr;
-	SDL_Texture* lightMask = nullptr;
+	SDL_Texture* nextFrame = nullptr; 
 	SDL_Texture* radialLightTexture = nullptr;
 	int screenWidth = 0;
 	int screenHeight = 0;

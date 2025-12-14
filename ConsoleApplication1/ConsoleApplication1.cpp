@@ -21,9 +21,7 @@ using json = nlohmann::ordered_json;
 
 int main(int argc, char* argv[]) {
 	std::string input; 
-	std::string windowTitle;
-	//int windowHeight = 600;
-	//int windowWidth = 800;
+	std::string windowTitle; 
 	 
 	if (int success = SDL_Init(SDL_INIT_VIDEO) < 1) {
 		logManager::logThis("SDL Failed to initialize."); 
@@ -45,9 +43,7 @@ int main(int argc, char* argv[]) {
 		logManager::logThis("Failed to load art succesfully.");
 		return 1;
 	} 
-	renderer& renderer = renderer::getInstance();
-	//renderer.init(600, 800);
-	//renderer.init(1280, 800);
+	renderer& renderer = renderer::getInstance(); 
 	renderer.init(gWindowWidth, gWindowHeight);
 
 	const int FPS = 60;
@@ -58,12 +54,18 @@ int main(int argc, char* argv[]) {
 	int frameNumber = 1;
 	bool displayFrameNumber = false; 
 
+	float deltaTime = 0.0f;
+	Uint64 last = SDL_GetPerformanceCounter();
+
 	gameManager::getInstance().loadDefaultAssets();
-	gameManager::getInstance().newGame(); 
-	  
+	gameManager::getInstance().newGame();  
 	gameManager::getInstance().init();
 
 	while (running && windowManager.getWindow()) {
+		Uint64 now = SDL_GetPerformanceCounter();
+		deltaTime = (float)(now - last) / SDL_GetPerformanceFrequency();
+		last = now;
+
 		Uint64 frameStart = SDL_GetTicks();
 		if(displayFrameNumber) logManager::logThis("Frame start ", frameNumber);
 
@@ -72,7 +74,7 @@ int main(int argc, char* argv[]) {
 		running = inputManager::getInstance().pollEvents();
 		
 
-		gameManager::getInstance().processGame();
+		gameManager::getInstance().processGame(deltaTime);
  
 		Uint64 frameTime = SDL_GetTicks() - frameStart;
 		if (frameTime < frameDelay) {
