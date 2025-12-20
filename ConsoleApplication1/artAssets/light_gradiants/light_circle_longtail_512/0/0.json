@@ -1,0 +1,14 @@
+{
+  "key": "light_gradiants_light_circle_longtail_512_0",
+  "animationName": "light_circle_longtail_512",
+  "frameNumber": 0,
+  "totalFrames": 1,
+  "width": 128,
+  "height": 128,
+  "hitBoxWidth": 0,
+  "hitBoxHeight": 0,
+  "xOffset": 0,
+  "yOffset": 0,
+  "loop": false,
+  "chainAnimation": "none"
+}

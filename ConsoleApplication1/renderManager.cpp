@@ -44,6 +44,23 @@ void renderManager::renderEntities(game& g, const std::vector<entity*>& cache) {
 		rendRef.drawToNextFrame(a.getCurrentTexture(), screenX, screenY, a.getHeight(), a.getWidth());
 	}
 } 
+void renderManager::renderEntityLights(game& g, const std::vector<entity*>& cache) {
+	light L = light({ -1.0f,-1.0f }, 128.0f, 0.6f, { 2, 255, 2, 255 });
+
+	const viewPort& view = g.getView();
+	const float camX = view.viewPos.getX();
+	const float camY = view.viewPos.getY();
+	float screenX = 0;
+	float screenY = 0;
+	for (auto& e : cache) {
+		animationManager& a = e->getAnimationManager();
+		const position pos = e->getCombinedPos();
+
+		screenX = pos.getX() - camX;
+		screenY = pos.getY() - camY; 
+		rendRef.drawLight(screenX + 64, screenY + 64, L.radius, L.color, L.intensity);
+	}
+}
 
 void renderManager::renderDialogue(game& g, dialogueManager& dlg) {
 	if (dlg.getActiveDialogues().empty()) { return; }
@@ -64,13 +81,42 @@ void renderManager::renderLights(game& g) {
 	}
 }
 
+void renderManager::renderLightning(game& g) { 
+	for (auto& s : g.getEffectsManager().getLightningManager().getStrikes()) {
+		for (const auto& seg : s.segments) {
+			const auto& a = s.nodes[seg.a];
+			const auto& b = s.nodes[seg.b];
+
+			SDL_Color c{
+				Uint8(220 * s.intensity),
+				Uint8(235 * s.intensity),
+				Uint8(255 * s.intensity),
+				Uint8(255)
+			};
+
+			SDL_SetRenderDrawColor(rendRef.getSDLRenderer(), c.r, c.g, c.b, c.a);
+			SDL_RenderLine(
+				rendRef.getSDLRenderer(),
+				a.basePos.x + a.offset.x,
+				a.basePos.y + a.offset.y,
+				b.basePos.x + b.offset.x,
+				b.basePos.y + b.offset.y
+			);
+		}
+	}
+}
+
 void renderManager::renderGame(game& g, menuManager& m) {
 	renderCacheManager& cache = g.getRenderCacheManager(); 
 	renderBackground();
 	renderEntities(g, cache.getRenderableTiles());
-	renderEntities(g, cache.getRenderableEntities());
 	rendRef.drawAmbientDarkness(180);
+	renderEntities(g, cache.getRenderableEntities());
+	renderEntityLights(g, cache.getRenderableEntities());
 	renderLights(g);
+	renderLightning(g);
+
+
 	renderDialogue(g, g.getDialogueManager());
 	
 	//renderGameMenu(g);

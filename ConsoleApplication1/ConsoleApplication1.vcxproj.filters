@@ -148,6 +148,21 @@
     <Filter Include="Source Files\rendering\lighting">
       <UniqueIdentifier>{229cc4ae-f838-41f3-9d30-7e397cb29fd4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ambiance">
+      <UniqueIdentifier>{a6d2adf7-e445-43e6-8cd2-b9dcfcaf8d1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\effects">
+      <UniqueIdentifier>{eb1054d2-0580-4d08-ba8e-948971f2bbd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\effects\lightning">
+      <UniqueIdentifier>{6aa7c8f9-90cb-4542-9fda-547e8deb0bb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\effects">
+      <UniqueIdentifier>{7ba494ba-d4d2-43cb-9b66-15909953309e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\effects\lightning">
+      <UniqueIdentifier>{d8a8b65f-34b6-44b8-8b78-f4c59e965555}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp">
@@ -263,6 +278,21 @@
     </ClCompile>
     <ClCompile Include="lightManager.cpp">
       <Filter>Source Files\rendering\lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="ambianceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lightningGenerator.cpp">
+      <Filter>Source Files\effects\lightning</Filter>
+    </ClCompile>
+    <ClCompile Include="lightningManager.cpp">
+      <Filter>Source Files\effects\lightning</Filter>
+    </ClCompile>
+    <ClCompile Include="lightningStormBank.cpp">
+      <Filter>Source Files\effects\lightning</Filter>
+    </ClCompile>
+    <ClCompile Include="effectsManager.cpp">
+      <Filter>Source Files\effects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -508,6 +538,66 @@
     </ClInclude>
     <ClInclude Include="lightManager.h">
       <Filter>Header Files\rendering\lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="ambiance.h">
+      <Filter>Header Files\ambiance</Filter>
+    </ClInclude>
+    <ClInclude Include="ambianceManager.h">
+      <Filter>Header Files\ambiance</Filter>
+    </ClInclude>
+    <ClInclude Include="weatherType.h">
+      <Filter>Header Files\ambiance</Filter>
+    </ClInclude>
+    <ClInclude Include="dayDivision.h">
+      <Filter>Header Files\ambiance</Filter>
+    </ClInclude>
+    <ClInclude Include="ambianceSaveData.h">
+      <Filter>Header Files\ambiance</Filter>
+    </ClInclude>
+    <ClInclude Include="lightModulationEnum.h">
+      <Filter>Header Files\rendering\lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="lightningNode.h">
+      <Filter>Header Files\effects\lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="lightningSegment.h">
+      <Filter>Header Files\effects\lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="lightningStrike.h">
+      <Filter>Header Files\effects\lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="lightningGeneratorConfig.h">
+      <Filter>Header Files\effects\lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="lightningManager.h">
+      <Filter>Header Files\effects\lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="lightningGenerator.h">
+      <Filter>Header Files\effects\lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="lightningStormConfig.h">
+      <Filter>Header Files\effects\lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="lightningStorm.h">
+      <Filter>Header Files\effects\lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="lightningPlacementModeEnum.h">
+      <Filter>Header Files\effects\lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="lightningStormDef.h">
+      <Filter>Header Files\effects\lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="lightningStormBank.h">
+      <Filter>Header Files\effects\lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="fileSystemHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL_Fpoint_json.h">
+      <Filter>Header Files\effects\lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="effectsManager.h">
+      <Filter>Header Files\effects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -34,8 +34,9 @@ game::game() {
 	); 
 	lightManager.addLight({ 64, 64 }, 110, 0.3f, { 177, 200, 150, 255 });
 	auto& lite = lightManager.getLights().back();
-	lite.enableRadiusPulse(13.0f, 0.7f); 
-	lite.enableIntensityPulse(3.0f, 0.3f);
+	lite.setIntensityOscillation(0.6f, 0.4f);
+	lite.setRadiusOscillation(0.9f, 0.4f); 
+	effectsManager.getLightningManager().addStorm("electrical_arc", { 0.0f, 0.0f }, { 150.0f, 150.0f });
 }
 
 game::~game() {
@@ -55,6 +56,7 @@ void game::update(inputManager& input, float deltaTime) {
 			dialogueManager.handleInput(input);
 			dialogueManager.tickDialogue();
 			lightManager.update(deltaTime);
+			effectsManager.getLightningManager().update(deltaTime);
 			break;
 		case gamePhase::ANIMATION:
 			break;

@@ -1,6 +1,7 @@
 #pragma once
 #include <vector> 
 #include "entityIncludes.h"
+#include "effectsManager.h"
 #include "lightManager.h"
 #include "inputManager.h"
 #include "entityManager.h"
@@ -37,6 +38,7 @@ public:
 	dialogueManager& getDialogueManager() { return dialogueManager; }
 
 	lightManager& getLightManager() { return lightManager; }
+	effectsManager& getEffectsManager() { return effectsManager; }
 private: 
 	int updateCount = 0;
 	bool blockMenus = false;
@@ -49,5 +51,6 @@ private:
 	dialogueManager dialogueManager;
 	lightManager lightManager;
 	turnManager turnManager;
+	effectsManager effectsManager;
 	//std::vector<int> turnOrder;//Id's, have to keep track of their ID when saving then update to new runtime ID after loading save!!
 }; 

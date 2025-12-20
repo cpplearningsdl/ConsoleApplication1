@@ -1,6 +1,7 @@
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\abilities.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\abilities.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\ability.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\ability.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\abilityFileLoader.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\abilityFileLoader.obj
+C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\ambianceManager.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\ambianceManager.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\animationManager.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\animationManager.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\animationMovement.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\animationMovement.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\animationMovementFactory.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\animationMovementFactory.obj
@@ -8,6 +9,7 @@ C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplicatio
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\dialogueEvents.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\dialogueEvents.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\dialogueManager.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\dialogueManager.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\dimensions.h;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\dimensions.obj
+C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\effectsManager.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\effectsManager.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\entity.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\entity.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\entityLoader.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\entityLoader.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\entityManager.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\entityManager.obj
@@ -20,6 +22,9 @@ C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplicatio
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\inventory.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\inventory.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\item.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\item.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\lightManager.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\lightManager.obj
+C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\lightningGenerator.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\lightningGenerator.obj
+C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\lightningManager.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\lightningManager.obj
+C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\lightningStormBank.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\lightningStormBank.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\logManager.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\logManager.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\mainMenu.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\mainMenu.obj
 C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\menu.cpp;C:\Users\spyse\source\repos\cpplearningsdl\ConsoleApplication1\ConsoleApplication1\x64\Debug\menu.obj

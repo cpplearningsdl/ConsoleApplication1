@@ -186,6 +186,7 @@ SDL3main.lib,SDL3_image.lib
     <ClCompile Include="abilities.cpp" />
     <ClCompile Include="ability.cpp" />
     <ClCompile Include="abilityFileLoader.cpp" />
+    <ClCompile Include="ambianceManager.cpp" />
     <ClCompile Include="animationManager.cpp" />
     <ClCompile Include="animationMovement.cpp" />
     <ClCompile Include="animationMovementFactory.cpp" />
@@ -193,6 +194,7 @@ SDL3main.lib,SDL3_image.lib
     <ClCompile Include="dialogueEvents.cpp" />
     <ClCompile Include="dialogueManager.cpp" />
     <ClCompile Include="dimensions.h" />
+    <ClCompile Include="effectsManager.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="entityLoader.cpp" />
     <ClCompile Include="entityManager.cpp" />
@@ -205,6 +207,9 @@ SDL3main.lib,SDL3_image.lib
     <ClCompile Include="inventory.cpp" />
     <ClCompile Include="item.cpp" />
     <ClCompile Include="lightManager.cpp" />
+    <ClCompile Include="lightningGenerator.cpp" />
+    <ClCompile Include="lightningManager.cpp" />
+    <ClCompile Include="lightningStormBank.cpp" />
     <ClCompile Include="logManager.cpp" />
     <ClCompile Include="mainMenu.cpp" />
     <ClCompile Include="menu.cpp" />
@@ -228,20 +233,26 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="abilityFactory.h" />
     <ClInclude Include="abilityFileLoader.h" />
     <ClInclude Include="activeDialogue.h" />
+    <ClInclude Include="ambiance.h" />
+    <ClInclude Include="ambianceManager.h" />
+    <ClInclude Include="ambianceSaveData.h" />
     <ClInclude Include="aNotes.h" />
     <ClInclude Include="buttonData.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="buttonEnums.h" />
     <ClInclude Include="characterTypeEnum.h" />
+    <ClInclude Include="dayDivision.h" />
     <ClInclude Include="defaultButtonSettings.h" />
     <ClInclude Include="dialogeEventHelperFunctions.h" />
     <ClInclude Include="dialogueEvents.h" />
     <ClInclude Include="dialogueManager.h" />
     <ClInclude Include="dialogueNode.h" />
+    <ClInclude Include="effectsManager.h" />
     <ClInclude Include="entityDied.h" />
     <ClInclude Include="entityManager.h" />
     <ClInclude Include="event.h" />
     <ClInclude Include="eventSystem.h" />
+    <ClInclude Include="fileSystemHelper.h" />
     <ClInclude Include="fontManager.h" />
     <ClInclude Include="gamePhaseEnum.h" />
     <ClInclude Include="interactability.h" />
@@ -257,6 +268,18 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="level.h" />
     <ClInclude Include="light.h" />
     <ClInclude Include="lightManager.h" />
+    <ClInclude Include="lightModulationEnum.h" />
+    <ClInclude Include="lightningGenerator.h" />
+    <ClInclude Include="lightningGeneratorConfig.h" />
+    <ClInclude Include="lightningManager.h" />
+    <ClInclude Include="lightningNode.h" />
+    <ClInclude Include="lightningPlacementModeEnum.h" />
+    <ClInclude Include="lightningSegment.h" />
+    <ClInclude Include="lightningStorm.h" />
+    <ClInclude Include="lightningStormBank.h" />
+    <ClInclude Include="lightningStormConfig.h" />
+    <ClInclude Include="lightningStormDef.h" />
+    <ClInclude Include="lightningStrike.h" />
     <ClInclude Include="mainMenu.h" />
     <ClInclude Include="menuManager.h" />
     <ClInclude Include="menu.h" />
@@ -273,6 +296,7 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="entityFactory.h" />
     <ClInclude Include="entityIncludes.h" />
     <ClInclude Include="entityLoader.h" />
+    <ClInclude Include="SDL_Fpoint_json.h" />
     <ClInclude Include="stringDB.h" />
     <ClInclude Include="textDB.h" />
     <ClInclude Include="turnEvents.h" />
@@ -302,6 +326,7 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="uses.h" />
     <ClInclude Include="movement.h" />
     <ClInclude Include="view.h" />
+    <ClInclude Include="weatherType.h" />
     <ClInclude Include="windowManager.h" />
     <ClInclude Include="windowSettings.h" />
   </ItemGroup>
