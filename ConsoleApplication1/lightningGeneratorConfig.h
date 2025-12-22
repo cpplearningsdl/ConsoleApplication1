@@ -14,6 +14,8 @@ struct lightningGeneratorConfig {
     float jitterAmplitude = 1.5f;
 
     float baseWidth = 4.0f;
+    int maxNodes = 0;       // 0 = unlimited
+    int maxSegments = 0;    // 0 = unlimited
 };
 inline void to_json(json& j, const lightningGeneratorConfig& c) {
     j = {
@@ -23,7 +25,9 @@ inline void to_json(json& j, const lightningGeneratorConfig& c) {
         { "branchChance", c.branchChance },
         { "maxBranches", c.maxBranches },
         { "jitterAmplitude", c.jitterAmplitude },
-        { "baseWidth", c.baseWidth }
+        { "baseWidth", c.baseWidth },
+        { "maxNodes", c.maxNodes },
+        { "maxSegments", c.maxSegments }
     };
 }
 
@@ -49,7 +53,12 @@ inline void from_json(const json& j, lightningGeneratorConfig& c) {
     if (j.contains("baseWidth"))
         c.baseWidth = j.at("baseWidth").get<float>();
 
-    // ---- sanity clamps ----
+    if (j.contains("maxNodes"))
+        c.maxNodes = j.at("maxNodes").get<int>();
+
+    if (j.contains("maxSegments"))
+        c.maxSegments = j.at("maxSegments").get<int>();
+     
     c.displacement = std::max(0.0f, c.displacement);
     c.displacementFalloff = std::clamp(c.displacementFalloff, 0.1f, 1.0f);
     c.recursionDepth = std::clamp(c.recursionDepth, 1, 10);
@@ -57,4 +66,6 @@ inline void from_json(const json& j, lightningGeneratorConfig& c) {
     c.maxBranches = std::max(0, c.maxBranches);
     c.jitterAmplitude = std::max(0.0f, c.jitterAmplitude);
     c.baseWidth = std::max(0.1f, c.baseWidth);
+    c.maxNodes = std::max(0, c.maxNodes);
+    c.maxSegments = std::max(0, c.maxSegments);
 }

@@ -34,12 +34,28 @@ static void subdivide(std::vector<SDL_FPoint>& points, SDL_FPoint a, SDL_FPoint 
     subdivide(points, mid, b, displacement * 0.5f, depth - 1, rng);
 }
 
+static void reduceNodes(std::vector<lightningNode>& nodes, int maxNodes) {
+    if ((int)nodes.size() <= maxNodes)
+        return;
+
+    std::vector<lightningNode> reduced;
+    reduced.reserve(maxNodes);
+
+    for (int i = 0; i < maxNodes; ++i) {
+        float t = float(i) / float(maxNodes - 1);
+        int idx = int(t * (nodes.size() - 1));
+        reduced.push_back(nodes[idx]);
+    }
+
+    nodes.swap(reduced);
+}
+ 
 
 lightningStrike lightningGenerator::generate(SDL_FPoint start, SDL_FPoint end, const lightningGeneratorConfig& cfg, uint32_t seed) {
     lightningStrike strike;
-    strike.seed = seed;
-
+    strike.seed = seed; 
     std::mt19937 rng(seed);
+    strike.genCfg = cfg;
 
     std::vector<SDL_FPoint> points;
     points.push_back(start);
@@ -57,6 +73,10 @@ lightningStrike lightningGenerator::generate(SDL_FPoint start, SDL_FPoint end, c
 
         strike.nodes.push_back(node);
     }
+    //"lightning detail"
+    if (cfg.maxNodes > 0 && strike.nodes.size() > cfg.maxNodes) {
+        reduceNodes(strike.nodes, cfg.maxNodes);
+    }
 
     // Build segments
     for (size_t i = 0; i + 1 < strike.nodes.size(); ++i) {
@@ -71,5 +91,40 @@ lightningStrike lightningGenerator::generate(SDL_FPoint start, SDL_FPoint end, c
     }
 
     return strike;
+}
+
+void lightningGenerator::rebuild(SDL_FPoint start, SDL_FPoint end, std::vector<lightningNode>& nodes, std::vector<lightningSegment>& segments, const lightningGeneratorConfig& cfg, std::mt19937& rng) {
+    // ---- 1. generate polyline ----
+    std::vector<SDL_FPoint> points;
+    points.reserve(static_cast<std::vector<SDL_FPoint, std::allocator<SDL_FPoint>>::size_type>(1) << cfg.recursionDepth);
+
+    points.push_back(start);
+    subdivide(points, start, end, cfg.displacement, cfg.recursionDepth, rng);
+
+    // ---- 2. resize nodes (reuse memory) ----
+    nodes.resize(points.size());
+
+    for (size_t i = 0; i < points.size(); ++i) {
+        auto& n = nodes[i];
+
+        n.basePos = points[i];
+        n.offset = { 0.0f, 0.0f };
+        n.jitterAmplitude = cfg.jitterAmplitude;
+
+        // Preserve existing phases if present
+        if (n.jitterPhase == 0.0f)
+            n.jitterPhase = std::uniform_real_distribution<float>(0.0f, 6.28318f)(rng);
+
+        if (n.colorPhase == 0.0f)
+            n.colorPhase = std::uniform_real_distribution<float>(0.0f, 6.28318f)(rng);
+    }
+
+    // ---- 3. rebuild segments (simple chain) ----
+    segments.clear();
+    segments.reserve(nodes.size() > 1 ? nodes.size() - 1 : 0);
+
+    for (int i = 0; i < (int)nodes.size() - 1; ++i) {
+        segments.emplace_back(lightningSegment{ static_cast<uint16_t>(i), static_cast<uint16_t>(i + 1), cfg.baseWidth });
+    }
 }
 

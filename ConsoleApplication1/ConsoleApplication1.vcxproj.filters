@@ -599,5 +599,8 @@
     <ClInclude Include="effectsManager.h">
       <Filter>Header Files\effects</Filter>
     </ClInclude>
+    <ClInclude Include="lightningManagerHelperFunctions.h">
+      <Filter>Header Files\effects\lightning</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

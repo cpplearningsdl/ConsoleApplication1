@@ -1,8 +1,10 @@
 #pragma once
 #include <random>
-#include  <cmath>
+#include <cmath>
+#include <algorithm> 
 #include <SDL3/SDL.h>
 #include "lightningManager.h"
+#include "lightningManagerHelperFunctions.h"
 #include "lightningGenerator.h"
 #include "lightningStormDef.h"
 #include "windowSettings.h"
@@ -13,23 +15,6 @@ lightningManager::lightningManager() {
 lightningManager::~lightningManager() {
     storms.clear();
     strikes.clear();
-}
-
-static SDL_FPoint randomPointOnScreen(int w, int h, std::mt19937& rng) {
-    std::uniform_real_distribution<float> x(0, (float)w);
-    std::uniform_real_distribution<float> y(0, (float)h);
-    return { x(rng), y(rng) };
-}
-
-static SDL_FPoint randomPointInRadius(SDL_FPoint center, float r, std::mt19937& rng) {
-    std::uniform_real_distribution<float> angle(0, 6.28318f);
-    std::uniform_real_distribution<float> radius(0, r);
-    float a = angle(rng);
-    float d = radius(rng);
-    return {
-        center.x + std::cos(a) * d,
-        center.y + std::sin(a) * d
-    };
 }
 
 
@@ -58,10 +43,11 @@ void lightningManager::update(float dt) {
         storm.age += dt;
         storm.spawnTimer -= dt;
 
-        if (!storm.finished && storm.spawnTimer <= 0.0f) {
+        if (!storm.finished && storm.spawnTimer <= 0.0f && storm.strikesSpawned < storm.def->config.maxStrikes) {
             storm.spawnTimer = storm.def->config.strikeInterval;
 
             spawnStrikeFromStorm(storm);
+            storm.strikesSpawned++;
         }
 
         if (storm.age >= storm.def->config.stormDuration) {
@@ -71,7 +57,17 @@ void lightningManager::update(float dt) {
 
     // ---- 2. Update strikes ----
     for (auto& strike : strikes) {
+        if (strike.rotateAroundEnd) {
+            rotateAroundPoint(dt, strike);
+        }
         updateStrike(strike, dt);
+
+        strike.rebuildTimer += dt;
+        if (strike.rebuildTimer >= strike.rebuildInterval) {
+            strike.rebuildTimer = 0.0f;
+
+            lightningGenerator::rebuild(strike.start, strike.end, strike.nodes, strike.segments, strike.genCfg, rng);
+        }
     }
 
     // ---- 3. Cull dead strikes ----
@@ -123,7 +119,14 @@ void lightningManager::spawnStrikeFromStorm(lightningStorm& storm) {
         start = randomPointOnScreen(logicalW, logicalH, rng);
         end = randomPointOnScreen(logicalW, logicalH, rng);
         break;
-
+    case lightningPlacementMode::RANDOMSCREENVERTICALFROMTOP:
+        start = randomVerticalFromTop(logicalW, rng);
+        end = randomVerticalBottom(start.x, logicalW, logicalH, cfg.maxHorizontalDelta, rng);
+        break;
+    case lightningPlacementMode::RANDOMONSCREENVERTICAL:
+        start = randomVerticalTop(logicalW, logicalH, rng);
+        end = randomVerticalBottom(start, logicalW, logicalH, 200.0f,cfg.maxHorizontalDelta, rng);
+        break; 
     case lightningPlacementMode::RADIUSFROMPOINT:
         start = randomPointInRadius(storm.start, cfg.radius, rng);
         end = randomPointInRadius(storm.start, cfg.radius, rng);
@@ -143,6 +146,11 @@ void lightningManager::spawnStrikeFromStorm(lightningStorm& storm) {
     strike.end = end;
     strike.lifetime = cfg.strikeLifetime;
     strike.persistent = cfg.persistentStrike;
+
+    strike.rotateAroundEnd = cfg.rotateStrikeStart;
+    strike.rotationSpeed = cfg.rotationSpeed;
+    strike.rotationRadius = cfg.rotationRadius;
+    strike.rebuildInterval = cfg.rebuildInterval;
 
     strikes.push_back(std::move(strike));
 }

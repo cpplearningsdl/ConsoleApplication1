@@ -272,6 +272,7 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="lightningGenerator.h" />
     <ClInclude Include="lightningGeneratorConfig.h" />
     <ClInclude Include="lightningManager.h" />
+    <ClInclude Include="lightningManagerHelperFunctions.h" />
     <ClInclude Include="lightningNode.h" />
     <ClInclude Include="lightningPlacementModeEnum.h" />
     <ClInclude Include="lightningSegment.h" />

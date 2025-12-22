@@ -2,6 +2,7 @@
 #include <vector>
 #include "lightningNode.h"
 #include "lightningSegment.h"
+#include "lightningGeneratorConfig.h"
 
 struct lightningStrike {
     std::vector<lightningNode> nodes;
@@ -20,5 +21,12 @@ struct lightningStrike {
     bool persistent = false;
     bool dead = false;
 
+    // --- rotational motion ---
+    bool rotateAroundEnd = false;
+    float rotationAngle = 0.0f;
+    float rotationSpeed = 0.0f;      // radians per second
+    float rotationRadius = 0.0f;
+
     uint32_t seed;
+    lightningGeneratorConfig genCfg;
 };

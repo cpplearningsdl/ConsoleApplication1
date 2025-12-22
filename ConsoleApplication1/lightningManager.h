@@ -1,10 +1,12 @@
 #pragma once
 #include <vector> 
 #include <string>
+#include <SDL3/SDL.h>
+#include <random>
 #include "lightningStormBank.h"
 #include "lightningStorm.h"
 #include "lightningStrike.h"
-#include <SDL3/SDL.h>
+
 
 class lightningManager {
 public:
@@ -24,4 +26,5 @@ private:
     std::vector<lightningStorm> storms;
     std::vector<lightningStrike> strikes;
     lightningStormBank defaultStorms;
+    std::mt19937 rng{ std::random_device{}() };
 };

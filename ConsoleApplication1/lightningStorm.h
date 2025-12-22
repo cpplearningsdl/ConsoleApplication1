@@ -11,5 +11,6 @@ struct lightningStorm {
 
     float age = 0.0f;
     float spawnTimer = 0.0f;
+    int strikesSpawned = 0;
     bool finished = false;
 };
