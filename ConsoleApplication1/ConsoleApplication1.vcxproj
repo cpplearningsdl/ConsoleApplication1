@@ -209,6 +209,7 @@ SDL3main.lib,SDL3_image.lib
     <ClCompile Include="lightManager.cpp" />
     <ClCompile Include="lightningGenerator.cpp" />
     <ClCompile Include="lightningManager.cpp" />
+    <ClCompile Include="lightningMovementEnum.h" />
     <ClCompile Include="lightningStormBank.cpp" />
     <ClCompile Include="logManager.cpp" />
     <ClCompile Include="mainMenu.cpp" />

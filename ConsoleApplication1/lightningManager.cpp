@@ -57,15 +57,41 @@ void lightningManager::update(float dt) {
 
     // ---- 2. Update strikes ----
     for (auto& strike : strikes) {
+
+        //rotation
         if (strike.rotateAroundEnd) {
             rotateAroundPoint(dt, strike);
         }
         updateStrike(strike, dt);
 
+        //movement
+        if (strike.walkVelocity.x != 0.0f || strike.walkVelocity.y != 0.0f) {
+            strike.start.x += strike.walkVelocity.x * dt;
+            strike.start.y += strike.walkVelocity.y * dt;
+            strike.end.x += strike.walkVelocity.x * dt;
+            strike.end.y += strike.walkVelocity.y * dt;
+
+            strike.walkRebuildTimer += dt;
+        }
+
+        // --- Geometry rebuild (walking OR regular) ---
+        bool needsRebuild = false;
+
+        if (strike.walkRebuildInterval > 0.0f &&
+            strike.walkRebuildTimer >= strike.walkRebuildInterval) {
+
+            strike.walkRebuildTimer = 0.0f;
+            needsRebuild = true;
+        }
+
         strike.rebuildTimer += dt;
         if (strike.rebuildTimer >= strike.rebuildInterval) {
             strike.rebuildTimer = 0.0f;
+            needsRebuild = true;
 
+        }
+
+        if (needsRebuild) {
             lightningGenerator::rebuild(strike.start, strike.end, strike.nodes, strike.segments, strike.genCfg, rng);
         }
     }
@@ -110,7 +136,7 @@ void lightningManager::spawnStrikeFromStorm(lightningStorm& storm) {
     const auto& cfg = storm.def->config;
 
     std::mt19937 rng(SDL_GetTicks());
-
+    
     SDL_FPoint start = storm.start;
     SDL_FPoint end = storm.end;
 
@@ -137,15 +163,17 @@ void lightningManager::spawnStrikeFromStorm(lightningStorm& storm) {
         break;
     }
 
-    lightningStrike strike =
-        lightningGenerator::generate(
-            start, end, cfg.generator, rng()
-        );
+    lightningStrike strike = lightningGenerator::generate(start, end, cfg.generator, rng());
 
     strike.start = start;
     strike.end = end;
     strike.lifetime = cfg.strikeLifetime;
+  //  strike.intensity = not added yet..
     strike.persistent = cfg.persistentStrike;
+
+    strike.walkVelocity = cfg.walkVelocity;
+    strike.walkRebuildInterval = cfg.walkRebuildInterval;  
+    strike.walkRebuildTimer = 0.0f;
 
     strike.rotateAroundEnd = cfg.rotateStrikeStart;
     strike.rotationSpeed = cfg.rotationSpeed;

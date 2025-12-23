@@ -19,6 +19,7 @@ struct lightningStormConfig {
     float radius = 200.0f;                 // for RadiusFromPoint
     SDL_FPoint walkVelocity{ 0, 0 };       // for WalkingEndpoints
     float walkRebuildInterval = 0.05f;     // how often geometry is regenerated
+    float walkRebuildTimer = 0.0f;
 
     // Strike behavior
     float strikeLifetime = 0.1f;
@@ -44,6 +45,7 @@ inline void to_json(json& j, const lightningStormConfig& c) {
     j["radius"] = c.radius;
     j["walkVelocity"] = c.walkVelocity;
     j["walkRebuildInterval"] = c.walkRebuildInterval;
+    j["walkRebuildTimer"] = c.walkRebuildTimer;
     j["strikeLifetime"] = c.strikeLifetime;
     j["persistentStrike"] = c.persistentStrike;
     j["maxHorizontalDelta"] = c.maxHorizontalDelta;
@@ -83,6 +85,9 @@ inline void from_json(const json& j, lightningStormConfig& c) {
     if (j.contains("walkRebuildInterval"))
         c.walkRebuildInterval = j.at("walkRebuildInterval").get<float>();
 
+    if (j.contains("walkRebuildTimer"))
+        c.walkRebuildTimer = j.at("walkRebuildTimer").get<float>();
+
     if (j.contains("persistentStrike"))
         c.persistentStrike = j.at("persistentStrike").get<bool>();
 
@@ -119,6 +124,7 @@ inline void from_json(const json& j, lightningStormConfig& c) {
 
     c.radius = std::max(0.0f, c.radius);
     c.walkRebuildInterval = std::max(0.01f, c.walkRebuildInterval);
+    c.walkRebuildTimer = std::max(0.01f, c.walkRebuildTimer);
 
     c.strikeLifetime = std::max(0.01f, c.strikeLifetime);
     c.maxStrikeHeight = std::max(0.01f, c.maxStrikeHeight);

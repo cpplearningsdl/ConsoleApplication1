@@ -294,6 +294,9 @@
     <ClCompile Include="effectsManager.cpp">
       <Filter>Source Files\effects</Filter>
     </ClCompile>
+    <ClCompile Include="lightningMovementEnum.h">
+      <Filter>Header Files\effects\lightning</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logManager.h">
