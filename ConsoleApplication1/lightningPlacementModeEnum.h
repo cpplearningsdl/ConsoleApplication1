@@ -12,7 +12,8 @@ enum class lightningPlacementMode {
     RANDOMSCREENVERTICALFROMTOP,
     RADIUSFROMPOINT,       // random within radius of center
     SPAWNAROUNDRADIUS,
-    WALKINGENDPOINTS       // endpoints move over time
+    WALKINGENDPOINTS,       // endpoints move over time
+    GOTOPOINT
 };
 
 
@@ -26,6 +27,7 @@ inline void to_json(json& j, const enum class lightningPlacementMode & lpm) {
     case lightningPlacementMode::RADIUSFROMPOINT:   j = "RADIUSFROMPOINT";   break;
     case lightningPlacementMode::SPAWNAROUNDRADIUS:   j = "SPAWNAROUNDRADIUS";   break;
     case lightningPlacementMode::WALKINGENDPOINTS:  j = "WALKINGENDPOINTS";  break;
+    case lightningPlacementMode::GOTOPOINT:  j = "GOTOPOINT";  break;
     default:
         j = "RANDOMONSCREEN"; // safety fallback
         break;
@@ -42,5 +44,6 @@ inline void from_json(const json& j, lightningPlacementMode& m) {
     else if (s == "RADIUSFROMPOINT")    m = lightningPlacementMode::RADIUSFROMPOINT;
     else if (s == "SPAWNAROUNDRADIUS")    m = lightningPlacementMode::SPAWNAROUNDRADIUS;
     else if (s == "WALKINGENDPOINTS")   m = lightningPlacementMode::WALKINGENDPOINTS;
+    else if (s == "GOTOPOINT")   m = lightningPlacementMode::GOTOPOINT;
     else                                m = lightningPlacementMode::RANDOMONSCREEN; // fallback for unknown / old saves
 }

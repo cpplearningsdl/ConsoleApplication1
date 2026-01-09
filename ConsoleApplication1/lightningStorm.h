@@ -8,6 +8,7 @@ struct lightningStorm {
 
     SDL_FPoint start;
     SDL_FPoint end;
+    SDL_FPoint target;
 
     float age = 0.0f;
     float spawnTimer = 0.0f;

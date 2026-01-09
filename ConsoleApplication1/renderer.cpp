@@ -118,7 +118,7 @@ void renderer::drawToNextFrame(SDL_Texture* t, float x, float y, float h, float 
 	SDL_RenderTexture(sdlRenderer, t, nullptr, &dst);
 }
 
-
+//SWITCH TO USING THE AMBIENTDARKNESS STRUCT/CLASS
 void renderer::drawAmbientDarkness(Uint8 alpha) {
 	SDL_SetRenderTarget(sdlRenderer, nextFrame);
 	SDL_SetRenderDrawBlendMode(sdlRenderer, SDL_BLENDMODE_BLEND);

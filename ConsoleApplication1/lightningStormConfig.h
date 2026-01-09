@@ -26,6 +26,7 @@ struct lightningStormConfig {
     bool persistentStrike = false;         // long-lived lightning
     float maxHorizontalDelta = 0.0f;
     float maxStrikeHeight = 0.0f;
+    float moveSpeed = 0.0f;
 
     bool rotateStrikeStart = false;
     float rotationSpeed = 0.0f;
@@ -50,6 +51,7 @@ inline void to_json(json& j, const lightningStormConfig& c) {
     j["persistentStrike"] = c.persistentStrike;
     j["maxHorizontalDelta"] = c.maxHorizontalDelta;
     j["maxStrikeHeight"] = c.maxStrikeHeight; 
+    j["moveSpeed"] = c.moveSpeed;
     j["rotateStrikeStart"] = c.rotateStrikeStart;
     j["rotationSpeed"] = c.rotationSpeed;
     j["rotationRadius"] = c.rotationRadius;
@@ -100,6 +102,9 @@ inline void from_json(const json& j, lightningStormConfig& c) {
     if (j.contains("maxStrikeHeight"))
         c.maxStrikeHeight = j.at("maxStrikeHeight").get<float>();
 
+    if (j.contains("moveSpeed"))
+        c.moveSpeed = j.at("moveSpeed").get<float>();
+
     if (j.contains("rotateStrikeStart"))
         c.rotateStrikeStart = j.at("rotateStrikeStart").get<bool>();
 
@@ -128,6 +133,7 @@ inline void from_json(const json& j, lightningStormConfig& c) {
 
     c.strikeLifetime = std::max(0.01f, c.strikeLifetime);
     c.maxStrikeHeight = std::max(0.01f, c.maxStrikeHeight);
+    c.moveSpeed = std::max(0.01f, c.moveSpeed);
 
     c.rotationSpeed = std::max(0.01f, c.rotationSpeed);
     c.rotationRadius = std::max(0.01f, c.rotationRadius);

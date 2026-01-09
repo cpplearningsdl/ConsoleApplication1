@@ -3,8 +3,7 @@
 #include <vector>
 #include <random>
 #include <cmath>
-
-
+ 
 
 static void subdivide(std::vector<SDL_FPoint>& points, SDL_FPoint a, SDL_FPoint b, float displacement, int depth, std::mt19937& rng) {
     if (depth == 0) {
@@ -32,8 +31,10 @@ static void subdivide(std::vector<SDL_FPoint>& points, SDL_FPoint a, SDL_FPoint 
 
     subdivide(points, a, mid, displacement * 0.5f, depth - 1, rng);
     subdivide(points, mid, b, displacement * 0.5f, depth - 1, rng);
-}
+} 
+ 
 
+ 
 static void reduceNodes(std::vector<lightningNode>& nodes, int maxNodes) {
     if ((int)nodes.size() <= maxNodes)
         return;
@@ -50,49 +51,58 @@ static void reduceNodes(std::vector<lightningNode>& nodes, int maxNodes) {
     nodes.swap(reduced);
 }
  
-
 lightningStrike lightningGenerator::generate(SDL_FPoint start, SDL_FPoint end, const lightningGeneratorConfig& cfg, uint32_t seed, std::optional<SDL_FPoint> target) {
     lightningStrike strike;
-    strike.seed = seed; 
+    strike.seed = seed;
     std::mt19937 rng(seed);
     strike.rng = rng;
     strike.genCfg = cfg;
 
     std::vector<SDL_FPoint> points;
+    std::vector<lightningSegment> segments;
+
     points.push_back(start);
 
+    // ---- Start recursive subdivision ----
     subdivide(points, start, end, cfg.displacement, cfg.recursionDepth, rng);
 
-    // Convert points to nodes
+    // ---- Convert points to nodes ----
     for (auto& p : points) {
         lightningNode node;
         node.basePos = p;
         node.offset = { 0, 0 };
-        node.jitterPhase = std::uniform_real_distribution<float>(0, 6.28f)(rng);
+        node.jitterPhase = std::uniform_real_distribution<float>(0.0f, 6.28318f)(rng);
         node.jitterAmplitude = cfg.jitterAmplitude;
-        node.colorPhase = std::uniform_real_distribution<float>(0, 6.28f)(rng);
+        node.colorPhase = std::uniform_real_distribution<float>(0.0f, 6.28318f)(rng);
 
         strike.nodes.push_back(node);
     }
-    //"lightning detail"
+
     if (cfg.maxNodes > 0 && strike.nodes.size() > cfg.maxNodes) {
         reduceNodes(strike.nodes, cfg.maxNodes);
     }
 
-    // Build segments
-    for (size_t i = 0; i + 1 < strike.nodes.size(); ++i) {
-        lightningSegment seg;
-        seg.a = (uint16_t)i;
-        seg.b = (uint16_t)(i + 1);
+    // ---- Copy segments ----
+    strike.segments = std::move(segments);
 
-        float t = (float)i / (strike.nodes.size() - 1);
-        seg.baseWidth = cfg.baseWidth * (1.0f - t);
-
-        strike.segments.push_back(seg);
+    // ---- Optional target adjustment ----
+    if (target.has_value()) {
+        SDL_FPoint dir{ target->x - start.x, target->y - start.y };
+        float len = std::sqrt(dir.x * dir.x + dir.y * dir.y);
+        if (len > 0.0001f) {
+            dir.x /= len;
+            dir.y /= len;
+            SDL_FPoint offset{ dir.x * len, dir.y * len };
+            for (auto& node : strike.nodes) {
+                node.basePos.x += offset.x;
+                node.basePos.y += offset.y;
+            }
+        }
     }
 
     return strike;
 }
+
 
 void lightningGenerator::rebuild(SDL_FPoint start, SDL_FPoint end, std::vector<lightningNode>& nodes, std::vector<lightningSegment>& segments, const lightningGeneratorConfig& cfg, std::mt19937& rng) {
     // ---- 1. generate polyline ----

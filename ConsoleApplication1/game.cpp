@@ -36,9 +36,9 @@ game::game() {
 	auto& lite = lightManager.getLights().back();
 	lite.setIntensityOscillation(0.6f, 0.4f);
 	lite.setRadiusOscillation(0.9f, 0.4f); 
-	effectsManager.getLightningManager().addStorm("walking", { 150.0f, 250.0f }, { 650.0f, 750.0f });
-	effectsManager.getLightningManager().addStorm("rotating_arc", { 450.0f, 350.0f }, { 450.0f, 350.0f });
-	effectsManager.getLightningManager().addStorm("rotating_arc", { 950.0f, 350.0f }, { 950.0f, 350.0f });
+	effectsManager.getLightningManager().addStorm("go-to", { 0, 0 }, { -1.0, -1.0 }, { 1950.0f, 1950.0f });
+//effectsManager.getLightningManager().addStorm("rotating_arc", { 950.0f, 350.0f }, { 950.0f, 350.0f });
+//effectsManager.getLightningManager().addStorm("basic_storm", { 333.0f, 333.0f }, { 950.0f, 350.0f });
 }
 
 game::~game() {

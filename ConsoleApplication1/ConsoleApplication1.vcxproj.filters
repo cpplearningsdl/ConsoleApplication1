@@ -163,6 +163,12 @@
     <Filter Include="Source Files\effects\lightning">
       <UniqueIdentifier>{d8a8b65f-34b6-44b8-8b78-f4c59e965555}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\effects\fire">
+      <UniqueIdentifier>{ab094975-c185-48e4-8265-911004e428ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\effects\fire">
+      <UniqueIdentifier>{f34139fd-1d9d-4970-959c-2b1aab52898e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp">
@@ -296,6 +302,30 @@
     </ClCompile>
     <ClCompile Include="lightningMovementEnum.h">
       <Filter>Header Files\effects\lightning</Filter>
+    </ClCompile>
+    <ClCompile Include="fireManager.cpp">
+      <Filter>Source Files\effects\fire</Filter>
+    </ClCompile>
+    <ClCompile Include="fire.cpp">
+      <Filter>Source Files\effects\fire</Filter>
+    </ClCompile>
+    <ClCompile Include="fireLine.cpp">
+      <Filter>Source Files\effects\fire</Filter>
+    </ClCompile>
+    <ClCompile Include="emberParticle.cpp">
+      <Filter>Source Files\effects\fire</Filter>
+    </ClCompile>
+    <ClCompile Include="fireStormBank.cpp">
+      <Filter>Source Files\effects\fire</Filter>
+    </ClCompile>
+    <ClCompile Include="fireStormSpawnParams.h">
+      <Filter>Header Files\effects\fire</Filter>
+    </ClCompile>
+    <ClCompile Include="fireStormSizeParams.h">
+      <Filter>Header Files\effects\fire</Filter>
+    </ClCompile>
+    <ClCompile Include="fireGenerator.cpp">
+      <Filter>Source Files\effects\fire</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -596,14 +626,62 @@
     <ClInclude Include="fileSystemHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SDL_Fpoint_json.h">
-      <Filter>Header Files\effects\lightning</Filter>
-    </ClInclude>
     <ClInclude Include="effectsManager.h">
       <Filter>Header Files\effects</Filter>
     </ClInclude>
     <ClInclude Include="lightningManagerHelperFunctions.h">
       <Filter>Header Files\effects\lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="stormHelperFunctions.h">
+      <Filter>Header Files\effects\lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="fireManager.h">
+      <Filter>Header Files\effects\fire</Filter>
+    </ClInclude>
+    <ClInclude Include="fireColorProfile.h">
+      <Filter>Header Files\effects\fire</Filter>
+    </ClInclude>
+    <ClInclude Include="emberMovementEnum.h">
+      <Filter>Header Files\effects\fire</Filter>
+    </ClInclude>
+    <ClInclude Include="emberParticle.h">
+      <Filter>Header Files\effects\fire</Filter>
+    </ClInclude>
+    <ClInclude Include="fire.h">
+      <Filter>Header Files\effects\fire</Filter>
+    </ClInclude>
+    <ClInclude Include="fireLine.h">
+      <Filter>Header Files\effects\fire</Filter>
+    </ClInclude>
+    <ClInclude Include="fireStorm.h">
+      <Filter>Header Files\effects\fire</Filter>
+    </ClInclude>
+    <ClInclude Include="fireStormBank.h">
+      <Filter>Header Files\effects\fire</Filter>
+    </ClInclude>
+    <ClInclude Include="fireStormDef.h">
+      <Filter>Header Files\effects\fire</Filter>
+    </ClInclude>
+    <ClInclude Include="fireStormConfig.h">
+      <Filter>Header Files\effects\fire</Filter>
+    </ClInclude>
+    <ClInclude Include="fireSpawnTypeEnum.h">
+      <Filter>Header Files\effects\fire</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL_Color_Json.h">
+      <Filter>Header Files\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL_Fpoint_json.h">
+      <Filter>Header Files\effects</Filter>
+    </ClInclude>
+    <ClInclude Include="fireStormEmberParams.h">
+      <Filter>Header Files\effects\fire</Filter>
+    </ClInclude>
+    <ClInclude Include="fireGenerator.h">
+      <Filter>Header Files\effects\fire</Filter>
+    </ClInclude>
+    <ClInclude Include="randomUtilityFunctions.h">
+      <Filter>Header Files\effects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

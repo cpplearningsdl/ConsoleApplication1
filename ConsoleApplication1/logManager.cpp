@@ -14,12 +14,47 @@ logManager& logManager::getInstance() {
 void logManager::logThis(const std::string& message) { 
 	std::cout << "[" << getFormattedTimeNow() << "] " << message << std::endl;
 }
+//ints
+void logManager::logThis(int value, int valueTwo) {
+	std::cout << "[" << getFormattedTimeNow() << "] " << value << " : " << valueTwo << std::endl;
+}
 void logManager::logThis(const std::string& message, int value) {
 	std::cout << "[" << getFormattedTimeNow() << "] " << message << ": " << value << std::endl;
 }
+void logManager::logThis(int value, const std::string& message) {
+	std::cout << "[" << getFormattedTimeNow() << "] " << value << ": " << message << std::endl;
+}
+void logManager::logThis(int value, const std::string& message, int valueTwo, const std::string& messageTwo) {
+	std::cout << "[" << getFormattedTimeNow() << "] " << value << ": " << message << valueTwo << ": " << messageTwo << std::endl;
+}
+
 void logManager::logThis(const std::string& message, const std::string& value){
 	std::cout << "[" << getFormattedTimeNow() << "] " << message << ": " << value << std::endl;
 }
+
+void logManager::logThis(const std::string& message, int value, const std::string& messageTwo, int valueTwo) {
+	std::cout << "[" << getFormattedTimeNow() << "] " << message << ": " << value << messageTwo << ": " << valueTwo << std::endl;
+}
+
+//floats
+void logManager::logThis(float value, float valueTwo) {
+	std::cout << "[" << getFormattedTimeNow() << "] " << value << " : " << valueTwo << std::endl;
+}
+void logManager::logThis(const std::string& message, float value) {
+	std::cout << "[" << getFormattedTimeNow() << "] " << message << ": " << value << std::endl;
+}
+void logManager::logThis(float value, const std::string& message) {
+	std::cout << "[" << getFormattedTimeNow() << "] " << value << ": " << message << std::endl;
+}
+void logManager::logThis(float value, const std::string& message, float valueTwo, const std::string& messageTwo) {
+	std::cout << "[" << getFormattedTimeNow() << "] " << value << ": " << message << valueTwo << ": " << messageTwo << std::endl;
+}
+ 
+
+void logManager::logThis(const std::string& message, float value, const std::string& messageTwo, float valueTwo) {
+	std::cout << "[" << getFormattedTimeNow() << "] " << message << ": " << value << messageTwo << ": " << valueTwo << std::endl;
+}
+
 
 
 

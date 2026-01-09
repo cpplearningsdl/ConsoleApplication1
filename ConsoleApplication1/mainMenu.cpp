@@ -20,7 +20,7 @@ void mainMenu::loadButtons() {
 	//THIS MENU LOADED BY JSON BUT SETTING POS HERE UNTIL DEFINITIVE LOGICALSIZE..
 	dimensions p = buttons.back().getSize();
 	position n = { (static_cast<float>(logicalW) - static_cast<float>(p.getW())) / 2.0f,(static_cast<float>(logicalH) - static_cast<float>(p.getH())) / 3.0f };
-	logManager::logThis("ButtonArraySize: ", buttons.size());
+	logManager::logThis("ButtonArraySize: ", static_cast<int>(buttons.size()));
 	buttons.back().setPos(n);
 }
 void mainMenu::updateRenderInfo() {

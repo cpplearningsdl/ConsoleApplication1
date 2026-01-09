@@ -87,10 +87,11 @@ void renderManager::renderLightning(game& g) {
 			const auto& a = s.nodes[seg.a];
 			const auto& b = s.nodes[seg.b];
 
+			float i = std::clamp(s.intensity, 0.0f, 1.5f);
 			SDL_Color c{
-				Uint8(220 * s.intensity),
-				Uint8(235 * s.intensity),
-				Uint8(255 * s.intensity),
+				Uint8(220 * i),
+				Uint8(235 * i),
+				Uint8(255 * i),
 				Uint8(255)
 			};
 
@@ -101,6 +102,13 @@ void renderManager::renderLightning(game& g) {
 				a.basePos.y + a.offset.y,
 				b.basePos.x + b.offset.x,
 				b.basePos.y + b.offset.y
+			);
+			SDL_RenderLine(
+			rendRef.getSDLRenderer(),
+				a.basePos.x + a.offset.x +2,
+				a.basePos.y + a.offset.y + 2,
+				b.basePos.x + b.offset.x + 2,
+				b.basePos.y + b.offset.y + 2
 			);
 		}
 	}
@@ -114,8 +122,7 @@ void renderManager::renderGame(game& g, menuManager& m) {
 	renderEntities(g, cache.getRenderableEntities());
 	renderEntityLights(g, cache.getRenderableEntities());
 	renderLights(g);
-	renderLightning(g);
-
+	renderLightning(g); 
 
 	renderDialogue(g, g.getDialogueManager());
 	

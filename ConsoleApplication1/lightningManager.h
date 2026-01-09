@@ -14,12 +14,12 @@ public:
     ~lightningManager();
     void addStorm(const lightningStormDef& def, SDL_FPoint start, SDL_FPoint end);
     void addStorm(std::string id, SDL_FPoint start, SDL_FPoint end);
+    void addStorm(std::string id, SDL_FPoint start, SDL_FPoint end, SDL_FPoint target);
     void render(SDL_Renderer* r);
-    void update(float dt);
-    void spawnStrikeFromStorm(lightningStorm& storm);
-    void updateStrike(lightningStrike& s, float dt);
+    void update(float dt); 
      
     lightningManager& getLightningManager() { return *this; }
+    std::vector<lightningStorm>& getStorms() { return storms; }
     std::vector<lightningStrike>& getStrikes() { return strikes; }
 
 private:
