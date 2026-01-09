@@ -6,11 +6,7 @@
 #include "lightningStrike.h"
 
 
-static SDL_FPoint calculateEndFromTarget(
-    const SDL_FPoint& start,
-    const SDL_FPoint& target,
-    float maxLength
-) {
+static SDL_FPoint calculateEndFromTarget(const SDL_FPoint& start, const SDL_FPoint& target, float maxLength) {
     SDL_FPoint dir{
         target.x - start.x,
         target.y - start.y

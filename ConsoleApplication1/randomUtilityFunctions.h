@@ -1,15 +1,19 @@
 #pragma once
 #include <random>
- 
+#include <cmath>
 
-inline int randomInt(int min, int max) {
-    static thread_local std::mt19937 rng{ std::random_device{}() };
+extern std::mt19937 gRng;
+
+void initRng(uint32_t seed);
+
+
+
+inline int randomInt(int min, int max) { 
     std::uniform_int_distribution<int> dist(min, max);
-    return dist(rng);
+    return dist(gRng);
 }
 
-inline float randomFloat(float min, float max) {
-    static thread_local std::mt19937 rng{ std::random_device{}() };
+inline float randomFloat(float min, float max) { 
     std::uniform_real_distribution<float> dist(min, max);
-    return dist(rng);
+    return dist(gRng);
 }

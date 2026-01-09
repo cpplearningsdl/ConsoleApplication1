@@ -41,8 +41,7 @@ struct lightningStrike {
     float rotationAngle = 0.0f;
     float rotationSpeed = 0.0f;      // radians per second
     float rotationRadius = 0.0f;
-
-    std::mt19937 rng;
+     
     uint32_t seed;
     lightningGeneratorConfig genCfg;
 };

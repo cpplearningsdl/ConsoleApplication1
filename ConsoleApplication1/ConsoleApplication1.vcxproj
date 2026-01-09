@@ -226,6 +226,7 @@ SDL3main.lib,SDL3_image.lib
     <ClCompile Include="movementManager.cpp" />
     <ClCompile Include="northMovement.cpp" />
     <ClCompile Include="pauseMenu.cpp" />
+    <ClCompile Include="randomUtilityFunctions.cpp" />
     <ClCompile Include="renderCacheManager.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="renderManager.cpp" />

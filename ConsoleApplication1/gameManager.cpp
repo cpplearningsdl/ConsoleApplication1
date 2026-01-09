@@ -7,6 +7,7 @@
 #include "inputManager.h"
 #include "menuManager.h"
 #include "fontManager.h"
+#include "randomUtilityFunctions.h"
 
 gameManager& gameManager::getInstance() {
 	static gameManager instance;
@@ -16,6 +17,7 @@ gameManager& gameManager::getInstance() {
 void gameManager::newGame() {
 	setState(gameManagerStateEnum::PLAYING);
 	currentGame = std::make_unique<game>(); 
+	initRng(1);//ADD RNG INIT TO LOADED GAMES WE ONLY HAVE IT FOR NEW GAME
 }
 
 void gameManager::endGame() {

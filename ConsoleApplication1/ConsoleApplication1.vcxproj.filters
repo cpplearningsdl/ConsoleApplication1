@@ -327,6 +327,9 @@
     <ClCompile Include="fireGenerator.cpp">
       <Filter>Source Files\effects\fire</Filter>
     </ClCompile>
+    <ClCompile Include="randomUtilityFunctions.cpp">
+      <Filter>Source Files\effects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logManager.h">

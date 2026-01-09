@@ -1,5 +1,6 @@
 #pragma once
 #include <random>
+#include "randomUtilityFunctions.h"
 #include "logManager.h"
 #include "lightningStorm.h"
 #include "lightningStrike.h"
@@ -44,9 +45,8 @@ static void setupMoveTowardTarget(lightningStrike& strike, float speed) {
 
 
 void spawnStrikeFromStorm(lightningStorm& storm, std::vector<lightningStrike>& strikes, float dt) {
-    const auto& cfg = storm.def->config;
-
-    std::mt19937 rng(SDL_GetTicks());
+    const auto& cfg = storm.def->config; 
+    std::mt19937 rng(gRng); 
 
     SDL_FPoint start = storm.start;
     SDL_FPoint end = storm.end;

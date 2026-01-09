@@ -53,11 +53,10 @@ static void reduceNodes(std::vector<lightningNode>& nodes, int maxNodes) {
  
 lightningStrike lightningGenerator::generate(SDL_FPoint start, SDL_FPoint end, const lightningGeneratorConfig& cfg, uint32_t seed, std::optional<SDL_FPoint> target) {
     lightningStrike strike;
-    strike.seed = seed;
     std::mt19937 rng(seed);
-    strike.rng = rng;
+    strike.seed = seed; 
     strike.genCfg = cfg;
-
+     
     std::vector<SDL_FPoint> points;
     std::vector<lightningSegment> segments;
 
