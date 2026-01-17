@@ -1,21 +1,37 @@
 #pragma once
 #include <vector>
 #include <string>
-#include <random>
-
+#include <random> 
 #include "logManager.h"
+#include "fireGenerator.h"
 #include "fireStorm.h"
+#include "fireStormBank.h"
+#include "fireLineBatch.h"
+#include "emberBatch.h"
 
 class fireManager {
 public: 
 	fireManager();
 	~fireManager();
 
-	void addFireStorm();
+	void addFireStorm(std::string id);
+	void addFireStorm(std::string id, fireStormSpawnParams fsp, bool overrideSpawnParams);
 	void update(float dt);
+	void buildLineBatch(); 
+	void buildEmberBatch();
 	void render(SDL_Renderer* renderer) const;
+	std::vector<SDL_FPoint>& getStarts() { return lineBatch.starts; }
+	std::vector<SDL_FPoint>& getEnds() { return lineBatch.ends; }
+	emberParticleBatch& getEmbers() { return emberBatch; }
+	fireLineBatch& getFireLineBatch() { return lineBatch; }
 
 private:
+	fireGenerator fireGenerator;
+
 	std::vector<fireStorm> fireStorms; 
-	std::mt19937 rng{ std::random_device{}() };
+	fireStormBank defaultStorms;
+
+	fireLineBatch lineBatch;
+	emberParticleBatch emberBatch;
+	 
 };

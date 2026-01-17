@@ -330,6 +330,9 @@
     <ClCompile Include="randomUtilityFunctions.cpp">
       <Filter>Source Files\effects</Filter>
     </ClCompile>
+    <ClCompile Include="fireStorm.cpp">
+      <Filter>Source Files\effects\fire</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logManager.h">
@@ -685,6 +688,24 @@
     </ClInclude>
     <ClInclude Include="randomUtilityFunctions.h">
       <Filter>Header Files\effects</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL_Vertex_json.h">
+      <Filter>Header Files\effects</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLLerp.h">
+      <Filter>Header Files\effects</Filter>
+    </ClInclude>
+    <ClInclude Include="fireLineParams.h">
+      <Filter>Header Files\effects\fire</Filter>
+    </ClInclude>
+    <ClInclude Include="fireStormFireLineParams.h">
+      <Filter>Header Files\effects\fire</Filter>
+    </ClInclude>
+    <ClInclude Include="fireLineBatch.h">
+      <Filter>Header Files\effects\fire</Filter>
+    </ClInclude>
+    <ClInclude Include="emberBatch.h">
+      <Filter>Header Files\effects\fire</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

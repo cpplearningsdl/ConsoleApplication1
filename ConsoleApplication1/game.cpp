@@ -37,6 +37,7 @@ game::game() {
 	lite.setIntensityOscillation(0.6f, 0.4f);
 	lite.setRadiusOscillation(0.9f, 0.4f); 
 	effectsManager.getLightningManager().addStorm("go-to", { 0, 0 }, { -1.0, -1.0 }, { 1950.0f, 1950.0f });
+	effectsManager.getFireManager().addFireStorm("defaultFireStorm");
 //effectsManager.getLightningManager().addStorm("rotating_arc", { 950.0f, 350.0f }, { 950.0f, 350.0f });
 //effectsManager.getLightningManager().addStorm("basic_storm", { 333.0f, 333.0f }, { 950.0f, 350.0f });
 }
@@ -59,6 +60,7 @@ void game::update(inputManager& input, float deltaTime) {
 			dialogueManager.tickDialogue();
 			lightManager.update(deltaTime);
 			effectsManager.getLightningManager().update(deltaTime);
+			effectsManager.getFireManager().update(deltaTime);
 			break;
 		case gamePhase::ANIMATION:
 			break;

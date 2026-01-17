@@ -7,6 +7,8 @@
 #include "fireColorProfile.h"
 #include "fireLine.h"
 #include "emberParticle.h"
+#include "fireStormFireLineParams.h"
+#include "fireStormEmberParams.h"
 
 
 struct fire {
@@ -18,10 +20,12 @@ struct fire {
 
     fireColorProfile colors;
 
+    float emberTimer = 0.0f;
+
     std::vector<fireLine> primary;
     std::vector<fireLine> secondary;
     std::vector<emberParticle> embers;
-    void update(float dt);
+    void update(float dt, fireStormFireLineParams& cfg, fireStormEmberParams& emberCfg);
 };
 
 inline void to_json(json& j, const fire& p) {
@@ -32,6 +36,7 @@ inline void to_json(json& j, const fire& p) {
     j["baseLeft"] = p.baseLeft;
     j["baseRight"] = p.baseRight;
     j["colors"] = p.colors;
+    j["emberTimer"] = p.emberTimer;
 
     j["primary"] = p.primary;
     j["secondary"] = p.secondary;
@@ -44,7 +49,7 @@ inline void from_json(const json& j, fire& p) {
     j.at("baseLeft").get_to(p.baseLeft);
     j.at("baseRight").get_to(p.baseRight);
     j.at("colors").get_to(p.colors);
-
+    j.at("emberTimer").get_to(p.emberTimer  );
     // vectors — default to empty if missing
     p.primary = j.value("primary", std::vector<fireLine>{});
     p.secondary = j.value("secondary", std::vector<fireLine>{});

@@ -6,9 +6,12 @@
 #include "menu.h"
 #include "renderer.h"
 #include "textureManager.h"
+#include "fireLineBatch.h"
+#include "emberBatch.h"
 
 class position;
 class dimensions;
+
 
 class renderManager
 {
@@ -24,5 +27,8 @@ public:
 	void renderEntities(game& g, const std::vector<entity*>& cache); 
 	void renderDialogue(game& g, dialogueManager& dlg);
 	void renderLightning(game& g);
+	void renderFire(game& g);
+	void renderLineBatch(fireLineBatch& lineBatch);
+	void renderPointBatch(emberParticleBatch& pointBatch);
 };
 

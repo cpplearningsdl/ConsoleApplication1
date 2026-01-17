@@ -13,7 +13,7 @@ using json = nlohmann::ordered_json;
 
 
 fireStormBank::fireStormBank() {
-    loadFromDirectory(getStormDefaultsPath());
+    loadFromDirectory(getFireStormDefaultsPath());
 }
 fireStormBank::~fireStormBank() {
     defs.clear();
@@ -43,6 +43,7 @@ bool fireStormBank::loadFromDirectory(const std::filesystem::path& path) {
 
 
         // ---- Config ----
+        logManager::logThis("Trying to load a default fire storm to bank...");
           def.config = j.at("config").get<fireStormConfig>();
 
         defs.emplace(def.id, std::move(def));

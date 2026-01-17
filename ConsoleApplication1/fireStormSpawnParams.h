@@ -10,6 +10,7 @@ using json = nlohmann::ordered_json;
 struct fireStormSpawnParams {
     bool spread = false;
     float spreadInterval = 0.5f;
+    float spreadChance = 0.0f;
 
     fireSpawnTypeEnum spawnType = fireSpawnTypeEnum::NONE;
 
@@ -29,6 +30,8 @@ inline void to_json(json& j, const fireStormSpawnParams& fsp) {
 
     j["spread"] = fsp.spread;
     j["spreadInterval"] = fsp.spreadInterval;
+    j["spreadChance"] = fsp.spreadChance;
+    j["spawnType"] = fsp.spawnType;
     j["spawnPoint"] = fsp.spawnPoint;
     j["spawnRadius"] = fsp.spawnRadius;
     j["topLeft"] = fsp.topLeft;
@@ -39,10 +42,11 @@ inline void to_json(json& j, const fireStormSpawnParams& fsp) {
 
  
 
-inline void from_json(const json& j, fireStormSpawnParams& fsp) {
-
+inline void from_json(const json& j, fireStormSpawnParams& fsp) { 
     j.at("spread").get_to(fsp.spread);
     j.at("spreadInterval").get_to(fsp.spreadInterval);
+    j.at("spreadChance").get_to(fsp.spreadChance);
+    j.at("spawnType").get_to(fsp.spawnType);
     j.at("spawnPoint").get_to(fsp.spawnPoint);
     j.at("spawnRadius").get_to(fsp.spawnRadius);
     j.at("topLeft").get_to(fsp.topLeft);

@@ -204,6 +204,7 @@ SDL3main.lib,SDL3_image.lib
     <ClCompile Include="fireGenerator.cpp" />
     <ClCompile Include="fireLine.cpp" />
     <ClCompile Include="fireManager.cpp" />
+    <ClCompile Include="fireStorm.cpp" />
     <ClCompile Include="fireStormBank.cpp" />
     <ClCompile Include="fireStormSizeParams.h" />
     <ClCompile Include="fireStormSpawnParams.h" />
@@ -258,6 +259,7 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="dialogueManager.h" />
     <ClInclude Include="dialogueNode.h" />
     <ClInclude Include="effectsManager.h" />
+    <ClInclude Include="emberBatch.h" />
     <ClInclude Include="emberMovementEnum.h" />
     <ClInclude Include="emberParticle.h" />
     <ClInclude Include="entityDied.h" />
@@ -269,6 +271,7 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="fireColorProfile.h" />
     <ClInclude Include="fireGenerator.h" />
     <ClInclude Include="fireLine.h" />
+    <ClInclude Include="fireLineParams.h" />
     <ClInclude Include="fireManager.h" />
     <ClInclude Include="fireSpawnTypeEnum.h" />
     <ClInclude Include="fireStorm.h" />
@@ -276,8 +279,10 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="fireStormConfig.h" />
     <ClInclude Include="fireStormDef.h" />
     <ClInclude Include="fireStormEmberParams.h" />
+    <ClInclude Include="fireStormFireLineParams.h" />
     <ClInclude Include="fontManager.h" />
     <ClInclude Include="gamePhaseEnum.h" />
+    <ClInclude Include="fireLineBatch.h" />
     <ClInclude Include="interactability.h" />
     <ClInclude Include="label.h" />
     <ClInclude Include="levelLoader.h" />
@@ -321,8 +326,10 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="entityIncludes.h" />
     <ClInclude Include="entityLoader.h" />
     <ClInclude Include="randomUtilityFunctions.h" />
+    <ClInclude Include="SDLLerp.h" />
     <ClInclude Include="SDL_Color_Json.h" />
     <ClInclude Include="SDL_Fpoint_json.h" />
+    <ClInclude Include="SDL_Vertex_json.h" />
     <ClInclude Include="stormHelperFunctions.h" />
     <ClInclude Include="stringDB.h" />
     <ClInclude Include="textDB.h" />

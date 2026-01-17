@@ -12,9 +12,7 @@ struct fireColorProfile {
     SDL_Color primaryMax;
     SDL_Color secondaryLine;  // hot flicker
     SDL_Color secondaryMin;
-    SDL_Color secondaryMax;
-    SDL_Color emberMin;       // ember gradient start
-    SDL_Color emberMax;       // ember gradient end
+    SDL_Color secondaryMax; 
 };
 
 inline void to_json(json& j, const fireColorProfile& p) {
@@ -26,10 +24,7 @@ inline void to_json(json& j, const fireColorProfile& p) {
 
     j["secondaryLine"] = p.secondaryLine;
     j["secondaryMin"] = p.secondaryMin;
-    j["secondaryMax"] = p.secondaryMax;
-
-    j["emberMin"] = p.emberMin;
-    j["emberMax"] = p.emberMax;
+    j["secondaryMax"] = p.secondaryMax; 
 }
 
 inline void from_json(const json& j, fireColorProfile& p) {
@@ -39,8 +34,5 @@ inline void from_json(const json& j, fireColorProfile& p) {
 
     j.at("secondaryLine").get_to(p.secondaryLine);
     j.at("secondaryMin").get_to(p.secondaryMin);
-    j.at("secondaryMax").get_to(p.secondaryMax);
-
-    j.at("emberMin").get_to(p.emberMin);
-    j.at("emberMax").get_to(p.emberMax);
+    j.at("secondaryMax").get_to(p.secondaryMax); 
 }
