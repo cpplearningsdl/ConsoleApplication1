@@ -10,7 +10,7 @@ enum class emberMovementEnum {
     DRIFT,       // slow, almost weightless (smoke-like) 
 };
 
-inline void to_json(json& j, const enum class emberMovementEnum& fst) {
+inline void to_json(json& j, const emberMovementEnum& fst) {
     switch (fst) {
     case emberMovementEnum::RISE:   j = "RISE";   break;
     case emberMovementEnum::RISEANDFAN: j = "RISEANDFAN"; break;

@@ -36,8 +36,8 @@ void fireLine::update(float dt, const fireLineParams& cfg)
         + dir.y * effectiveLength
         + perp.y * sway;
 
-    //// color oscillation
-    //colorT += colorDir * cfg.colorSpeed * dt;
-    //if (colorT >= 1.0f) { colorT = 1.0f; colorDir = -1.0f; }
-    //if (colorT <= 0.0f) { colorT = 0.0f; colorDir = 1.0f; }
+    // color oscillation
+    colorT += colorDir * cfg.colorSpeed * dt;
+    if (colorT >= 1.0f) { colorT = 1.0f; colorDir = -1.0f; }
+    if (colorT <= 0.0f) { colorT = 0.0f; colorDir = 1.0f; }
 }

@@ -42,7 +42,8 @@ inline void to_json(json& j, const fireStormConfig& c) {
 }
 
 inline void from_json(const json& j, fireStormConfig& c) {
-      
+    c = fireStormConfig{};
+
     if (j.contains("stormDuration"))
         c.stormDuration = j.at("stormDuration").get<float>();  
 

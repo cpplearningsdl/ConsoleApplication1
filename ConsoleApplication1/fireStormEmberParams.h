@@ -1,16 +1,20 @@
 #pragma once
-#include "emberMovementEnum.h"
 #include "SDL3/SDL.h"
+#include "SDL_Fpoint_json.h"
 #include "SDL_Color_json.h"
+#include "emberMovementEnum.h"
 
 struct fireStormEmberParams {
     bool smoke = false; 
     int embersPerFireMin = 0;
     int embersPerFireMax = 0; 
     float emberInterval = 0.0f;
+    float emberLifetime = 0.0f;
 
-    SDL_Color emberColorMin;       // ember gradient start
-    SDL_Color emberColorMax;       // ember gradient end
+    SDL_FPoint velocity = { 0.0f, 0.0f };
+
+    SDL_Color emberColorMin;
+    SDL_Color emberColorMax;
 
     emberMovementEnum emberMovement = emberMovementEnum::RISE; 
 };
@@ -23,6 +27,8 @@ inline void to_json(json& j, const fireStormEmberParams& c) {
     j["embersPerFireMin"] = c.embersPerFireMin;
     j["embersPerFireMax"] = c.embersPerFireMax;
     j["emberInterval"] = c.emberInterval;
+    j["emberLifetime"] = c.emberLifetime;
+    j["velocity"] = c.velocity;
     j["emberColorMin"] = c.emberColorMin;
     j["emberColorMax"] = c.emberColorMax;
     j["emberMovement"] = c.emberMovement;
@@ -42,6 +48,12 @@ inline void from_json(const json& j, fireStormEmberParams& c) {
 
     if (j.contains("emberInterval"))
         c.emberInterval = j.at("emberInterval").get<float>();
+
+    if (j.contains("emberLifetime"))
+        c.emberLifetime = j.at("emberLifetime").get<float>();
+
+    if (j.contains("velocity"))
+        c.velocity = j.at("velocity").get<SDL_FPoint>();
 
     if (j.contains("emberColorMin"))
         c.emberColorMin = j.at("emberColorMin").get<SDL_Color>();

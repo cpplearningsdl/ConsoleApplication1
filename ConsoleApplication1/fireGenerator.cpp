@@ -105,11 +105,8 @@ fire fireGenerator::generateFire(const fireStormConfig& cfg, const SDL_FPoint& o
     for (int i = 0; i < emberCount; ++i) {
         emberParticle e;
         e.pos = origin;
-        e.velocity = {
-            randomFloat(-0.4f, 0.4f) * size * pixelScale,
-            randomFloat(-1.2f, -0.6f) * size * pixelScale
-        };
-        e.lifetime = randomFloat(0.8f, 1.6f);
+        e.velocity = { cfg.emberParams.velocity.x * randomFloat(0.0, 0.3), cfg.emberParams.velocity.y * randomFloat(0.0, 0.3) }; 
+        e.lifetime = cfg.emberParams.emberLifetime;
         e.color = cfg.emberParams.emberColorMin;
         e.movement = cfg.emberParams.emberMovement;
         f.embers.push_back(e);
@@ -121,8 +118,8 @@ fire fireGenerator::generateFire(const fireStormConfig& cfg, const SDL_FPoint& o
 emberParticle fireGenerator::generateEmber(const fireStormEmberParams& emberCfg, const SDL_FPoint& origin) {
     emberParticle e;
     e.pos = origin; 
-    e.velocity = { randomFloat(-0.4f, 0.4f), randomFloat(-1.2f, -0.6f) };
-    e.lifetime = randomFloat(0.8f, 2.4f);
+    e.velocity = { emberCfg.velocity.x * randomFloat(0.0, 0.3), emberCfg.velocity.y * randomFloat(0.0, 0.3) };
+    e.lifetime = emberCfg.emberLifetime;
     e.color = emberCfg.emberColorMin;
     e.movement = emberCfg.emberMovement;
     return e;
