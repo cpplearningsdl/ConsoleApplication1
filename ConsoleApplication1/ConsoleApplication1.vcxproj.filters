@@ -169,6 +169,12 @@
     <Filter Include="Source Files\effects\fire">
       <UniqueIdentifier>{f34139fd-1d9d-4970-959c-2b1aab52898e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\effects\particles">
+      <UniqueIdentifier>{c4a68ab1-46f6-4dc0-bc3c-ee3773ace670}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\effects\particle">
+      <UniqueIdentifier>{c968ca55-094c-4a1f-bd2c-412ef9071e03}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp">
@@ -332,6 +338,15 @@
     </ClCompile>
     <ClCompile Include="fireStorm.cpp">
       <Filter>Source Files\effects\fire</Filter>
+    </ClCompile>
+    <ClCompile Include="particleStormBank.cpp">
+      <Filter>Source Files\effects\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="particleManager.cpp">
+      <Filter>Source Files\effects\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="particleStorm.cpp">
+      <Filter>Source Files\effects\particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -708,7 +723,46 @@
       <Filter>Header Files\effects\fire</Filter>
     </ClInclude>
     <ClInclude Include="SDL_Color_Range.h">
-      <Filter>Source Files\effects</Filter>
+      <Filter>Header Files\effects</Filter>
+    </ClInclude>
+    <ClInclude Include="particleSpawnType.h">
+      <Filter>Header Files\effects\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="particleSpawnParams.h">
+      <Filter>Header Files\effects\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="particleManager.h">
+      <Filter>Header Files\effects\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="particleStorm.h">
+      <Filter>Header Files\effects\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="particleStormDef.h">
+      <Filter>Header Files\effects\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="particleStormConfig.h">
+      <Filter>Header Files\effects\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="particleMotionType.h">
+      <Filter>Header Files\effects\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="particleMotionParams.h">
+      <Filter>Header Files\effects\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="particleConfig.h">
+      <Filter>Header Files\effects\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="particle.h">
+      <Filter>Header Files\effects\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="particleBank.h">
+      <Filter>Header Files\effects\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="particleOverrideParams.h">
+      <Filter>Header Files\effects\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="particleEmitter.h">
+      <Filter>Header Files\effects\particles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

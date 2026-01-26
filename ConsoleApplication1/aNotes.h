@@ -10,3 +10,6 @@
 //MAKE SURE CAN SERIALIZE ALL EFFECTS FOR SAVE/LOAD(LIGHTNING NOT FINISHED)/UPDATE LIGHTNINGSTORMS PTR MEMBER FOR DEF TO VALUE NOT PTR)
 //FIX JSON FOR AMBIANCE MANAGER
 //UPPDATE EFFECTS TO USE SDL_COLOR_RANGE.h 
+//check all places ambiance was used i cant remember where but something wasnt being used right(i think rendering)
+
+//move degToRad() out of randomUtilityFunctions.h

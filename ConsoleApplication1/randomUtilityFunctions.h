@@ -33,3 +33,8 @@ inline SDL_FPoint randomOffsetInRadius(float radius) {
         std::sin(angle) * r
     };
 }
+
+inline float degToRad(float deg)
+{
+    return deg * (3.1415926535f / 180.0f);
+}
