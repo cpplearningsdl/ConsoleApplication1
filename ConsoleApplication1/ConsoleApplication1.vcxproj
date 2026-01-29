@@ -346,6 +346,7 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="SDL_Color_Json.h" />
     <ClInclude Include="SDL_Color_Range.h" />
     <ClInclude Include="SDL_Fpoint_json.h" />
+    <ClInclude Include="SDL_FrectHelpers.h" />
     <ClInclude Include="SDL_Vertex_json.h" />
     <ClInclude Include="particleOverrideParams.h" />
     <ClInclude Include="stormHelperFunctions.h" />

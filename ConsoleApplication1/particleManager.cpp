@@ -1,4 +1,5 @@
 #pragma once
+#include "SDL_FrectHelpers.h"
 #include "particleManager.h"
 #include "particleStorm.h" 
 #include "particleStormDef.h"
@@ -39,9 +40,7 @@ void particleManager::addParticleStorm(const std::string& id) {
 
 void particleManager::addParticleStorm(const std::string id, particleSpawnParams& p) {
 	particleStorm s;
-	s.def = defaults.get(id);
-
-
+	s.def = defaults.get(id); 
 };
 
 void particleManager::buildParticleBatch(){
@@ -53,11 +52,11 @@ void particleManager::buildParticleBatch(){
     }
 
     // Ensure capacity (only grows)
-    particleBatch.points.reserve(totalCount);
+    particleBatch.rects.reserve(totalCount);
     particleBatch.colors.reserve(totalCount);
 
     // Resize to exact size (no push_back)
-    particleBatch.points.resize(totalCount);
+    particleBatch.rects.resize(totalCount);
     particleBatch.colors.resize(totalCount);
 
     size_t index = 0;
@@ -66,14 +65,14 @@ void particleManager::buildParticleBatch(){
     {
         for (const auto& p : storm.particles)
         {
-            particleBatch.points[index] = p.position;
+            particleBatch.rects[index] = makeRectFromCenter(p.position, p.size);
             particleBatch.colors[index] = p.color;
             ++index;
         }
     }
 
   //  sortParticleBatchByColorInPlace(particleBatch);
-    sortParticleBatchByPackedColor(particleBatch);
+    sortParticleBatchByColorInPlace(particleBatch);
     // Debug safety
     assert(index == totalCount);
 }

@@ -1,3 +1,5 @@
+#pragma once
+#include <SDL3/SDL.h>
 #include "renderManager.h"
 #include "entityRenderInfo.h"
 #include "windowSettings.h"
@@ -121,7 +123,7 @@ void renderManager::renderFire(game& g) {
 
 void renderManager::renderParticles(game& g) {
 	//renderGroupedPoints(g.getEffectsManager().getParticleManager().getParticleBatch());
-	renderParticleBatchPackedColors(g.getEffectsManager().getParticleManager().getParticleBatch());
+	renderParticleBatchRects(g.getEffectsManager().getParticleManager().getParticleBatch());
 }
 
 void renderManager::renderPointBatch(particleBatch& b) {
@@ -129,7 +131,7 @@ void renderManager::renderPointBatch(particleBatch& b) {
 
 	const size_t count = b.colors.size();
 	for (size_t i = 0; i < count; ++i) {
-		const SDL_FPoint& p = b.points[i];//move c and p creation out of loop so not creating over and over..
+		const SDL_FRect& p = b.rects[i];//move c and p creation out of loop so not creating over and over..
 		const SDL_Color& c = b.colors[i];
 		SDL_SetRenderDrawColor(r, c.r, c.g, c.b, c.a);
 		SDL_RenderPoint(r, p.x, p.y);
@@ -138,58 +140,33 @@ void renderManager::renderPointBatch(particleBatch& b) {
 		SDL_RenderPoint(r, p.x + 1, p.y + 1);
  
 	}
-}
-void renderManager::renderGroupedPoints(particleBatch& batch) {
+}	
+ 
+void renderManager::renderParticleBatchRects(particleBatch& batch) {
 	SDL_Renderer* r = rendRef.getSDLRenderer();
-	size_t count = batch.points.size();
+	size_t count = batch.rects.size();
 	if (count == 0) return;
 
 	size_t i = 0;
+
 	while (i < count)
 	{
-		// Take the current color as the draw color
 		SDL_Color c = batch.colors[i];
 		SDL_SetRenderDrawColor(r, c.r, c.g, c.b, c.a);
 
-		// Find how many consecutive points have the same color
-		size_t start = i;
-		while (i < count &&
-			memcmp(&batch.colors[i], &c, sizeof(SDL_Color)) == 0)
-		{
-			++i;
-		}
-
-		// Draw the chunk of points with the same color
-		if (SDL_RenderPoints(r, batch.points.data() + start, static_cast<int>(i - start))) {
-			logManager::logThis("rendered points");
-		}
-		else { logManager::logThis("failed to render points"); };
-	}
-}
-void renderManager::renderParticleBatchPackedColors(particleBatch& batch) {
-	SDL_Renderer* r = rendRef.getSDLRenderer();
-	size_t count = batch.points.size();
-	if (count == 0) return;
-
-	size_t i = 0;
-	while (i < count)
-	{
-		// Current color
-		SDL_Color c = batch.colors[i];
-		SDL_SetRenderDrawColor(r, c.r, c.g, c.b, c.a);
-
-		size_t start = i;
 		uint32_t packed = packColor(c);
+		size_t start = i;
 
-		// Render consecutive points with same packed color
+		// group consecutive rects with same color
 		while (i < count && packColor(batch.colors[i]) == packed)
 			++i;
 
-		SDL_RenderPoints(r,
-			batch.points.data() + start,
+		SDL_RenderRects(r,
+			batch.rects.data() + start,
 			static_cast<int>(i - start));
 	}
 }
+
 
 void renderManager::renderLineBatch(fireLineBatch& lineBatch) {
 	if (lineBatch.starts.empty() || lineBatch.ends.empty() || lineBatch.colors.empty()) return;

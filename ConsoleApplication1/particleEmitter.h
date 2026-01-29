@@ -98,10 +98,15 @@ inline particle emitParticle(const particleStormConfig& cfg, const particleSpawn
     case particleMotionType::ORBIT:
     case particleMotionType::SPIRAL_IN:
     case particleMotionType::SPIRAL_OUT:
-        p.orbitAngle = randomFloat(0.0f, 2.0f * 3.1415926535f);
         p.orbitRadius = hypotf(
             p.position.x - spawn.origin.x,
-            p.position.y - spawn.origin.y);
+            p.position.y - spawn.origin.y
+        );
+
+        p.orbitAngle = atan2f(
+            p.position.y - spawn.origin.y,
+            p.position.x - spawn.origin.x
+        );
 
         p.velocity = { 0.0f, 0.0f }; 
 

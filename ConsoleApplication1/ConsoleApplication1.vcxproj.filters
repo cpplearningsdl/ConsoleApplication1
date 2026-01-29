@@ -767,5 +767,8 @@
     <ClInclude Include="SDL_Color_Helpers.h">
       <Filter>Header Files\effects</Filter>
     </ClInclude>
+    <ClInclude Include="SDL_FrectHelpers.h">
+      <Filter>Header Files\effects</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

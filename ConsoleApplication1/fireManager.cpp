@@ -58,13 +58,13 @@ void fireManager::update(float dt) {
 }
 
 void fireManager::buildEmberBatch() { 
-    emberBatch.points.clear();
+    emberBatch.rects.clear();
     emberBatch.colors.clear();
 
         for (const auto& storm : fireStorms) {
             for (const auto& fire : storm.fires) {
                 for (const auto& ember : fire.embers) { 
-                    emberBatch.points.push_back(ember.pos);
+                    emberBatch.rects.push_back({ember.pos.x,ember.pos.x,ember.size, ember.size});
                     emberBatch.colors.push_back(ember.color);
                 }
             }

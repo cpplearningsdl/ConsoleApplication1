@@ -31,7 +31,6 @@ public:
 	void renderParticles(game& g);
 	void renderLineBatch(fireLineBatch& lineBatch);
 	void renderPointBatch(particleBatch& pointBatch);
-	void renderGroupedPoints(particleBatch& batch);
-	void renderParticleBatchPackedColors(particleBatch& batch);
+	void renderParticleBatchRects(particleBatch& batch);
 };
 
