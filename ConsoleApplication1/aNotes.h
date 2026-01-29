@@ -13,3 +13,4 @@
 //check all places ambiance was used i cant remember where but something wasnt being used right(i think rendering)
 
 //move degToRad() out of randomUtilityFunctions.h
+//update linebatch to be like particlebatch(resizing, dont use pushback [i]instead, sort by color)

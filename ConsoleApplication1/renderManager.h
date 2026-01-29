@@ -7,7 +7,7 @@
 #include "renderer.h"
 #include "textureManager.h"
 #include "fireLineBatch.h"
-#include "emberBatch.h"
+#include "particleBatch.h"
 
 class position;
 class dimensions;
@@ -28,7 +28,10 @@ public:
 	void renderDialogue(game& g, dialogueManager& dlg);
 	void renderLightning(game& g);
 	void renderFire(game& g);
+	void renderParticles(game& g);
 	void renderLineBatch(fireLineBatch& lineBatch);
-	void renderPointBatch(emberParticleBatch& pointBatch);
+	void renderPointBatch(particleBatch& pointBatch);
+	void renderGroupedPoints(particleBatch& batch);
+	void renderParticleBatchPackedColors(particleBatch& batch);
 };
 

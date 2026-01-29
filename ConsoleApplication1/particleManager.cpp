@@ -2,6 +2,7 @@
 #include "particleManager.h"
 #include "particleStorm.h" 
 #include "particleStormDef.h"
+#include "particleBatch.h"
 
 particleManager::particleManager() {
 
@@ -19,8 +20,11 @@ void particleManager::update(float dt) {
             storms[i] = storms.back();
             storms.pop_back();
         }
+        else { ++i; }
     }
-
+    if (!storms.empty()) {
+        buildParticleBatch();
+    }
 }
 void particleManager::addParticleStorm(const std::string& id) {
     storms.emplace_back();
@@ -39,3 +43,37 @@ void particleManager::addParticleStorm(const std::string id, particleSpawnParams
 
 
 };
+
+void particleManager::buildParticleBatch(){
+    // Count total particles
+    size_t totalCount = 0;
+    for (const auto& storm : storms)
+    {
+        totalCount += storm.particles.size();
+    }
+
+    // Ensure capacity (only grows)
+    particleBatch.points.reserve(totalCount);
+    particleBatch.colors.reserve(totalCount);
+
+    // Resize to exact size (no push_back)
+    particleBatch.points.resize(totalCount);
+    particleBatch.colors.resize(totalCount);
+
+    size_t index = 0;
+
+    for (const auto& storm : storms)
+    {
+        for (const auto& p : storm.particles)
+        {
+            particleBatch.points[index] = p.position;
+            particleBatch.colors[index] = p.color;
+            ++index;
+        }
+    }
+
+  //  sortParticleBatchByColorInPlace(particleBatch);
+    sortParticleBatchByPackedColor(particleBatch);
+    // Debug safety
+    assert(index == totalCount);
+}

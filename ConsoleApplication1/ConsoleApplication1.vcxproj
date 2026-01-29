@@ -262,7 +262,7 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="dialogueManager.h" />
     <ClInclude Include="dialogueNode.h" />
     <ClInclude Include="effectsManager.h" />
-    <ClInclude Include="emberBatch.h" />
+    <ClInclude Include="particleBatch.h" />
     <ClInclude Include="emberMovementEnum.h" />
     <ClInclude Include="emberParticle.h" />
     <ClInclude Include="entityDied.h" />
@@ -342,6 +342,7 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="particleStormDef.h" />
     <ClInclude Include="randomUtilityFunctions.h" />
     <ClInclude Include="SDLLerp.h" />
+    <ClInclude Include="SDL_Color_Helpers.h" />
     <ClInclude Include="SDL_Color_Json.h" />
     <ClInclude Include="SDL_Color_Range.h" />
     <ClInclude Include="SDL_Fpoint_json.h" />

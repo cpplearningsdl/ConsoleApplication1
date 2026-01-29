@@ -1,4 +1,6 @@
 #pragma once
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include "particleStorm.h" 
 #include "particleEmitter.h"
 #include "SDLLerp.h"
@@ -26,6 +28,7 @@ void particleStorm::updateActualParams() {
     }
     resolveSpawnOverride();
     resolveMotionOverride();
+    updateParams = false;
 }
 
 void particleStorm::update(float dt) {
@@ -92,6 +95,7 @@ bool particleStorm::updateParticle(particle& p, float dt) {
     }
 
     p.colorPhase += p.colorSpeed * dt;
+    float t = (sinf(p.colorPhase * 2.0f * M_PI) + 1.0f) * 0.5f;
     p.color = lerpColor(p.colorStart, p.colorEnd, p.colorPhase);
 
     // wrap into [0,1)

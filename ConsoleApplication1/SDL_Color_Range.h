@@ -16,10 +16,22 @@ struct particleColorRange {
 inline SDL_Color randomColorInRange(const particleColorRange& range){
     SDL_Color c = {};
 
-    std::uniform_int_distribution<int> r(range.start.r, range.end.r);
-    std::uniform_int_distribution<int> g(range.start.g, range.end.g);
-    std::uniform_int_distribution<int> b(range.start.b, range.end.b);
-    std::uniform_int_distribution<int> a(range.start.a, range.end.a);
+    int rMin = std::min(range.start.r, range.end.r);
+    int rMax = std::max(range.start.r, range.end.r);
+
+    int gMin = std::min(range.start.g, range.end.g);
+    int gMax = std::max(range.start.g, range.end.g);
+
+    int bMin = std::min(range.start.b, range.end.b);
+    int bMax = std::max(range.start.b, range.end.b);
+
+    int aMin = std::min(range.start.a, range.end.a);
+    int aMax = std::max(range.start.a, range.end.a);
+
+    std::uniform_int_distribution<int> r(rMin, rMax);
+    std::uniform_int_distribution<int> g(gMin, gMax);
+    std::uniform_int_distribution<int> b(bMin, bMax);
+    std::uniform_int_distribution<int> a(aMin, aMax);
 
     c.r = static_cast<Uint8>(r(gRng));
     c.g = static_cast<Uint8>(g(gRng));

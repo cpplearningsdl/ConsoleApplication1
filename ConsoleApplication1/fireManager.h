@@ -7,7 +7,7 @@
 #include "fireStorm.h"
 #include "fireStormBank.h"
 #include "fireLineBatch.h"
-#include "emberBatch.h"
+#include "particleBatch.h"
 
 class fireManager {
 public: 
@@ -22,7 +22,7 @@ public:
 	void render(SDL_Renderer* renderer) const;
 	std::vector<SDL_FPoint>& getStarts() { return lineBatch.starts; }
 	std::vector<SDL_FPoint>& getEnds() { return lineBatch.ends; }
-	emberParticleBatch& getEmbers() { return emberBatch; }
+	particleBatch& getEmbers() { return emberBatch; }
 	fireLineBatch& getFireLineBatch() { return lineBatch; }
 
 private:
@@ -32,6 +32,6 @@ private:
 	fireStormBank defaultStorms;
 
 	fireLineBatch lineBatch;
-	emberParticleBatch emberBatch;
+	particleBatch emberBatch;
 	 
 };

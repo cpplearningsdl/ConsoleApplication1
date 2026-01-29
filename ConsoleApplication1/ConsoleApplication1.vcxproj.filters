@@ -719,7 +719,7 @@
     <ClInclude Include="fireLineBatch.h">
       <Filter>Header Files\effects\fire</Filter>
     </ClInclude>
-    <ClInclude Include="emberBatch.h">
+    <ClInclude Include="particleBatch.h">
       <Filter>Header Files\effects\fire</Filter>
     </ClInclude>
     <ClInclude Include="SDL_Color_Range.h">
@@ -763,6 +763,9 @@
     </ClInclude>
     <ClInclude Include="particleEmitter.h">
       <Filter>Header Files\effects\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL_Color_Helpers.h">
+      <Filter>Header Files\effects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

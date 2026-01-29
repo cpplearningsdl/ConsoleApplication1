@@ -12,7 +12,7 @@ struct particleStorm {
 
     particleSpawnParams actualSpawnParams;
     particleMotionParams actualMotionParams;
-    bool updateParams = false;
+    bool updateParams = true;
 
 	float age = 0.0f; 
     float emitAccumulator = 0.0f;

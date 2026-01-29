@@ -3,6 +3,7 @@
 #include "json.hpp"
 #include "particleStorm.h" 
 #include "particleBank.h" 
+#include "particleBatch.h"
 
 using json = nlohmann::ordered_json;
 
@@ -15,11 +16,11 @@ public:
 	void update(float dt);
 	void addParticleStorm(const std::string& id);
 	void addParticleStorm(const std::string id, particleSpawnParams& p);
+	void buildParticleBatch();
+	particleBatch& getParticleBatch() { return particleBatch; };
 
-
-	void update(float dt);
 private:
 	std::vector<particleStorm> storms;
 	particleStormBank defaults;
-
+	particleBatch particleBatch;
 };
