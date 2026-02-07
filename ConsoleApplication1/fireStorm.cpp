@@ -13,7 +13,8 @@ void fireStorm::update(float dt) {
 
 void fireStorm::spread(float dt) {
     if (!def.config.spawnParams.spread || fires.empty()) { return; }
-    if (fires.size() > 500) { return; }
+    int maxFiresPlusMaxFiresFromSpread = def.config.spawnParams.maxFires + def.config.spawnParams.maxFiresFromSpread;
+    if (fires.size() > 100 || fires.size() > maxFiresPlusMaxFiresFromSpread) { return; }
 
     const auto& sp = def.config.spawnParams;
 

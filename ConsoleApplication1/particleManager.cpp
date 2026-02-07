@@ -20,6 +20,7 @@ void particleManager::update(float dt) {
         if (storms[i].age > storms[i].def.config.stormDuration) {
             storms[i] = storms.back();
             storms.pop_back();
+            particleBatch.clear();
         }
         else { ++i; }
     }
@@ -36,6 +37,7 @@ void particleManager::addParticleStorm(const std::string& id) {
     const float expected = s.def.config.particlesPerSecond * s.def.config.stormDuration;
 
     s.particles.reserve(static_cast<size_t>(std::ceil(expected * 1.10f)));
+    s.updateActualParams();
 }
 
 void particleManager::addParticleStorm(const std::string id, particleSpawnParams& p) {

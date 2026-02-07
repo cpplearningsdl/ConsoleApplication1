@@ -117,8 +117,8 @@ void renderManager::renderLightning(game& g) {
 }
 
 void renderManager::renderFire(game& g) {
-	renderLineBatch(g.getEffectsManager().getFireManager().getFireLineBatch());
-	renderPointBatch(g.getEffectsManager().getFireManager().getEmbers());
+	renderLineBatch(g.getEffectsManager().getFireManager().getFireLineBatch()); 
+	//renderPointBatch(g.getEffectsManager().getFireManager().getEmbers());
 }
 
 void renderManager::renderParticles(game& g) {
@@ -171,13 +171,14 @@ void renderManager::renderParticleBatchRects(particleBatch& batch) {
 void renderManager::renderLineBatch(fireLineBatch& lineBatch) {
 	if (lineBatch.starts.empty() || lineBatch.ends.empty() || lineBatch.colors.empty()) return;
 	 
+ 
+
 	const size_t count = lineBatch.starts.size();
 
 	for (size_t i = 0; i < count; ++i) {
 		const SDL_FPoint& s = lineBatch.starts[i];
 		const SDL_FPoint& e = lineBatch.ends[i];
 		const SDL_Color& c = lineBatch.colors[i];
-
 		SDL_SetRenderDrawColor(rendRef.getSDLRenderer(), c.r, c.g, c.b, c.a);
 
 		SDL_RenderLine(

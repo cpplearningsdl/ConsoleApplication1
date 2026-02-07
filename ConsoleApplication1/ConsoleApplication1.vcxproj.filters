@@ -770,5 +770,11 @@
     <ClInclude Include="SDL_FrectHelpers.h">
       <Filter>Header Files\effects</Filter>
     </ClInclude>
+    <ClInclude Include="timingMode.h">
+      <Filter>Header Files\effects\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="particleMotionSequence.h">
+      <Filter>Header Files\effects\particles</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

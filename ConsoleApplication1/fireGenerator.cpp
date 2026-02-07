@@ -9,7 +9,7 @@
  
 float UP = -1.57079632679f;
 
-void fireGenerator::generateStorm(fireStorm& s, int fireCount) {
+void fireGenerator::generateStorm(fireStorm& s, int fireCount) {  
     for (int i = 0; i < fireCount; ++i) {
         SDL_FPoint origin = generateOrigin(s.def.config.spawnParams);
         s.fires.push_back(generateFire(s.def.config, origin));
@@ -52,7 +52,7 @@ std::vector<fireLine> fireGenerator::generateFireLines(const SDL_FPoint& origin,
 
         float xOffset = randomFloat(-halfWidth, halfWidth);
 
-        line.start = { origin.x + xOffset, origin.y};
+        line.start = { origin.x + xOffset * 10, origin.y};
         line.end = origin;
 
         float angle = randomFloat(cfg.minAngle, cfg.maxAngle);
@@ -99,7 +99,7 @@ fire fireGenerator::generateFire(const fireStormConfig& cfg, const SDL_FPoint& o
 
     f.secondary = generateFireLines(origin, secondaryCount,cfg.fireLineParams.secondary, halfWidth, size);
 
-    // ---------------- EMBERS (UNCHANGED) ----------------
+    // ---------------- EMBERS  ----------------
     int emberCount =  0;
 
     for (int i = 0; i < emberCount; ++i) {

@@ -4,7 +4,7 @@
 
 struct particleMotionParams {
     particleMotionType type = particleMotionType::FIXED_ANGLE;
-
+    float duration = 0.0f;
     float angleDegrees = 0.0f;     // FIXED_ANGLE
     float spreadDegrees = 0.0f;    // applies to all linear modes
 
@@ -17,7 +17,7 @@ inline void to_json(json& j, const particleMotionParams& pcr) {
     j = json::object();
 
     j["type"] = pcr.type;
-
+    j["duration"] = pcr.duration;
     j["angleDegrees"] = pcr.angleDegrees;
     j["spreadDegrees"] = pcr.spreadDegrees;
 
@@ -27,7 +27,7 @@ inline void to_json(json& j, const particleMotionParams& pcr) {
 
 inline void from_json(const json& j, particleMotionParams& pcr) {
     j.at("type").get_to(pcr.type);
-
+    j.at("duration").get_to(pcr.duration);
     j.at("angleDegrees").get_to(pcr.angleDegrees);
     j.at("spreadDegrees").get_to(pcr.spreadDegrees);
 

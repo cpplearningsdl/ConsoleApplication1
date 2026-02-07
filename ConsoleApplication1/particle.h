@@ -1,12 +1,17 @@
 #pragma once
 #include <SDL3/SDL.h>
 #include "json.hpp"
+#include "particleMotionType.h"
 #include "SDL_Fpoint_json.h"
 #include "SDL_Color_Json.h"
 
 struct particle {
+    particleMotionType motionType;
     SDL_FPoint position = { -100.0f, -100.0f };
     SDL_FPoint velocity = { 0.0f, 0.0f };
+
+    size_t currentStep = 0;
+    float nextMotionTime = 0.0f;
 
     float orbitAngle = 0.0f;
     float orbitRadius = 0.0f;
@@ -29,8 +34,11 @@ struct particle {
 
 inline void to_json(json& j, const particle& p) {
     j = json::object(); 
+    j["motionType"] = p.motionType;
     j["position"] = p.position;
     j["velocity"] = p.velocity;
+    j["currentStep"] = p.currentStep;
+    j["nextMotionTime"] = p.nextMotionTime;
     j["orbitAngle"] = p.orbitAngle;
     j["orbitRadius"] = p.orbitRadius;
     j["color"] = p.color;
@@ -44,8 +52,11 @@ inline void to_json(json& j, const particle& p) {
 }
 
 inline void from_json(const json& j, particle& p) {
+    j.at("motionType").get_to(p.motionType);
     j.at("position").get_to(p.position);
     j.at("velocity").get_to(p.velocity);
+    j.at("currentStep").get_to(p.currentStep);
+    j.at("nextMotionTime").get_to(p.nextMotionTime);
     j.at("orbitAngle").get_to(p.orbitAngle);
     j.at("orbitRadius").get_to(p.orbitRadius);
     j.at("color").get_to(p.color);

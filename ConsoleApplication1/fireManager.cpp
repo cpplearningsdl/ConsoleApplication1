@@ -20,10 +20,15 @@ fireManager::~fireManager() {
 void fireManager::addFireStorm(std::string defaultStormId) {
     fireStorm storm;
     storm.def = defaultStorms.get(defaultStormId);
- 
-    int fireCount = randomInt(storm.def.config.spawnParams.minFires, storm.def.config.spawnParams.maxFires);
+    int minFires = storm.def.config.spawnParams.minFires;
+    int maxFires = storm.def.config.spawnParams.maxFires; 
 
-    storm.fires.reserve(fireCount);
+    int fireCount = randomInt(minFires, maxFires);
+    int spreadCount = storm.def.config.spawnParams.maxFiresFromSpread;
+
+    int reserveCount = fireCount + spreadCount;
+
+    storm.fires.reserve(reserveCount);
     fireGenerator::generateStorm(storm, fireCount);
     fireStorms.push_back(storm);
 }

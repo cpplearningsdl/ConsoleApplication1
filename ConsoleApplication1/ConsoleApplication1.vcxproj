@@ -333,6 +333,7 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="particleConfig.h" />
     <ClInclude Include="particleEmitter.h" />
     <ClInclude Include="particleMotionParams.h" />
+    <ClInclude Include="particleMotionSequence.h" />
     <ClInclude Include="particleMotionType.h" />
     <ClInclude Include="particleManager.h" />
     <ClInclude Include="particleSpawnParams.h" />
@@ -352,6 +353,7 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="stormHelperFunctions.h" />
     <ClInclude Include="stringDB.h" />
     <ClInclude Include="textDB.h" />
+    <ClInclude Include="timingMode.h" />
     <ClInclude Include="turnEvents.h" />
     <ClInclude Include="northMovement.h" />
     <ClInclude Include="entity.h" />

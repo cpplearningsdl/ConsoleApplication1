@@ -12,6 +12,8 @@ inline particle emitParticle(const particleStormConfig& cfg, const particleSpawn
     // Lifetime & size
     // --------------------
     p.age = 0.0f;
+    p.nextMotionTime = 0.0f;
+    p.currentStep = 0;
     p.lifetime = randomFloat(cfg.particleCfg.lifetimeMin, cfg.particleCfg.lifetimeMax);
     //----
     //size & speed
@@ -75,12 +77,56 @@ inline particle emitParticle(const particleStormConfig& cfg, const particleSpawn
     switch (motion.type)
     {
     case particleMotionType::FIXED_ANGLE:
-        angleRad = degToRad(motion.angleDegrees +
-            randomFloat(-motion.spreadDegrees, motion.spreadDegrees));
+        angleRad = degToRad(motion.angleDegrees + randomFloat(-motion.spreadDegrees, motion.spreadDegrees));
         break;
 
     case particleMotionType::RANDOM_DIRECTION:
         angleRad = randomFloat(0.0f, 2.0f * 3.1415926535f);
+        break;
+
+    case particleMotionType::OUTWARD_FROM_ORIGIN:
+        angleRad = atan2f(p.position.y - spawn.origin.y, p.position.x - spawn.origin.x);
+        break;
+
+    case particleMotionType::INWARD_TOWARD_ORIGIN:
+        angleRad = atan2f(spawn.origin.y - p.position.y, spawn.origin.x - p.position.x);
+        break;
+
+    case particleMotionType::ORBIT:
+    case particleMotionType::SPIRAL_IN:
+    case particleMotionType::SPIRAL_OUT:
+        p.orbitRadius = hypotf(p.position.x - spawn.origin.x, p.position.y - spawn.origin.y);
+        p.orbitAngle = atan2f(p.position.y - spawn.origin.y, p.position.x - spawn.origin.x);
+        p.velocity = { 0.0f, 0.0f }; 
+
+        return p;
+    }
+
+    // --------------------
+    // Linear velocity
+    // --------------------
+    p.velocity.x = cosf(angleRad) * speed;
+    p.velocity.y = sinf(angleRad) * speed;
+ 
+    return p;
+}
+
+inline void initParticleMotion(particle& p, const particleMotionParams& motion, const particleSpawnParams& spawn, float speed) {
+    p.motionType = motion.type;
+    p.nextMotionTime = motion.duration;
+
+    float angleRad = 0.0f;  
+
+    switch (motion.type)
+    {
+    case particleMotionType::FIXED_ANGLE:
+        angleRad = degToRad(
+            motion.angleDegrees +
+            randomFloat(-motion.spreadDegrees, motion.spreadDegrees));
+        break;
+
+    case particleMotionType::RANDOM_DIRECTION: 
+        angleRad = randomFloat(0.0f, 2.0f * 3.14159265358979323846);
         break;
 
     case particleMotionType::OUTWARD_FROM_ORIGIN:
@@ -98,27 +144,21 @@ inline particle emitParticle(const particleStormConfig& cfg, const particleSpawn
     case particleMotionType::ORBIT:
     case particleMotionType::SPIRAL_IN:
     case particleMotionType::SPIRAL_OUT:
-        p.orbitRadius = hypotf(
-            p.position.x - spawn.origin.x,
-            p.position.y - spawn.origin.y
-        );
+    {
+        // Compute polar coordinates from origin
+        float dx = p.position.x - spawn.origin.x;
+        float dy = p.position.y - spawn.origin.y;
 
-        p.orbitAngle = atan2f(
-            p.position.y - spawn.origin.y,
-            p.position.x - spawn.origin.x
-        );
+        p.orbitRadius = hypotf(dx, dy);
+        p.orbitAngle = atan2f(dy, dx);
 
-        p.velocity = { 0.0f, 0.0f }; 
-
-        return p;
+        // Linear velocity not used in orbit modes
+        p.velocity = { 0.0f, 0.0f };
+        return;
+    }
     }
 
-    // --------------------
-    // Linear velocity
-    // --------------------
+    // Linear velocity modes
     p.velocity.x = cosf(angleRad) * speed;
     p.velocity.y = sinf(angleRad) * speed;
- 
-    return p;
 }
-

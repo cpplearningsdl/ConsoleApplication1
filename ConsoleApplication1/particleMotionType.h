@@ -4,6 +4,7 @@
 using json = nlohmann::ordered_json;
 
 enum class particleMotionType {
+    PAUSE,
     FIXED_ANGLE,            // straight line at angle
     RANDOM_DIRECTION,       // straight line random
     OUTWARD_FROM_ORIGIN,    // radial outward
@@ -16,6 +17,7 @@ enum class particleMotionType {
 
 inline void to_json(json& j, const particleMotionType& w) {
     switch (w) {
+    case particleMotionType::PAUSE:   j = "pause";   break;
     case particleMotionType::FIXED_ANGLE:   j = "fixed_angle";   break;
     case particleMotionType::RANDOM_DIRECTION: j = "random_direction"; break;
     case particleMotionType::OUTWARD_FROM_ORIGIN:   j = "outward_from_origin";   break;
@@ -32,7 +34,8 @@ inline void to_json(json& j, const particleMotionType& w) {
 inline void from_json(const json& j, particleMotionType& w) {
     const std::string s = j.get<std::string>();
 
-    if (s == "fixed_angle")   w = particleMotionType::FIXED_ANGLE;
+    if (s == "pause")   w = particleMotionType::PAUSE;
+    else if (s == "fixed_angle") w = particleMotionType::FIXED_ANGLE;
     else if (s == "random_direction") w = particleMotionType::RANDOM_DIRECTION;
     else if (s == "outward_from_origin")   w = particleMotionType::OUTWARD_FROM_ORIGIN;
     else if (s == "inward_toward_origin")  w = particleMotionType::INWARD_TOWARD_ORIGIN;
