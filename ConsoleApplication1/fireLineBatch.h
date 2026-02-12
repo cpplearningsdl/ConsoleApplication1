@@ -12,6 +12,12 @@ struct fireLineBatch {
     std::vector<SDL_FPoint> starts;
     std::vector<SDL_FPoint> ends;
     std::vector<SDL_Color> colors;
+
+    void clear() {
+        starts.clear();
+        ends.clear();
+        colors.clear();
+    }
 };
 
 inline void to_json(json& j, const fireLineBatch& b) {

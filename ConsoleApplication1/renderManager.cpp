@@ -118,7 +118,7 @@ void renderManager::renderLightning(game& g) {
 
 void renderManager::renderFire(game& g) {
 	renderLineBatch(g.getEffectsManager().getFireManager().getFireLineBatch()); 
-	//renderPointBatch(g.getEffectsManager().getFireManager().getEmbers());
+	renderPointBatch(g.getEffectsManager().getFireManager().getEmbers());
 }
 
 void renderManager::renderParticles(game& g) {

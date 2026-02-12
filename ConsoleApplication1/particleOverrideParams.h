@@ -2,6 +2,8 @@
 #include "particleSpawnParams.h"
 #include "particleMotionParams.h" 
 
+using json = nlohmann::ordered_json;
+
 struct particleOverrides {
     bool overrideSpawn = false;
     particleSpawnParams spawn = { particleSpawnType::POINT, -100.0f, -100.0f, 0.0f, 0.0f };

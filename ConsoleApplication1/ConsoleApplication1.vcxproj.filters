@@ -175,6 +175,15 @@
     <Filter Include="Source Files\effects\particle">
       <UniqueIdentifier>{c968ca55-094c-4a1f-bd2c-412ef9071e03}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\effects\rain">
+      <UniqueIdentifier>{ac1e8658-040a-479e-8cfc-d9440ac816ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\effects\rain">
+      <UniqueIdentifier>{7a8dbca9-7892-4a9c-a02e-244cb0024bc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\effects\rain\def">
+      <UniqueIdentifier>{d8a1609d-98a1-46bf-9a52-d6357208953a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp">
@@ -347,6 +356,24 @@
     </ClCompile>
     <ClCompile Include="particleStorm.cpp">
       <Filter>Source Files\effects\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="rainManager.cpp">
+      <Filter>Source Files\effects\rain</Filter>
+    </ClCompile>
+    <ClCompile Include="rainStormBank.cpp">
+      <Filter>Source Files\effects\rain</Filter>
+    </ClCompile>
+    <ClCompile Include="rainStorm.cpp">
+      <Filter>Source Files\effects\rain</Filter>
+    </ClCompile>
+    <ClCompile Include="drop.cpp">
+      <Filter>Source Files\effects\rain</Filter>
+    </ClCompile>
+    <ClCompile Include="rainVelocityParams.h">
+      <Filter>Header Files\effects\rain\def</Filter>
+    </ClCompile>
+    <ClCompile Include="dropEmitter.cpp">
+      <Filter>Source Files\effects\rain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -719,9 +746,6 @@
     <ClInclude Include="fireLineBatch.h">
       <Filter>Header Files\effects\fire</Filter>
     </ClInclude>
-    <ClInclude Include="particleBatch.h">
-      <Filter>Header Files\effects\fire</Filter>
-    </ClInclude>
     <ClInclude Include="SDL_Color_Range.h">
       <Filter>Header Files\effects</Filter>
     </ClInclude>
@@ -775,6 +799,60 @@
     </ClInclude>
     <ClInclude Include="particleMotionSequence.h">
       <Filter>Header Files\effects\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="particleBatch.h">
+      <Filter>Header Files\effects\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="rainManager.h">
+      <Filter>Header Files\effects\rain</Filter>
+    </ClInclude>
+    <ClInclude Include="rainStormBank.h">
+      <Filter>Header Files\effects\rain</Filter>
+    </ClInclude>
+    <ClInclude Include="rainStorm.h">
+      <Filter>Header Files\effects\rain</Filter>
+    </ClInclude>
+    <ClInclude Include="drop.h">
+      <Filter>Header Files\effects\rain</Filter>
+    </ClInclude>
+    <ClInclude Include="rainOverrideParams.h">
+      <Filter>Header Files\effects\rain\def</Filter>
+    </ClInclude>
+    <ClInclude Include="rainSizeParams.h">
+      <Filter>Header Files\effects\rain\def</Filter>
+    </ClInclude>
+    <ClInclude Include="rainStormColorParams.h">
+      <Filter>Header Files\effects\rain\def</Filter>
+    </ClInclude>
+    <ClInclude Include="rainStormConfig.h">
+      <Filter>Header Files\effects\rain\def</Filter>
+    </ClInclude>
+    <ClInclude Include="rainStormDef.h">
+      <Filter>Header Files\effects\rain\def</Filter>
+    </ClInclude>
+    <ClInclude Include="rainStormSpawnParams.h">
+      <Filter>Header Files\effects\rain\def</Filter>
+    </ClInclude>
+    <ClInclude Include="rainStormSpawnTypeEnum.h">
+      <Filter>Header Files\effects\rain\def</Filter>
+    </ClInclude>
+    <ClInclude Include="rainStormKillParams.h">
+      <Filter>Header Files\effects\rain\def</Filter>
+    </ClInclude>
+    <ClInclude Include="rainKillTypeEnum.h">
+      <Filter>Header Files\effects\rain\def</Filter>
+    </ClInclude>
+    <ClInclude Include="rainStormWindParams.h">
+      <Filter>Header Files\effects\rain\def</Filter>
+    </ClInclude>
+    <ClInclude Include="rainWindState.h">
+      <Filter>Header Files\effects\rain\def</Filter>
+    </ClInclude>
+    <ClInclude Include="rainVelocityState.h">
+      <Filter>Header Files\effects\rain\def</Filter>
+    </ClInclude>
+    <ClInclude Include="dropEmitter.h">
+      <Filter>Header Files\effects\rain</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

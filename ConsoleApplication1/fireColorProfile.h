@@ -1,7 +1,6 @@
 #pragma once
 #include <SDL3/SDL.h>
-#include "json.hpp"
-#include "SDL_fpoint_Json.h"
+#include "json.hpp" 
 #include "SDL_Color_json.h"
 
 using json = nlohmann::ordered_json;

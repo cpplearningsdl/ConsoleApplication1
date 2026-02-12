@@ -47,8 +47,7 @@ void fireManager::addFireStorm(std::string defaultStormId, fireStormSpawnParams 
 	fireStorms.push_back(storm);
 }
 
-void fireManager::update(float dt) { 
-    //CONSIDER ERASING FIRST THEN UPDATE SO YOU CAN BUILD BATCHES WHILE ITERATING?
+void fireManager::update(float dt) {  
 	for (auto& storm : fireStorms) {
 		storm.update(dt); 
 	}
@@ -69,7 +68,7 @@ void fireManager::buildEmberBatch() {
         for (const auto& storm : fireStorms) {
             for (const auto& fire : storm.fires) {
                 for (const auto& ember : fire.embers) { 
-                    emberBatch.rects.push_back({ember.pos.x,ember.pos.x,ember.size, ember.size});
+                    emberBatch.rects.push_back({ember.pos.x,ember.pos.y,ember.size, ember.size});
                     emberBatch.colors.push_back(ember.color);
                 }
             }

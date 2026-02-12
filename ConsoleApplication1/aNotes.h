@@ -14,4 +14,4 @@
 
 //move degToRad() out of randomUtilityFunctions.h
 //update linebatch to be like particlebatch(resizing, dont use pushback [i]instead, sort by color)
-//fix embers to use rects
+//test particle animation per particle instead of storm time 

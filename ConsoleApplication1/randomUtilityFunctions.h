@@ -34,7 +34,6 @@ inline SDL_FPoint randomOffsetInRadius(float radius) {
     };
 }
 
-inline float degToRad(float deg)
-{
+inline float degToRad(float deg) {
     return deg * (3.1415926535f / 180.0f);
 }
