@@ -8,12 +8,15 @@ using json = nlohmann::ordered_json;
 
 
 struct drop {
-    SDL_FPoint start;
-    SDL_FPoint end;
+    SDL_FPoint start{};
+    SDL_FPoint end{};
 
-    SDL_FPoint velocity;
-    SDL_Color color;
+    SDL_FPoint velocity{};
+    SDL_Color color{};
+    
+    bool primary = true;
 
+    const bool isPrimary() const { return primary; };
     void update(float dt);
 };
 
@@ -23,6 +26,7 @@ inline void to_json(json& j, const drop& d ) {
     j["end"] = d.end;
     j["velocity"] = d.velocity;
     j["color"] = d.color;
+    j["primary"] = d.primary;
 }
 
 inline void from_json(const json& j, drop& d) {
@@ -31,4 +35,5 @@ inline void from_json(const json& j, drop& d) {
     j.at("end").get_to(d.end);
     j.at("velocity").get_to(d.velocity);
     j.at("color").get_to(d.color);
+    j.at("primary").get_to(d.primary);
 }

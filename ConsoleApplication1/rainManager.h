@@ -18,10 +18,13 @@ public:
 	void addRainStorm(const std::string& id);
 	void addRainStorm(const std::string id,rainStormSpawnParams& p);
 	void buildRainBatch();
-	fireLineBatch& getRainBatch() { return dropBatch; };
+	void reserveBatchesForAllStorms();
+	fireLineBatch& getPrimaryBatch() { return primaryColorDropBatch; };
+	fireLineBatch& getSecondaryBatch() { return secondaryColorDropBatch; };
 
 private:
 	std::vector<rainStorm> storms;
 	rainStormBank stormBank;
-	fireLineBatch dropBatch;//<<<<<<<<<<<
+	fireLineBatch primaryColorDropBatch;//<<<<<<<<<<<
+	fireLineBatch secondaryColorDropBatch;//<<<<<<<<<<<
 };

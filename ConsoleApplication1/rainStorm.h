@@ -33,8 +33,7 @@ struct rainStorm {
     void update(float t);
     void updateActualParams();
     void resolveSpawnOverride();
-    void updateDrops(float dt);
-    bool updateDrop(drop& p, float dt);
+    void updateDrops(float dt); 
     void resetDrop(drop& d);
     bool isOutsideKillVolume(const SDL_FPoint& p, const rainKillParams& k);
 };

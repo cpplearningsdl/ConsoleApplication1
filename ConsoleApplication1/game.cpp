@@ -41,6 +41,9 @@ game::game() {
 //	effectsManager.getParticleManager().addParticleStorm("defaultSpiralIn");
 //	effectsManager.getParticleManager().addParticleStorm("bloodSpray");
 	effectsManager.getParticleManager().addParticleStorm("ringInwardExplosion");
+
+	//effectsManager.getRainManager().addRainStorm("defaultRadiusRainStorm");
+	effectsManager.getRainManager().addRainStorm("defaultRadiusRainStorm");
 //effectsManager.getLightningManager().addStorm("rotating_arc", { 950.0f, 350.0f }, { 950.0f, 350.0f });
 //effectsManager.getLightningManager().addStorm("basic_storm", { 333.0f, 333.0f }, { 950.0f, 350.0f });
 }
@@ -62,9 +65,11 @@ void game::update(inputManager& input, float deltaTime) {
 			dialogueManager.handleInput(input);
 			dialogueManager.tickDialogue();
 			lightManager.update(deltaTime);
-			effectsManager.getLightningManager().update(deltaTime);
+			effectsManager.getLightningManager().update(deltaTime);//CONDENSE THIS INTO 1 EFFECT MANAGER CALL
 			effectsManager.getFireManager().update(deltaTime);
 			effectsManager.getParticleManager().update(deltaTime);
+			effectsManager.getParticleManager().update(deltaTime);
+			effectsManager.getRainManager().update(deltaTime);
 			break;
 		case gamePhase::ANIMATION:
 			break;

@@ -49,11 +49,7 @@ void rainStorm::updateDrops(float dt)
         }
     }
 }
-
-bool rainStorm::updateDrop(drop& p, float dt) {
  
-};
-
 void rainStorm::resetDrop(drop& d) {
     d = rainDropEmitter::makeDrop(*this);
 }
@@ -67,11 +63,18 @@ bool rainStorm::isOutsideKillVolume(const SDL_FPoint& p, const rainKillParams& k
             return !(p.x >= k.rect.x && p.x <= k.rect.x + k.rect.w && p.y >= k.rect.y && p.y <= k.rect.y + k.rect.h);
 
         case rainKillType::CIRCLE: {
+            if (p.y <= k.center.y)
+                return false;
+
             float dx = p.x - k.center.x;
             float dy = p.y - k.center.y;
+
             float distSq = dx * dx + dy * dy;
-            return distSq > (k.radius * k.radius);
+            float radiusSq = k.radius * k.radius;
+
+            return distSq > radiusSq;
         }
+
 
         case rainKillType::ELLIPSE: {
             float nx = (p.x - k.center.x) / k.radiusX;

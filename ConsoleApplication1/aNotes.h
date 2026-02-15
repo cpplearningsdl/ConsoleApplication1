@@ -15,3 +15,5 @@
 //move degToRad() out of randomUtilityFunctions.h
 //update linebatch to be like particlebatch(resizing, dont use pushback [i]instead, sort by color)
 //test particle animation per particle instead of storm time 
+//WHEN RAINSTORM ENDS THE DROPS DISAPEAR BUT WE SHOULD TAPER OFF OR JUST STOP SPAWNING, NOT STOP SPAWNING AND REMOVE DROPS BEFORE THEY GET TO BOTTOM OF SCREEN
+//^^PERHAPS AN EMIT TIME THAT IS ALWAYS A FEW SECONDS SHORTER THAN THE AGE OF THE STORM 

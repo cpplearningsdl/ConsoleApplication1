@@ -29,7 +29,9 @@ public:
 	void renderLightning(game& g);
 	void renderFire(game& g);
 	void renderParticles(game& g);
+	void renderRain(game& g);
 	void renderLineBatch(fireLineBatch& lineBatch);
+	void renderMonocolorLineBatch(fireLineBatch& lineBatch);
 	void renderPointBatch(particleBatch& pointBatch);
 	void renderParticleBatchRects(particleBatch& batch);
 };

@@ -126,6 +126,11 @@ void renderManager::renderParticles(game& g) {
 	renderParticleBatchRects(g.getEffectsManager().getParticleManager().getParticleBatch());
 }
 
+void renderManager::renderRain(game& g) {
+	renderMonocolorLineBatch(g.getEffectsManager().getRainManager().getPrimaryBatch());
+	renderMonocolorLineBatch(g.getEffectsManager().getRainManager().getSecondaryBatch());
+};
+
 void renderManager::renderPointBatch(particleBatch& b) {
 	SDL_Renderer* r = rendRef.getSDLRenderer();
 
@@ -167,12 +172,29 @@ void renderManager::renderParticleBatchRects(particleBatch& batch) {
 	}
 }
 
+void renderManager::renderMonocolorLineBatch(fireLineBatch& lineBatch) {
+	if (lineBatch.starts.empty() || lineBatch.ends.empty() || lineBatch.colors.empty()) return;
 
+	const size_t count = lineBatch.starts.size();
+	const SDL_Color& c = lineBatch.colors[0];
+	SDL_SetRenderDrawColor(rendRef.getSDLRenderer(), c.r, c.g, c.b, c.a);
+
+	for (size_t i = 0; i < count; ++i) {
+		const SDL_FPoint& s = lineBatch.starts[i];
+		const SDL_FPoint& e = lineBatch.ends[i];
+		 
+		SDL_RenderLine(
+			rendRef.getSDLRenderer(),
+			static_cast<int>(s.x),
+			static_cast<int>(s.y),
+			static_cast<int>(e.x),
+			static_cast<int>(e.y)
+		);
+	}
+}
 void renderManager::renderLineBatch(fireLineBatch& lineBatch) {
 	if (lineBatch.starts.empty() || lineBatch.ends.empty() || lineBatch.colors.empty()) return;
-	 
- 
-
+	  
 	const size_t count = lineBatch.starts.size();
 
 	for (size_t i = 0; i < count; ++i) {
@@ -202,6 +224,7 @@ void renderManager::renderGame(game& g, menuManager& m) {
 	renderLightning(g); 
 	renderFire(g);
 	renderParticles(g);
+	renderRain(g);
 	renderDialogue(g, g.getDialogueManager());
 	
 	//renderGameMenu(g);

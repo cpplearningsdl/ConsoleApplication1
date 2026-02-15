@@ -7,7 +7,7 @@ struct rainSizeParams {
     float lengthMin = 8.0f;
     float lengthMax = 16.0f;
 
-    int thickness = 1; // number of offset lines 
+    int thickness = 1; // NOT IMPLEMENTED ** NEED TO ADJUST ESTIMATED VECTOR SIZE FOR RESERVING ON STORM CREATION!! multiply by thickness s.primaryLineBatch.reserve(expectedPrimary * thickness * 2);
 };
 
 inline void to_json(json& j, const rainSizeParams& p) {

@@ -22,7 +22,7 @@ struct rainStormSpawnParams {
 
 
     float dropsPerSecond = 300.0f;
-    float dropLength = 0.0f;
+    float dropLength = 0.0f;//not implemented, this should be changed to emitLength and used for  the amount of time to emit drops, so storm doesnt end with drops not getting to animate to off screen
 };
 inline void to_json(json& j, const rainStormSpawnParams& rsp) {
     j = json::object();

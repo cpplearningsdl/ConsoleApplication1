@@ -88,17 +88,13 @@ void fireManager::buildLineBatch() {
             for (const auto& line : f.primary) {
                 lineBatch.starts.push_back(line.start);
                 lineBatch.ends.push_back(line.end);
-                lineBatch.colors.push_back(
-                    lerpColor(profile.primaryMin, profile.primaryMax, line.colorT)
-                );
+                lineBatch.colors.push_back(lerpColor(profile.primaryMin, profile.primaryMax, line.colorT));
             }
 
             for (const auto& line : f.secondary) {
                 lineBatch.starts.push_back(line.start);
                 lineBatch.ends.push_back(line.end);
-                lineBatch.colors.push_back(
-                    lerpColor(profile.secondaryMin, profile.secondaryMax, line.colorT)
-                );
+                lineBatch.colors.push_back(lerpColor(profile.secondaryMin, profile.secondaryMax, line.colorT));
             }
         }
     }

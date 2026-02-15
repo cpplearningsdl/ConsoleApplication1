@@ -17,7 +17,12 @@ struct fireLineBatch {
         starts.clear();
         ends.clear();
         colors.clear();
-    }
+    };
+    void reserve(int c) {
+        starts.reserve(c);
+        ends.reserve(c);
+        colors.reserve(c);
+    };
 };
 
 inline void to_json(json& j, const fireLineBatch& b) {

@@ -7,6 +7,8 @@
 
 class rainStormBank {
 public: 
+    rainStormBank();
+    ~rainStormBank();
     bool loadFromDirectory(const std::filesystem::path& path);
    const rainStormDef get(const std::string& id) const;
 

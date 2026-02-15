@@ -9,5 +9,5 @@ public:
 
 private:
     static SDL_FPoint computeSpawnPoint(const rainStorm& storm);
-    static SDL_Color computeColor(const rainStorm& storm);
+    static SDL_Color computeColor(const rainStorm& storm, drop& d);
 };
