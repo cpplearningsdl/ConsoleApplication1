@@ -17,11 +17,15 @@ void rainStormManager::update(float dt) {
     for (auto& storm : storms) {
         storm.update(dt);
     }
-    for (size_t i = 0; i < storms.size(); ) {
+ 
+    for (size_t i = 0; i < storms.size(); ) { 
         if (storms[i].age > storms[i].def.config.stormDuration) {
+            if (storms[i].def.config.sequence.continueSequence) { 
+                addRainStorm(storms[i].def.config.sequence.nextStormId, storms[i].overrideParams);
+            }
             storms[i].drops.clear();
             storms[i] = storms.back();
-            storms.pop_back();  
+            storms.pop_back(); 
         }
         else { ++i; } 
     }
@@ -40,23 +44,32 @@ void rainStormManager::addRainStorm(const std::string& id) {
     storms.emplace_back();
     auto& s = storms.back(); 
     s.def = stormBank.get(id);
+    s.updateActualParams();
+    s.actualKillParams = s.def.config.killParams;
     s.wind.currentAngleDeg = s.def.config.windParams.startAngleDeg;
-    const float expected = s.def.config.spawnParams.dropsPerSecond * s.def.config.stormDuration; 
 
+    s.emitCutOff = s.def.config.stormDuration * s.def.config.spawnParams.emitTime;
+    const float expected = s.def.config.emitParams.dropsPerSecond * s.def.config.stormDuration;   
     s.drops.reserve(static_cast<size_t>(std::ceil(expected * 1.10f))); 
-    s.updateActualParams();
+
 };
-
-void rainStormManager::addRainStorm(const std::string id, rainStormSpawnParams& p) {
+ 
+void rainStormManager::addRainStorm(const std::string id, rainOverrideParams rop) {
     storms.emplace_back();
-    auto& s = storms.back();
-
-    s.def = stormBank.get(id);
-
-    const float expected = s.def.config.spawnParams.dropsPerSecond * s.def.config.stormDuration;
-
-    s.drops.reserve(static_cast<size_t>(std::ceil(expected * 1.10f)));
+    auto& s = storms.back();  
+    
+    s.overrideParams.overrideSpawn = rop.overrideSpawn;
+    s.overrideParams.spawnOverrides = rop.spawnOverrides;
+    s.def = stormBank.get(id); 
+    
     s.updateActualParams();
+    s.actualKillParams = s.def.config.killParams;
+
+    s.wind.currentAngleDeg = s.def.config.windParams.startAngleDeg;
+
+    s.emitCutOff = s.def.config.stormDuration * s.def.config.spawnParams.emitTime;
+    const float expected = s.def.config.emitParams.dropsPerSecond * s.def.config.stormDuration; 
+    s.drops.reserve(static_cast<size_t>(std::ceil(expected * 1.10f))); 
 };
 
 void rainStormManager::reserveBatchesForAllStorms() {
@@ -65,7 +78,7 @@ void rainStormManager::reserveBatchesForAllStorms() {
 
     for (const auto& s : storms)
     {
-        float expectedDrops = s.def.config.spawnParams.dropsPerSecond * s.age;
+        float expectedDrops = s.def.config.emitParams.dropsPerSecond * s.age;
 
         expectedDrops *= 1.10f; // safety margin
 

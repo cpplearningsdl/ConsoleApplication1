@@ -16,7 +16,7 @@ public:
 	~rainStormManager();
 	void update(float dt);
 	void addRainStorm(const std::string& id);
-	void addRainStorm(const std::string id,rainStormSpawnParams& p);
+	void addRainStorm(const std::string id, rainOverrideParams rop);
 	void buildRainBatch();
 	void reserveBatchesForAllStorms();
 	fireLineBatch& getPrimaryBatch() { return primaryColorDropBatch; };

@@ -40,10 +40,10 @@ game::game() {
 	effectsManager.getFireManager().addFireStorm("defaultFireStorm");
 //	effectsManager.getParticleManager().addParticleStorm("defaultSpiralIn");
 //	effectsManager.getParticleManager().addParticleStorm("bloodSpray");
-	effectsManager.getParticleManager().addParticleStorm("ringInwardExplosion");
+	effectsManager.getParticleManager().addParticleStorm("pie");
 
+	effectsManager.getRainManager().addRainStorm("defaultRainStorm");
 	//effectsManager.getRainManager().addRainStorm("defaultRadiusRainStorm");
-	effectsManager.getRainManager().addRainStorm("defaultRadiusRainStorm");
 //effectsManager.getLightningManager().addStorm("rotating_arc", { 950.0f, 350.0f }, { 950.0f, 350.0f });
 //effectsManager.getLightningManager().addStorm("basic_storm", { 333.0f, 333.0f }, { 950.0f, 350.0f });
 }

@@ -6,6 +6,9 @@
 #include "rainStormWindParams.h"
 #include "rainSizeParams.h"
 #include "rainVelocityParams.h"
+#include "rainStormSequence.h"
+#include "rainStormEmitParams.h"
+#include "rainStormSizeAnimationSequence.h"
 
 struct rainStormConfig {
     float stormDuration = 0.0f;   // 0 = infinite
@@ -15,6 +18,9 @@ struct rainStormConfig {
     rainSizeParams sizeParams;
     rainVelocityParams velocityParams;
     rainStormColorParams colors; 
+    rainStormSequence sequence;
+    rainEmitParams emitParams;
+    rainStormSizeAnimationSequence sizeAnimationSequence;
 };
 
 
@@ -28,7 +34,9 @@ inline void to_json(json& j, const rainStormConfig& c) {
     j["sizeParams"] = c.sizeParams;
     j["velocityParams"] = c.velocityParams;
     j["colors"] = c.colors;
-
+    j["sequence"] = c.sequence;
+    j["emitParams"] = c.emitParams;
+    j["sizeAnimationSequence"] = c.sizeAnimationSequence;
 }
 
 inline void from_json(const json& j, rainStormConfig& c) {
@@ -55,5 +63,14 @@ inline void from_json(const json& j, rainStormConfig& c) {
     if (j.contains("colors"))
         c.colors = j.at("colors").get<rainStormColorParams>();
      
+    if (j.contains("sequence"))
+        c.sequence = j.at("sequence").get<rainStormSequence>();
+
+    if (j.contains("emitParams"))
+        c.emitParams = j.at("emitParams").get<rainEmitParams>();
+
+    if (j.contains("sizeAnimationSequence"))
+        c.sizeAnimationSequence = j.at("sizeAnimationSequence").get<rainStormSizeAnimationSequence>();
+
     c.stormDuration = std::max(0.0f, c.stormDuration);
 }

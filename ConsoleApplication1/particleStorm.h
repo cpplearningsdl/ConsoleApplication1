@@ -16,7 +16,7 @@ struct particleStorm {
 
     float nextMotionTime = 0.0f;
     int motionStep = 0;
-    motionTimingMode timingMode = motionTimingMode::PER_STORM;
+    motionTimingMode timingMode = motionTimingMode::PER_STORM;//<<<<<<
      
     std::vector<particle> particles;
 

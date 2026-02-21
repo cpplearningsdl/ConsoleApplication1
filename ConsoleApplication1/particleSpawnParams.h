@@ -14,6 +14,9 @@ struct particleSpawnParams {
 
     float radiusInner = 0.0f; 
     float radiusOuter = 0.0f;  
+
+    float angleStartDegrees = 0.0f;
+    float angleEndDegrees = 360.0f;
 };
 
 inline void to_json(json& j, const particleSpawnParams& pcr) {
@@ -23,6 +26,8 @@ inline void to_json(json& j, const particleSpawnParams& pcr) {
     j["origin"] = pcr.origin;
     j["radiusInner"] = pcr.radiusInner;
     j["radiusOuter"] = pcr.radiusOuter;
+    j["angleStartDegrees"] = pcr.angleStartDegrees;
+    j["angleEndDegrees"] = pcr.angleEndDegrees;
 }
 
 inline void from_json(const json& j, particleSpawnParams& pcr) {
@@ -30,4 +35,6 @@ inline void from_json(const json& j, particleSpawnParams& pcr) {
     j.at("origin").get_to(pcr.origin);
     j.at("radiusInner").get_to(pcr.radiusInner);
     j.at("radiusOuter").get_to(pcr.radiusOuter);
+    j.at("angleStartDegrees").get_to(pcr.angleStartDegrees);
+    j.at("angleEndDegrees").get_to(pcr.angleEndDegrees);
 }

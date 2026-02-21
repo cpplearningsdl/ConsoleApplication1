@@ -351,6 +351,8 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="particleStormDef.h" />
     <ClInclude Include="rainKillTypeEnum.h" />
     <ClInclude Include="rainManager.h" />
+    <ClInclude Include="rainStormEmitParams.h" />
+    <ClInclude Include="rainStormSequence.h" />
     <ClInclude Include="rainOverrideParams.h" />
     <ClInclude Include="rainSizeParams.h" />
     <ClInclude Include="rainStorm.h" />
@@ -359,6 +361,7 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="rainStormConfig.h" />
     <ClInclude Include="rainStormDef.h" />
     <ClInclude Include="rainStormKillParams.h" />
+    <ClInclude Include="rainStormSizeChanger.h" />
     <ClInclude Include="rainStormSpawnParams.h" />
     <ClInclude Include="rainStormSpawnTypeEnum.h" />
     <ClInclude Include="rainStormWindParams.h" />
@@ -366,6 +369,7 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="rainWindState.h" />
     <ClInclude Include="randomUtilityFunctions.h" />
     <ClInclude Include="SDLLerp.h" />
+    <ClInclude Include="SDL_CenterRect.h" />
     <ClInclude Include="SDL_Color_Helpers.h" />
     <ClInclude Include="SDL_Color_Json.h" />
     <ClInclude Include="SDL_Color_Range.h" />
@@ -373,6 +377,8 @@ SDL3main.lib,SDL3_image.lib
     <ClInclude Include="SDL_FrectHelpers.h" />
     <ClInclude Include="SDL_Vertex_json.h" />
     <ClInclude Include="particleOverrideParams.h" />
+    <ClInclude Include="rainStormSizeAnimationParams.h" />
+    <ClInclude Include="rainStormSizeAnimationSequence.h" />
     <ClInclude Include="stormHelperFunctions.h" />
     <ClInclude Include="stringDB.h" />
     <ClInclude Include="textDB.h" />

@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL3/SDL.h>
 #include "json.hpp"
+#include "SDL_CenterRect.h" 
 #include "rainKillTypeEnum.h"
 #include "SDL_FrectHelpers.h"
 #include "SDL_Fpoint_json.h"
@@ -12,7 +13,7 @@ struct rainKillParams {
     float lowerY = 0.0f;
 
     // RECTANGLE
-    SDL_FRect rect{};
+    centerRect rect{};
 
     // CIRCLE
     SDL_FPoint center{};

@@ -12,6 +12,7 @@ struct particleStormConfig {
     float particlesPerSecond = 50.0f;
     int maxParticles = 10000;
     float emitLength = 0.0f;
+    //timing mode?
     particleSpawnParams spawnParams; 
     particleMotionParams motionParams;
     particleConfig particleCfg; 

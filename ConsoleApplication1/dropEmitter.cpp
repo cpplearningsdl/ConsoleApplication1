@@ -54,7 +54,7 @@ SDL_Color rainDropEmitter::computeColor(const rainStorm& storm, drop& d) {
 }
 
 SDL_FPoint rainDropEmitter::computeSpawnPoint(const rainStorm& storm) {
-    const auto& sp = storm.def.config.spawnParams;
+    const auto& sp = storm.actualSpawnParams;
     SDL_FPoint p{};
 
     switch (sp.type) {
@@ -65,8 +65,9 @@ SDL_FPoint rainDropEmitter::computeSpawnPoint(const rainStorm& storm) {
         }
 
         case rainSpawnTypeEnum::RECTANGLE: {
-            p.x = randomFloat(sp.rect.x, sp.rect.x + sp.rect.w);
-            p.y = randomFloat(sp.rect.y, sp.rect.y + sp.rect.h);
+            SDL_FRect rect = sp.rect.getSDLRect();
+            p.x = randomFloat(rect.x, rect.x + rect.w);
+            p.y = randomFloat(rect.y, rect.y + rect.h);
             break;
         }
 

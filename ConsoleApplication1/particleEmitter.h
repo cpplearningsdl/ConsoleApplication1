@@ -44,29 +44,52 @@ inline particle emitParticle(const particleStormConfig& cfg, const particleSpawn
     float angle = randomFloat(0.0f, 2.0f * 3.1415926535f);
     float radius = 0.0f;
 
-    switch (spawn.type)
-    {
+    switch (spawn.type) {
     case particleSpawnType::POINT:
         p.position = spawn.origin;
-        break;
-
-    case particleSpawnType::RANDOM_WITHIN_RADIUS:
+        break; 
+    case particleSpawnType::RANDOM_WITHIN_RADIUS:{
         radius = randomFloat(0.0f, spawn.radiusOuter);
         p.position.x = spawn.origin.x + cosf(angle) * radius;
         p.position.y = spawn.origin.y + sinf(angle) * radius;
-        break;
-
-    case particleSpawnType::RANDOM_OUTSIDE_RADIUS:
+    }
+        break; 
+    case particleSpawnType::RANDOM_OUTSIDE_RADIUS:{
         radius = randomFloat(spawn.radiusOuter, spawn.radiusOuter * 2.0f);
         p.position.x = spawn.origin.x + cosf(angle) * radius;
         p.position.y = spawn.origin.y + sinf(angle) * radius;
-        break;
-
-    case particleSpawnType::RANDOM_BETWEEN_RADII:
+    }
+        break; 
+    case particleSpawnType::RANDOM_BETWEEN_RADII: {
         radius = randomFloat(spawn.radiusInner, spawn.radiusOuter);
         p.position.x = spawn.origin.x + cosf(angle) * radius;
         p.position.y = spawn.origin.y + sinf(angle) * radius;
+    }
         break;
+    case particleSpawnType::BETWEEN_RADII_WITHIN_DEGREES: {
+        float r = sqrtf(randomFloat(spawn.radiusInner * spawn.radiusInner, spawn.radiusOuter * spawn.radiusOuter));//equal distribution, update other switch cases above^^^^^
+
+        float angleDeg;
+        if (spawn.angleStartDegrees <= spawn.angleEndDegrees) { 
+            angleDeg = randomFloat(spawn.angleStartDegrees, spawn.angleEndDegrees);
+        }
+        else {
+            float range1 = 360.0f - spawn.angleStartDegrees;
+            float range2 = spawn.angleEndDegrees;
+            float pick = randomFloat(0.0f, range1 + range2);
+
+            if (pick < range1)
+                angleDeg = spawn.angleStartDegrees + pick;
+            else
+                angleDeg = pick - range1;
+        }
+
+        float angleRad = degToRad(angleDeg);
+
+        p.position.x = spawn.origin.x + cosf(angleRad) * r;
+        p.position.y = spawn.origin.y + sinf(angleRad) * r;
+    }
+    break;
     }
 
     // --------------------

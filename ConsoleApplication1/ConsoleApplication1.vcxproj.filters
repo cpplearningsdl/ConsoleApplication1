@@ -854,5 +854,23 @@
     <ClInclude Include="dropEmitter.h">
       <Filter>Header Files\effects\rain</Filter>
     </ClInclude>
+    <ClInclude Include="rainStormSequence.h">
+      <Filter>Header Files\effects\rain\def</Filter>
+    </ClInclude>
+    <ClInclude Include="rainStormEmitParams.h">
+      <Filter>Header Files\effects\rain\def</Filter>
+    </ClInclude>
+    <ClInclude Include="rainStormSizeAnimationParams.h">
+      <Filter>Header Files\effects\rain\def</Filter>
+    </ClInclude>
+    <ClInclude Include="rainStormSizeAnimationSequence.h">
+      <Filter>Header Files\effects\rain\def</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL_CenterRect.h">
+      <Filter>Header Files\effects</Filter>
+    </ClInclude>
+    <ClInclude Include="rainStormSizeChanger.h">
+      <Filter>Header Files\effects\rain</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
